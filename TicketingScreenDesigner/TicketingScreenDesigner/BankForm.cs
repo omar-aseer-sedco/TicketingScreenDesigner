@@ -34,7 +34,7 @@ namespace TicketingScreenDesigner
 
 		private void UpdateTitleLabel()
 		{
-			titleLabel.Text = titleText + " - " + this.bankName;
+			titleLabel.Text = titleText + " - " + bankName;
 			int sizeDifference = ClientSize.Width - titleLabel.Width;
 			titleLabel.Location = new Point(sizeDifference / 2, titleLabel.Location.Y);
 		}
@@ -118,7 +118,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) // INCOMPLETE
 			{
-				MessageBox.Show(ex.Message, "Something went wrong XD - GetScreens");
+				MessageBox.Show(ex.Message, "Something went wrong XD - UpdateListView");
 			}
 			finally
 			{

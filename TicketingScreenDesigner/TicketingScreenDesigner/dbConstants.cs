@@ -17,7 +17,7 @@ namespace TicketingScreenDesigner
 		public const string TABLE_NAME = "Screens";
 		public const string BANK_NAME = "bank_name";
 		public const string SCREEN_ID = "screen_id";
-		public const string IS_ACTIVE = "isActive";
+		public const string IS_ACTIVE = "is_active";
 		public const string SCREEN_TITLE = "screen_title";
 	}
 
