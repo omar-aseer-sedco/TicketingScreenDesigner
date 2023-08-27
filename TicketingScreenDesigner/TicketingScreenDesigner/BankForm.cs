@@ -49,7 +49,7 @@ namespace TicketingScreenDesigner
 
 		private bool AddScreen(string screenName)
 		{
-			string query = "INSERT INTO Screens VALUES (@bankName, @screenName, @isActive, @ScreenTitle);";
+			string query = $"INSERT INTO {ScreensConstants.TABLE_NAME} VALUES (@bankName, @screenName, @isActive, @ScreenTitle);";
 			SqlCommand command = new SqlCommand(query, connection);
 			command.Parameters.AddWithValue("@bankName", bankName);
 			command.Parameters.AddWithValue("@screenName", screenName);
@@ -79,7 +79,7 @@ namespace TicketingScreenDesigner
 		{
 			screensListView.Items.Clear();
 
-			string query = "SELECT screen_id, is_active, screen_title FROM Screens WHERE bank_name = @bankName;";
+			string query = $"SELECT {ScreensConstants.SCREEN_ID}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName;";
 			SqlCommand command = new SqlCommand(query, connection);
 			command.Parameters.AddWithValue("@bankName", bankName);
 
@@ -93,21 +93,21 @@ namespace TicketingScreenDesigner
 				{
 					ListViewItem row = new()
 					{
-						Text = reader["screen_id"].ToString(),
-						Name = "screen_id"
+						Name = ScreensConstants.SCREEN_ID,
+						Text = reader[ScreensConstants.SCREEN_ID].ToString()
 					};
 
 					ListViewItem.ListViewSubItem isActive = new()
 					{
-						Name = "is_active",
-						Text = (bool) reader["is_active"] ? "Yes" : "No"
+						Name = ScreensConstants.IS_ACTIVE,
+						Text = (bool) reader[ScreensConstants.IS_ACTIVE] ? "Yes" : "No"
 					};
 					row.SubItems.Add(isActive);
 
 					ListViewItem.ListViewSubItem screenTitle = new()
 					{
-						Name = "screen_title",
-						Text = reader["screen_title"].ToString()
+						Name = ScreensConstants.SCREEN_TITLE,
+						Text = reader[ScreensConstants.SCREEN_TITLE].ToString()
 					};
 					row.SubItems.Add(screenTitle);
 
@@ -135,7 +135,7 @@ namespace TicketingScreenDesigner
 		{
 			int selectedCount = screensListView.SelectedItems.Count;
 
-			var query = new StringBuilder("DELETE FROM Screens WHERE bank_name = @bankName AND screen_id IN (");
+			var query = new StringBuilder($"DELETE FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} IN (");
 			SqlCommand command = new SqlCommand();
 			command.Parameters.AddWithValue("@bankName", bankName);
 
@@ -143,7 +143,7 @@ namespace TicketingScreenDesigner
 			foreach (ListViewItem row in screensListView.SelectedItems)
 			{
 				query.Append("@P").Append(i).Append(',');
-				command.Parameters.Add("@P" + i, SqlDbType.VarChar).Value = row.SubItems["screen_id"].Text;
+				command.Parameters.Add("@P" + i, SqlDbType.VarChar).Value = row.SubItems[ScreensConstants.SCREEN_ID].Text;
 				++i;
 			}
 

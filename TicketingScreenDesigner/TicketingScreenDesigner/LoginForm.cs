@@ -17,7 +17,7 @@ namespace TicketingScreenDesigner
 		{
 			bool exists = false;
 
-			string query = "SELECT * FROM Banks WHERE bank_name = @bankName;";
+			string query = $"SELECT * FROM {BanksConstants.TABLE_NAME} WHERE {BanksConstants.BANK_NAME} = @bankName;";
 			SqlCommand command = new SqlCommand(query, connection);
 			command.Parameters.AddWithValue("@bankName", bankName);
 
@@ -40,7 +40,7 @@ namespace TicketingScreenDesigner
 
 		private bool AddBank(string bankName)
 		{
-			string query = "INSERT INTO Banks VALUES (@bankName);";
+			string query = $"INSERT INTO {BanksConstants.TABLE_NAME} VALUES (@bankName);";
 			SqlCommand command = new SqlCommand(query, connection);
 			command.Parameters.AddWithValue("@bankName", bankName);
 
