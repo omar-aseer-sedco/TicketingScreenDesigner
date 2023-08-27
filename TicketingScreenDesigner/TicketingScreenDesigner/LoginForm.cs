@@ -10,21 +10,15 @@ namespace TicketingScreenDesigner
 		{
 			InitializeComponent();
 
-			connection = CreateConnection();
-		}
-
-		private static SqlConnection CreateConnection()
-		{
-			string connectionString = "server=(local);database=TSD;integrated security=sspi";
-			return new SqlConnection(connectionString);
+			connection = dbUtils.CreateConnection();
 		}
 
 		private bool CheckIfExists(string bankName)
 		{
 			bool exists = false;
 
-			string queryString = $"SELECT * FROM Banks WHERE bank_name = @bankName";
-			SqlCommand command = new SqlCommand(queryString, connection);
+			string query = "SELECT * FROM Banks WHERE bank_name = @bankName;";
+			SqlCommand command = new SqlCommand(query, connection);
 			command.Parameters.AddWithValue("@bankName", bankName);
 
 			try
@@ -34,7 +28,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) // INCOMPLETE
 			{
-				MessageBox.Show(ex.Message, "Something went wrong XD");
+				MessageBox.Show(ex.Message, "Something went wrong XD - CheckIfExists");
 			}
 			finally
 			{
@@ -44,10 +38,10 @@ namespace TicketingScreenDesigner
 			return exists;
 		}
 
-		private bool CreateTable(string bankName)
+		private bool AddBank(string bankName)
 		{
-			string queryString = $"INSERT INTO Banks VALUES (@bankName)";
-			SqlCommand command = new SqlCommand(queryString, connection);
+			string query = "INSERT INTO Banks VALUES (@bankName);";
+			SqlCommand command = new SqlCommand(query, connection);
 			command.Parameters.AddWithValue("@bankName", bankName);
 
 			bool success = false;
@@ -59,7 +53,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) // INCOMPLETE
 			{
-				MessageBox.Show(ex.Message, "Something went wrong XD");
+				MessageBox.Show(ex.Message, "Something went wrong XD - AddBank");
 			}
 			finally
 			{
@@ -81,7 +75,7 @@ namespace TicketingScreenDesigner
 
 			if (!CheckIfExists(bankName))
 			{
-				if (!CreateTable(bankName)) // INCOMPLETE
+				if (!AddBank(bankName)) // INCOMPLETE
 				{
 					MessageBox.Show($"Something went wrong.");
 				}

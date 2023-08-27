@@ -36,6 +36,7 @@
 			// 
 			// bankNameTextBox
 			// 
+			bankNameTextBox.Anchor =  AnchorStyles.Left | AnchorStyles.Right;
 			bankNameTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			bankNameTextBox.Location = new Point(114, 94);
 			bankNameTextBox.Name = "bankNameTextBox";
@@ -44,6 +45,7 @@
 			// 
 			// label1
 			// 
+			label1.Anchor = AnchorStyles.Left;
 			label1.AutoSize = true;
 			label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			label1.Location = new Point(12, 97);
@@ -54,6 +56,7 @@
 			// 
 			// logInButton
 			// 
+			logInButton.Anchor = AnchorStyles.Bottom;
 			logInButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			logInButton.Location = new Point(142, 174);
 			logInButton.Name = "logInButton";
@@ -65,6 +68,7 @@
 			// 
 			// welcomeLabel
 			// 
+			welcomeLabel.Anchor = AnchorStyles.Top;
 			welcomeLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
 			welcomeLabel.Location = new Point(11, 28);
 			welcomeLabel.Name = "welcomeLabel";
@@ -84,6 +88,7 @@
 			Controls.Add(label1);
 			Controls.Add(bankNameTextBox);
 			Name = "LoginForm";
+			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Log In";
 			ResumeLayout(false);
 			PerformLayout();

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\omar.aseer\\source\\repos\\TicketingScreenDesigner\\TicketingScreenDesigner\\TicketingScreenDesigner.csproj": {}
+    "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\TicketingScreenDesigner.csproj": {}
   },
   "projects": {
-    "C:\\Users\\omar.aseer\\source\\repos\\TicketingScreenDesigner\\TicketingScreenDesigner\\TicketingScreenDesigner.csproj": {
+    "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\TicketingScreenDesigner.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\omar.aseer\\source\\repos\\TicketingScreenDesigner\\TicketingScreenDesigner\\TicketingScreenDesigner.csproj",
+        "projectUniqueName": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\TicketingScreenDesigner.csproj",
         "projectName": "TicketingScreenDesigner",
-        "projectPath": "C:\\Users\\omar.aseer\\source\\repos\\TicketingScreenDesigner\\TicketingScreenDesigner\\TicketingScreenDesigner.csproj",
+        "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\TicketingScreenDesigner.csproj",
         "packagesPath": "C:\\Users\\omar.aseer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\omar.aseer\\source\\repos\\TicketingScreenDesigner\\TicketingScreenDesigner\\obj\\",
+        "outputPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\omar.aseer\\AppData\\Roaming\\NuGet\\NuGet.Config",

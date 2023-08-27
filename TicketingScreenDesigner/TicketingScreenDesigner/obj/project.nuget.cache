@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nbwMbizIRheTX8pVRUM5/EkNESaOgdlR77xASJESZfgYNUls4eRs/VjtCpQj/eO5g7LQOi4H8IcAOSXkqlLPGw==",
+  "dgSpecHash": "QeZax1nyKGH7lZJsfbdZs1WrwYufeXxqcQK47l/MpAKlr28JsaVQgSjRcPjwTWHEMx6Qdtab/3JSQSDvdamb+g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\omar.aseer\\source\\repos\\TicketingScreenDesigner\\TicketingScreenDesigner\\TicketingScreenDesigner.csproj",
+  "projectFilePath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\TicketingScreenDesigner.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\omar.aseer\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\omar.aseer\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
