@@ -16,12 +16,14 @@ namespace TicketingScreenDesigner
 		private const string titleText = "Ticketing Screen Designer";
 		private readonly string bankName;
 		private readonly SqlConnection connection;
+		private readonly ActiveScreenController activeScreenController;
 
 		private BankForm()
 		{
 			InitializeComponent();
 			bankName = "";
 			connection = dbUtils.CreateConnection();
+			activeScreenController = new ActiveScreenController(this);
 		}
 
 		public BankForm(string bankName) : this()
@@ -45,12 +47,12 @@ namespace TicketingScreenDesigner
 			screenEditor.Show();
 		}
 
-		private bool AddScreen(string screenName)
+		private bool AddScreen(string screenId)
 		{
-			string query = $"INSERT INTO {ScreensConstants.TABLE_NAME} VALUES (@bankName, @screenName, @isActive, @ScreenTitle);";
+			string query = $"INSERT INTO {ScreensConstants.TABLE_NAME} VALUES (@bankName, @screenId, @isActive, @ScreenTitle);";
 			SqlCommand command = new SqlCommand(query, connection);
 			command.Parameters.AddWithValue("@bankName", bankName);
-			command.Parameters.AddWithValue("@screenName", screenName);
+			command.Parameters.AddWithValue("@screenId", screenId);
 			command.Parameters.AddWithValue("@isActive", "0");
 			command.Parameters.AddWithValue("@ScreenTitle", DBNull.Value);
 
@@ -147,7 +149,7 @@ namespace TicketingScreenDesigner
 				return false;
 
 			var query = new StringBuilder($"DELETE FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} IN (");
-			SqlCommand command = new SqlCommand();
+			var command = new SqlCommand();
 			command.Parameters.AddWithValue("@bankName", bankName);
 
 			int i = 0;
@@ -229,76 +231,105 @@ namespace TicketingScreenDesigner
 			}
 		}
 
-		private string? GetActiveScreenId()
+		private class ActiveScreenController
 		{
-			string query = $"SELECT {ScreensConstants.SCREEN_ID} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.IS_ACTIVE} = 1;";
-			var command = new SqlCommand(query, connection);
-			command.Parameters.AddWithValue("@bankName", bankName);
+			BankForm parentForm;
 
-			string? ret = null;
-
-			try
+			public ActiveScreenController(BankForm parentForm)
 			{
-				connection.Open();
+				this.parentForm = parentForm;
+			}
 
-				var reader = command.ExecuteReader();
+			public string? GetActiveScreenId()
+			{
+				string query = $"SELECT {ScreensConstants.SCREEN_ID} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.IS_ACTIVE} = 1;";
+				var command = new SqlCommand(query, parentForm.connection);
+				command.Parameters.AddWithValue("@bankName", parentForm.bankName);
 
-				if (reader.Read())
+				string? ret = null;
+
+				try
 				{
-					ret = reader.GetString(0);
+					parentForm.connection.Open();
+
+					var reader = command.ExecuteReader();
+
+					if (reader.Read())
+					{
+						ret = reader.GetString(0);
+					}
 				}
-			}
-			catch (Exception ex) // INCOMPLETE
-			{
-				MessageBox.Show(ex.Message, "Something went wrong XD - GetActiveScreenId");
-			}
-			finally
-			{
-				connection.Close();
+				catch (Exception ex) // INCOMPLETE
+				{
+					MessageBox.Show(ex.Message, "Something went wrong XD - GetActiveScreenId");
+				}
+				finally
+				{
+					parentForm.connection.Close();
+				}
+
+				return ret;
 			}
 
-			return ret;
+			private bool SetIsActive(string screenId, bool active)
+			{
+				string query = $"UPDATE {ScreensConstants.TABLE_NAME} SET {ScreensConstants.IS_ACTIVE} = @isActive WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} = @screenId";
+				var command = new SqlCommand(query, parentForm.connection);
+				command.Parameters.AddWithValue("@isActive", active ? 1 : 0);
+				command.Parameters.AddWithValue("@bankName", parentForm.bankName);
+				command.Parameters.AddWithValue("@screenId", screenId);
+
+				bool success = false;
+
+				try
+				{
+					parentForm.connection.Open();
+
+					success = command.ExecuteNonQuery() == 1;
+				}
+				catch (Exception ex) // INCOMPLETE
+				{
+					MessageBox.Show(ex.Message, "Something went wrong XD - SetIsActive");
+				}
+				finally
+				{
+					parentForm.connection.Close();
+				}
+
+				return success;
+			}
+
+			public bool DeactivateScreen(string screenId)
+			{
+				return SetIsActive(screenId, false);
+			}
+
+			public bool ActivateScreen(string screenId)
+			{
+				string? currentlyActiveScreenId = GetActiveScreenId();
+
+				if (currentlyActiveScreenId is not null && currentlyActiveScreenId != screenId)
+				{
+					DeactivateScreen(currentlyActiveScreenId);
+				}
+
+				return SetIsActive(screenId, true);
+			}
 		}
 
-		private void SetIsActive(string screenId, bool active)
+		public string? GetActiveScreenId()
 		{
-			string query = $"UPDATE {ScreensConstants.TABLE_NAME} SET {ScreensConstants.IS_ACTIVE} = @isActive WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} = @screenId";
-			var command = new SqlCommand(query , connection);
-			command.Parameters.AddWithValue("@isActive", active ? 1 : 0);
-			command.Parameters.AddWithValue("@bankName", bankName);
-			command.Parameters.AddWithValue("@screenId", screenId);
-
-			try
-			{
-				connection.Open();
-
-				command.ExecuteNonQuery();
-			}
-			catch (Exception ex) // INCOMPLETE
-			{
-				MessageBox.Show(ex.Message, "Something went wrong XD - SetIsActive");
-			}
-			finally
-			{
-				connection.Close();
-			}
+			return activeScreenController.GetActiveScreenId();
 		}
 
-		public void ActivateScreen(string screenId)
+		public bool ActivateScreen(string screenId)
 		{
-			string? currentlyActiveScreenId = GetActiveScreenId();
-
-			if (currentlyActiveScreenId is not null)
-			{
-				DeactivateScreen(currentlyActiveScreenId);
-			}
-
-			SetIsActive(screenId, true);
+			return activeScreenController.ActivateScreen(screenId);
 		}
 
-		public void DeactivateScreen(string screenId)
+		public bool DeactivateScreen(string screenId)
 		{
-			SetIsActive(screenId, false);
+			return activeScreenController.DeactivateScreen(screenId);
 		}
 
 		private void setActiveButton_Click(object sender, EventArgs e)
@@ -317,6 +348,7 @@ namespace TicketingScreenDesigner
 				if (currentlyActiveScreenId == selectedScreenId)
 				{
 					MessageBox.Show("The selected screen is already active.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					return;
 				}
 				else
 				{
@@ -326,6 +358,8 @@ namespace TicketingScreenDesigner
 					{
 						return;
 					}
+
+					DeactivateScreen(currentlyActiveScreenId);
 				}
 			}
 

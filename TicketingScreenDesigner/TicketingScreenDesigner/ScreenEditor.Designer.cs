@@ -68,6 +68,7 @@
 			buttonsListView.TabIndex = 1;
 			buttonsListView.UseCompatibleStateImageBehavior = false;
 			buttonsListView.View = View.Details;
+			buttonsListView.SelectedIndexChanged += buttonsListView_SelectedIndexChanged;
 			// 
 			// idColumn
 			// 
@@ -119,16 +120,19 @@
 			// deleteButton
 			// 
 			deleteButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
+			deleteButton.Enabled = false;
 			deleteButton.Location = new Point(622, 129);
 			deleteButton.Name = "deleteButton";
 			deleteButton.Size = new Size(75, 23);
 			deleteButton.TabIndex = 4;
 			deleteButton.Text = "Delete";
 			deleteButton.UseVisualStyleBackColor = true;
+			deleteButton.Click += deleteButton_Click;
 			// 
 			// editButton
 			// 
 			editButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
+			editButton.Enabled = false;
 			editButton.Location = new Point(622, 100);
 			editButton.Name = "editButton";
 			editButton.Size = new Size(75, 23);
