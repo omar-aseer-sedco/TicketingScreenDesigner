@@ -123,6 +123,7 @@
 			setActiveButton.TabIndex = 5;
 			setActiveButton.Text = "Set Active Screen";
 			setActiveButton.UseVisualStyleBackColor = true;
+			setActiveButton.Click += setActiveButton_Click;
 			// 
 			// BankForm
 			// 

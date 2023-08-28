@@ -165,6 +165,7 @@ namespace TicketingScreenDesigner
 			{
 				callingForm.DeactivateScreen(screenIdTextBox.Text);
 			}
+
 			callingForm.UpdateListView();
 			Close();
 		}

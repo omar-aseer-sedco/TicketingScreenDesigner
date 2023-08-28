@@ -48,3 +48,4 @@ C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\Ticketin
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net6.0-windows\TicketingScreenDesigner.pdb
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net6.0-windows\TicketingScreenDesigner.genruntimeconfig.cache
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net6.0-windows\ref\TicketingScreenDesigner.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net6.0-windows\TicketingScreenDesigner.ScreenEditor.resources
