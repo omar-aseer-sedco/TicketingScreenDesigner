@@ -136,6 +136,7 @@
 			Controls.Add(editScreenButton);
 			Controls.Add(addScreenButton);
 			Controls.Add(screensListView);
+			MinimumSize = new Size(670, 475);
 			Name = "BankForm";
 			StartPosition = FormStartPosition.CenterScreen;
 			Text = "- Ticketing Screen Designer";

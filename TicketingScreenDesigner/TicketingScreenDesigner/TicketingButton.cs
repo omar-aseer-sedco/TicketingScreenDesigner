@@ -8,15 +8,15 @@ namespace TicketingScreenDesigner
 {
 	public class TicketingButton
 	{
-		public string BankName { get; private set; }
-		public string ScreenId { get; private set; }
-		public string ButtonId { get; private set; }
-		public string Type { get; private set; }
-		public string NameEn { get; private set; }
-		public string NameAr { get; private set; }
-		public string? Service { get; private set; }
-		public string? MessageEn { get; private set; }
-		public string? MessageAr { get; private set; }
+		public string BankName { get; set; }
+		public string ScreenId { get; set; }
+		public string ButtonId { get; set; }
+		public string Type { get; set; }
+		public string NameEn { get; set; }
+		public string NameAr { get; set; }
+		public string? Service { get; set; }
+		public string? MessageEn { get; set; }
+		public string? MessageAr { get; set; }
 
 		public TicketingButton()
 		{

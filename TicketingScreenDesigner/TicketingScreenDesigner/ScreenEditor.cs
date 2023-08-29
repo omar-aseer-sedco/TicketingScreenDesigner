@@ -26,11 +26,12 @@ namespace TicketingScreenDesigner
 		private ScreenEditor()
 		{
 			InitializeComponent();
-			bankName = "";
-			screenId = "";
+			bankName = string.Empty;
+			screenId = string.Empty;
 			connection = dbUtils.CreateConnection();
 			pendingButtons = new List<TicketingButton>();
 			deleteList = new List<string>();
+			callingForm = new BankForm(bankName);
 		}
 
 		public ScreenEditor(BankForm callingForm, string bankName) : this()
@@ -142,6 +143,9 @@ namespace TicketingScreenDesigner
 			var button = new TicketingButton(bankName, screenIdTextBox.Text, $"Button{random.Next(0, 65536)}", "Issue Ticket", "Some Button", "كبسة", "Some Service", null, null);
 			pendingButtons.Add(button);
 			AddToListView(button.ButtonId, button.NameEn, button.Type, button.Service, button.MessageEn);
+
+			var buttonEditor = new ButtonEditor(this, bankName, screenIdTextBox.Text);
+			buttonEditor.Show();
 		}
 
 		private bool AddScreen()
@@ -370,7 +374,7 @@ namespace TicketingScreenDesigner
 				}
 				catch (Exception ex) // INCOMPLETE
 				{
-					MessageBox.Show(ex.Message, "Something went wrong XD - AddPendingButtons");
+					MessageBox.Show(ex.Message, "Something went wrong XD - ExecutePendingDeletes");
 				}
 				finally
 				{
@@ -484,6 +488,18 @@ namespace TicketingScreenDesigner
 				editButton.Enabled = false;
 				deleteButton.Enabled = true;
 			}
+		}
+
+		private void editButton_Click(object sender, EventArgs e)
+		{
+			if (buttonsListView.SelectedItems.Count != 1)
+			{
+				MessageBox.Show("Select a button to edit.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return;
+			}
+
+			var buttonEditor = new ButtonEditor(this, bankName, screenIdTextBox.Text, buttonsListView.SelectedItems[0].Text);
+			buttonEditor.Show();
 		}
 	}
 }

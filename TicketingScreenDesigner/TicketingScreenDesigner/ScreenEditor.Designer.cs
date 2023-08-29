@@ -139,6 +139,7 @@
 			editButton.TabIndex = 5;
 			editButton.Text = "Edit";
 			editButton.UseVisualStyleBackColor = true;
+			editButton.Click += editButton_Click;
 			// 
 			// activeCheckBox
 			// 
@@ -203,6 +204,7 @@
 			Controls.Add(cancelButton);
 			Controls.Add(buttonsListView);
 			Controls.Add(saveButton);
+			MinimumSize = new Size(724, 411);
 			Name = "ScreenEditor";
 			Text = "Screen Editor";
 			ResumeLayout(false);

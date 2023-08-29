@@ -87,6 +87,7 @@
 			Controls.Add(logInButton);
 			Controls.Add(label1);
 			Controls.Add(bankNameTextBox);
+			MinimumSize = new Size(400, 270);
 			Name = "LoginForm";
 			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Log In";
