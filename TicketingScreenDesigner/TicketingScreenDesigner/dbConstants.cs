@@ -33,5 +33,11 @@ namespace TicketingScreenDesigner
 		public const string SERVICE = "service";
 		public const string MESSAGE_EN = "message_en";
 		public const string MESSAGE_AR = "message_ar";
+		
+		public static class Types
+		{
+			public const string ISSUE_TICKET = "Issue Ticket";
+			public const string SHOW_MESSAGE = "Show Message";
+		}
 	}
 }

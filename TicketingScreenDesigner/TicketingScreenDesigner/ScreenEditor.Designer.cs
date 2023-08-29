@@ -206,6 +206,7 @@
 			Controls.Add(saveButton);
 			MinimumSize = new Size(724, 411);
 			Name = "ScreenEditor";
+			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Screen Editor";
 			ResumeLayout(false);
 			PerformLayout();

@@ -76,7 +76,7 @@
 			typeComboBox.Location = new Point(121, 102);
 			typeComboBox.Name = "typeComboBox";
 			typeComboBox.Size = new Size(479, 23);
-			typeComboBox.TabIndex = 2;
+			typeComboBox.TabIndex = 3;
 			typeComboBox.SelectedIndexChanged += typeComboBox_SelectedIndexChanged;
 			// 
 			// saveButton
@@ -85,9 +85,10 @@
 			saveButton.Location = new Point(525, 222);
 			saveButton.Name = "saveButton";
 			saveButton.Size = new Size(75, 23);
-			saveButton.TabIndex = 3;
+			saveButton.TabIndex = 8;
 			saveButton.Text = "Save";
 			saveButton.UseVisualStyleBackColor = true;
+			saveButton.Click += saveButton_Click;
 			// 
 			// nameEnglishLabel
 			// 
@@ -122,7 +123,7 @@
 			nameEnTextBox.Location = new Point(121, 44);
 			nameEnTextBox.Name = "nameEnTextBox";
 			nameEnTextBox.Size = new Size(479, 23);
-			nameEnTextBox.TabIndex = 7;
+			nameEnTextBox.TabIndex = 1;
 			// 
 			// nameArTextBox
 			// 
@@ -131,7 +132,7 @@
 			nameArTextBox.Name = "nameArTextBox";
 			nameArTextBox.RightToLeft = RightToLeft.Yes;
 			nameArTextBox.Size = new Size(479, 23);
-			nameArTextBox.TabIndex = 8;
+			nameArTextBox.TabIndex = 2;
 			// 
 			// cancelButton
 			// 
@@ -139,9 +140,10 @@
 			cancelButton.Location = new Point(444, 222);
 			cancelButton.Name = "cancelButton";
 			cancelButton.Size = new Size(75, 23);
-			cancelButton.TabIndex = 9;
+			cancelButton.TabIndex = 7;
 			cancelButton.Text = "Cancel";
 			cancelButton.UseVisualStyleBackColor = true;
+			cancelButton.Click += cancelButton_Click;
 			// 
 			// showMessagePanel
 			// 
@@ -163,7 +165,7 @@
 			messageArTextBox.Name = "messageArTextBox";
 			messageArTextBox.RightToLeft = RightToLeft.Yes;
 			messageArTextBox.Size = new Size(479, 23);
-			messageArTextBox.TabIndex = 12;
+			messageArTextBox.TabIndex = 5;
 			// 
 			// messageEnTextBox
 			// 
@@ -171,7 +173,7 @@
 			messageEnTextBox.Location = new Point(121, 0);
 			messageEnTextBox.Name = "messageEnTextBox";
 			messageEnTextBox.Size = new Size(479, 23);
-			messageEnTextBox.TabIndex = 11;
+			messageEnTextBox.TabIndex = 4;
 			// 
 			// label1
 			// 
@@ -208,7 +210,7 @@
 			serviceTextBox.Location = new Point(121, 0);
 			serviceTextBox.Name = "serviceTextBox";
 			serviceTextBox.Size = new Size(479, 23);
-			serviceTextBox.TabIndex = 11;
+			serviceTextBox.TabIndex = 6;
 			// 
 			// label4
 			// 
@@ -238,6 +240,7 @@
 			Controls.Add(buttonIdTextBox);
 			MinimumSize = new Size(628, 233);
 			Name = "ButtonEditor";
+			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Button Editor";
 			showMessagePanel.ResumeLayout(false);
 			showMessagePanel.PerformLayout();

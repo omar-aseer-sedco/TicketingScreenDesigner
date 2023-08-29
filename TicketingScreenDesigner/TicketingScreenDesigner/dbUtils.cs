@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TicketingScreenDesigner
 {
-	public static class dbUtils
+	public static class DBUtils
 	{
 		public static SqlConnection CreateConnection()
 		{
