@@ -7,7 +7,7 @@ namespace TicketingScreenDesigner {
 		public LoginForm() {
 			InitializeComponent();
 
-			connection = DBUtils.CreateConnection();
+			connection = Utils.CreateConnection();
 		}
 
 		private bool CheckIfExists(string bankName) {
@@ -21,8 +21,11 @@ namespace TicketingScreenDesigner {
 				connection.Open();
 				exists = command.ExecuteReader().HasRows;
 			}
-			catch (Exception ex) { // INCOMPLETE
-				MessageBox.Show(ex.Message, "Something went wrong XD - CheckIfExists");
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "screenId");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
@@ -42,8 +45,11 @@ namespace TicketingScreenDesigner {
 				connection.Open();
 				success = command.ExecuteNonQuery() == 1;
 			}
-			catch (Exception ex) { // INCOMPLETE
-				MessageBox.Show(ex.Message, "Something went wrong XD - AddBank");
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "screenId");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();

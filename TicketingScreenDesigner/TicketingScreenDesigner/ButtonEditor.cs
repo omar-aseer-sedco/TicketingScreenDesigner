@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data.SqlClient;
 
 namespace TicketingScreenDesigner {
 	public partial class ButtonEditor : Form {
@@ -25,7 +15,7 @@ namespace TicketingScreenDesigner {
 
 		private ButtonEditor() {
 			InitializeComponent();
-			connection = DBUtils.CreateConnection();
+			connection = Utils.CreateConnection();
 			button = new TicketingButton();
 			callingForm = new ScreenEditor(new BankForm(button.BankName), button.BankName);
 		}
@@ -86,8 +76,11 @@ namespace TicketingScreenDesigner {
 					ret = new TicketingButton(bankName, screenId, buttonId, type, nameEn, nameAr, service, messageEn, messageAr);
 				}
 			}
-			catch (Exception ex) { // INCOMPLETE
-				MessageBox.Show(ex.Message, "Something went wrong XD - GetButtonById");
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "screenId");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();

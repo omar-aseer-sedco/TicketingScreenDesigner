@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System.Data;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
 
 namespace TicketingScreenDesigner {
@@ -19,7 +12,7 @@ namespace TicketingScreenDesigner {
 		private BankForm() {
 			InitializeComponent();
 			bankName = "";
-			connection = DBUtils.CreateConnection();
+			connection = Utils.CreateConnection();
 			activeScreenController = new ActiveScreenController(this);
 		}
 
@@ -76,8 +69,11 @@ namespace TicketingScreenDesigner {
 
 				reader.Close();
 			}
-			catch (Exception ex) { // INCOMPLETE
-				MessageBox.Show(ex.Message, "Something went wrong XD - UpdateListView");
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "screenId");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
@@ -126,8 +122,11 @@ namespace TicketingScreenDesigner {
 				connection.Open();
 				success = command.ExecuteNonQuery() == selectedCount;
 			}
-			catch (Exception ex) { // INCOMPLETE
-				MessageBox.Show(ex.Message, "Something went wrong XD - DeleteSelected");
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "screenId");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
@@ -197,8 +196,11 @@ namespace TicketingScreenDesigner {
 						ret = reader.GetString(0);
 					}
 				}
-				catch (Exception ex) { // INCOMPLETE
-					MessageBox.Show(ex.Message, "Something went wrong XD - GetActiveScreenId");
+				catch (SqlException ex) {
+					ExceptionHelper.HandleSqlException(ex, "screenId");
+				}
+				catch (Exception ex) {
+					ExceptionHelper.HandleGeneralException(ex);
 				}
 				finally {
 					parentForm.connection.Close();
@@ -221,8 +223,11 @@ namespace TicketingScreenDesigner {
 
 					success = command.ExecuteNonQuery() == 1;
 				}
-				catch (Exception ex) { // INCOMPLETE
-					MessageBox.Show(ex.Message, "Something went wrong XD - SetIsActive");
+				catch (SqlException ex) {
+					ExceptionHelper.HandleSqlException(ex, "screenId");
+				}
+				catch (Exception ex) {
+					ExceptionHelper.HandleGeneralException(ex);
 				}
 				finally {
 					parentForm.connection.Close();

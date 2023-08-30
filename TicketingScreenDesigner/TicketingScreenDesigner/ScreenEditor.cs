@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TicketingScreenDesigner {
 	public partial class ScreenEditor : Form {
@@ -27,7 +18,7 @@ namespace TicketingScreenDesigner {
 			InitializeComponent();
 			bankName = string.Empty;
 			screenId = string.Empty;
-			connection = DBUtils.CreateConnection();
+			connection = Utils.CreateConnection();
 			pendingAdds = new List<TicketingButton>();
 			pendingUpdates = new Dictionary<string, TicketingButton>();
 			deleteList = new List<string>();
@@ -78,8 +69,11 @@ namespace TicketingScreenDesigner {
 
 				reader.Close();
 			}
-			catch (Exception ex) { // INCOMPLETE 
-				MessageBox.Show(ex.Message, "Something went wrong XD - UpdateListView");
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "screenId");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
@@ -153,8 +147,11 @@ namespace TicketingScreenDesigner {
 
 				success = command.ExecuteNonQuery() == 1;
 			}
-			catch (Exception ex) { // INCOMPLETE
-				MessageBox.Show(ex.Message, "Something went wrong XD - AddScreen");
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "screenId");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
@@ -167,9 +164,9 @@ namespace TicketingScreenDesigner {
 			bool addScreenSuccess = AddScreen();
 			bool activationSuccess = addScreenSuccess && UpdateScreenActivation();
 			bool addButtonsSuccess = addScreenSuccess && AddPending();
-			bool updateScreenSuccess = addScreenSuccess && UpdatePending();
+			bool updateButtonsSuccess = addScreenSuccess && UpdatePending();
 
-			return addScreenSuccess & activationSuccess & addButtonsSuccess & updateScreenSuccess;
+			return addScreenSuccess && activationSuccess && addButtonsSuccess && updateButtonsSuccess;
 		}
 
 		private bool UpdateScreenInformation() {
@@ -189,8 +186,11 @@ namespace TicketingScreenDesigner {
 				connection.Open();
 				success = updateScreenCommand.ExecuteNonQuery() == 1;
 			}
-			catch (Exception ex) { // INCOMPLETE
-				MessageBox.Show(ex.Message, "Something went wrong XD - UpdateCurrentScreen");
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "screenId");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
@@ -326,9 +326,11 @@ namespace TicketingScreenDesigner {
 					connection.Open();
 					success = command.ExecuteNonQuery() == pendingUpdates.Count;
 				}
-				catch (Exception ex) { // INCOMPLETE
-					MessageBox.Show(ex.Message, "Something went wrong XD - UpdatePending");
-					MessageBox.Show(command.CommandText, "Something went wrong XD - UpdatePending");
+				catch (SqlException ex) {
+					ExceptionHelper.HandleSqlException(ex, "screenId");
+				}
+				catch (Exception ex) {
+					ExceptionHelper.HandleGeneralException(ex);
 				}
 				finally {
 					connection.Close();
@@ -336,6 +338,15 @@ namespace TicketingScreenDesigner {
 			}
 
 			return success;
+		}
+
+		private void UnifyScreenId() {
+			foreach (var button in pendingAdds) {
+				button.ScreenId = screenIdTextBox.Text;
+			}
+			foreach (var button in pendingUpdates) {
+				button.Value.ScreenId = screenIdTextBox.Text;
+			}
 		}
 
 		private SqlCommand? CreateAddButtonsCommand() {
@@ -407,9 +418,11 @@ namespace TicketingScreenDesigner {
 					connection.Open();
 					success = command.ExecuteNonQuery() == pendingAdds.Count;
 				}
-				catch (Exception ex) { // INCOMPLETE
-					MessageBox.Show(ex.Message, "Something went wrong XD - AddPendingButtons");
-					MessageBox.Show(command.CommandText, "Something went wrong XD - AddPendingButtons");
+				catch (SqlException ex) {
+					ExceptionHelper.HandleSqlException(ex, "screenId");
+				}
+				catch (Exception ex) {
+					ExceptionHelper.HandleGeneralException(ex);
 				}
 				finally {
 					connection.Close();
@@ -471,11 +484,13 @@ namespace TicketingScreenDesigner {
 
 				try {
 					connection.Open();
-					int tmp = command.ExecuteNonQuery();
-					success = tmp == deleteList.Count;
+					success = command.ExecuteNonQuery() == deleteList.Count;
 				}
-				catch (Exception ex) { // INCOMPLETE
-					MessageBox.Show(ex.Message, "Something went wrong XD - ExecutePendingDeletes");
+				catch (SqlException ex) {
+					ExceptionHelper.HandleSqlException(ex, "screenId");
+				}
+				catch (Exception ex) {
+					ExceptionHelper.HandleGeneralException(ex);
 				}
 				finally {
 					connection.Close();
@@ -502,6 +517,8 @@ namespace TicketingScreenDesigner {
 			}
 
 			bool success;
+
+			UnifyScreenId();
 
 			if (newScreen) {
 				success = AddNewScreen();
