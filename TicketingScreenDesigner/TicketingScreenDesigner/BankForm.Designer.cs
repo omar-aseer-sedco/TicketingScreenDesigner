@@ -1,7 +1,5 @@
-﻿namespace TicketingScreenDesigner
-{
-	partial class BankForm
-	{
+﻿namespace TicketingScreenDesigner {
+	partial class BankForm {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -11,10 +9,8 @@
 		/// Clean up any resources being used.
 		/// </summary>
 		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
+		protected override void Dispose(bool disposing) {
+			if (disposing && (components != null)) {
 				components.Dispose();
 			}
 			base.Dispose(disposing);
@@ -26,8 +22,7 @@
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
-		private void InitializeComponent()
-		{
+		private void InitializeComponent() {
 			screensListView = new ListView();
 			screenIdColumn = new ColumnHeader();
 			isActiveColumn = new ColumnHeader();
@@ -37,6 +32,7 @@
 			deleteScreenButton = new Button();
 			titleLabel = new Label();
 			setActiveButton = new Button();
+			previewButton = new Button();
 			SuspendLayout();
 			// 
 			// screensListView
@@ -125,11 +121,24 @@
 			setActiveButton.UseVisualStyleBackColor = true;
 			setActiveButton.Click += setActiveButton_Click;
 			// 
+			// previewButton
+			// 
+			previewButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
+			previewButton.Enabled = false;
+			previewButton.Location = new Point(534, 184);
+			previewButton.Name = "previewButton";
+			previewButton.Size = new Size(108, 23);
+			previewButton.TabIndex = 6;
+			previewButton.Text = "Preview";
+			previewButton.UseVisualStyleBackColor = true;
+			previewButton.Click += previewButton_Click;
+			// 
 			// BankForm
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(654, 436);
+			Controls.Add(previewButton);
 			Controls.Add(setActiveButton);
 			Controls.Add(titleLabel);
 			Controls.Add(deleteScreenButton);
@@ -155,5 +164,6 @@
 		private ColumnHeader isActiveColumn;
 		private ColumnHeader screenTitleColumn;
 		private Button setActiveButton;
+		private Button previewButton;
 	}
 }

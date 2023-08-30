@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace TicketingScreenDesigner {
 	public partial class BankForm : Form {
-		private const string titleText = "Ticketing Screen Designer";
+		private const string TITLE_TEXT = "Ticketing Screen Designer";
 		private readonly string bankName;
 		private readonly SqlConnection connection;
 		private readonly ActiveScreenController activeScreenController;
@@ -12,19 +12,19 @@ namespace TicketingScreenDesigner {
 		private BankForm() {
 			InitializeComponent();
 			bankName = "";
-			connection = Utils.CreateConnection();
+			connection = DBUtils.CreateConnection();
 			activeScreenController = new ActiveScreenController(this);
 		}
 
 		public BankForm(string bankName) : this() {
 			this.bankName = bankName;
-			Text = titleText + " - " + this.bankName;
+			Text = TITLE_TEXT + " - " + this.bankName;
 			UpdateTitleLabel();
 			UpdateListView();
 		}
 
 		private void UpdateTitleLabel() {
-			titleLabel.Text = titleText + " - " + bankName;
+			titleLabel.Text = TITLE_TEXT + " - " + bankName;
 			int sizeDifference = ClientSize.Width - titleLabel.Width;
 			titleLabel.Location = new Point(sizeDifference / 2, titleLabel.Location.Y);
 		}
@@ -70,7 +70,7 @@ namespace TicketingScreenDesigner {
 				reader.Close();
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "screenId");
+				ExceptionHelper.HandleSqlException(ex, "Screen ID");
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -78,6 +78,8 @@ namespace TicketingScreenDesigner {
 			finally {
 				connection.Close();
 			}
+
+			CheckButtonActivation();
 		}
 
 		private void editScreenButton_Click(object sender, EventArgs e) {
@@ -123,7 +125,7 @@ namespace TicketingScreenDesigner {
 				success = command.ExecuteNonQuery() == selectedCount;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "screenId");
+				ExceptionHelper.HandleSqlException(ex, "screen ID");
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -154,7 +156,7 @@ namespace TicketingScreenDesigner {
 			UpdateListView();
 		}
 
-		private void screensListView_SelectedIndexChanged(object sender, EventArgs e) {
+		private void CheckButtonActivation() {
 			int selectedCount = screensListView.SelectedIndices.Count;
 			if (selectedCount == 0) {
 				editScreenButton.Enabled = false;
@@ -171,6 +173,10 @@ namespace TicketingScreenDesigner {
 				deleteScreenButton.Enabled = true;
 				setActiveButton.Enabled = false;
 			}
+		}
+
+		private void screensListView_SelectedIndexChanged(object sender, EventArgs e) {
+			CheckButtonActivation();
 		}
 
 		private class ActiveScreenController {
@@ -197,7 +203,7 @@ namespace TicketingScreenDesigner {
 					}
 				}
 				catch (SqlException ex) {
-					ExceptionHelper.HandleSqlException(ex, "screenId");
+					ExceptionHelper.HandleSqlException(ex, "Screen ID");
 				}
 				catch (Exception ex) {
 					ExceptionHelper.HandleGeneralException(ex);
@@ -224,7 +230,7 @@ namespace TicketingScreenDesigner {
 					success = command.ExecuteNonQuery() == 1;
 				}
 				catch (SqlException ex) {
-					ExceptionHelper.HandleSqlException(ex, "screenId");
+					ExceptionHelper.HandleSqlException(ex, "Screen ID");
 				}
 				catch (Exception ex) {
 					ExceptionHelper.HandleGeneralException(ex);
@@ -264,8 +270,8 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void setActiveButton_Click(object sender, EventArgs e) {
-			if (screensListView.SelectedItems.Count == 0) {
-				MessageBox.Show("Select a screen to activate.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			if (screensListView.SelectedItems.Count != 1) {
+				MessageBox.Show("Select one screen to activate.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
 
@@ -290,6 +296,10 @@ namespace TicketingScreenDesigner {
 
 			ActivateScreen(selectedScreenId);
 			UpdateListView();
+		}
+
+		private void previewButton_Click(object sender, EventArgs e) {
+			MessageBox.Show("This doesn't do anything yet.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 	}
 }

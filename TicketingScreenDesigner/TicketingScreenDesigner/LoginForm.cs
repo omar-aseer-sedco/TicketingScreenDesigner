@@ -7,7 +7,7 @@ namespace TicketingScreenDesigner {
 		public LoginForm() {
 			InitializeComponent();
 
-			connection = Utils.CreateConnection();
+			connection = DBUtils.CreateConnection();
 		}
 
 		private bool CheckIfExists(string bankName) {
@@ -22,7 +22,7 @@ namespace TicketingScreenDesigner {
 				exists = command.ExecuteReader().HasRows;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "screenId");
+				ExceptionHelper.HandleSqlException(ex, "Bank Name");
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -46,7 +46,7 @@ namespace TicketingScreenDesigner {
 				success = command.ExecuteNonQuery() == 1;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "screenId");
+				ExceptionHelper.HandleSqlException(ex, "Bank Name");
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -67,12 +67,16 @@ namespace TicketingScreenDesigner {
 			}
 
 			if (!CheckIfExists(bankName)) {
-				if (!AddBank(bankName)) { // INCOMPLETE
-					MessageBox.Show($"Something went wrong.");
-				}
+				var confirmationResult = MessageBox.Show("Your bank is not in the database. Add a new bank?", "Add a new bank", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+				if (confirmationResult == DialogResult.No)
+					return;
+
+				if (!AddBank(bankName))
+					return;
 			}
 
-			BankForm bankForm = new BankForm(bankName);
+			var bankForm = new BankForm(bankName);
 			bankForm.Show();
 		}
 	}

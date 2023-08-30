@@ -1,7 +1,5 @@
-﻿namespace TicketingScreenDesigner
-{
-	partial class ButtonEditor
-	{
+﻿namespace TicketingScreenDesigner {
+	partial class ButtonEditor {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -11,10 +9,8 @@
 		/// Clean up any resources being used.
 		/// </summary>
 		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
+		protected override void Dispose(bool disposing) {
+			if (disposing && (components != null)) {
 				components.Dispose();
 			}
 			base.Dispose(disposing);
@@ -26,8 +22,7 @@
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
-		private void InitializeComponent()
-		{
+		private void InitializeComponent() {
 			buttonIdTextBox = new TextBox();
 			buttonIdLabel = new Label();
 			typeComboBox = new ComboBox();
@@ -46,6 +41,7 @@
 			issueTicketPanel = new Panel();
 			serviceTextBox = new TextBox();
 			label4 = new Label();
+			autoFillIdButton = new Button();
 			showMessagePanel.SuspendLayout();
 			issueTicketPanel.SuspendLayout();
 			SuspendLayout();
@@ -55,7 +51,7 @@
 			buttonIdTextBox.Anchor =  AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			buttonIdTextBox.Location = new Point(121, 15);
 			buttonIdTextBox.Name = "buttonIdTextBox";
-			buttonIdTextBox.Size = new Size(479, 23);
+			buttonIdTextBox.Size = new Size(398, 23);
 			buttonIdTextBox.TabIndex = 0;
 			// 
 			// buttonIdLabel
@@ -221,11 +217,23 @@
 			label4.TabIndex = 9;
 			label4.Text = "Service:";
 			// 
+			// autoFillIdButton
+			// 
+			autoFillIdButton.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
+			autoFillIdButton.Location = new Point(525, 14);
+			autoFillIdButton.Name = "autoFillIdButton";
+			autoFillIdButton.Size = new Size(75, 23);
+			autoFillIdButton.TabIndex = 14;
+			autoFillIdButton.Text = "Autofill";
+			autoFillIdButton.UseVisualStyleBackColor = true;
+			autoFillIdButton.Click += autoFillIdButton_Click;
+			// 
 			// ButtonEditor
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(612, 255);
+			Controls.Add(autoFillIdButton);
 			Controls.Add(issueTicketPanel);
 			Controls.Add(showMessagePanel);
 			Controls.Add(cancelButton);
@@ -270,5 +278,6 @@
 		private Panel issueTicketPanel;
 		private TextBox serviceTextBox;
 		private Label label4;
+		private Button autoFillIdButton;
 	}
 }

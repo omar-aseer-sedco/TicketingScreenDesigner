@@ -1,7 +1,5 @@
-﻿namespace TicketingScreenDesigner
-{
-	partial class ScreenEditor
-	{
+﻿namespace TicketingScreenDesigner {
+	partial class ScreenEditor {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -11,10 +9,8 @@
 		/// Clean up any resources being used.
 		/// </summary>
 		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
+		protected override void Dispose(bool disposing) {
+			if (disposing && (components != null)) {
 				components.Dispose();
 			}
 			base.Dispose(disposing);
@@ -26,8 +22,7 @@
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
-		private void InitializeComponent()
-		{
+		private void InitializeComponent() {
 			saveButton = new Button();
 			buttonsListView = new ListView();
 			idColumn = new ColumnHeader();
@@ -44,6 +39,8 @@
 			screenIdLabel = new Label();
 			screenTitleLabel = new Label();
 			screenTitleTextBox = new TextBox();
+			previewButton = new Button();
+			autoFillIdButton = new Button();
 			SuspendLayout();
 			// 
 			// saveButton
@@ -157,7 +154,7 @@
 			screenIdTextBox.Anchor =  AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			screenIdTextBox.Location = new Point(88, 13);
 			screenIdTextBox.Name = "screenIdTextBox";
-			screenIdTextBox.Size = new Size(608, 23);
+			screenIdTextBox.Size = new Size(529, 23);
 			screenIdTextBox.TabIndex = 7;
 			// 
 			// screenIdLabel
@@ -183,8 +180,31 @@
 			screenTitleTextBox.Anchor =  AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			screenTitleTextBox.Location = new Point(88, 42);
 			screenTitleTextBox.Name = "screenTitleTextBox";
-			screenTitleTextBox.Size = new Size(608, 23);
+			screenTitleTextBox.Size = new Size(609, 23);
 			screenTitleTextBox.TabIndex = 9;
+			// 
+			// previewButton
+			// 
+			previewButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
+			previewButton.Enabled = false;
+			previewButton.Location = new Point(622, 158);
+			previewButton.Name = "previewButton";
+			previewButton.Size = new Size(75, 23);
+			previewButton.TabIndex = 11;
+			previewButton.Text = "Preview";
+			previewButton.UseVisualStyleBackColor = true;
+			previewButton.Click += previewButton_Click;
+			// 
+			// autoFillIdButton
+			// 
+			autoFillIdButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
+			autoFillIdButton.Location = new Point(623, 13);
+			autoFillIdButton.Name = "autoFillIdButton";
+			autoFillIdButton.Size = new Size(75, 23);
+			autoFillIdButton.TabIndex = 12;
+			autoFillIdButton.Text = "Autofill";
+			autoFillIdButton.UseVisualStyleBackColor = true;
+			autoFillIdButton.Click += autoFillIdButton_Click;
 			// 
 			// ScreenEditor
 			// 
@@ -193,6 +213,8 @@
 			AutoScaleMode = AutoScaleMode.Font;
 			CancelButton = cancelButton;
 			ClientSize = new Size(708, 372);
+			Controls.Add(autoFillIdButton);
+			Controls.Add(previewButton);
 			Controls.Add(screenTitleLabel);
 			Controls.Add(screenTitleTextBox);
 			Controls.Add(screenIdLabel);
@@ -230,5 +252,7 @@
 		private ColumnHeader typeColumn;
 		private ColumnHeader serviceColumn;
 		private ColumnHeader messageColumn;
+		private Button previewButton;
+		private Button autoFillIdButton;
 	}
 }
