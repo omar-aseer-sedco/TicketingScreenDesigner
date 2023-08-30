@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Text;
 using System.Data.SqlClient;
+using System.ComponentModel.Design;
 
 namespace TicketingScreenDesigner {
 	public partial class BankForm : Form {
@@ -162,16 +163,19 @@ namespace TicketingScreenDesigner {
 				editScreenButton.Enabled = false;
 				deleteScreenButton.Enabled = false;
 				setActiveButton.Enabled = false;
+				previewButton.Enabled = false;
 			}
 			else if (selectedCount == 1) {
 				editScreenButton.Enabled = true;
 				deleteScreenButton.Enabled = true;
 				setActiveButton.Enabled = true;
+				previewButton.Enabled = true;
 			}
 			else {
 				editScreenButton.Enabled = false;
 				deleteScreenButton.Enabled = true;
 				setActiveButton.Enabled = false;
+				previewButton.Enabled = false;
 			}
 		}
 
@@ -300,6 +304,60 @@ namespace TicketingScreenDesigner {
 
 		private void previewButton_Click(object sender, EventArgs e) {
 			MessageBox.Show("This doesn't do anything yet.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			return;
+
+			//if (screensListView.SelectedItems.Count != 1) {
+			//	MessageBox.Show("Select one screen to preview.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			//	return;
+			//}
+
+			//PreviewScreen(screensListView.SelectedItems[0].Text, screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text);
+		}
+		
+		private List<TicketingButton> GetButtons(string screenId) {
+			string query = $"SELECT * FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId;";
+			var command = new SqlCommand(query, connection);
+			command.Parameters.AddWithValue("@bankName", bankName);
+			command.Parameters.AddWithValue("@screenId", screenId);
+
+			var ret = new List<TicketingButton>();
+			try {
+				connection.Open();
+
+				string buttonBankName, buttonScreenId, buttonId, type, nameEn, nameAr;
+				string? service, messageEn, messageAr;
+				var reader = command.ExecuteReader();
+
+				while (reader.Read()) {
+					buttonBankName = reader[ButtonsConstants.BANK_NAME].ToString() ?? $"Error getting {ButtonsConstants.BANK_NAME}";
+					buttonScreenId = reader[ButtonsConstants.SCREEN_ID].ToString() ?? $"Error getting {ButtonsConstants.SCREEN_ID}";
+					buttonId = reader[ButtonsConstants.BUTTON_ID].ToString() ?? $"Error getting {ButtonsConstants.BUTTON_ID}";
+					type = reader[ButtonsConstants.TYPE].ToString() ?? $"Error getting {ButtonsConstants.TYPE}";
+					nameEn = reader[ButtonsConstants.NAME_EN].ToString() ?? $"Error getting {ButtonsConstants.NAME_EN}";
+					nameAr = reader[ButtonsConstants.NAME_AR].ToString() ?? $"Error getting {ButtonsConstants.NAME_AR}";
+					service = reader[ButtonsConstants.SERVICE].ToString();
+					messageEn = reader[ButtonsConstants.MESSAGE_EN].ToString();
+					messageAr = reader[ButtonsConstants.MESSAGE_AR].ToString();
+
+					ret.Add(new TicketingButton(buttonBankName, buttonScreenId, buttonId, type, nameEn, nameAr, service, messageEn, messageAr));
+				}
+			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "button ID");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
+			finally {
+				connection.Close();
+			}
+
+			return ret;
+		}
+
+		public void PreviewScreen(string screenId, string screenTitle) {
+			var previewForm = new PreviewFormTest(screenTitle, GetButtons(screenId));
+			previewForm.Show();
 		}
 	}
 }

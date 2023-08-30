@@ -10,6 +10,9 @@
     <Compile Update="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="PreviewFormTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ScreenEditor.cs">
       <SubType>Form</SubType>
     </Compile>

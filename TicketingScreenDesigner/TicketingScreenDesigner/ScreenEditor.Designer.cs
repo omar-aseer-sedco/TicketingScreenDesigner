@@ -186,7 +186,6 @@
 			// previewButton
 			// 
 			previewButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
-			previewButton.Enabled = false;
 			previewButton.Location = new Point(622, 158);
 			previewButton.Name = "previewButton";
 			previewButton.Size = new Size(75, 23);
