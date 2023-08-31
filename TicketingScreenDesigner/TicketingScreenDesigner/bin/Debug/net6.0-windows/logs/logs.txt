@@ -1,0 +1,70 @@
+{
+  "Message": "Unhandled SQL Error. Code: 8178\nMessage: The parameterized query \u0027(@bankName nvarchar(5),@screenId nvarchar(4000))SELECT button_id\u0027 expects the parameter \u0027@screenId\u0027, which was not supplied.",
+  "TimeStamp": "2023-08-31T11:24:19.2867341+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateListView() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 56"
+}
+{
+  "Message": "Duplicate key insertion rejected. Violation of PRIMARY KEY constraint \u0027PK__Screens__127F92E6949ABC7A\u0027. Cannot insert duplicate key in object \u0027dbo.Screens\u0027. The duplicate key value is (bank1, Screen 6).",
+  "TimeStamp": "2023-08-31T11:42:04.9206517+03:00",
+  "Severity": "Info",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at TicketingScreenDesigner.ScreenEditor.AddScreen() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 160"
+}
+{
+  "Message": "The statement has been terminated.",
+  "TimeStamp": "2023-08-31T11:42:04.9872789+03:00",
+  "Severity": "Warning",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at TicketingScreenDesigner.ScreenEditor.AddScreen() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 160"
+}
+{
+  "Message": "Format of the initialization string does not conform to specification starting at index 0.",
+  "TimeStamp": "2023-08-31T11:55:48.0791676+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Format of the initialization string does not conform to specification starting at index 0.",
+  "TimeStamp": "2023-08-31T11:59:56.475178+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Format of the initialization string does not conform to specification starting at index 0.",
+  "TimeStamp": "2023-08-31T12:01:20.5962207+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Format of the initialization string does not conform to specification starting at index 0.",
+  "TimeStamp": "2023-08-31T12:01:45.7404127+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Format of the initialization string does not conform to specification starting at index 0.",
+  "TimeStamp": "2023-08-31T12:02:10.3977893+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Format of the initialization string does not conform to specification starting at index 0.",
+  "TimeStamp": "2023-08-31T12:03:01.9564868+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Format of the initialization string does not conform to specification starting at index 0.",
+  "TimeStamp": "2023-08-31T12:19:15.6532164+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}

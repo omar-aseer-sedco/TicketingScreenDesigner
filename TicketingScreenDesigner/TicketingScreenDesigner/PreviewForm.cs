@@ -1,11 +1,11 @@
 ﻿namespace TicketingScreenDesigner {
-	public class PreviewFormTest : Form {
+	public class PreviewForm : Form {
 		private const int TOP_MARGIN = 20;
 		private const int BOTTOM_MARGIN = 60;
-		private const int SIDE_MARGIN = 75;
+		private const int SIDE_MARGIN = 60;
 		private const int TEXT_SPACING = 30;
-		private const int BUTTON_HEIGHT = 23;
-		private const int BUTTON_WIDTH = 75;
+		private const int BUTTON_HEIGHT = 50;
+		private const int BUTTON_WIDTH = 120;
 		private const int BUTTON_SPACING_VERTICAL = 30;
 		private const int BUTTON_SPACING_HORIZONTAL = 50;
 		private const int VERTICAL_CORRECTION = 30;
@@ -20,44 +20,58 @@
 		private int rows;
 		private int columns;
 
-		public PreviewFormTest(string screenTitle, List<TicketingButton> ticketingButtons) {
+		public PreviewForm(string screenTitle, List<TicketingButton> ticketingButtons) {
 			titleText = screenTitle;
-			formButtons = new List<Button>();
-			titleLabel = new Label();
 			this.ticketingButtons = ticketingButtons;
 			buttonCount = ticketingButtons.Count;
 			InitializeComponent();
 		}
 
 		private void InitializeComponent() {
-			SuspendLayout();
+			try {
+				SuspendLayout();
 
-			SetGridDimensions();
-			SetFormSize();
+				formButtons = new List<Button>();
 
-			titleLabel.AutoSize = true;
-			titleLabel.Text = titleText;
-			titleLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-			titleLabel.TextAlign = ContentAlignment.MiddleCenter;
-			titleLabel.Location = new Point((Size.Width - titleLabel.Width) / 2, TOP_MARGIN);
+				titleLabel = new Label {
+					Text = titleText,
+					Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point),
+					TextAlign = ContentAlignment.MiddleCenter,
+					Anchor = AnchorStyles.Top,
+					Dock = DockStyle.Top,
+					AutoEllipsis = true,
+				};
 
-			int i = 0;
-			foreach (var ticketingButton in ticketingButtons) {
-				formButtons.Add(new Button {
-					Name = ticketingButton.ButtonId,
-					Text = ticketingButton.NameEn,
-					Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point),
-					Size = new Size(BUTTON_WIDTH, BUTTON_HEIGHT),
-					Location = GetButtonLocation(i),
-				});
+				SetGridDimensions();
+				SetFormSize();
+				MinimumSize = Size;
 
-				++i;
+				Padding = new Padding(SIDE_MARGIN, TOP_MARGIN, SIDE_MARGIN, BOTTOM_MARGIN);
+				titleLabel.Location = new Point((Size.Width - titleLabel.Width) / 2, TOP_MARGIN);
+
+				int i = 0;
+				foreach (var ticketingButton in ticketingButtons) {
+					formButtons.Add(new Button {
+						Name = ticketingButton.ButtonId,
+						Text = ticketingButton.NameEn,
+						Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point),
+						Size = new Size(BUTTON_WIDTH, BUTTON_HEIGHT),
+						Location = GetButtonLocation(i),
+						Anchor = AnchorStyles.None,
+						AutoEllipsis = true,
+					});
+
+					++i;
+				}
+
+				Controls.AddRange(formButtons.ToArray<Control>());
+				Controls.Add(titleLabel);
+
+				ResumeLayout();
 			}
-
-			Controls.AddRange(formButtons.ToArray<Control>());
-			Controls.Add(titleLabel);
-
-			ResumeLayout();
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
 		}
 
 		private int GetNextSquareRoot(int x) {
@@ -66,9 +80,7 @@
 
 		private void SetGridDimensions() {
 			rows = GetNextSquareRoot(buttonCount);
-			columns = (int) Math.Ceiling((double) buttonCount / rows) + (buttonCount % rows != 0 ? 1 : 0);
-
-			MessageBox.Show($"rows = {rows}, columns = {columns}");
+			columns = (int) Math.Ceiling((double) buttonCount / rows);
 		}
 
 		private void SetFormSize() {
@@ -79,7 +91,7 @@
 		}
 
 		private Point GetButtonLocation(int index) {
-			int row = index / rows, column = index % rows;
+			int row = index / columns, column = index % columns;
 
 			int x = SIDE_MARGIN + (column * (BUTTON_WIDTH + BUTTON_SPACING_HORIZONTAL));
 			int y = TOP_MARGIN + titleLabel.Height + TEXT_SPACING + (row * (BUTTON_HEIGHT + BUTTON_SPACING_VERTICAL));

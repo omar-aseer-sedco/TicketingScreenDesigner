@@ -1,4 +1,0 @@
-{"Message":"Duplicate primary key operation rejected","TimeStamp":"2023-08-30T17:43:11.1289326+03:00","Severity":"Info"}
-{"Message":"Statement terminated","TimeStamp":"2023-08-30T17:43:11.2200096+03:00","Severity":"Warning"}
-{"Message":"Duplicate primary key operation rejected","TimeStamp":"2023-08-30T17:43:35.7543251+03:00","Severity":"Info"}
-{"Message":"Statement terminated","TimeStamp":"2023-08-30T17:43:35.7569813+03:00","Severity":"Warning"}

@@ -13,11 +13,11 @@ namespace TicketingScreenDesigner {
 		private BankForm() {
 			InitializeComponent();
 			bankName = "";
-			connection = DBUtils.CreateConnection();
 			activeScreenController = new ActiveScreenController(this);
 		}
 
-		public BankForm(string bankName) : this() {
+		public BankForm(SqlConnection connection, string bankName) : this() {
+			this.connection = connection;
 			this.bankName = bankName;
 			Text = TITLE_TEXT + " - " + this.bankName;
 			UpdateTitleLabel();
@@ -31,151 +31,171 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void addScreenButton_Click(object sender, EventArgs e) {
-			var screenEditor = new ScreenEditor(this, bankName);
+			var screenEditor = new ScreenEditor(connection, this, bankName);
 			screenEditor.Show();
 		}
 
 		public void UpdateListView() {
-			screensListView.Items.Clear();
-
-			string query = $"SELECT {ScreensConstants.SCREEN_ID}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName;";
-			SqlCommand command = new SqlCommand(query, connection);
-			command.Parameters.AddWithValue("@bankName", bankName);
-
 			try {
-				connection.Open();
+				screensListView.Items.Clear();
 
-				SqlDataReader reader = command.ExecuteReader();
+				string query = $"SELECT {ScreensConstants.SCREEN_ID}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName;";
+				SqlCommand command = new SqlCommand(query, connection);
+				command.Parameters.AddWithValue("@bankName", bankName);
 
-				while (reader.Read()) {
-					ListViewItem row = new() {
-						Name = ScreensConstants.SCREEN_ID,
-						Text = reader[ScreensConstants.SCREEN_ID].ToString()
-					};
+				try {
+					connection.Open();
 
-					ListViewItem.ListViewSubItem isActive = new() {
-						Name = ScreensConstants.IS_ACTIVE,
-						Text = (bool) reader[ScreensConstants.IS_ACTIVE] ? "Yes" : "No"
-					};
-					row.SubItems.Add(isActive);
+					SqlDataReader reader = command.ExecuteReader();
 
-					ListViewItem.ListViewSubItem screenTitle = new() {
-						Name = ScreensConstants.SCREEN_TITLE,
-						Text = reader[ScreensConstants.SCREEN_TITLE].ToString()
-					};
-					row.SubItems.Add(screenTitle);
+					while (reader.Read()) {
+						ListViewItem row = new() {
+							Name = ScreensConstants.SCREEN_ID,
+							Text = reader[ScreensConstants.SCREEN_ID].ToString()
+						};
 
-					screensListView.Items.Add(row);
+						ListViewItem.ListViewSubItem isActive = new() {
+							Name = ScreensConstants.IS_ACTIVE,
+							Text = (bool) reader[ScreensConstants.IS_ACTIVE] ? "Yes" : "No"
+						};
+						row.SubItems.Add(isActive);
+
+						ListViewItem.ListViewSubItem screenTitle = new() {
+							Name = ScreensConstants.SCREEN_TITLE,
+							Text = reader[ScreensConstants.SCREEN_TITLE].ToString()
+						};
+						row.SubItems.Add(screenTitle);
+
+						screensListView.Items.Add(row);
+					}
+
+					reader.Close();
+				}
+				catch (SqlException ex) {
+					ExceptionHelper.HandleSqlException(ex, "Screen ID");
+				}
+				finally {
+					connection.Close();
 				}
 
-				reader.Close();
-			}
-			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "Screen ID");
+				CheckButtonActivation();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
-			finally {
-				connection.Close();
-			}
-
-			CheckButtonActivation();
 		}
 
 		private void editScreenButton_Click(object sender, EventArgs e) {
-			if (screensListView.SelectedItems.Count == 0) {
-				MessageBox.Show("Select a screen to edit.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				return;
-			}
-
-			string screenId = screensListView.SelectedItems[0].Text;
-			string screenTitle = screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text;
-			bool isActive = screensListView.SelectedItems[0].SubItems[ScreensConstants.IS_ACTIVE].Text == "Yes";
-			var screenEditor = new ScreenEditor(this, bankName, screenId, screenTitle, isActive);
-			screenEditor.Show();
-		}
-
-		private bool DeleteSelected() {
-			int selectedCount = screensListView.SelectedItems.Count;
-
-			if (selectedCount == 0)
-				return false;
-
-			var query = new StringBuilder($"DELETE FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} IN (");
-			var command = new SqlCommand();
-			command.Parameters.AddWithValue("@bankName", bankName);
-
-			int i = 0;
-			foreach (ListViewItem row in screensListView.SelectedItems) {
-				query.Append("@P").Append(i).Append(',');
-				command.Parameters.Add("@P" + i, SqlDbType.VarChar).Value = row.SubItems[ScreensConstants.SCREEN_ID].Text;
-				++i;
-			}
-
-			query.Length--; // remove last ,
-			query.Append(");");
-
-			command.Connection = connection;
-			command.CommandText = query.ToString();
-
-			bool success = false;
-
 			try {
-				connection.Open();
-				success = command.ExecuteNonQuery() == selectedCount;
-			}
-			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "screen ID");
+				if (screensListView.SelectedItems.Count == 0) {
+					MessageBox.Show("Select a screen to edit.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					return;
+				}
+
+				string screenId = screensListView.SelectedItems[0].Text;
+				string screenTitle = screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text;
+				bool isActive = screensListView.SelectedItems[0].SubItems[ScreensConstants.IS_ACTIVE].Text == "Yes";
+				var screenEditor = new ScreenEditor(connection, this, bankName, screenId, screenTitle, isActive);
+				screenEditor.Show();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
-			finally {
-				connection.Close();
+		}
+
+		private bool DeleteSelected() {
+			bool success = false;
+
+			try {
+				int selectedCount = screensListView.SelectedItems.Count;
+
+				if (selectedCount == 0)
+					return false;
+
+				var query = new StringBuilder($"DELETE FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} IN (");
+				var command = new SqlCommand();
+				command.Parameters.AddWithValue("@bankName", bankName);
+
+				int i = 0;
+				foreach (ListViewItem row in screensListView.SelectedItems) {
+					query.Append("@P").Append(i).Append(',');
+					command.Parameters.Add("@P" + i, SqlDbType.VarChar).Value = row.SubItems[ScreensConstants.SCREEN_ID].Text;
+					++i;
+				}
+
+				query.Length--; // remove last ,
+				query.Append(");");
+
+				command.Connection = connection;
+				command.CommandText = query.ToString();
+
+
+				try {
+					connection.Open();
+					success = command.ExecuteNonQuery() == selectedCount;
+				}
+				catch (SqlException ex) {
+					ExceptionHelper.HandleSqlException(ex, "screen ID");
+				}
+				finally {
+					connection.Close();
+				}
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 
 			return success;
 		}
 
 		private void deleteScreenButton_Click(object sender, EventArgs e) {
-			if (screensListView.SelectedItems.Count == 0) {
-				MessageBox.Show("Select a screen to delete.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				return;
+			try {
+				if (screensListView.SelectedItems.Count == 0) {
+					MessageBox.Show("Select a screen to delete.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					return;
+				}
+
+				var confirmationResult = MessageBox.Show("Are you sure you want to delete the selected screen(s)? This action cannot be undone.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+				if (confirmationResult == DialogResult.No) {
+					return;
+				}
+
+				if (!DeleteSelected()) {
+					MessageBox.Show("Screen deletion failed.", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+
+				UpdateListView();
 			}
-
-			var confirmationResult = MessageBox.Show("Are you sure you want to delete the selected screen(s)? This action cannot be undone.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-			if (confirmationResult == DialogResult.No) {
-				return;
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
-
-			if (!DeleteSelected()) {
-				MessageBox.Show("Screen deletion failed.", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-
-			UpdateListView();
 		}
 
 		private void CheckButtonActivation() {
-			int selectedCount = screensListView.SelectedIndices.Count;
-			if (selectedCount == 0) {
-				editScreenButton.Enabled = false;
-				deleteScreenButton.Enabled = false;
-				setActiveButton.Enabled = false;
-				previewButton.Enabled = false;
+			try {
+				int selectedCount = screensListView.SelectedIndices.Count;
+				if (selectedCount == 0) {
+					editScreenButton.Enabled = false;
+					deleteScreenButton.Enabled = false;
+					setActiveButton.Enabled = false;
+					previewButton.Enabled = false;
+				}
+				else if (selectedCount == 1) {
+					editScreenButton.Enabled = true;
+					deleteScreenButton.Enabled = true;
+					setActiveButton.Enabled = true;
+					previewButton.Enabled = true;
+				}
+				else {
+					editScreenButton.Enabled = false;
+					deleteScreenButton.Enabled = true;
+					setActiveButton.Enabled = false;
+					previewButton.Enabled = false;
+				}
 			}
-			else if (selectedCount == 1) {
-				editScreenButton.Enabled = true;
-				deleteScreenButton.Enabled = true;
-				setActiveButton.Enabled = true;
-				previewButton.Enabled = true;
-			}
-			else {
-				editScreenButton.Enabled = false;
-				deleteScreenButton.Enabled = true;
-				setActiveButton.Enabled = false;
-				previewButton.Enabled = false;
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 		}
 
@@ -191,56 +211,66 @@ namespace TicketingScreenDesigner {
 			}
 
 			public string? GetActiveScreenId() {
-				string query = $"SELECT {ScreensConstants.SCREEN_ID} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.IS_ACTIVE} = 1;";
-				var command = new SqlCommand(query, parentForm.connection);
-				command.Parameters.AddWithValue("@bankName", parentForm.bankName);
-
 				string? ret = null;
 
 				try {
-					parentForm.connection.Open();
+					string query = $"SELECT {ScreensConstants.SCREEN_ID} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.IS_ACTIVE} = 1;";
+					var command = new SqlCommand(query, parentForm.connection);
+					command.Parameters.AddWithValue("@bankName", parentForm.bankName);
 
-					var reader = command.ExecuteReader();
+					try {
+						parentForm.connection.Open();
 
-					if (reader.Read()) {
-						ret = reader.GetString(0);
+						var reader = command.ExecuteReader();
+
+						if (reader.Read()) {
+							ret = reader.GetString(0);
+						}
 					}
-				}
-				catch (SqlException ex) {
-					ExceptionHelper.HandleSqlException(ex, "Screen ID");
+					catch (SqlException ex) {
+						ExceptionHelper.HandleSqlException(ex, "Screen ID");
+					}
+					catch (Exception ex) {
+						ExceptionHelper.HandleGeneralException(ex);
+					}
+					finally {
+						parentForm.connection.Close();
+					}
 				}
 				catch (Exception ex) {
 					ExceptionHelper.HandleGeneralException(ex);
-				}
-				finally {
-					parentForm.connection.Close();
 				}
 
 				return ret;
 			}
 
 			private bool SetIsActive(string screenId, bool active) {
-				string query = $"UPDATE {ScreensConstants.TABLE_NAME} SET {ScreensConstants.IS_ACTIVE} = @isActive WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} = @screenId";
-				var command = new SqlCommand(query, parentForm.connection);
-				command.Parameters.AddWithValue("@isActive", active ? 1 : 0);
-				command.Parameters.AddWithValue("@bankName", parentForm.bankName);
-				command.Parameters.AddWithValue("@screenId", screenId);
-
 				bool success = false;
 
 				try {
-					parentForm.connection.Open();
+					string query = $"UPDATE {ScreensConstants.TABLE_NAME} SET {ScreensConstants.IS_ACTIVE} = @isActive WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} = @screenId";
+					var command = new SqlCommand(query, parentForm.connection);
+					command.Parameters.AddWithValue("@isActive", active ? 1 : 0);
+					command.Parameters.AddWithValue("@bankName", parentForm.bankName);
+					command.Parameters.AddWithValue("@screenId", screenId);
 
-					success = command.ExecuteNonQuery() == 1;
-				}
-				catch (SqlException ex) {
-					ExceptionHelper.HandleSqlException(ex, "Screen ID");
+					try {
+						parentForm.connection.Open();
+
+						success = command.ExecuteNonQuery() == 1;
+					}
+					catch (SqlException ex) {
+						ExceptionHelper.HandleSqlException(ex, "Screen ID");
+					}
+					catch (Exception ex) {
+						ExceptionHelper.HandleGeneralException(ex);
+					}
+					finally {
+						parentForm.connection.Close();
+					}
 				}
 				catch (Exception ex) {
 					ExceptionHelper.HandleGeneralException(ex);
-				}
-				finally {
-					parentForm.connection.Close();
 				}
 
 				return success;
@@ -274,90 +304,112 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void setActiveButton_Click(object sender, EventArgs e) {
-			if (screensListView.SelectedItems.Count != 1) {
-				MessageBox.Show("Select one screen to activate.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				return;
-			}
-
-			string selectedScreenId = screensListView.SelectedItems[0].Text;
-			string? currentlyActiveScreenId = GetActiveScreenId();
-
-			if (currentlyActiveScreenId is not null) {
-				if (currentlyActiveScreenId == selectedScreenId) {
-					MessageBox.Show("The selected screen is already active.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			try {
+				if (screensListView.SelectedItems.Count != 1) {
+					MessageBox.Show("Select one screen to activate.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
-				else {
-					var confirmationResult = MessageBox.Show("Setting this screen as active will deactivate the currently active screen. Do you want to proceed?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-					if (confirmationResult == DialogResult.No) {
+				string selectedScreenId = screensListView.SelectedItems[0].Text;
+				string? currentlyActiveScreenId = GetActiveScreenId();
+
+				if (currentlyActiveScreenId is not null) {
+					if (currentlyActiveScreenId == selectedScreenId) {
+						MessageBox.Show("The selected screen is already active.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 						return;
 					}
+					else {
+						var confirmationResult = MessageBox.Show("Setting this screen as active will deactivate the currently active screen. Do you want to proceed?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-					DeactivateScreen(currentlyActiveScreenId);
+						if (confirmationResult == DialogResult.No) {
+							return;
+						}
+
+						DeactivateScreen(currentlyActiveScreenId);
+					}
 				}
-			}
 
-			ActivateScreen(selectedScreenId);
-			UpdateListView();
-		}
-
-		private void previewButton_Click(object sender, EventArgs e) {
-			MessageBox.Show("This doesn't do anything yet.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			return;
-
-			//if (screensListView.SelectedItems.Count != 1) {
-			//	MessageBox.Show("Select one screen to preview.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			//	return;
-			//}
-
-			//PreviewScreen(screensListView.SelectedItems[0].Text, screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text);
-		}
-		
-		private List<TicketingButton> GetButtons(string screenId) {
-			string query = $"SELECT * FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId;";
-			var command = new SqlCommand(query, connection);
-			command.Parameters.AddWithValue("@bankName", bankName);
-			command.Parameters.AddWithValue("@screenId", screenId);
-
-			var ret = new List<TicketingButton>();
-			try {
-				connection.Open();
-
-				string buttonBankName, buttonScreenId, buttonId, type, nameEn, nameAr;
-				string? service, messageEn, messageAr;
-				var reader = command.ExecuteReader();
-
-				while (reader.Read()) {
-					buttonBankName = reader[ButtonsConstants.BANK_NAME].ToString() ?? $"Error getting {ButtonsConstants.BANK_NAME}";
-					buttonScreenId = reader[ButtonsConstants.SCREEN_ID].ToString() ?? $"Error getting {ButtonsConstants.SCREEN_ID}";
-					buttonId = reader[ButtonsConstants.BUTTON_ID].ToString() ?? $"Error getting {ButtonsConstants.BUTTON_ID}";
-					type = reader[ButtonsConstants.TYPE].ToString() ?? $"Error getting {ButtonsConstants.TYPE}";
-					nameEn = reader[ButtonsConstants.NAME_EN].ToString() ?? $"Error getting {ButtonsConstants.NAME_EN}";
-					nameAr = reader[ButtonsConstants.NAME_AR].ToString() ?? $"Error getting {ButtonsConstants.NAME_AR}";
-					service = reader[ButtonsConstants.SERVICE].ToString();
-					messageEn = reader[ButtonsConstants.MESSAGE_EN].ToString();
-					messageAr = reader[ButtonsConstants.MESSAGE_AR].ToString();
-
-					ret.Add(new TicketingButton(buttonBankName, buttonScreenId, buttonId, type, nameEn, nameAr, service, messageEn, messageAr));
-				}
-			}
-			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "button ID");
+				ActivateScreen(selectedScreenId);
+				UpdateListView();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
-			finally {
-				connection.Close();
+		}
+
+		private void previewButton_Click(object sender, EventArgs e) {
+			try {
+				if (screensListView.SelectedItems.Count != 1) {
+					MessageBox.Show("Select one screen to preview.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					return;
+				}
+
+				string screenId = screensListView.SelectedItems[0].Text;
+				string screenTitle = screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text;
+				PreviewScreen(screenId, screenTitle == string.Empty ? screenId : screenTitle);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
+		}
+
+		public List<TicketingButton> GetButtons(string screenId) {
+			var ret = new List<TicketingButton>();
+
+			try {
+				string query = $"SELECT * FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId;";
+				var command = new SqlCommand(query, connection);
+				command.Parameters.AddWithValue("@bankName", bankName);
+				command.Parameters.AddWithValue("@screenId", screenId);
+
+				try {
+					connection.Open();
+
+					string buttonBankName, buttonScreenId, buttonId, type, nameEn, nameAr;
+					string? service, messageEn, messageAr;
+					var reader = command.ExecuteReader();
+
+					while (reader.Read()) {
+						buttonBankName = reader[ButtonsConstants.BANK_NAME].ToString() ?? $"Error getting {ButtonsConstants.BANK_NAME}";
+						buttonScreenId = reader[ButtonsConstants.SCREEN_ID].ToString() ?? $"Error getting {ButtonsConstants.SCREEN_ID}";
+						buttonId = reader[ButtonsConstants.BUTTON_ID].ToString() ?? $"Error getting {ButtonsConstants.BUTTON_ID}";
+						type = reader[ButtonsConstants.TYPE].ToString() ?? $"Error getting {ButtonsConstants.TYPE}";
+						nameEn = reader[ButtonsConstants.NAME_EN].ToString() ?? $"Error getting {ButtonsConstants.NAME_EN}";
+						nameAr = reader[ButtonsConstants.NAME_AR].ToString() ?? $"Error getting {ButtonsConstants.NAME_AR}";
+						service = reader[ButtonsConstants.SERVICE].ToString();
+						messageEn = reader[ButtonsConstants.MESSAGE_EN].ToString();
+						messageAr = reader[ButtonsConstants.MESSAGE_AR].ToString();
+
+						ret.Add(new TicketingButton(buttonBankName, buttonScreenId, buttonId, type, nameEn, nameAr, service, messageEn, messageAr));
+					}
+				}
+				catch (SqlException ex) {
+					ExceptionHelper.HandleSqlException(ex, "button ID");
+				}
+				finally {
+					connection.Close();
+				}
+
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 
 			return ret;
 		}
 
 		public void PreviewScreen(string screenId, string screenTitle) {
-			var previewForm = new PreviewFormTest(screenTitle, GetButtons(screenId));
-			previewForm.Show();
+			try {
+				var previewForm = new PreviewForm(screenTitle, GetButtons(screenId));
+				previewForm.Show();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
+		}
+
+		private void refreshButton_Click(object sender, EventArgs e) {
+			UpdateListView();
 		}
 	}
 }

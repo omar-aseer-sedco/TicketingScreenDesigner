@@ -230,8 +230,10 @@
 			// 
 			// ButtonEditor
 			// 
+			AcceptButton = saveButton;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
+			CancelButton = cancelButton;
 			ClientSize = new Size(612, 255);
 			Controls.Add(autoFillIdButton);
 			Controls.Add(issueTicketPanel);
@@ -248,7 +250,6 @@
 			Controls.Add(buttonIdTextBox);
 			MinimumSize = new Size(628, 233);
 			Name = "ButtonEditor";
-			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Button Editor";
 			showMessagePanel.ResumeLayout(false);
 			showMessagePanel.PerformLayout();

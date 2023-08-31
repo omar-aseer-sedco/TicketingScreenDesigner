@@ -7,6 +7,13 @@ namespace TicketingScreenDesigner {
 			Message = message;
 			TimeStamp = timeStamp;
 			Severity = GetSeverity(severity);
+			Source = null;
+			StackTrace = null;
+		}
+
+		public LogEvent(string message, DateTime timeStamp, EventSeverity severity, string? source, string? stackTrace) : this(message, timeStamp, severity) {
+			Source = source;
+			StackTrace = stackTrace;
 		}
 
 		private string GetSeverity(EventSeverity severity) {
@@ -25,6 +32,8 @@ namespace TicketingScreenDesigner {
 		public string Message { get; private set; }
 		public DateTime TimeStamp { get; private set; }
 		public string Severity { get; private set; }
+		public string? Source { get; private set; }
+		public string? StackTrace { get; private set; }
 	}
 
 	public enum EventSeverity {
@@ -34,8 +43,7 @@ namespace TicketingScreenDesigner {
 	}
 
 	public static class LogsHelper {
-		private const string LOG_FILE_NAME = "logs.txt";
-		private static readonly string logFilePath = Path.Join(Directory.GetCurrentDirectory(), "system logs", LOG_FILE_NAME);
+		private static readonly string logFilePath = Path.Join(Directory.GetCurrentDirectory(), "logs", "logs.txt");
 
 		public static void Log(LogEvent logEvent) {
 			WriteLog(logEvent);
@@ -43,13 +51,12 @@ namespace TicketingScreenDesigner {
 
 		private static void WriteLog(LogEvent logEvent) {
 			try {
-				var options = new FileStreamOptions() {
-					Mode = FileMode.OpenOrCreate,
-					Access = FileAccess.Write,
+				var options = new JsonSerializerOptions() {
+					WriteIndented = true,
 				};
 
 				using (var fileWriter = File.AppendText(logFilePath)) {
-					fileWriter.WriteLine(JsonSerializer.Serialize(logEvent));
+					fileWriter.WriteLine(JsonSerializer.Serialize(logEvent, typeof(LogEvent), options));
 				}
 			}
 			catch (IOException ex) {

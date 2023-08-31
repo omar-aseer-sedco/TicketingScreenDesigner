@@ -39,8 +39,8 @@
 			screenIdLabel = new Label();
 			screenTitleLabel = new Label();
 			screenTitleTextBox = new TextBox();
-			previewButton = new Button();
 			autoFillIdButton = new Button();
+			refreshButton = new Button();
 			SuspendLayout();
 			// 
 			// saveButton
@@ -183,17 +183,6 @@
 			screenTitleTextBox.Size = new Size(609, 23);
 			screenTitleTextBox.TabIndex = 9;
 			// 
-			// previewButton
-			// 
-			previewButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
-			previewButton.Location = new Point(622, 158);
-			previewButton.Name = "previewButton";
-			previewButton.Size = new Size(75, 23);
-			previewButton.TabIndex = 11;
-			previewButton.Text = "Preview";
-			previewButton.UseVisualStyleBackColor = true;
-			previewButton.Click += previewButton_Click;
-			// 
 			// autoFillIdButton
 			// 
 			autoFillIdButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
@@ -205,6 +194,17 @@
 			autoFillIdButton.UseVisualStyleBackColor = true;
 			autoFillIdButton.Click += autoFillIdButton_Click;
 			// 
+			// refreshButton
+			// 
+			refreshButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
+			refreshButton.Location = new Point(622, 158);
+			refreshButton.Name = "refreshButton";
+			refreshButton.Size = new Size(75, 23);
+			refreshButton.TabIndex = 13;
+			refreshButton.Text = "Refresh";
+			refreshButton.UseVisualStyleBackColor = true;
+			refreshButton.Click += refreshButton_Click;
+			// 
 			// ScreenEditor
 			// 
 			AcceptButton = saveButton;
@@ -212,8 +212,8 @@
 			AutoScaleMode = AutoScaleMode.Font;
 			CancelButton = cancelButton;
 			ClientSize = new Size(708, 372);
+			Controls.Add(refreshButton);
 			Controls.Add(autoFillIdButton);
-			Controls.Add(previewButton);
 			Controls.Add(screenTitleLabel);
 			Controls.Add(screenTitleTextBox);
 			Controls.Add(screenIdLabel);
@@ -227,7 +227,6 @@
 			Controls.Add(saveButton);
 			MinimumSize = new Size(724, 411);
 			Name = "ScreenEditor";
-			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Screen Editor";
 			ResumeLayout(false);
 			PerformLayout();
@@ -251,7 +250,7 @@
 		private ColumnHeader typeColumn;
 		private ColumnHeader serviceColumn;
 		private ColumnHeader messageColumn;
-		private Button previewButton;
 		private Button autoFillIdButton;
+		private Button refreshButton;
 	}
 }

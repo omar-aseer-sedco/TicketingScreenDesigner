@@ -33,6 +33,7 @@
 			titleLabel = new Label();
 			setActiveButton = new Button();
 			previewButton = new Button();
+			refreshButton = new Button();
 			SuspendLayout();
 			// 
 			// screensListView
@@ -133,11 +134,23 @@
 			previewButton.UseVisualStyleBackColor = true;
 			previewButton.Click += previewButton_Click;
 			// 
+			// refreshButton
+			// 
+			refreshButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
+			refreshButton.Location = new Point(533, 213);
+			refreshButton.Name = "refreshButton";
+			refreshButton.Size = new Size(108, 23);
+			refreshButton.TabIndex = 7;
+			refreshButton.Text = "Refresh";
+			refreshButton.UseVisualStyleBackColor = true;
+			refreshButton.Click += refreshButton_Click;
+			// 
 			// BankForm
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(654, 436);
+			Controls.Add(refreshButton);
 			Controls.Add(previewButton);
 			Controls.Add(setActiveButton);
 			Controls.Add(titleLabel);
@@ -147,7 +160,6 @@
 			Controls.Add(screensListView);
 			MinimumSize = new Size(670, 475);
 			Name = "BankForm";
-			StartPosition = FormStartPosition.CenterScreen;
 			Text = "- Ticketing Screen Designer";
 			ResumeLayout(false);
 			PerformLayout();
@@ -165,5 +177,6 @@
 		private ColumnHeader screenTitleColumn;
 		private Button setActiveButton;
 		private Button previewButton;
+		private Button refreshButton;
 	}
 }
