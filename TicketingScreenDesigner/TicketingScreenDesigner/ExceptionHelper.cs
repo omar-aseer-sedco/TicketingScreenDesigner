@@ -14,7 +14,7 @@ namespace TicketingScreenDesigner {
 			LogsHelper.Log(new LogEvent(message, DateTime.Now, EventSeverity.Error, exception.Source, exception.StackTrace));
 		}
 
-		public static void HandleSqlException(SqlException exception, string fieldName) {
+		public static void HandleSqlException(SqlException exception, string fieldName = "") {
 			bool suppressStatementTermination = false;
 
 			foreach (SqlError error in exception.Errors) {
