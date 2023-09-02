@@ -50,7 +50,7 @@
 			saveButton.Name = "saveButton";
 			saveButton.Size = new Size(75, 23);
 			saveButton.TabIndex = 0;
-			saveButton.Text = "Save";
+			saveButton.Text = "&Save";
 			saveButton.UseVisualStyleBackColor = true;
 			saveButton.Click += saveButton_Click;
 			// 
@@ -66,6 +66,7 @@
 			buttonsListView.UseCompatibleStateImageBehavior = false;
 			buttonsListView.View = View.Details;
 			buttonsListView.SelectedIndexChanged += buttonsListView_SelectedIndexChanged;
+			buttonsListView.KeyDown += buttonsListView_KeyDown;
 			// 
 			// idColumn
 			// 
@@ -99,7 +100,7 @@
 			cancelButton.Name = "cancelButton";
 			cancelButton.Size = new Size(75, 23);
 			cancelButton.TabIndex = 2;
-			cancelButton.Text = "Cancel";
+			cancelButton.Text = "&Cancel";
 			cancelButton.UseVisualStyleBackColor = true;
 			cancelButton.Click += cancelButton_Click;
 			// 
@@ -110,7 +111,7 @@
 			addButton.Name = "addButton";
 			addButton.Size = new Size(75, 23);
 			addButton.TabIndex = 3;
-			addButton.Text = "Add";
+			addButton.Text = "A&dd";
 			addButton.UseVisualStyleBackColor = true;
 			addButton.Click += addButton_Click;
 			// 
@@ -122,7 +123,7 @@
 			deleteButton.Name = "deleteButton";
 			deleteButton.Size = new Size(75, 23);
 			deleteButton.TabIndex = 4;
-			deleteButton.Text = "Delete";
+			deleteButton.Text = "De&lete";
 			deleteButton.UseVisualStyleBackColor = true;
 			deleteButton.Click += deleteButton_Click;
 			// 
@@ -134,7 +135,7 @@
 			editButton.Name = "editButton";
 			editButton.Size = new Size(75, 23);
 			editButton.TabIndex = 5;
-			editButton.Text = "Edit";
+			editButton.Text = "&Edit";
 			editButton.UseVisualStyleBackColor = true;
 			editButton.Click += editButton_Click;
 			// 
@@ -146,7 +147,7 @@
 			activeCheckBox.Name = "activeCheckBox";
 			activeCheckBox.Size = new Size(59, 19);
 			activeCheckBox.TabIndex = 6;
-			activeCheckBox.Text = "Active";
+			activeCheckBox.Text = "&Active";
 			activeCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// screenIdTextBox
@@ -190,7 +191,7 @@
 			autoFillIdButton.Name = "autoFillIdButton";
 			autoFillIdButton.Size = new Size(75, 23);
 			autoFillIdButton.TabIndex = 12;
-			autoFillIdButton.Text = "Autofill";
+			autoFillIdButton.Text = "Auto&Fill";
 			autoFillIdButton.UseVisualStyleBackColor = true;
 			autoFillIdButton.Click += autoFillIdButton_Click;
 			// 
@@ -201,7 +202,7 @@
 			refreshButton.Name = "refreshButton";
 			refreshButton.Size = new Size(75, 23);
 			refreshButton.TabIndex = 13;
-			refreshButton.Text = "Refresh";
+			refreshButton.Text = "&Refresh";
 			refreshButton.UseVisualStyleBackColor = true;
 			refreshButton.Click += refreshButton_Click;
 			// 
@@ -228,6 +229,7 @@
 			MinimumSize = new Size(724, 411);
 			Name = "ScreenEditor";
 			Text = "Screen Editor";
+			KeyDown += ScreenEditor_KeyDown;
 			ResumeLayout(false);
 			PerformLayout();
 		}

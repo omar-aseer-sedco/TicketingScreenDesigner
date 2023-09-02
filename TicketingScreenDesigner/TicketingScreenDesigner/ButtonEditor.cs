@@ -176,14 +176,14 @@ namespace TicketingScreenDesigner {
 				string buttonId = buttonIdTextBox.Text;
 				string type = typeComboBox.SelectedIndex == ISSUE_TICKET_INDEX ? ButtonsConstants.Types.ISSUE_TICKET : ButtonsConstants.Types.SHOW_MESSAGE;
 				string nameEn = nameEnTextBox.Text;
-				string nameAr = nameEnTextBox.Text;
+				string nameAr = nameArTextBox.Text;
 				string? service = serviceTextBox.Text == string.Empty ? null : serviceTextBox.Text;
 				string? messageEn = messageEnTextBox.Text == string.Empty ? null : messageEnTextBox.Text;
 				string? messageAr = messageArTextBox.Text == string.Empty ? null : messageArTextBox.Text;
 				var newButton = new TicketingButton(bankName, screenId, buttonId, type, nameEn, nameAr, service, messageEn, messageAr);
 
 				if (isNewButton) {
-					callingForm.AddButton(newButton);
+					callingForm.AddButtonToPendingList(newButton);
 				}
 				else {
 					callingForm.UpdateButton(button.ButtonId, newButton);

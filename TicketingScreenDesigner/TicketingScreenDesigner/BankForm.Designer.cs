@@ -48,6 +48,7 @@
 			screensListView.UseCompatibleStateImageBehavior = false;
 			screensListView.View = View.Details;
 			screensListView.SelectedIndexChanged += screensListView_SelectedIndexChanged;
+			screensListView.KeyDown += screensListView_KeyDown;
 			// 
 			// screenIdColumn
 			// 
@@ -71,7 +72,7 @@
 			addScreenButton.Name = "addScreenButton";
 			addScreenButton.Size = new Size(108, 23);
 			addScreenButton.TabIndex = 1;
-			addScreenButton.Text = "Add";
+			addScreenButton.Text = "&Add";
 			addScreenButton.UseVisualStyleBackColor = true;
 			addScreenButton.Click += addScreenButton_Click;
 			// 
@@ -83,7 +84,7 @@
 			editScreenButton.Name = "editScreenButton";
 			editScreenButton.Size = new Size(108, 23);
 			editScreenButton.TabIndex = 2;
-			editScreenButton.Text = "Edit";
+			editScreenButton.Text = "&Edit";
 			editScreenButton.UseVisualStyleBackColor = true;
 			editScreenButton.Click += editScreenButton_Click;
 			// 
@@ -95,7 +96,7 @@
 			deleteScreenButton.Name = "deleteScreenButton";
 			deleteScreenButton.Size = new Size(108, 23);
 			deleteScreenButton.TabIndex = 3;
-			deleteScreenButton.Text = "Delete";
+			deleteScreenButton.Text = "&Delete";
 			deleteScreenButton.UseVisualStyleBackColor = true;
 			deleteScreenButton.Click += deleteScreenButton_Click;
 			// 
@@ -118,7 +119,7 @@
 			setActiveButton.Name = "setActiveButton";
 			setActiveButton.Size = new Size(108, 23);
 			setActiveButton.TabIndex = 5;
-			setActiveButton.Text = "Set Active Screen";
+			setActiveButton.Text = "&Set Active Screen";
 			setActiveButton.UseVisualStyleBackColor = true;
 			setActiveButton.Click += setActiveButton_Click;
 			// 
@@ -130,7 +131,7 @@
 			previewButton.Name = "previewButton";
 			previewButton.Size = new Size(108, 23);
 			previewButton.TabIndex = 6;
-			previewButton.Text = "Preview";
+			previewButton.Text = "&Preview";
 			previewButton.UseVisualStyleBackColor = true;
 			previewButton.Click += previewButton_Click;
 			// 
@@ -141,7 +142,7 @@
 			refreshButton.Name = "refreshButton";
 			refreshButton.Size = new Size(108, 23);
 			refreshButton.TabIndex = 7;
-			refreshButton.Text = "Refresh";
+			refreshButton.Text = "&Refresh";
 			refreshButton.UseVisualStyleBackColor = true;
 			refreshButton.Click += refreshButton_Click;
 			// 
@@ -161,6 +162,7 @@
 			MinimumSize = new Size(670, 475);
 			Name = "BankForm";
 			Text = "- Ticketing Screen Designer";
+			KeyDown += BankForm_KeyDown;
 			ResumeLayout(false);
 			PerformLayout();
 		}

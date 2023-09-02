@@ -1,0 +1,10 @@
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net48\TicketingScreenDesigner.csproj.AssemblyReference.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net48\TicketingScreenDesigner.BankForm.resources
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net48\TicketingScreenDesigner.ButtonEditor.resources
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net48\TicketingScreenDesigner.LoginForm.resources
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net48\TicketingScreenDesigner.ScreenEditor.resources
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net48\TicketingScreenDesigner.csproj.GenerateResource.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net48\TicketingScreenDesigner.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net48\TicketingScreenDesigner.AssemblyInfoInputs.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net48\TicketingScreenDesigner.AssemblyInfo.cs
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net48\TicketingScreenDesigner.csproj.CoreCompileInputs.cache

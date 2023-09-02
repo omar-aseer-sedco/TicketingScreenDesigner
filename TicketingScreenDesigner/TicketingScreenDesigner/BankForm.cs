@@ -30,9 +30,13 @@ namespace TicketingScreenDesigner {
 			titleLabel.Location = new Point(sizeDifference / 2, titleLabel.Location.Y);
 		}
 
-		private void addScreenButton_Click(object sender, EventArgs e) {
+		private void AddScreen() {
 			var screenEditor = new ScreenEditor(connection, this, bankName);
 			screenEditor.Show();
+		}
+
+		private void addScreenButton_Click(object sender, EventArgs e) {
+			AddScreen();
 		}
 
 		public void UpdateListView() {
@@ -85,10 +89,10 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void editScreenButton_Click(object sender, EventArgs e) {
+		private void EditScreen() {
 			try {
-				if (screensListView.SelectedItems.Count == 0) {
-					MessageBox.Show("Select a screen to edit.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				if (screensListView.SelectedItems.Count != 1) {
+					MessageBox.Show("Select one screen to edit.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
 
@@ -101,6 +105,10 @@ namespace TicketingScreenDesigner {
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
+		}
+
+		private void editScreenButton_Click(object sender, EventArgs e) {
+			EditScreen();
 		}
 
 		private bool DeleteSelected() {
@@ -148,7 +156,7 @@ namespace TicketingScreenDesigner {
 			return success;
 		}
 
-		private void deleteScreenButton_Click(object sender, EventArgs e) {
+		private void DeleteScreen() {
 			try {
 				if (screensListView.SelectedItems.Count == 0) {
 					MessageBox.Show("Select a screen to delete.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -170,6 +178,10 @@ namespace TicketingScreenDesigner {
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
+		}
+
+		private void deleteScreenButton_Click(object sender, EventArgs e) {
+			DeleteScreen();
 		}
 
 		private void CheckButtonActivation() {
@@ -303,7 +315,7 @@ namespace TicketingScreenDesigner {
 			return activeScreenController.DeactivateScreen(screenId);
 		}
 
-		private void setActiveButton_Click(object sender, EventArgs e) {
+		private void SetActiveScreen() {
 			try {
 				if (screensListView.SelectedItems.Count != 1) {
 					MessageBox.Show("Select one screen to activate.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -337,7 +349,11 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void previewButton_Click(object sender, EventArgs e) {
+		private void setActiveButton_Click(object sender, EventArgs e) {
+			SetActiveScreen();
+		}
+
+		private void PreviewScreen() {
 			try {
 				if (screensListView.SelectedItems.Count != 1) {
 					MessageBox.Show("Select one screen to preview.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -346,11 +362,15 @@ namespace TicketingScreenDesigner {
 
 				string screenId = screensListView.SelectedItems[0].Text;
 				string screenTitle = screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text;
-				PreviewScreen(screenId, screenTitle == string.Empty ? screenId : screenTitle);
+				PreviewScreenById(screenId, screenTitle == string.Empty ? screenId : screenTitle);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
+		}
+
+		private void previewButton_Click(object sender, EventArgs e) {
+			PreviewScreen();
 		}
 
 		public List<TicketingButton> GetButtons(string screenId) {
@@ -398,7 +418,7 @@ namespace TicketingScreenDesigner {
 			return ret;
 		}
 
-		public void PreviewScreen(string screenId, string screenTitle) {
+		public void PreviewScreenById(string screenId, string screenTitle) {
 			try {
 				var previewForm = new PreviewForm(screenTitle, GetButtons(screenId));
 				previewForm.Show();
@@ -410,6 +430,38 @@ namespace TicketingScreenDesigner {
 
 		private void refreshButton_Click(object sender, EventArgs e) {
 			UpdateListView();
+		}
+
+		private void HandleKeyEvent(KeyEventArgs e) {
+			switch (e.KeyCode) {
+				case Keys.Enter:
+					EditScreen();
+					break;
+				case Keys.Delete:
+				case Keys.Back:
+					DeleteScreen();
+					break;
+				case Keys.A:
+					AddScreen();
+					break;
+				case Keys.E:
+					EditScreen();
+					break;
+				case Keys.S:
+					SetActiveScreen();
+					break;
+				case Keys.P:
+					PreviewScreen();
+					break;
+			}
+		}
+
+		private void BankForm_KeyDown(object sender, KeyEventArgs e) {
+			HandleKeyEvent(e);
+		}
+
+		private void screensListView_KeyDown(object sender, KeyEventArgs e) {
+			HandleKeyEvent(e);
 		}
 	}
 }

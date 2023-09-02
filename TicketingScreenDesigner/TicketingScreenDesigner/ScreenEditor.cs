@@ -130,7 +130,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void addButton_Click(object sender, EventArgs e) {
+		private void AddButton() {
 			try {
 				TrimInput();
 				var buttonEditor = new ButtonEditor(connection, this, bankName, screenIdTextBox.Text);
@@ -139,6 +139,10 @@ namespace TicketingScreenDesigner {
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
+		}
+
+		private void addButton_Click(object sender, EventArgs e) {
+			AddButton();
 		}
 
 		private bool AddScreen() {
@@ -237,7 +241,7 @@ namespace TicketingScreenDesigner {
 			return success;
 		}
 
-		public void AddButton(TicketingButton button) {
+		public void AddButtonToPendingList(TicketingButton button) {
 			try {
 				pendingAdds.Add(button);
 			}
@@ -589,7 +593,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void saveButton_Click(object sender, EventArgs e) {
+		private void Save() {
 			try {
 				TrimInput();
 
@@ -621,7 +625,11 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void cancelButton_Click(object sender, EventArgs e) {
+		private void saveButton_Click(object sender, EventArgs e) {
+			Save();
+		}
+
+		private void Cancel() {
 			try {
 				if (pendingAdds.Count > 0) {
 					var confirmationResult = MessageBox.Show("Are you sure you want to quit? You will lose any unsaved changes.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -639,7 +647,11 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void deleteButton_Click(object sender, EventArgs e) {
+		private void cancelButton_Click(object sender, EventArgs e) {
+			Cancel();
+		}
+
+		private void Delete() {
 			try {
 				int selectedCount = buttonsListView.SelectedItems.Count;
 
@@ -676,6 +688,10 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
+		private void deleteButton_Click(object sender, EventArgs e) {
+			Delete();
+		}
+
 		private void buttonsListView_SelectedIndexChanged(object sender, EventArgs e) {
 			try {
 				int selectedCount = buttonsListView.SelectedItems.Count;
@@ -698,7 +714,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void editButton_Click(object sender, EventArgs e) {
+		private void Edit() {
 			try {
 				if (buttonsListView.SelectedItems.Count != 1) {
 					MessageBox.Show("Select one button to edit.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -713,6 +729,10 @@ namespace TicketingScreenDesigner {
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
+		}
+
+		private void editButton_Click(object sender, EventArgs e) {
+			Edit();
 		}
 
 		public TicketingButton? GetPendingButtonById(string buttonId) {
@@ -742,7 +762,7 @@ namespace TicketingScreenDesigner {
 			return HasButtons() && screenIdTextBox.Text != string.Empty;
 		}
 
-		private void autoFillIdButton_Click(object sender, EventArgs e) {
+		private void AutoFill() {
 			try {
 				string query = $"SELECT {ScreensConstants.SCREEN_ID} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} LIKE @screenIdPattern";
 				var command = new SqlCommand(query, connection);
@@ -775,6 +795,10 @@ namespace TicketingScreenDesigner {
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
+		}
+
+		private void autoFillIdButton_Click(object sender, EventArgs e) {
+			AutoFill();
 		}
 
 		public int GetLastAutoFilledButtonIndex() {
@@ -840,8 +864,56 @@ namespace TicketingScreenDesigner {
 			return ret;
 		}
 
-		private void refreshButton_Click(object sender, EventArgs e) {
+		private void RefreshList() {
 			UpdateListView();
+		}
+
+		private void refreshButton_Click(object sender, EventArgs e) {
+			RefreshList();
+		}
+
+		private void ToggleActive() {
+			activeCheckBox.Checked = !activeCheckBox.Checked;
+		}
+
+		private void HandleKeyEvent(KeyEventArgs e) {
+			switch (e.KeyCode) {
+				case Keys.Enter:
+				case Keys.E:
+					Edit();
+					break;
+				case Keys.Delete:
+				case Keys.Back:
+				case Keys.L:
+					Delete();
+					break;
+				case Keys.D:
+					AddButton();
+					break;
+				case Keys.A:
+					ToggleActive();
+					break;
+				case Keys.C:
+					Cancel();
+					break;
+				case Keys.F:
+					AutoFill();
+					break;
+				case Keys.R:
+					RefreshList();
+					break;
+				case Keys.S:
+					Save();
+					break;
+			}
+		}
+
+		private void ScreenEditor_KeyDown(object sender, KeyEventArgs e) {
+			HandleKeyEvent(e);
+		}
+
+		private void buttonsListView_KeyDown(object sender, KeyEventArgs e) {
+			HandleKeyEvent(e);
 		}
 	}
 }

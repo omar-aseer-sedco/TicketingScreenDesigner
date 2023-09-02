@@ -10,8 +10,8 @@ namespace TicketingScreenDesigner {
 
 		public static void HandleGeneralException(Exception exception) {
 			string message = $"Unhandled Error.\nType: {exception.GetType()}\nMessage: {exception.Message}";
-			ShowErrorMessageBox(message);
 			LogsHelper.Log(new LogEvent(message, DateTime.Now, EventSeverity.Error, exception.Source, exception.StackTrace));
+			ShowErrorMessageBox(message);
 		}
 
 		public static void HandleSqlException(SqlException exception, string fieldName = "") {
@@ -25,18 +25,18 @@ namespace TicketingScreenDesigner {
 						suppressStatementTermination = true;
 						break;
 					case (int) SqlErrorCodes.StatementTerminated:
+						LogsHelper.Log(new LogEvent(error.Message, DateTime.Now, EventSeverity.Warning, error.Source, exception.StackTrace));
 						if (!suppressStatementTermination)
 							ShowErrorMessageBox("Statement terminated.");
-						LogsHelper.Log(new LogEvent(error.Message, DateTime.Now, EventSeverity.Warning, error.Source, exception.StackTrace));
 						break;
 					case (int) SqlErrorCodes.MissingQueryParamters:
-						ShowErrorMessageBox("Missing query parameters.");
 						LogsHelper.Log(new LogEvent(error.Message, DateTime.Now, EventSeverity.Warning, error.Source, exception.StackTrace));
+						ShowErrorMessageBox("Missing query parameters.");
 						break;
 					default:
 						string message = $"Unhandled SQL Error. Code: {error.Number}\nMessage: {error.Message}";
-						ShowErrorMessageBox(message);
 						LogsHelper.Log(new LogEvent(message, DateTime.Now, EventSeverity.Error, error.Source, exception.StackTrace));
+						ShowErrorMessageBox(message);
 						break;
 				}
 			}
