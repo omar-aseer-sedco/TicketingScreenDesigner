@@ -13,7 +13,7 @@ namespace TicketingScreenDesigner {
 			catch (Exception) {
 				Environment.Exit(1);
 			}
-}
+		}
 
 		private bool CheckIfExists(string bankName) {
 			bool exists = false;

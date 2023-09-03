@@ -593,7 +593,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void Save() {
+		private void saveButton_Click(object sender, EventArgs e) {
 			try {
 				TrimInput();
 
@@ -625,11 +625,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void saveButton_Click(object sender, EventArgs e) {
-			Save();
-		}
-
-		private void Cancel() {
+		private void cancelButton_Click(object sender, EventArgs e) {
 			try {
 				if (pendingAdds.Count > 0) {
 					var confirmationResult = MessageBox.Show("Are you sure you want to quit? You will lose any unsaved changes.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -645,10 +641,6 @@ namespace TicketingScreenDesigner {
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
-		}
-
-		private void cancelButton_Click(object sender, EventArgs e) {
-			Cancel();
 		}
 
 		private void Delete() {
@@ -878,23 +870,16 @@ namespace TicketingScreenDesigner {
 
 		private void HandleKeyEvent(KeyEventArgs e) {
 			switch (e.KeyCode) {
-				case Keys.Enter:
 				case Keys.E:
 					Edit();
 					break;
 				case Keys.Delete:
 				case Keys.Back:
-				case Keys.L:
+				case Keys.D:
 					Delete();
 					break;
-				case Keys.D:
-					AddButton();
-					break;
 				case Keys.A:
-					ToggleActive();
-					break;
-				case Keys.C:
-					Cancel();
+					AddButton();
 					break;
 				case Keys.F:
 					AutoFill();
@@ -903,7 +888,7 @@ namespace TicketingScreenDesigner {
 					RefreshList();
 					break;
 				case Keys.S:
-					Save();
+					ToggleActive();
 					break;
 			}
 		}

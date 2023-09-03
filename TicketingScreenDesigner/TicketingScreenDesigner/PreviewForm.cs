@@ -51,7 +51,7 @@
 
 				int i = 0;
 				foreach (var ticketingButton in ticketingButtons) {
-					formButtons.Add(new Button {
+					var button = new Button {
 						Name = ticketingButton.ButtonId,
 						Text = ticketingButton.NameEn,
 						Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point),
@@ -59,7 +59,10 @@
 						Location = GetButtonLocation(i),
 						Anchor = AnchorStyles.None,
 						AutoEllipsis = true,
-					});
+					};
+					button.Click += Button_Click;
+
+					formButtons.Add(button);
 
 					++i;
 				}
@@ -97,6 +100,25 @@
 			int y = TOP_MARGIN + titleLabel.Height + TEXT_SPACING + (row * (BUTTON_HEIGHT + BUTTON_SPACING_VERTICAL));
 
 			return new Point(x, y);
+		}
+
+		private void Button_Click(object sender, EventArgs e) {
+			Button button = (Button) sender;
+			string service = "";
+			string messageEn = "";
+			string messageAr = "";
+
+			foreach (var ticketingButton in ticketingButtons) {
+				if (button.Name == ticketingButton.ButtonId) {
+					service = ticketingButton.Service ?? "";
+					messageEn = ticketingButton.MessageEn ?? "";
+					messageAr = ticketingButton.MessageAr ?? "";
+				}
+			}
+
+			string message = service == "" ? $"{messageEn}.\n{messageAr}." : service;
+
+			MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 	}
 }
