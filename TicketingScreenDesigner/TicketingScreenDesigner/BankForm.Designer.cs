@@ -23,6 +23,7 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			components = new System.ComponentModel.Container();
 			screensListView = new ListView();
 			screenIdColumn = new ColumnHeader();
 			isActiveColumn = new ColumnHeader();
@@ -34,6 +35,11 @@
 			setActiveButton = new Button();
 			previewButton = new Button();
 			refreshButton = new Button();
+			menuStrip1 = new MenuStrip();
+			contextMenuStrip1 = new ContextMenuStrip(components);
+			helpToolStripMenuItem = new ToolStripMenuItem();
+			keyboardShortcutsToolStripMenuItem = new ToolStripMenuItem();
+			menuStrip1.SuspendLayout();
 			SuspendLayout();
 			// 
 			// screensListView
@@ -41,9 +47,9 @@
 			screensListView.Anchor =  AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 			screensListView.Columns.AddRange(new ColumnHeader[] { screenIdColumn, isActiveColumn, screenTitleColumn });
 			screensListView.FullRowSelect = true;
-			screensListView.Location = new Point(12, 68);
+			screensListView.Location = new Point(12, 77);
 			screensListView.Name = "screensListView";
-			screensListView.Size = new Size(515, 356);
+			screensListView.Size = new Size(515, 366);
 			screensListView.TabIndex = 0;
 			screensListView.UseCompatibleStateImageBehavior = false;
 			screensListView.View = View.Details;
@@ -68,7 +74,7 @@
 			// addScreenButton
 			// 
 			addScreenButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
-			addScreenButton.Location = new Point(534, 68);
+			addScreenButton.Location = new Point(534, 77);
 			addScreenButton.Name = "addScreenButton";
 			addScreenButton.Size = new Size(108, 23);
 			addScreenButton.TabIndex = 1;
@@ -80,7 +86,7 @@
 			// 
 			editScreenButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			editScreenButton.Enabled = false;
-			editScreenButton.Location = new Point(534, 97);
+			editScreenButton.Location = new Point(534, 106);
 			editScreenButton.Name = "editScreenButton";
 			editScreenButton.Size = new Size(108, 23);
 			editScreenButton.TabIndex = 2;
@@ -92,7 +98,7 @@
 			// 
 			deleteScreenButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			deleteScreenButton.Enabled = false;
-			deleteScreenButton.Location = new Point(534, 126);
+			deleteScreenButton.Location = new Point(534, 135);
 			deleteScreenButton.Name = "deleteScreenButton";
 			deleteScreenButton.Size = new Size(108, 23);
 			deleteScreenButton.TabIndex = 3;
@@ -105,7 +111,7 @@
 			titleLabel.Anchor = AnchorStyles.Top;
 			titleLabel.AutoSize = true;
 			titleLabel.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-			titleLabel.Location = new Point(48, 14);
+			titleLabel.Location = new Point(48, 27);
 			titleLabel.Name = "titleLabel";
 			titleLabel.Size = new Size(558, 40);
 			titleLabel.TabIndex = 4;
@@ -115,7 +121,7 @@
 			// 
 			setActiveButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			setActiveButton.Enabled = false;
-			setActiveButton.Location = new Point(534, 155);
+			setActiveButton.Location = new Point(534, 164);
 			setActiveButton.Name = "setActiveButton";
 			setActiveButton.Size = new Size(108, 23);
 			setActiveButton.TabIndex = 5;
@@ -127,7 +133,7 @@
 			// 
 			previewButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			previewButton.Enabled = false;
-			previewButton.Location = new Point(534, 184);
+			previewButton.Location = new Point(534, 193);
 			previewButton.Name = "previewButton";
 			previewButton.Size = new Size(108, 23);
 			previewButton.TabIndex = 6;
@@ -138,7 +144,7 @@
 			// refreshButton
 			// 
 			refreshButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
-			refreshButton.Location = new Point(533, 213);
+			refreshButton.Location = new Point(533, 222);
 			refreshButton.Name = "refreshButton";
 			refreshButton.Size = new Size(108, 23);
 			refreshButton.TabIndex = 7;
@@ -146,11 +152,39 @@
 			refreshButton.UseVisualStyleBackColor = true;
 			refreshButton.Click += refreshButton_Click;
 			// 
+			// menuStrip1
+			// 
+			menuStrip1.Items.AddRange(new ToolStripItem[] { helpToolStripMenuItem });
+			menuStrip1.Location = new Point(0, 0);
+			menuStrip1.Name = "menuStrip1";
+			menuStrip1.Size = new Size(654, 24);
+			menuStrip1.TabIndex = 8;
+			menuStrip1.Text = "menuStrip1";
+			// 
+			// contextMenuStrip1
+			// 
+			contextMenuStrip1.Name = "contextMenuStrip1";
+			contextMenuStrip1.Size = new Size(61, 4);
+			// 
+			// helpToolStripMenuItem
+			// 
+			helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { keyboardShortcutsToolStripMenuItem });
+			helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			helpToolStripMenuItem.Size = new Size(44, 20);
+			helpToolStripMenuItem.Text = "Help";
+			// 
+			// keyboardShortcutsToolStripMenuItem
+			// 
+			keyboardShortcutsToolStripMenuItem.Name = "keyboardShortcutsToolStripMenuItem";
+			keyboardShortcutsToolStripMenuItem.Size = new Size(180, 22);
+			keyboardShortcutsToolStripMenuItem.Text = "Keyboard shortcuts";
+			keyboardShortcutsToolStripMenuItem.Click += keyboardShortcutsToolStripMenuItem_Click;
+			// 
 			// BankForm
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(654, 436);
+			ClientSize = new Size(654, 454);
 			Controls.Add(refreshButton);
 			Controls.Add(previewButton);
 			Controls.Add(setActiveButton);
@@ -159,10 +193,14 @@
 			Controls.Add(editScreenButton);
 			Controls.Add(addScreenButton);
 			Controls.Add(screensListView);
+			Controls.Add(menuStrip1);
+			MainMenuStrip = menuStrip1;
 			MinimumSize = new Size(670, 475);
 			Name = "BankForm";
 			Text = "- Ticketing Screen Designer";
 			KeyDown += BankForm_KeyDown;
+			menuStrip1.ResumeLayout(false);
+			menuStrip1.PerformLayout();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -180,5 +218,9 @@
 		private Button setActiveButton;
 		private Button previewButton;
 		private Button refreshButton;
+		private MenuStrip menuStrip1;
+		private ContextMenuStrip contextMenuStrip1;
+		private ToolStripMenuItem helpToolStripMenuItem;
+		private ToolStripMenuItem keyboardShortcutsToolStripMenuItem;
 	}
 }

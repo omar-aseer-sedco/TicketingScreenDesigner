@@ -444,6 +444,7 @@ namespace TicketingScreenDesigner {
 					break;
 				case Keys.Delete:
 				case Keys.Back:
+				case Keys.D:
 					Delete();
 					break;
 				case Keys.A:
@@ -467,6 +468,12 @@ namespace TicketingScreenDesigner {
 
 		private void screensListView_KeyDown(object sender, KeyEventArgs e) {
 			HandleKeyEvent(e);
+		}
+
+		private void keyboardShortcutsToolStripMenuItem_Click(object sender, EventArgs e) {
+			string shortcuts = "E/Enter: Edit\nD/Del/Backspace: Delete\nA: Add\nS: Set Active\nP: Preview\nR: Refresh\nF: Autofill";
+
+			MessageBox.Show(shortcuts, "Keyboard shortcuts", MessageBoxButtons.OK, MessageBoxIcon.Question);
 		}
 	}
 }
