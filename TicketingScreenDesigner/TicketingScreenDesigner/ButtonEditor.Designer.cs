@@ -23,6 +23,7 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			components = new System.ComponentModel.Container();
 			buttonIdTextBox = new TextBox();
 			buttonIdLabel = new Label();
 			typeComboBox = new ComboBox();
@@ -42,6 +43,7 @@
 			serviceTextBox = new TextBox();
 			label4 = new Label();
 			autoFillIdButton = new Button();
+			toolTip1 = new ToolTip(components);
 			showMessagePanel.SuspendLayout();
 			issueTicketPanel.SuspendLayout();
 			SuspendLayout();
@@ -62,6 +64,7 @@
 			buttonIdLabel.Size = new Size(60, 15);
 			buttonIdLabel.TabIndex = 1;
 			buttonIdLabel.Text = "Button ID:";
+			toolTip1.SetToolTip(buttonIdLabel, "Button ID:\r\nA unique identifier for the button. This has to be\r\nunique across all the buttons on the screen.");
 			// 
 			// typeComboBox
 			// 
@@ -94,6 +97,7 @@
 			nameEnglishLabel.Size = new Size(91, 15);
 			nameEnglishLabel.TabIndex = 4;
 			nameEnglishLabel.Text = "Name (English):";
+			toolTip1.SetToolTip(nameEnglishLabel, "Name (English):\r\nThe name of the button that will be shown\r\nto your customers.");
 			// 
 			// nameArabicLabel
 			// 
@@ -103,6 +107,7 @@
 			nameArabicLabel.Size = new Size(87, 15);
 			nameArabicLabel.TabIndex = 5;
 			nameArabicLabel.Text = "Name (Arabic):";
+			toolTip1.SetToolTip(nameArabicLabel, "Name (Arabic):\r\nThe name of the button that will be shown \r\nto your customers.");
 			// 
 			// typeLabel
 			// 
@@ -112,6 +117,7 @@
 			typeLabel.Size = new Size(34, 15);
 			typeLabel.TabIndex = 6;
 			typeLabel.Text = "Type:";
+			toolTip1.SetToolTip(typeLabel, "Type:\r\nThe type of the button.");
 			// 
 			// nameEnTextBox
 			// 
@@ -179,6 +185,7 @@
 			label1.Size = new Size(101, 15);
 			label1.TabIndex = 10;
 			label1.Text = "Message (Arabic):";
+			toolTip1.SetToolTip(label1, "Message (Arabic):\r\nThe message that will be shown to your\r\ncustomer when they press the button.");
 			// 
 			// label2
 			// 
@@ -188,6 +195,7 @@
 			label2.Size = new Size(105, 15);
 			label2.TabIndex = 9;
 			label2.Text = "Message (English):";
+			toolTip1.SetToolTip(label2, "Message (English):\r\nThe message that will be shown to your\r\ncustomer when they press the button.");
 			// 
 			// issueTicketPanel
 			// 
@@ -216,6 +224,7 @@
 			label4.Size = new Size(47, 15);
 			label4.TabIndex = 9;
 			label4.Text = "Service:";
+			toolTip1.SetToolTip(label4, "Service:\r\nThe service that will be provided to your customer\r\nwhen they press the button.");
 			// 
 			// autoFillIdButton
 			// 
@@ -225,6 +234,7 @@
 			autoFillIdButton.Size = new Size(75, 23);
 			autoFillIdButton.TabIndex = 14;
 			autoFillIdButton.Text = "Autofill";
+			toolTip1.SetToolTip(autoFillIdButton, "Autofill (F):\r\nGenerate a new unique button ID.");
 			autoFillIdButton.UseVisualStyleBackColor = true;
 			autoFillIdButton.Click += autoFillIdButton_Click;
 			// 
@@ -251,6 +261,7 @@
 			MinimumSize = new Size(628, 233);
 			Name = "ButtonEditor";
 			Text = "Button Editor";
+			KeyDown += ButtonEditor_KeyDown;
 			showMessagePanel.ResumeLayout(false);
 			showMessagePanel.PerformLayout();
 			issueTicketPanel.ResumeLayout(false);
@@ -280,5 +291,6 @@
 		private TextBox serviceTextBox;
 		private Label label4;
 		private Button autoFillIdButton;
+		private ToolTip toolTip1;
 	}
 }

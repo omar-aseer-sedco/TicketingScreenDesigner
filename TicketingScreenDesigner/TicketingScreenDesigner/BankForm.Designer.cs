@@ -36,9 +36,10 @@
 			previewButton = new Button();
 			refreshButton = new Button();
 			menuStrip1 = new MenuStrip();
-			contextMenuStrip1 = new ContextMenuStrip(components);
 			helpToolStripMenuItem = new ToolStripMenuItem();
 			keyboardShortcutsToolStripMenuItem = new ToolStripMenuItem();
+			contextMenuStrip1 = new ContextMenuStrip(components);
+			toolTip1 = new ToolTip(components);
 			menuStrip1.SuspendLayout();
 			SuspendLayout();
 			// 
@@ -79,6 +80,7 @@
 			addScreenButton.Size = new Size(108, 23);
 			addScreenButton.TabIndex = 1;
 			addScreenButton.Text = "Add";
+			toolTip1.SetToolTip(addScreenButton, "Add (A)\r\nAdd a new screen.");
 			addScreenButton.UseVisualStyleBackColor = true;
 			addScreenButton.Click += addScreenButton_Click;
 			// 
@@ -91,6 +93,7 @@
 			editScreenButton.Size = new Size(108, 23);
 			editScreenButton.TabIndex = 2;
 			editScreenButton.Text = "Edit";
+			toolTip1.SetToolTip(editScreenButton, "Edit (E)\r\nEdit the currently selected screen.");
 			editScreenButton.UseVisualStyleBackColor = true;
 			editScreenButton.Click += editScreenButton_Click;
 			// 
@@ -103,6 +106,7 @@
 			deleteScreenButton.Size = new Size(108, 23);
 			deleteScreenButton.TabIndex = 3;
 			deleteScreenButton.Text = "Delete";
+			toolTip1.SetToolTip(deleteScreenButton, "Delete (D/Del):\r\nDelete the currently selected screen(s).");
 			deleteScreenButton.UseVisualStyleBackColor = true;
 			deleteScreenButton.Click += deleteScreenButton_Click;
 			// 
@@ -126,6 +130,7 @@
 			setActiveButton.Size = new Size(108, 23);
 			setActiveButton.TabIndex = 5;
 			setActiveButton.Text = "Set Active Screen";
+			toolTip1.SetToolTip(setActiveButton, "Set Active Screen (S):\r\nSet the currently selected screen to active. \r\nThis will deactivate the currently active screen.");
 			setActiveButton.UseVisualStyleBackColor = true;
 			setActiveButton.Click += setActiveButton_Click;
 			// 
@@ -138,6 +143,7 @@
 			previewButton.Size = new Size(108, 23);
 			previewButton.TabIndex = 6;
 			previewButton.Text = "Preview";
+			toolTip1.SetToolTip(previewButton, "Preview (P):\r\nPreview how the currently selected screen would look.");
 			previewButton.UseVisualStyleBackColor = true;
 			previewButton.Click += previewButton_Click;
 			// 
@@ -149,6 +155,7 @@
 			refreshButton.Size = new Size(108, 23);
 			refreshButton.TabIndex = 7;
 			refreshButton.Text = "Refresh";
+			toolTip1.SetToolTip(refreshButton, "Refresh (R):\r\nRefresh the screen list view.");
 			refreshButton.UseVisualStyleBackColor = true;
 			refreshButton.Click += refreshButton_Click;
 			// 
@@ -161,11 +168,6 @@
 			menuStrip1.TabIndex = 8;
 			menuStrip1.Text = "menuStrip1";
 			// 
-			// contextMenuStrip1
-			// 
-			contextMenuStrip1.Name = "contextMenuStrip1";
-			contextMenuStrip1.Size = new Size(61, 4);
-			// 
 			// helpToolStripMenuItem
 			// 
 			helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { keyboardShortcutsToolStripMenuItem });
@@ -176,9 +178,14 @@
 			// keyboardShortcutsToolStripMenuItem
 			// 
 			keyboardShortcutsToolStripMenuItem.Name = "keyboardShortcutsToolStripMenuItem";
-			keyboardShortcutsToolStripMenuItem.Size = new Size(180, 22);
+			keyboardShortcutsToolStripMenuItem.Size = new Size(176, 22);
 			keyboardShortcutsToolStripMenuItem.Text = "Keyboard shortcuts";
 			keyboardShortcutsToolStripMenuItem.Click += keyboardShortcutsToolStripMenuItem_Click;
+			// 
+			// contextMenuStrip1
+			// 
+			contextMenuStrip1.Name = "contextMenuStrip1";
+			contextMenuStrip1.Size = new Size(61, 4);
 			// 
 			// BankForm
 			// 
@@ -222,5 +229,6 @@
 		private ContextMenuStrip contextMenuStrip1;
 		private ToolStripMenuItem helpToolStripMenuItem;
 		private ToolStripMenuItem keyboardShortcutsToolStripMenuItem;
+		private ToolTip toolTip1;
 	}
 }

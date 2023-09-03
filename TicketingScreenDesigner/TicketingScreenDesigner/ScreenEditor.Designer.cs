@@ -23,6 +23,7 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			components = new System.ComponentModel.Container();
 			saveButton = new Button();
 			buttonsListView = new ListView();
 			idColumn = new ColumnHeader();
@@ -41,6 +42,7 @@
 			screenTitleTextBox = new TextBox();
 			autoFillIdButton = new Button();
 			refreshButton = new Button();
+			toolTip1 = new ToolTip(components);
 			SuspendLayout();
 			// 
 			// saveButton
@@ -51,6 +53,7 @@
 			saveButton.Size = new Size(75, 23);
 			saveButton.TabIndex = 0;
 			saveButton.Text = "Save";
+			toolTip1.SetToolTip(saveButton, "Save (Enter):\r\nSave your changes and close the window.");
 			saveButton.UseVisualStyleBackColor = true;
 			saveButton.Click += saveButton_Click;
 			// 
@@ -101,6 +104,7 @@
 			cancelButton.Size = new Size(75, 23);
 			cancelButton.TabIndex = 2;
 			cancelButton.Text = "Cancel";
+			toolTip1.SetToolTip(cancelButton, "Cancel (Esc):\r\nDiscard your changes and close the window.");
 			cancelButton.UseVisualStyleBackColor = true;
 			cancelButton.Click += cancelButton_Click;
 			// 
@@ -112,6 +116,7 @@
 			addButton.Size = new Size(75, 23);
 			addButton.TabIndex = 3;
 			addButton.Text = "Add";
+			toolTip1.SetToolTip(addButton, "Add (A):\r\nAdd a new button to the screen.");
 			addButton.UseVisualStyleBackColor = true;
 			addButton.Click += addButton_Click;
 			// 
@@ -124,6 +129,7 @@
 			deleteButton.Size = new Size(75, 23);
 			deleteButton.TabIndex = 4;
 			deleteButton.Text = "Delete";
+			toolTip1.SetToolTip(deleteButton, "Delete (D/Del):\r\nDelete the currently selected button(s).");
 			deleteButton.UseVisualStyleBackColor = true;
 			deleteButton.Click += deleteButton_Click;
 			// 
@@ -136,6 +142,7 @@
 			editButton.Size = new Size(75, 23);
 			editButton.TabIndex = 5;
 			editButton.Text = "Edit";
+			toolTip1.SetToolTip(editButton, "Edit (E):\r\nEdit the currently selected button.");
 			editButton.UseVisualStyleBackColor = true;
 			editButton.Click += editButton_Click;
 			// 
@@ -148,6 +155,7 @@
 			activeCheckBox.Size = new Size(59, 19);
 			activeCheckBox.TabIndex = 6;
 			activeCheckBox.Text = "Active";
+			toolTip1.SetToolTip(activeCheckBox, "Active (S):\r\nSelect to set the screen as active when you save.");
 			activeCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// screenIdTextBox
@@ -166,6 +174,7 @@
 			screenIdLabel.Size = new Size(59, 15);
 			screenIdLabel.TabIndex = 8;
 			screenIdLabel.Text = "Screen ID:";
+			toolTip1.SetToolTip(screenIdLabel, "Screen ID:\r\nA unique identifier for the screen. This has to be unique \r\nacross all of your screens.");
 			// 
 			// screenTitleLabel
 			// 
@@ -175,6 +184,7 @@
 			screenTitleLabel.Size = new Size(70, 15);
 			screenTitleLabel.TabIndex = 10;
 			screenTitleLabel.Text = "Screen Title:";
+			toolTip1.SetToolTip(screenTitleLabel, "Screen Title:\r\nThis is the title that will be shown to your customers\r\non the screen. If left blank, the screen ID will be shown\r\ninstead.");
 			// 
 			// screenTitleTextBox
 			// 
@@ -192,6 +202,7 @@
 			autoFillIdButton.Size = new Size(75, 23);
 			autoFillIdButton.TabIndex = 12;
 			autoFillIdButton.Text = "AutoFill";
+			toolTip1.SetToolTip(autoFillIdButton, "Autofill (F):\r\nGenerate a new unique screen ID.");
 			autoFillIdButton.UseVisualStyleBackColor = true;
 			autoFillIdButton.Click += autoFillIdButton_Click;
 			// 
@@ -203,6 +214,7 @@
 			refreshButton.Size = new Size(75, 23);
 			refreshButton.TabIndex = 13;
 			refreshButton.Text = "Refresh";
+			toolTip1.SetToolTip(refreshButton, "Refresh (R):\r\nRefresh the button list view.");
 			refreshButton.UseVisualStyleBackColor = true;
 			refreshButton.Click += refreshButton_Click;
 			// 
@@ -254,5 +266,6 @@
 		private ColumnHeader messageColumn;
 		private Button autoFillIdButton;
 		private Button refreshButton;
+		private ToolTip toolTip1;
 	}
 }

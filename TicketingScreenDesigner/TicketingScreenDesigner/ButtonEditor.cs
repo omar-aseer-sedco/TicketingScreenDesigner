@@ -238,7 +238,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void autoFillIdButton_Click(object sender, EventArgs e) {
+		private void Autofill() {
 			try {
 				string query = $"SELECT {ButtonsConstants.BUTTON_ID} FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} LIKE @buttonIdPattern";
 				var command = new SqlCommand(query, connection);
@@ -273,6 +273,16 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+			}
+		}
+
+		private void autoFillIdButton_Click(object sender, EventArgs e) {
+			Autofill();
+		}
+
+		private void ButtonEditor_KeyDown(object sender, KeyEventArgs e) {
+			if (e.KeyCode == Keys.F) {
+				Autofill();
 			}
 		}
 	}
