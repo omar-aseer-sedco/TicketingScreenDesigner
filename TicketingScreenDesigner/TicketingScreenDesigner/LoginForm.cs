@@ -6,6 +6,7 @@ namespace TicketingScreenDesigner {
 
 		public LoginForm() {
 			InitializeComponent();
+			LogsHelper.InitializeLogsDirectory();
 
 			try {
 				connection = DBUtils.CreateConnection();

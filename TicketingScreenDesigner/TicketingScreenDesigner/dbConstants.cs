@@ -1,4 +1,8 @@
 ﻿namespace TicketingScreenDesigner {
+	public static class DBConstants {
+		public const string DATABASE_NAME = "TSD";
+	}
+
 	public static class BanksConstants {
 		public const string TABLE_NAME = "Banks";
 		public const string BANK_NAME = "bank_name";

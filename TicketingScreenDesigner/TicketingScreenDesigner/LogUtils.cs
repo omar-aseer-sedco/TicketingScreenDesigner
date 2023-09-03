@@ -43,7 +43,17 @@ namespace TicketingScreenDesigner {
 	}
 
 	public static class LogsHelper {
-		private static readonly string logFilePath = Path.Join(Directory.GetCurrentDirectory(), "logs", "logs.txt");
+		private static readonly string logsDirectoryPath = Path.Join(Directory.GetCurrentDirectory(), "logs");
+		private static readonly string logsFilePath = Path.Join(logsDirectoryPath, "logs.txt");
+
+		public static void InitializeLogsDirectory() {
+			try {
+				Directory.CreateDirectory(logsDirectoryPath);
+			}
+			catch {
+				MessageBox.Show("Failed to create logs directory.");
+			}
+		}
 
 		public static void Log(LogEvent logEvent) {
 			WriteLog(logEvent);
@@ -55,7 +65,7 @@ namespace TicketingScreenDesigner {
 					WriteIndented = true,
 				};
 
-				using (var fileWriter = File.AppendText(logFilePath)) {
+				using (var fileWriter = File.AppendText(logsFilePath)) {
 					fileWriter.WriteLine(JsonSerializer.Serialize(logEvent, typeof(LogEvent), options));
 				}
 			}

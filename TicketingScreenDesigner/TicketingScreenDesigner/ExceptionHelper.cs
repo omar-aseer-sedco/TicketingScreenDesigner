@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using System.Runtime.Serialization;
 
 namespace TicketingScreenDesigner {
 	public static class ExceptionHelper {
@@ -10,6 +11,12 @@ namespace TicketingScreenDesigner {
 
 		public static void HandleGeneralException(Exception exception) {
 			string message = $"Unhandled Error.\nType: {exception.GetType()}\nMessage: {exception.Message}";
+			LogsHelper.Log(new LogEvent(message, DateTime.Now, EventSeverity.Error, exception.Source, exception.StackTrace));
+			ShowErrorMessageBox(message);
+		}
+
+		public static void HandleConfigReadError(Exception exception) {
+			string message = $"Unable to read configuration file. Message: {exception.Message}";
 			LogsHelper.Log(new LogEvent(message, DateTime.Now, EventSeverity.Error, exception.Source, exception.StackTrace));
 			ShowErrorMessageBox(message);
 		}
