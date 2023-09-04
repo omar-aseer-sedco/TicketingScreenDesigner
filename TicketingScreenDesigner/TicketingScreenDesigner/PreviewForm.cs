@@ -1,4 +1,6 @@
-﻿namespace TicketingScreenDesigner {
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+namespace TicketingScreenDesigner {
 	public class PreviewForm : Form {
 		private const int TOP_MARGIN = 20;
 		private const int BOTTOM_MARGIN = 60;
@@ -52,7 +54,7 @@
 				int i = 0;
 				foreach (var ticketingButton in ticketingButtons) {
 					var button = new Button {
-						Name = ticketingButton.ButtonId,
+						Name = ticketingButton.ButtonId.ToString(),
 						Text = ticketingButton.NameEn,
 						Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point),
 						Size = new Size(BUTTON_WIDTH, BUTTON_HEIGHT),
@@ -109,7 +111,7 @@
 			string messageAr = "";
 
 			foreach (var ticketingButton in ticketingButtons) {
-				if (button.Name == ticketingButton.ButtonId) {
+				if (int.Parse(button.Name) == ticketingButton.ButtonId) {
 					service = ticketingButton.Service ?? "";
 					messageEn = ticketingButton.MessageEn ?? "";
 					messageAr = ticketingButton.MessageAr ?? "";

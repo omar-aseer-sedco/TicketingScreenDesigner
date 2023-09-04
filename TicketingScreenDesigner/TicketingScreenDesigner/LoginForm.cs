@@ -88,7 +88,7 @@ namespace TicketingScreenDesigner {
 				}
 
 				var bankForm = new BankForm(connection, bankName);
-				bankForm.Show();
+				bankForm.ShowDialog();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);

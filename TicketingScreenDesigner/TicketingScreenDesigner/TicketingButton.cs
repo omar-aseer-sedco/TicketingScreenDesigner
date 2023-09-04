@@ -3,8 +3,8 @@
 	public class TicketingButton
 	{
 		public string BankName { get; set; }
-		public string ScreenId { get; set; }
-		public string ButtonId { get; set; }
+		public int ScreenId { get; set; }
+		public int ButtonId { get; set; }
 		public string Type { get; set; }
 		public string NameEn { get; set; }
 		public string NameAr { get; set; }
@@ -15,8 +15,8 @@
 		public TicketingButton()
 		{
 			BankName = string.Empty;
-			ScreenId = string.Empty;
-			ButtonId = string.Empty;
+			ScreenId = 0;
+			ButtonId = 0;
 			Type = string.Empty;
 			NameEn = string.Empty;
 			NameAr = string.Empty;
@@ -25,7 +25,7 @@
 			MessageAr = null;
 		}
 
-		public TicketingButton(string bankName, string screenId, string buttonId, string type, string nameEn, string nameAr, string? service, string? messageEn, string? messageAr)
+		public TicketingButton(string bankName, int screenId, int buttonId, string type, string nameEn, string nameAr, string? service, string? messageEn, string? messageAr)
 		{
 			BankName = bankName;
 			ScreenId = screenId;

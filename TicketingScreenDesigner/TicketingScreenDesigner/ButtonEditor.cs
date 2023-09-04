@@ -1,13 +1,16 @@
-﻿using System.Data.SqlClient;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+using System.Data.SqlClient;
 
 namespace TicketingScreenDesigner {
 	public partial class ButtonEditor : Form {
 		private const int ISSUE_TICKET_INDEX = 0;
 		private const int SHOW_MESSAGE_INDEX = 1;
 		private const string TITLE_TEXT = "Button Editor";
-		private const int DEFAULT_PANEL_POSITION_Y = 131;
-		private const int MINIMUM_HEIGHT_ISSUE_TICKET = 233;
-		private const int MINIMUM_HEIGH_SHOW_MESSAGE = 260;
+		private const int DEFAULT_PANEL_POSITION_Y = 95;
+		private const int MINIMUM_HEIGHT_ISSUE_TICKET = 206; // 233
+		private const int MINIMUM_HEIGHT_SHOW_MESSAGE = 233; // 260
+		private const int MINIMUM_WIDTH = 628;
 		private readonly TicketingButton button;
 		private readonly SqlConnection connection;
 		private readonly ScreenEditor callingForm;
@@ -23,14 +26,17 @@ namespace TicketingScreenDesigner {
 			this.callingForm = callingForm;
 		}
 
-		public ButtonEditor(SqlConnection connection, ScreenEditor callingForm, string bankName, string screenId) : this(connection, callingForm) {
+		public ButtonEditor(SqlConnection connection, ScreenEditor callingForm, string bankName) : this(connection, callingForm) {
 			button.BankName = bankName;
-			button.ScreenId = screenId;
 			Text = TITLE_TEXT + " - New Button";
 			isNewButton = true;
 		}
 
-		public ButtonEditor(SqlConnection connection, ScreenEditor callingForm, string bankName, string screenId, string buttonId) : this(connection, callingForm) {
+		public ButtonEditor(SqlConnection connection, ScreenEditor callingForm, string bankName, int screenId) : this(connection, callingForm, bankName) {
+			button.ScreenId = screenId;
+		}
+
+		public ButtonEditor(SqlConnection connection, ScreenEditor callingForm, string bankName, int screenId, int buttonId) : this(connection, callingForm) {
 			TicketingButton? button = GetButtonById(bankName, screenId, buttonId);
 
 			if (button is null) {
@@ -49,7 +55,7 @@ namespace TicketingScreenDesigner {
 			FillTextBoxes(button);
 		}
 
-		private TicketingButton? GetButtonById(string bankName, string screenId, string buttonId) {
+		private TicketingButton? GetButtonById(string bankName, int screenId, int buttonId) {
 			TicketingButton? ret = null;
 
 			try {
@@ -94,7 +100,6 @@ namespace TicketingScreenDesigner {
 
 		private void FillTextBoxes(TicketingButton button) {
 			try {
-				buttonIdTextBox.Text = button.ButtonId;
 				nameEnTextBox.Text = button.NameEn;
 				nameArTextBox.Text = button.NameAr;
 				typeComboBox.SelectedIndex = button.Type == ButtonsConstants.Types.ISSUE_TICKET ? ISSUE_TICKET_INDEX : SHOW_MESSAGE_INDEX;
@@ -115,6 +120,8 @@ namespace TicketingScreenDesigner {
 					showMessagePanel.Visible = showMessagePanel.Enabled = false;
 				}
 				else if (typeComboBox.SelectedIndex == ISSUE_TICKET_INDEX) {
+					MinimumSize = new Size(MINIMUM_WIDTH, MINIMUM_HEIGHT_ISSUE_TICKET);
+
 					issueTicketPanel.Visible = issueTicketPanel.Enabled = true;
 					showMessagePanel.Visible = showMessagePanel.Enabled = false;
 
@@ -125,13 +132,15 @@ namespace TicketingScreenDesigner {
 					}
 				}
 				else if (typeComboBox.SelectedIndex == SHOW_MESSAGE_INDEX) {
+					MinimumSize = new Size(MINIMUM_WIDTH, MINIMUM_HEIGHT_SHOW_MESSAGE);
+
 					issueTicketPanel.Visible = issueTicketPanel.Enabled = false;
 					showMessagePanel.Visible = showMessagePanel.Enabled = true;
 
 					showMessagePanel.Location = new Point(showMessagePanel.Location.X, DEFAULT_PANEL_POSITION_Y);
 
-					if (Size.Height < MINIMUM_HEIGH_SHOW_MESSAGE) {
-						Size = new Size(Size.Width, MINIMUM_HEIGH_SHOW_MESSAGE);
+					if (Size.Height < MINIMUM_HEIGHT_SHOW_MESSAGE) {
+						Size = new Size(Size.Width, MINIMUM_HEIGHT_SHOW_MESSAGE);
 					}
 				}
 			}
@@ -145,11 +154,9 @@ namespace TicketingScreenDesigner {
 		}
 
 		private bool IsInformationComplete() {
-			TrimInput();
-
 			try {
-				return buttonIdTextBox.Text != string.Empty && nameEnTextBox.Text != string.Empty && nameArTextBox.Text != string.Empty && typeComboBox.SelectedIndex != -1 &&
-					((typeComboBox.SelectedIndex == ISSUE_TICKET_INDEX && serviceTextBox.Text != string.Empty) || (typeComboBox.SelectedIndex == SHOW_MESSAGE_INDEX && messageEnTextBox.Text != string.Empty && messageArTextBox.Text != string.Empty));
+				return nameEnTextBox.Text != string.Empty && nameArTextBox.Text != string.Empty && typeComboBox.SelectedIndex != -1 && ((typeComboBox.SelectedIndex == ISSUE_TICKET_INDEX && serviceTextBox.Text != string.Empty) ||
+					(typeComboBox.SelectedIndex == SHOW_MESSAGE_INDEX && messageEnTextBox.Text != string.Empty && messageArTextBox.Text != string.Empty));
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -158,29 +165,21 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void saveButton_Click(object sender, EventArgs e) {
-			TrimInput();
-
 			try {
-				if ((isNewButton || (!isNewButton && button.ButtonId != buttonIdTextBox.Text)) && callingForm.CheckIfExists(buttonIdTextBox.Text)) {
-					MessageBox.Show("The Button ID must be unique across all buttons in the same screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return;
-				}
-
 				if (!IsInformationComplete()) {
 					MessageBox.Show("Please fill in all the fields before saving the button.", "Incomplete information", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
 
 				string bankName = button.BankName;
-				string screenId = button.ScreenId;
-				string buttonId = buttonIdTextBox.Text;
+				int screenId = button.ScreenId;
 				string type = typeComboBox.SelectedIndex == ISSUE_TICKET_INDEX ? ButtonsConstants.Types.ISSUE_TICKET : ButtonsConstants.Types.SHOW_MESSAGE;
 				string nameEn = nameEnTextBox.Text;
 				string nameAr = nameArTextBox.Text;
 				string? service = serviceTextBox.Text == string.Empty ? null : serviceTextBox.Text;
 				string? messageEn = messageEnTextBox.Text == string.Empty ? null : messageEnTextBox.Text;
 				string? messageAr = messageArTextBox.Text == string.Empty ? null : messageArTextBox.Text;
-				var newButton = new TicketingButton(bankName, screenId, buttonId, type, nameEn, nameAr, service, messageEn, messageAr);
+				var newButton = new TicketingButton(bankName, screenId, button.ButtonId, type, nameEn, nameAr, service, messageEn, messageAr);
 
 				if (isNewButton) {
 					callingForm.AddButtonToPendingList(newButton);
@@ -198,11 +197,8 @@ namespace TicketingScreenDesigner {
 		}
 
 		private bool IsDataChanged() {
-			TrimInput();
-
 			try {
-				return (isNewButton && (buttonIdTextBox.Text != string.Empty || nameEnTextBox.Text != string.Empty || nameArTextBox.Text != string.Empty || typeComboBox.SelectedIndex != -1)) ||
-					(!isNewButton && (buttonIdTextBox.Text != button.ButtonId || nameEnTextBox.Text != button.NameEn || nameArTextBox.Text != button.NameAr ||
+				return (isNewButton && (nameEnTextBox.Text != string.Empty || nameArTextBox.Text != string.Empty || typeComboBox.SelectedIndex != -1)) || (!isNewButton && (nameEnTextBox.Text != button.NameEn || nameArTextBox.Text != button.NameAr ||
 					typeComboBox.SelectedIndex != (button.Type == ButtonsConstants.Types.ISSUE_TICKET ? ISSUE_TICKET_INDEX : SHOW_MESSAGE_INDEX) || (typeComboBox.SelectedIndex == ISSUE_TICKET_INDEX && serviceTextBox.Text != button.Service) ||
 					(typeComboBox.SelectedIndex == SHOW_MESSAGE_INDEX && (messageEnTextBox.Text != button.MessageEn || messageArTextBox.Text != button.MessageAr))));
 			}
@@ -226,63 +222,6 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-		}
-
-		private void TrimInput() {
-			try {
-				buttonIdTextBox.Text = buttonIdTextBox.Text.Trim();
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-		}
-
-		private void Autofill() {
-			try {
-				string query = $"SELECT {ButtonsConstants.BUTTON_ID} FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} LIKE @buttonIdPattern";
-				var command = new SqlCommand(query, connection);
-				command.Parameters.AddWithValue("@bankName", button.BankName);
-				command.Parameters.AddWithValue("@screenId", button.ScreenId);
-				command.Parameters.AddWithValue("@buttonIdPattern", "Button %");
-
-				try {
-					connection.Open();
-
-					int mx = 0;
-					var reader = command.ExecuteReader();
-
-					while (reader.Read()) {
-						string id = reader.GetString(0);
-
-						if (int.TryParse(id[7..], out int number)) {
-							mx = Math.Max(mx, number);
-						}
-					}
-
-					mx = Math.Max(mx, callingForm.GetLastAutoFilledButtonIndex());
-
-					buttonIdTextBox.Text = $"Button {mx + 1}";
-				}
-				catch (SqlException ex) {
-					ExceptionHelper.HandleSqlException(ex, "Button ID");
-				}
-				finally {
-					connection.Close();
-				}
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-		}
-
-		private void autoFillIdButton_Click(object sender, EventArgs e) {
-			Autofill();
-		}
-
-		private void ButtonEditor_KeyDown(object sender, KeyEventArgs e) {
-			if (e.KeyCode == Keys.F) {
-				Autofill();
 			}
 		}
 	}

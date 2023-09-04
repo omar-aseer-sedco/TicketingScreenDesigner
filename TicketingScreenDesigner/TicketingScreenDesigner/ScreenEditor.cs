@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,20 +9,23 @@ namespace TicketingScreenDesigner {
 	public partial class ScreenEditor : Form {
 		private const string TITLE_TEXT = "Screen Editor";
 		private readonly string bankName;
-		private readonly string screenId;
+		private int screenId;
+		private readonly string screenTitle;
 		private readonly SqlConnection connection;
 		private readonly List<TicketingButton> pendingAdds;
-		private readonly Dictionary<string, TicketingButton> pendingUpdates;
-		private readonly List<string> deleteList;
+		private readonly Dictionary<int, TicketingButton> pendingUpdates;
+		private readonly List<int> pendingDeletes;
 		private readonly BankForm callingForm;
-		private readonly bool newScreen;
+		private readonly bool isNewScreen;
 
 		private ScreenEditor() {
 			InitializeComponent();
-			screenId = string.Empty;
+			bankName = string.Empty;
+			screenId = -1;
+			screenTitle = string.Empty;
 			pendingAdds = new List<TicketingButton>();
-			pendingUpdates = new Dictionary<string, TicketingButton>();
-			deleteList = new List<string>();
+			pendingUpdates = new Dictionary<int, TicketingButton>();
+			pendingDeletes = new List<int>();
 		}
 
 		public ScreenEditor(SqlConnection connection, BankForm callingForm, string bankName) : this() {
@@ -28,16 +33,16 @@ namespace TicketingScreenDesigner {
 			this.callingForm = callingForm;
 			this.bankName = bankName;
 			Text = TITLE_TEXT + " - New Screen";
-			newScreen = true;
+			isNewScreen = true;
 		}
 
-		public ScreenEditor(SqlConnection connection, BankForm callingForm, string bankName, string screenId, string screenTitle, bool isActive) : this(connection, callingForm, bankName) {
+		public ScreenEditor(SqlConnection connection, BankForm callingForm, string bankName, int screenId, string screenTitle, bool isActive) : this(connection, callingForm, bankName) {
 			this.screenId = screenId;
-			screenIdTextBox.Text = screenId;
+			this.screenTitle = screenTitle;
 			screenTitleTextBox.Text = screenTitle;
 			activeCheckBox.Checked = isActive;
-			Text = TITLE_TEXT + " - " + screenId;
-			newScreen = false;
+			Text = TITLE_TEXT + " - " + screenTitle;
+			isNewScreen = false;
 			UpdateListView();
 		}
 
@@ -57,7 +62,7 @@ namespace TicketingScreenDesigner {
 					var reader = command.ExecuteReader();
 
 					while (reader.Read()) {
-						string buttonId = reader[ButtonsConstants.BUTTON_ID].ToString() ?? $"Error getting {ButtonsConstants.BUTTON_ID}";
+						int buttonId = int.Parse(reader[ButtonsConstants.BUTTON_ID].ToString() ?? "-1");
 						string type = reader[ButtonsConstants.TYPE].ToString() ?? $"Error getting {ButtonsConstants.TYPE}";
 						string nameEn = reader[ButtonsConstants.NAME_EN].ToString() ?? $"Error getting {ButtonsConstants.NAME_EN}";
 						string? service = reader[ButtonsConstants.SERVICE].ToString();
@@ -88,15 +93,15 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void AddToListView(string buttonId, string nameEn, string type, string? service, string? messageEn) {
+		private void AddToListView(int buttonId, string nameEn, string type, string? service, string? messageEn) {
 			try {
-				if (deleteList.Contains(buttonId)) {
+				if (pendingDeletes.Contains(buttonId)) {
 					return;
 				}
 
 				ListViewItem row = new() {
 					Name = ButtonsConstants.BUTTON_ID,
-					Text = buttonId
+					Text = buttonId == 0 ? string.Empty : buttonId.ToString(),
 				};
 
 				ListViewItem.ListViewSubItem buttonNameEn = new() {
@@ -130,11 +135,16 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void AddButton() {
+		private void Add() {
 			try {
-				TrimInput();
-				var buttonEditor = new ButtonEditor(connection, this, bankName, screenIdTextBox.Text);
-				buttonEditor.Show();
+				ButtonEditor buttonEditor;
+				if (isNewScreen) {
+					buttonEditor = new ButtonEditor(connection, this, bankName);
+				}
+				else {
+					buttonEditor = new ButtonEditor(connection, this, bankName, screenId);
+				}
+				buttonEditor.ShowDialog();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -142,26 +152,23 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void addButton_Click(object sender, EventArgs e) {
-			AddButton();
+			Add();
 		}
 
-		private bool AddScreen() {
-			TrimInput();
-
-			bool success = false;
+		private int InsertScreen() {
+			int ret = -1;
 
 			try {
-				string query = $"INSERT INTO {ScreensConstants.TABLE_NAME} ({ScreensConstants.BANK_NAME}, {ScreensConstants.SCREEN_ID}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE}) VALUES (@bankName, @screenId, @isActive, @screenTitle);";
+				string query = $"INSERT INTO {ScreensConstants.TABLE_NAME} ({ScreensConstants.BANK_NAME}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE}) VALUES (@bankName, @isActive, @screenTitle);SELECT CAST(scope_identity() AS int);";
 				var command = new SqlCommand(query, connection);
 				command.Parameters.AddWithValue("@bankName", bankName);
-				command.Parameters.AddWithValue("@screenId", screenIdTextBox.Text);
 				command.Parameters.AddWithValue("@isActive", 0);
 				command.Parameters.AddWithValue("@screenTitle", screenTitleTextBox.Text != string.Empty ? screenTitleTextBox.Text : DBNull.Value);
 
 				try {
 					connection.Open();
 
-					success = command.ExecuteNonQuery() == 1;
+					ret = (int) command.ExecuteScalar();
 				}
 				catch (SqlException ex) {
 					ExceptionHelper.HandleSqlException(ex, "Screen ID");
@@ -174,11 +181,12 @@ namespace TicketingScreenDesigner {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 
-			return success;
+			return ret;
 		}
 
 		private bool AddNewScreen() {
-			bool addScreenSuccess = AddScreen();
+			screenId = InsertScreen();
+			bool addScreenSuccess = screenId != -1;
 			bool activationSuccess = addScreenSuccess && UpdateScreenActivation();
 			bool addButtonsSuccess = addScreenSuccess && AddPending();
 			bool updateButtonsSuccess = addScreenSuccess && UpdatePending();
@@ -187,15 +195,11 @@ namespace TicketingScreenDesigner {
 		}
 
 		private bool UpdateScreenInformation() {
-			TrimInput();
-
 			bool success = false;
 
 			try {
-				string updateScreenQuery = $"UPDATE {ScreensConstants.TABLE_NAME} SET {ScreensConstants.SCREEN_ID} = @newScreenId, {ScreensConstants.SCREEN_TITLE} = @screenTitle " +
-					$"WHERE {ScreensConstants.SCREEN_ID} = @screenId AND {ScreensConstants.BANK_NAME} = @bankName";
+				string updateScreenQuery = $"UPDATE {ScreensConstants.TABLE_NAME} SET {ScreensConstants.SCREEN_TITLE} = @screenTitle WHERE {ScreensConstants.SCREEN_ID} = @screenId AND {ScreensConstants.BANK_NAME} = @bankName";
 				var updateScreenCommand = new SqlCommand(updateScreenQuery, connection);
-				updateScreenCommand.Parameters.AddWithValue("@newScreenId", screenIdTextBox.Text);
 				updateScreenCommand.Parameters.AddWithValue("@screenTitle", screenTitleTextBox.Text);
 				updateScreenCommand.Parameters.AddWithValue("@screenId", screenId);
 				updateScreenCommand.Parameters.AddWithValue("@bankName", bankName);
@@ -222,16 +226,14 @@ namespace TicketingScreenDesigner {
 		}
 
 		private bool UpdateScreenActivation() {
-			TrimInput();
-
 			bool success = false;
 
 			try {
 				if (activeCheckBox.Checked) {
-					success = callingForm.ActivateScreen(screenIdTextBox.Text);
+					success = callingForm.ActivateScreen(screenId);
 				}
 				else {
-					success = callingForm.DeactivateScreen(screenIdTextBox.Text);
+					success = callingForm.DeactivateScreen(screenId);
 				}
 			}
 			catch (Exception ex) {
@@ -250,7 +252,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public void UpdateButton(string buttonId, TicketingButton updatedButton) {
+		public void UpdateButton(int buttonId, TicketingButton updatedButton) {
 			try {
 				bool isPendingButton = false;
 
@@ -276,8 +278,6 @@ namespace TicketingScreenDesigner {
 
 		private string? GetButtonFieldByName(TicketingButton button, string fieldName) {
 			switch (fieldName) {
-				case "@newButtonId":
-					return button.ButtonId;
 				case "@type":
 					return button.Type;
 				case "@nameEn":
@@ -305,7 +305,6 @@ namespace TicketingScreenDesigner {
 
 				var fields = new Dictionary<string, StringBuilder>()
 				{
-					{"@newButtonId", new StringBuilder($"{ButtonsConstants.BUTTON_ID} = CASE {ButtonsConstants.BUTTON_ID} ")},
 					{"@type", new StringBuilder($"{ButtonsConstants.TYPE} = CASE {ButtonsConstants.BUTTON_ID} ")},
 					{"@nameEn", new StringBuilder($"{ButtonsConstants.NAME_EN} = CASE {ButtonsConstants.BUTTON_ID} ")},
 					{"@nameAr", new StringBuilder($"{ButtonsConstants.NAME_AR} = CASE {ButtonsConstants.BUTTON_ID} ")},
@@ -392,26 +391,12 @@ namespace TicketingScreenDesigner {
 			return success;
 		}
 
-		private void UnifyScreenId() {
-			try {
-				foreach (var button in pendingAdds) {
-					button.ScreenId = screenIdTextBox.Text;
-				}
-				foreach (var button in pendingUpdates) {
-					button.Value.ScreenId = screenIdTextBox.Text;
-				}
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-		}
-
 		private SqlCommand? CreateAddButtonsCommand() {
 			if (pendingAdds.Count == 0)
 				return null;
 
 			try {
-				var query = new StringBuilder($"INSERT INTO {ButtonsConstants.TABLE_NAME} ({ButtonsConstants.BANK_NAME}, {ButtonsConstants.SCREEN_ID}, {ButtonsConstants.BUTTON_ID}, {ButtonsConstants.TYPE}, {ButtonsConstants.NAME_EN}, " +
+				var query = new StringBuilder($"INSERT INTO {ButtonsConstants.TABLE_NAME} ({ButtonsConstants.BANK_NAME}, {ButtonsConstants.SCREEN_ID}, {ButtonsConstants.TYPE}, {ButtonsConstants.NAME_EN}, " +
 					$"{ButtonsConstants.NAME_AR}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, {ButtonsConstants.MESSAGE_AR}) VALUES ");
 				var command = new SqlCommand();
 
@@ -420,7 +405,6 @@ namespace TicketingScreenDesigner {
 					query.Append('(');
 					query.Append("@bankName").Append(i).Append(',');
 					query.Append("@screenId").Append(i).Append(',');
-					query.Append("@buttonId").Append(i).Append(',');
 					query.Append("@type").Append(i).Append(',');
 					query.Append("@nameEn").Append(i).Append(',');
 					query.Append("@nameAr").Append(i).Append(',');
@@ -429,35 +413,34 @@ namespace TicketingScreenDesigner {
 					query.Append("@messageAr").Append(i);
 					query.Append("),");
 
-					command.Parameters.Add("@bankName" + i, SqlDbType.VarChar).Value = b.BankName;
-					command.Parameters.Add("@screenId" + i, SqlDbType.VarChar).Value = b.ScreenId;
-					command.Parameters.Add("@buttonId" + i, SqlDbType.VarChar).Value = b.ButtonId;
-					command.Parameters.Add("@type" + i, SqlDbType.VarChar).Value = b.Type;
-					command.Parameters.Add("@nameEn" + i, SqlDbType.VarChar).Value = b.NameEn;
-					command.Parameters.Add("@nameAr" + i, SqlDbType.NVarChar).Value = b.NameAr;
+					command.Parameters.AddWithValue("@bankName" + i, b.BankName);
+					command.Parameters.AddWithValue("@screenId" + i, screenId);
+					command.Parameters.AddWithValue("@type" + i, b.Type);
+					command.Parameters.AddWithValue("@nameEn" + i, b.NameEn);
+					command.Parameters.AddWithValue("@nameAr" + i, b.NameAr);
 					if (b.Service is not null) {
-						command.Parameters.Add("@service" + i, SqlDbType.VarChar).Value = b.Service;
+						command.Parameters.AddWithValue("@service" + i, b.Service);
 					}
 					else {
-						command.Parameters.Add("@service" + i, SqlDbType.VarChar).Value = DBNull.Value;
+						command.Parameters.AddWithValue("@service" + i, DBNull.Value);
 					}
 					if (b.MessageEn is not null) {
-						command.Parameters.Add("@messageEn" + i, SqlDbType.VarChar).Value = b.MessageEn;
+						command.Parameters.AddWithValue("@messageEn" + i, b.MessageEn);
 					}
 					else {
-						command.Parameters.Add("@messageEn" + i, SqlDbType.VarChar).Value = DBNull.Value;
+						command.Parameters.AddWithValue("@messageEn" + i, DBNull.Value);
 					}
 					if (b.MessageAr is not null) {
-						command.Parameters.Add("@messageAr" + i, SqlDbType.NVarChar).Value = b.MessageAr;
+						command.Parameters.AddWithValue("@messageAr" + i, b.MessageAr);
 					}
 					else {
-						command.Parameters.Add("@messageAr" + i, SqlDbType.VarChar).Value = DBNull.Value;
+						command.Parameters.AddWithValue("@messageAr" + i, DBNull.Value);
 					}
 
 					++i;
 				}
 
-				query.Length--; // remove last
+				query.Length--;
 
 				command.Connection = connection;
 				command.CommandText = query.ToString();
@@ -517,7 +500,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		private SqlCommand? CreateDeleteButtonsCommand() {
-			if (deleteList.Count == 0)
+			if (pendingDeletes.Count == 0)
 				return null;
 
 			try {
@@ -527,7 +510,7 @@ namespace TicketingScreenDesigner {
 				command.Parameters.AddWithValue("@screenId", screenId);
 
 				int i = 0;
-				foreach (var b in deleteList) {
+				foreach (var b in pendingDeletes) {
 					query.Append("@buttonId").Append(i).Append(',');
 					command.Parameters.AddWithValue("@buttonId" + i, b);
 					++i;
@@ -561,7 +544,7 @@ namespace TicketingScreenDesigner {
 
 					try {
 						connection.Open();
-						success = command.ExecuteNonQuery() == deleteList.Count;
+						success = command.ExecuteNonQuery() == pendingDeletes.Count;
 					}
 					catch (SqlException ex) {
 						ExceptionHelper.HandleSqlException(ex, "ButtonID");
@@ -575,7 +558,7 @@ namespace TicketingScreenDesigner {
 				}
 
 				if (success)
-					deleteList.Clear();
+					pendingDeletes.Clear();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -584,19 +567,8 @@ namespace TicketingScreenDesigner {
 			return success;
 		}
 
-		private void TrimInput() {
-			try {
-				screenIdTextBox.Text = screenIdTextBox.Text.Trim();
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-		}
-
 		private void saveButton_Click(object sender, EventArgs e) {
 			try {
-				TrimInput();
-
 				if (!IsInformationComplete()) {
 					MessageBox.Show("Please fill in the screen ID and add at least one button before saving the screen.", "Incomplete information", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
@@ -604,9 +576,7 @@ namespace TicketingScreenDesigner {
 
 				bool success;
 
-				UnifyScreenId();
-
-				if (newScreen) {
+				if (isNewScreen) {
 					success = AddNewScreen();
 				}
 				else {
@@ -625,9 +595,13 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
+		private bool IsDataChanged() {
+			return pendingAdds.Count > 0 || pendingUpdates.Count > 0 || pendingDeletes.Count > 0 || (isNewScreen && screenTitleTextBox.Text != string.Empty) || (!isNewScreen && screenTitleTextBox.Text != screenTitle);
+		}
+
 		private void cancelButton_Click(object sender, EventArgs e) {
 			try {
-				if (pendingAdds.Count > 0) {
+				if (IsDataChanged()) {
 					var confirmationResult = MessageBox.Show("Are you sure you want to quit? You will lose any unsaved changes.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
 					if (confirmationResult == DialogResult.No) {
@@ -661,7 +635,7 @@ namespace TicketingScreenDesigner {
 				foreach (ListViewItem button in buttonsListView.SelectedItems) {
 					bool inPendingList = false;
 					foreach (var pendingButton in pendingAdds) {
-						if (pendingButton.ButtonId == button.Text) {
+						if (pendingButton.ButtonId == int.Parse(button.Text)) {
 							pendingAdds.Remove(pendingButton);
 							inPendingList = true;
 							break;
@@ -669,7 +643,7 @@ namespace TicketingScreenDesigner {
 					}
 
 					if (!inPendingList) {
-						deleteList.Add(button.Text);
+						pendingDeletes.Add(int.Parse(button.Text));
 					}
 				}
 
@@ -713,10 +687,8 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				TrimInput();
-
-				var buttonEditor = new ButtonEditor(connection, this, bankName, screenIdTextBox.Text, buttonsListView.SelectedItems[0].Text);
-				buttonEditor.Show();
+				var buttonEditor = new ButtonEditor(connection, this, bankName, screenId, int.Parse(buttonsListView.SelectedItems[0].Text));
+				buttonEditor.ShowDialog();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -727,7 +699,7 @@ namespace TicketingScreenDesigner {
 			Edit();
 		}
 
-		public TicketingButton? GetPendingButtonById(string buttonId) {
+		public TicketingButton? GetPendingButtonById(int buttonId) {
 			try {
 				foreach (var button in pendingAdds) {
 					if (buttonId == button.ButtonId) {
@@ -749,111 +721,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		private bool IsInformationComplete() {
-			TrimInput();
-
-			return HasButtons() && screenIdTextBox.Text != string.Empty;
-		}
-
-		private void AutoFill() {
-			try {
-				string query = $"SELECT {ScreensConstants.SCREEN_ID} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} LIKE @screenIdPattern";
-				var command = new SqlCommand(query, connection);
-				command.Parameters.AddWithValue("@bankName", bankName);
-				command.Parameters.AddWithValue("@screenIdPattern", "Screen %");
-
-				try {
-					connection.Open();
-
-					int mx = 0;
-					var reader = command.ExecuteReader();
-
-					while (reader.Read()) {
-						string id = reader.GetString(0);
-
-						if (int.TryParse(id[7..], out int number)) {
-							mx = Math.Max(mx, number);
-						}
-					}
-
-					screenIdTextBox.Text = $"Screen {mx + 1}";
-				}
-				catch (SqlException ex) {
-					ExceptionHelper.HandleSqlException(ex, "Button ID");
-				}
-				finally {
-					connection.Close();
-				}
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-		}
-
-		private void autoFillIdButton_Click(object sender, EventArgs e) {
-			AutoFill();
-		}
-
-		public int GetLastAutoFilledButtonIndex() {
-			int mx = 0;
-
-			try {
-				Regex pattern = new Regex(@"Button \d+");
-
-				foreach (var button in pendingAdds) {
-					if (pattern.IsMatch(button.ButtonId) && int.TryParse(button.ButtonId[7..], out int number)) {
-						mx = Math.Max(mx, number);
-					}
-				}
-				foreach (var button in pendingUpdates.Values) {
-					if (pattern.IsMatch(button.ButtonId) && int.TryParse(button.ButtonId[7..], out int number)) {
-						mx = Math.Max(mx, number);
-					}
-				}
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-
-			return mx;
-		}
-
-		public bool CheckIfExists(string buttonId) {
-			bool ret = false;
-
-			try {
-				string query = $"SELECT {ButtonsConstants.BUTTON_ID} FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} = @buttonId;";
-				var command = new SqlCommand(query, connection);
-				command.Parameters.AddWithValue("@bankName", bankName);
-				command.Parameters.AddWithValue("@screenId", screenIdTextBox.Text);
-				command.Parameters.AddWithValue("@buttonId", buttonId);
-
-				try {
-					connection.Open();
-
-					ret = command.ExecuteReader().HasRows;
-				}
-				catch (SqlException ex) {
-					ExceptionHelper.HandleSqlException(ex, "Button ID");
-				}
-				catch (Exception ex) {
-					ExceptionHelper.HandleGeneralException(ex);
-				}
-				finally {
-					connection.Close();
-				}
-
-				foreach (var button in pendingAdds) {
-					ret |= button.ButtonId == buttonId;
-				}
-				foreach (var button in pendingUpdates.Values) {
-					ret |= button.ButtonId == buttonId;
-				}
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-
-			return ret;
+			return HasButtons() && screenTitleTextBox.Text != string.Empty;
 		}
 
 		private void RefreshList() {
@@ -879,10 +747,7 @@ namespace TicketingScreenDesigner {
 					Delete();
 					break;
 				case Keys.A:
-					AddButton();
-					break;
-				case Keys.F:
-					AutoFill();
+					Add();
 					break;
 				case Keys.R:
 					RefreshList();

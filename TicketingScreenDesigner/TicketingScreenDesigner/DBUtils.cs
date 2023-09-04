@@ -21,6 +21,11 @@ namespace TicketingScreenDesigner {
 				string connectionString = $"server={config.Server};database={config.Database};integrated security={config.IntegratedSecurity}";
 				return new SqlConnection(connectionString);
 			}
+			catch (FileNotFoundException ex) {
+				ExceptionHelper.ShowErrorMessageBox("The configuration file was not found. Was it accidentally moved, renamed, or deleted?");
+				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error));
+				throw;
+			}
 			catch (ArgumentException ex) {
 				ExceptionHelper.ShowErrorMessageBox("Failed to connect to database. Please try again.");
 				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error));

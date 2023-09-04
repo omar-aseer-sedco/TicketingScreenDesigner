@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+using System.Data;
 using System.Text;
 using System.Data.SqlClient;
 using System.ComponentModel.Design;
@@ -32,7 +34,7 @@ namespace TicketingScreenDesigner {
 
 		private void Add() {
 			var screenEditor = new ScreenEditor(connection, this, bankName);
-			screenEditor.Show();
+			screenEditor.ShowDialog();
 		}
 
 		private void addScreenButton_Click(object sender, EventArgs e) {
@@ -96,11 +98,11 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				string screenId = screensListView.SelectedItems[0].Text;
+				int screenId = int.Parse(screensListView.SelectedItems[0].Text);
 				string screenTitle = screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text;
 				bool isActive = screensListView.SelectedItems[0].SubItems[ScreensConstants.IS_ACTIVE].Text == "Yes";
 				var screenEditor = new ScreenEditor(connection, this, bankName, screenId, screenTitle, isActive);
-				screenEditor.Show();
+				screenEditor.ShowDialog();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -222,8 +224,8 @@ namespace TicketingScreenDesigner {
 				this.parentForm = parentForm;
 			}
 
-			public string? GetActiveScreenId() {
-				string? ret = null;
+			public int? GetActiveScreenId() {
+				int? ret = null;
 
 				try {
 					string query = $"SELECT {ScreensConstants.SCREEN_ID} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.IS_ACTIVE} = 1;";
@@ -236,7 +238,7 @@ namespace TicketingScreenDesigner {
 						var reader = command.ExecuteReader();
 
 						if (reader.Read()) {
-							ret = reader.GetString(0);
+							ret = reader.GetInt32(0);
 						}
 					}
 					catch (SqlException ex) {
@@ -256,7 +258,7 @@ namespace TicketingScreenDesigner {
 				return ret;
 			}
 
-			private bool SetIsActive(string screenId, bool active) {
+			private bool SetIsActive(int screenId, bool active) {
 				bool success = false;
 
 				try {
@@ -288,30 +290,30 @@ namespace TicketingScreenDesigner {
 				return success;
 			}
 
-			public bool DeactivateScreen(string screenId) {
+			public bool DeactivateScreen(int screenId) {
 				return SetIsActive(screenId, false);
 			}
 
-			public bool ActivateScreen(string screenId) {
-				string? currentlyActiveScreenId = GetActiveScreenId();
+			public bool ActivateScreen(int screenId) {
+				int? currentlyActiveScreenId = GetActiveScreenId();
 
 				if (currentlyActiveScreenId is not null && currentlyActiveScreenId != screenId) {
-					DeactivateScreen(currentlyActiveScreenId);
+					DeactivateScreen((int) currentlyActiveScreenId);
 				}
 
 				return SetIsActive(screenId, true);
 			}
 		}
 
-		public string? GetActiveScreenId() {
+		public int? GetActiveScreenId() {
 			return activeScreenController.GetActiveScreenId();
 		}
 
-		public bool ActivateScreen(string screenId) {
+		public bool ActivateScreen(int screenId) {
 			return activeScreenController.ActivateScreen(screenId);
 		}
 
-		public bool DeactivateScreen(string screenId) {
+		public bool DeactivateScreen(int screenId) {
 			return activeScreenController.DeactivateScreen(screenId);
 		}
 
@@ -322,8 +324,8 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				string selectedScreenId = screensListView.SelectedItems[0].Text;
-				string? currentlyActiveScreenId = GetActiveScreenId();
+				int selectedScreenId = int.Parse(screensListView.SelectedItems[0].Text);
+				int? currentlyActiveScreenId = GetActiveScreenId();
 
 				if (currentlyActiveScreenId is not null) {
 					if (currentlyActiveScreenId == selectedScreenId) {
@@ -337,7 +339,7 @@ namespace TicketingScreenDesigner {
 							return;
 						}
 
-						DeactivateScreen(currentlyActiveScreenId);
+						DeactivateScreen((int) currentlyActiveScreenId);
 					}
 				}
 
@@ -360,9 +362,9 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				string screenId = screensListView.SelectedItems[0].Text;
+				int screenId = int.Parse(screensListView.SelectedItems[0].Text);
 				string screenTitle = screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text;
-				PreviewScreenById(screenId, screenTitle == string.Empty ? screenId : screenTitle);
+				PreviewScreenById(screenId, screenTitle);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -373,7 +375,7 @@ namespace TicketingScreenDesigner {
 			Preview();
 		}
 
-		public List<TicketingButton> GetButtons(string screenId) {
+		public List<TicketingButton> GetButtons(int screenId) {
 			var ret = new List<TicketingButton>();
 
 			try {
@@ -385,14 +387,15 @@ namespace TicketingScreenDesigner {
 				try {
 					connection.Open();
 
-					string buttonBankName, buttonScreenId, buttonId, type, nameEn, nameAr;
+					int buttonScreenId, buttonId;
+					string buttonBankName, type, nameEn, nameAr;
 					string? service, messageEn, messageAr;
 					var reader = command.ExecuteReader();
 
 					while (reader.Read()) {
 						buttonBankName = reader[ButtonsConstants.BANK_NAME].ToString() ?? $"Error getting {ButtonsConstants.BANK_NAME}";
-						buttonScreenId = reader[ButtonsConstants.SCREEN_ID].ToString() ?? $"Error getting {ButtonsConstants.SCREEN_ID}";
-						buttonId = reader[ButtonsConstants.BUTTON_ID].ToString() ?? $"Error getting {ButtonsConstants.BUTTON_ID}";
+						buttonScreenId = int.Parse(reader[ButtonsConstants.SCREEN_ID].ToString() ?? "-1");
+						buttonId = int.Parse(reader[ButtonsConstants.BUTTON_ID].ToString() ?? "-1");
 						type = reader[ButtonsConstants.TYPE].ToString() ?? $"Error getting {ButtonsConstants.TYPE}";
 						nameEn = reader[ButtonsConstants.NAME_EN].ToString() ?? $"Error getting {ButtonsConstants.NAME_EN}";
 						nameAr = reader[ButtonsConstants.NAME_AR].ToString() ?? $"Error getting {ButtonsConstants.NAME_AR}";
@@ -418,10 +421,10 @@ namespace TicketingScreenDesigner {
 			return ret;
 		}
 
-		public void PreviewScreenById(string screenId, string screenTitle) {
+		public void PreviewScreenById(int screenId, string screenTitle) {
 			try {
 				var previewForm = new PreviewForm(screenTitle, GetButtons(screenId));
-				previewForm.Show();
+				previewForm.ShowDialog();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);

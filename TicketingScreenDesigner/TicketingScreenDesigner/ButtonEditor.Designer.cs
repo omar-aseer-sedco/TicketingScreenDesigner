@@ -24,8 +24,6 @@
 		/// </summary>
 		private void InitializeComponent() {
 			components = new System.ComponentModel.Container();
-			buttonIdTextBox = new TextBox();
-			buttonIdLabel = new Label();
 			typeComboBox = new ComboBox();
 			saveButton = new Button();
 			nameEnglishLabel = new Label();
@@ -42,29 +40,10 @@
 			issueTicketPanel = new Panel();
 			serviceTextBox = new TextBox();
 			label4 = new Label();
-			autoFillIdButton = new Button();
 			toolTip1 = new ToolTip(components);
 			showMessagePanel.SuspendLayout();
 			issueTicketPanel.SuspendLayout();
 			SuspendLayout();
-			// 
-			// buttonIdTextBox
-			// 
-			buttonIdTextBox.Anchor =  AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-			buttonIdTextBox.Location = new Point(121, 15);
-			buttonIdTextBox.Name = "buttonIdTextBox";
-			buttonIdTextBox.Size = new Size(398, 23);
-			buttonIdTextBox.TabIndex = 0;
-			// 
-			// buttonIdLabel
-			// 
-			buttonIdLabel.AutoSize = true;
-			buttonIdLabel.Location = new Point(54, 18);
-			buttonIdLabel.Name = "buttonIdLabel";
-			buttonIdLabel.Size = new Size(60, 15);
-			buttonIdLabel.TabIndex = 1;
-			buttonIdLabel.Text = "Button ID:";
-			toolTip1.SetToolTip(buttonIdLabel, "Button ID:\r\nA unique identifier for the button. This has to be\r\nunique across all the buttons on the screen.");
 			// 
 			// typeComboBox
 			// 
@@ -72,7 +51,7 @@
 			typeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 			typeComboBox.FormattingEnabled = true;
 			typeComboBox.Items.AddRange(new object[] { "Issue Ticket", "Show Message" });
-			typeComboBox.Location = new Point(121, 102);
+			typeComboBox.Location = new Point(121, 66);
 			typeComboBox.Name = "typeComboBox";
 			typeComboBox.Size = new Size(479, 23);
 			typeComboBox.TabIndex = 3;
@@ -81,7 +60,7 @@
 			// saveButton
 			// 
 			saveButton.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
-			saveButton.Location = new Point(525, 222);
+			saveButton.Location = new Point(525, 183);
 			saveButton.Name = "saveButton";
 			saveButton.Size = new Size(75, 23);
 			saveButton.TabIndex = 8;
@@ -92,7 +71,7 @@
 			// nameEnglishLabel
 			// 
 			nameEnglishLabel.AutoSize = true;
-			nameEnglishLabel.Location = new Point(23, 47);
+			nameEnglishLabel.Location = new Point(23, 11);
 			nameEnglishLabel.Name = "nameEnglishLabel";
 			nameEnglishLabel.Size = new Size(91, 15);
 			nameEnglishLabel.TabIndex = 4;
@@ -102,7 +81,7 @@
 			// nameArabicLabel
 			// 
 			nameArabicLabel.AutoSize = true;
-			nameArabicLabel.Location = new Point(27, 76);
+			nameArabicLabel.Location = new Point(27, 40);
 			nameArabicLabel.Name = "nameArabicLabel";
 			nameArabicLabel.Size = new Size(87, 15);
 			nameArabicLabel.TabIndex = 5;
@@ -112,7 +91,7 @@
 			// typeLabel
 			// 
 			typeLabel.AutoSize = true;
-			typeLabel.Location = new Point(80, 105);
+			typeLabel.Location = new Point(80, 69);
 			typeLabel.Name = "typeLabel";
 			typeLabel.Size = new Size(34, 15);
 			typeLabel.TabIndex = 6;
@@ -122,7 +101,7 @@
 			// nameEnTextBox
 			// 
 			nameEnTextBox.Anchor =  AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-			nameEnTextBox.Location = new Point(121, 44);
+			nameEnTextBox.Location = new Point(121, 8);
 			nameEnTextBox.Name = "nameEnTextBox";
 			nameEnTextBox.Size = new Size(479, 23);
 			nameEnTextBox.TabIndex = 1;
@@ -130,7 +109,7 @@
 			// nameArTextBox
 			// 
 			nameArTextBox.Anchor =  AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-			nameArTextBox.Location = new Point(121, 73);
+			nameArTextBox.Location = new Point(121, 37);
 			nameArTextBox.Name = "nameArTextBox";
 			nameArTextBox.RightToLeft = RightToLeft.Yes;
 			nameArTextBox.Size = new Size(479, 23);
@@ -139,7 +118,7 @@
 			// cancelButton
 			// 
 			cancelButton.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
-			cancelButton.Location = new Point(444, 222);
+			cancelButton.Location = new Point(444, 183);
 			cancelButton.Name = "cancelButton";
 			cancelButton.Size = new Size(75, 23);
 			cancelButton.TabIndex = 7;
@@ -154,7 +133,7 @@
 			showMessagePanel.Controls.Add(messageEnTextBox);
 			showMessagePanel.Controls.Add(label1);
 			showMessagePanel.Controls.Add(label2);
-			showMessagePanel.Location = new Point(0, 131);
+			showMessagePanel.Location = new Point(0, 95);
 			showMessagePanel.Name = "showMessagePanel";
 			showMessagePanel.Size = new Size(613, 52);
 			showMessagePanel.TabIndex = 10;
@@ -202,7 +181,7 @@
 			issueTicketPanel.Anchor =  AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			issueTicketPanel.Controls.Add(serviceTextBox);
 			issueTicketPanel.Controls.Add(label4);
-			issueTicketPanel.Location = new Point(0, 189);
+			issueTicketPanel.Location = new Point(0, 153);
 			issueTicketPanel.Name = "issueTicketPanel";
 			issueTicketPanel.Size = new Size(613, 23);
 			issueTicketPanel.TabIndex = 13;
@@ -226,26 +205,13 @@
 			label4.Text = "Service:";
 			toolTip1.SetToolTip(label4, "Service:\r\nThe service that will be provided to your customer\r\nwhen they press the button.");
 			// 
-			// autoFillIdButton
-			// 
-			autoFillIdButton.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
-			autoFillIdButton.Location = new Point(525, 14);
-			autoFillIdButton.Name = "autoFillIdButton";
-			autoFillIdButton.Size = new Size(75, 23);
-			autoFillIdButton.TabIndex = 14;
-			autoFillIdButton.Text = "Autofill";
-			toolTip1.SetToolTip(autoFillIdButton, "Autofill (F):\r\nGenerate a new unique button ID.");
-			autoFillIdButton.UseVisualStyleBackColor = true;
-			autoFillIdButton.Click += autoFillIdButton_Click;
-			// 
 			// ButtonEditor
 			// 
 			AcceptButton = saveButton;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			CancelButton = cancelButton;
-			ClientSize = new Size(612, 255);
-			Controls.Add(autoFillIdButton);
+			ClientSize = new Size(612, 218);
 			Controls.Add(issueTicketPanel);
 			Controls.Add(showMessagePanel);
 			Controls.Add(cancelButton);
@@ -256,12 +222,9 @@
 			Controls.Add(nameEnglishLabel);
 			Controls.Add(saveButton);
 			Controls.Add(typeComboBox);
-			Controls.Add(buttonIdLabel);
-			Controls.Add(buttonIdTextBox);
 			MinimumSize = new Size(628, 233);
 			Name = "ButtonEditor";
 			Text = "Button Editor";
-			KeyDown += ButtonEditor_KeyDown;
 			showMessagePanel.ResumeLayout(false);
 			showMessagePanel.PerformLayout();
 			issueTicketPanel.ResumeLayout(false);
@@ -271,9 +234,6 @@
 		}
 
 		#endregion
-
-		private TextBox buttonIdTextBox;
-		private Label buttonIdLabel;
 		private ComboBox typeComboBox;
 		private Button saveButton;
 		private Label nameEnglishLabel;
@@ -290,7 +250,6 @@
 		private Panel issueTicketPanel;
 		private TextBox serviceTextBox;
 		private Label label4;
-		private Button autoFillIdButton;
 		private ToolTip toolTip1;
 	}
 }
