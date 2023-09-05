@@ -19,13 +19,16 @@ namespace TicketingScreenDesigner {
 
 		private List<Button> formButtons;
 		private Label titleLabel;
+		private Button languageButton;
 		private int rows;
 		private int columns;
+		private string language;
 
 		public PreviewForm(string screenTitle, List<TicketingButton> ticketingButtons) {
 			titleText = screenTitle;
 			this.ticketingButtons = ticketingButtons;
 			buttonCount = ticketingButtons.Count;
+			language = "en";
 			InitializeComponent();
 		}
 
@@ -43,6 +46,16 @@ namespace TicketingScreenDesigner {
 					Dock = DockStyle.Top,
 					AutoEllipsis = true,
 				};
+
+				languageButton = new Button {
+					Text = language.ToUpper(),
+					Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point),
+					TextAlign = ContentAlignment.MiddleCenter,
+					Size = new Size(40, 24),
+					Location = new Point(5, 5),
+					Anchor = AnchorStyles.Top | AnchorStyles.Left,
+				};
+				languageButton.Click += SwitchLanguage;
 
 				SetGridDimensions();
 				SetFormSize();
@@ -71,6 +84,7 @@ namespace TicketingScreenDesigner {
 
 				Controls.AddRange(formButtons.ToArray<Control>());
 				Controls.Add(titleLabel);
+				Controls.Add(languageButton);
 
 				ResumeLayout();
 			}
@@ -104,7 +118,10 @@ namespace TicketingScreenDesigner {
 			return new Point(x, y);
 		}
 
-		private void Button_Click(object sender, EventArgs e) {
+		private void Button_Click(object? sender, EventArgs e) {
+			if (sender is null)
+				return;
+
 			Button button = (Button) sender;
 			string service = "";
 			string messageEn = "";
@@ -121,6 +138,27 @@ namespace TicketingScreenDesigner {
 			string message = service == "" ? $"{messageEn}.\n{messageAr}." : service;
 
 			MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		private void SwitchLanguage(object? sender, EventArgs e) {
+			if (language == "en") {
+				for (int i = 0; i < formButtons.Count; ++i) {
+					formButtons[i].RightToLeft = RightToLeft.Yes;
+					formButtons[i].Text = ticketingButtons[i].NameAr;
+				}
+
+				language = "ar";
+			}
+			else {
+				for (int i = 0; i < formButtons.Count; ++i) {
+					formButtons[i].RightToLeft = RightToLeft.No;
+					formButtons[i].Text = ticketingButtons[i].NameEn;
+				}
+
+				language = "en";
+			}
+
+			languageButton.Text = language.ToUpper();
 		}
 	}
 }

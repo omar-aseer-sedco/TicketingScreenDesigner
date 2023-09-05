@@ -635,7 +635,6 @@ namespace TicketingScreenDesigner {
 				bool success;
 
 				if (isNewScreen) {
-					MessageBox.Show("beep boop");
 					success = AddNewScreen();
 				}
 				else {
