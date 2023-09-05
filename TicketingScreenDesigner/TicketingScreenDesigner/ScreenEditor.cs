@@ -1,9 +1,7 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-using System.Data;
 using System.Data.SqlClient;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace TicketingScreenDesigner {
 	public partial class ScreenEditor : Form {
@@ -265,6 +263,7 @@ namespace TicketingScreenDesigner {
 				}
 				if (pendingUpdates.ContainsKey(buttonId)) {
 					pendingUpdates[buttonId] = updatedButton;
+					isPendingButton = true;
 				}
 
 				if (!isPendingButton) {
@@ -293,6 +292,59 @@ namespace TicketingScreenDesigner {
 				default:
 					return null;
 			}
+		}
+
+		private bool RemoveDeletedButtons() {
+			if (pendingUpdates.Count == 0) {
+				return false;
+			}
+
+			bool ret = false;
+
+			var query = new StringBuilder($"SELECT {ButtonsConstants.BUTTON_ID} FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BUTTON_ID} IN (");
+			var command = new SqlCommand();
+
+			int i = 0;
+			foreach (var buttonId in pendingUpdates.Keys) {
+				query.Append("@buttonId").Append(i).Append(',');
+				command.Parameters.AddWithValue("@buttonId" + i, buttonId);
+
+				++i;
+			}
+
+			query.Length--;
+			query.Append(");");
+
+			command.CommandText = query.ToString();
+			command.Connection = connection;
+
+			try {
+				connection.Open();
+
+				var undeleted = new HashSet<int>();
+				var reader = command.ExecuteReader();
+				while (reader.Read()) {
+					undeleted.Add(reader.GetInt32(0));
+				}
+
+				foreach (var buttonId in pendingUpdates.Keys.ToList()) {
+					if (!undeleted.Contains(buttonId)) {
+						pendingUpdates.Remove(buttonId);
+						ret = true;
+					}
+				}
+			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "Button ID");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
+			finally {
+				connection.Close();
+			}
+
+			return ret;
 		}
 
 		private SqlCommand? CreateUpdateButtonsCommand() {
@@ -362,6 +414,10 @@ namespace TicketingScreenDesigner {
 			bool success = false;
 
 			try {
+				if (RemoveDeletedButtons()) {
+					MessageBox.Show("Some of the buttons you edited were deleted by a different user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+
 				var command = CreateUpdateButtonsCommand();
 
 				success = true;
@@ -569,6 +625,8 @@ namespace TicketingScreenDesigner {
 
 		private void saveButton_Click(object sender, EventArgs e) {
 			try {
+				screenTitleTextBox.Text = screenTitleTextBox.Text.Trim();
+
 				if (!IsInformationComplete()) {
 					MessageBox.Show("Please fill in the screen ID and add at least one button before saving the screen.", "Incomplete information", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
@@ -580,18 +638,32 @@ namespace TicketingScreenDesigner {
 					success = AddNewScreen();
 				}
 				else {
-					success = UpdateCurrentScreen();
+					if (callingForm.CheckIfScreenExists(screenId)) {
+						success = UpdateCurrentScreen();
+					}
+					else
+					{
+						var confirmationResult = MessageBox.Show("This screen no longer exists. It may have been deleted by another user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						callingForm.UpdateListView();
+						Close();
+						return;
+					}
 				}
 
 				success &= DeletePending();
 
 				if (success) {
 					callingForm.UpdateListView();
-					Close();
+				}
+				else {
+					throw new Exception("Failed to Apply all of the changes due to an unexpected error.");
 				}
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+			}
+			finally {
+				Close();
 			}
 		}
 
@@ -610,6 +682,8 @@ namespace TicketingScreenDesigner {
 				}
 
 				pendingAdds.Clear();
+				pendingUpdates.Clear();
+				pendingDeletes.Clear();
 				Close();
 			}
 			catch (Exception ex) {
@@ -634,12 +708,17 @@ namespace TicketingScreenDesigner {
 
 				foreach (ListViewItem button in buttonsListView.SelectedItems) {
 					bool inPendingList = false;
+					int buttonId = int.Parse(button.Text);
 					foreach (var pendingButton in pendingAdds) {
-						if (pendingButton.ButtonId == int.Parse(button.Text)) {
+						if (pendingButton.ButtonId == buttonId) {
 							pendingAdds.Remove(pendingButton);
 							inPendingList = true;
 							break;
 						}
+					}
+					if (pendingUpdates.ContainsKey(buttonId)) {
+						pendingUpdates.Remove(buttonId);
+						inPendingList = true;
 					}
 
 					if (!inPendingList) {
@@ -680,6 +759,42 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
+		public bool CheckIfButtonExists (int buttonId) {
+			bool ret = false;
+
+			string query = $"SELECT COUNT({ButtonsConstants.BUTTON_ID}) FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BUTTON_ID} = @buttonId;";
+			var command = new SqlCommand(query, connection);
+			command.Parameters.AddWithValue("@buttonId", buttonId);
+
+			try {
+				connection.Open();
+
+				ret = (int) command.ExecuteScalar() == 1;
+			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "Button ID");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
+			finally {
+				connection.Close();
+			}
+
+			return ret;
+		}
+
+		public void CheckIfScreenExists () {
+			if (!callingForm.CheckIfScreenExists(screenId)) {
+				MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				pendingAdds.Clear();
+				pendingUpdates.Clear();
+				pendingDeletes.Clear();
+				Close();
+				return;
+			}
+		}
+
 		private void Edit() {
 			try {
 				if (buttonsListView.SelectedItems.Count != 1) {
@@ -687,7 +802,15 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				var buttonEditor = new ButtonEditor(connection, this, bankName, screenId, int.Parse(buttonsListView.SelectedItems[0].Text));
+				int buttonId = int.Parse(buttonsListView.SelectedItems[0].Text);
+
+				if (!CheckIfButtonExists(buttonId)) {
+					MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					RefreshList();
+					return;
+				}
+
+				var buttonEditor = new ButtonEditor(connection, this, bankName, screenId, buttonId);
 				buttonEditor.ShowDialog();
 			}
 			catch (Exception ex) {

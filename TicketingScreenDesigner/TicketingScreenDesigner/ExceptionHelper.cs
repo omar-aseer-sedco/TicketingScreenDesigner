@@ -1,5 +1,4 @@
 ﻿using System.Data.SqlClient;
-using System.Runtime.Serialization;
 
 namespace TicketingScreenDesigner {
 	public static class ExceptionHelper {

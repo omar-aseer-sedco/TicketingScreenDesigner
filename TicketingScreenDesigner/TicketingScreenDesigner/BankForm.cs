@@ -3,7 +3,6 @@
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
-using System.ComponentModel.Design;
 
 namespace TicketingScreenDesigner {
 	public partial class BankForm : Form {
@@ -91,6 +90,31 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
+		public bool CheckIfScreenExists(int screenId) {
+			bool ret = false;
+
+			string query = $"SELECT COUNT({ScreensConstants.SCREEN_ID}) FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.SCREEN_ID} = @screenId;";
+			var command = new SqlCommand(query, connection);
+			command.Parameters.AddWithValue("@screenId", screenId);
+
+			try {
+				connection.Open();
+
+				ret = (int) command.ExecuteScalar() == 1;
+			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "Screen ID");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
+			finally {
+				connection.Close();
+			}
+
+			return ret;
+		}
+
 		private void Edit() {
 			try {
 				if (screensListView.SelectedItems.Count != 1) {
@@ -99,6 +123,13 @@ namespace TicketingScreenDesigner {
 				}
 
 				int screenId = int.Parse(screensListView.SelectedItems[0].Text);
+
+				if (!CheckIfScreenExists(screenId)) {
+					MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					RefreshList();
+					return;
+				}
+
 				string screenTitle = screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text;
 				bool isActive = screensListView.SelectedItems[0].SubItems[ScreensConstants.IS_ACTIVE].Text == "Yes";
 				var screenEditor = new ScreenEditor(connection, this, bankName, screenId, screenTitle, isActive);
@@ -421,8 +452,14 @@ namespace TicketingScreenDesigner {
 			return ret;
 		}
 
-		public void PreviewScreenById(int screenId, string screenTitle) {
+		private void PreviewScreenById(int screenId, string screenTitle) {
 			try {
+				if (!CheckIfScreenExists(screenId)) {
+					MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					RefreshList();
+					return;
+				}
+
 				var previewForm = new PreviewForm(screenTitle, GetButtons(screenId));
 				previewForm.ShowDialog();
 			}
@@ -474,7 +511,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void keyboardShortcutsToolStripMenuItem_Click(object sender, EventArgs e) {
-			string shortcuts = "E/Enter: Edit\nD/Del/Backspace: Delete\nA: Add\nS: Set Active\nP: Preview\nR: Refresh\nF: Autofill";
+			string shortcuts = "E/Enter: Edit\nD/Del/Backspace: Delete\nA: Add\nS: Set Active\nP: Preview\nR: Refresh";
 
 			MessageBox.Show(shortcuts, "Keyboard shortcuts", MessageBoxButtons.OK, MessageBoxIcon.Question);
 		}

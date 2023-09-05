@@ -8,8 +8,8 @@ namespace TicketingScreenDesigner {
 		private const int SHOW_MESSAGE_INDEX = 1;
 		private const string TITLE_TEXT = "Button Editor";
 		private const int DEFAULT_PANEL_POSITION_Y = 95;
-		private const int MINIMUM_HEIGHT_ISSUE_TICKET = 206; // 233
-		private const int MINIMUM_HEIGHT_SHOW_MESSAGE = 233; // 260
+		private const int MINIMUM_HEIGHT_ISSUE_TICKET = 206;
+		private const int MINIMUM_HEIGHT_SHOW_MESSAGE = 233;
 		private const int MINIMUM_WIDTH = 628;
 		private readonly TicketingButton button;
 		private readonly SqlConnection connection;
@@ -166,8 +166,17 @@ namespace TicketingScreenDesigner {
 
 		private void saveButton_Click(object sender, EventArgs e) {
 			try {
+				TrimInput();
+
 				if (!IsInformationComplete()) {
 					MessageBox.Show("Please fill in all the fields before saving the button.", "Incomplete information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
+				if (!isNewButton && !callingForm.CheckIfButtonExists(button.ButtonId)) {
+					MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					callingForm.UpdateListView();
+					Close();
 					return;
 				}
 
@@ -188,6 +197,7 @@ namespace TicketingScreenDesigner {
 					callingForm.UpdateButton(button.ButtonId, newButton);
 				}
 
+				callingForm.CheckIfScreenExists();
 				callingForm.UpdateListView();
 				Close();
 			}
@@ -223,6 +233,14 @@ namespace TicketingScreenDesigner {
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
+		}
+
+		private void TrimInput() {
+			nameEnTextBox.Text = nameEnTextBox.Text.Trim();
+			nameArTextBox.Text = nameArTextBox.Text.Trim();
+			messageEnTextBox.Text = messageEnTextBox.Text.Trim();
+			messageArTextBox.Text = messageArTextBox.Text.Trim();
+			serviceTextBox.Text = serviceTextBox.Text.Trim();
 		}
 	}
 }
