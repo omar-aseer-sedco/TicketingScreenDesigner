@@ -64,7 +64,7 @@ namespace TicketingScreenDesigner {
 				};
 				languageButton.Click += SwitchLanguage;
 
-				SetGridDimensions();
+				SetButtonGridDimensions();
 				SetFormSize();
 				MinimumSize = Size;
 
@@ -100,12 +100,12 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private static int GetNextSquareRoot(int x) {
+		private static int GetNextPerfectSquareRoot(int x) {
 			return (int) Math.Ceiling(Math.Sqrt(x));
 		}
 
-		private void SetGridDimensions() {
-			rows = GetNextSquareRoot(buttonCount);
+		private void SetButtonGridDimensions() {
+			rows = GetNextPerfectSquareRoot(buttonCount);
 			columns = (int) Math.Ceiling((double) buttonCount / rows);
 		}
 

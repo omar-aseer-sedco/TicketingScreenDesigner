@@ -56,10 +56,6 @@ namespace TicketingScreenDesigner {
 		}
 
 		public static void Log(LogEvent logEvent) {
-			WriteLog(logEvent);
-		}
-
-		private static void WriteLog(LogEvent logEvent) {
 			try {
 				var options = new JsonSerializerOptions() {
 					WriteIndented = true,

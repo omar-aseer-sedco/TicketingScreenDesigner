@@ -23,12 +23,12 @@ namespace TicketingScreenDesigner {
 			}
 			catch (FileNotFoundException ex) {
 				ExceptionHelper.ShowErrorMessageBox("The configuration file was not found. Was it accidentally moved, renamed, or deleted?");
-				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error));
+				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error, ex.Source, ex.StackTrace));
 				throw;
 			}
 			catch (ArgumentException ex) {
 				ExceptionHelper.ShowErrorMessageBox("Failed to connect to database. Please try again.");
-				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error));
+				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error, ex.Source, ex.StackTrace));
 				throw;
 			}
 			catch (Exception ex) {

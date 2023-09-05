@@ -7,7 +7,6 @@ namespace TicketingScreenDesigner {
 	public partial class ScreenEditor : Form {
 		private const string TITLE_TEXT = "Screen Editor";
 		private readonly string bankName;
-		private int screenId;
 		private readonly string screenTitle;
 		private readonly SqlConnection connection;
 		private readonly List<TicketingButton> pendingAdds;
@@ -15,6 +14,7 @@ namespace TicketingScreenDesigner {
 		private readonly List<int> pendingDeletes;
 		private readonly BankForm callingForm;
 		private readonly bool isNewScreen;
+		private int screenId;
 
 		private ScreenEditor() {
 			InitializeComponent();
@@ -80,10 +80,10 @@ namespace TicketingScreenDesigner {
 				}
 
 				foreach (var button in pendingAdds) {
-					AddToListView(button.ButtonId, button.NameEn, button.Type, button.Service, button.MessageEn);
+					AddToListView(button);
 				}
 				foreach (var button in pendingUpdates.Values) {
-					AddToListView(button.ButtonId, button.NameEn, button.Type, button.Service, button.MessageEn);
+					AddToListView(button);
 				}
 			}
 			catch (Exception ex) {
@@ -131,6 +131,10 @@ namespace TicketingScreenDesigner {
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
+		}
+
+		private void AddToListView(TicketingButton button) {
+			AddToListView(button.ButtonId, button.NameEn, button.Type, button.Service, button.MessageEn);
 		}
 
 		private void Add() {
@@ -192,7 +196,7 @@ namespace TicketingScreenDesigner {
 			return addScreenSuccess && activationSuccess && addButtonsSuccess && updateButtonsSuccess;
 		}
 
-		private bool UpdateScreenInformation() {
+		private bool UpdateScreenTitle() {
 			bool success = false;
 
 			try {
@@ -241,7 +245,7 @@ namespace TicketingScreenDesigner {
 			return success;
 		}
 
-		public void AddButtonToPendingList(TicketingButton button) {
+		public void AddButton(TicketingButton button) {
 			try {
 				pendingAdds.Add(button);
 			}
@@ -547,7 +551,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		private bool UpdateCurrentScreen() {
-			bool informationUpdateSuccess = UpdateScreenInformation();
+			bool informationUpdateSuccess = UpdateScreenTitle();
 			bool activationUpdateSuccess = UpdateScreenActivation();
 			bool addButtonsSuccess = AddPending();
 			bool updateButtonsSuccess = UpdatePending();
@@ -737,8 +741,8 @@ namespace TicketingScreenDesigner {
 		private void deleteButton_Click(object sender, EventArgs e) {
 			Delete();
 		}
-
-		private void buttonsListView_SelectedIndexChanged(object sender, EventArgs e) {
+		
+		private void UpdateFormButtonActivation() {
 			try {
 				int selectedCount = buttonsListView.SelectedItems.Count;
 
@@ -760,7 +764,11 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public bool CheckIfButtonExists (int buttonId) {
+		private void buttonsListView_SelectedIndexChanged(object sender, EventArgs e) {
+			UpdateFormButtonActivation();
+		}
+
+		public bool CheckIfButtonExists(int buttonId) {
 			bool ret = false;
 
 			string query = $"SELECT COUNT({ButtonsConstants.BUTTON_ID}) FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BUTTON_ID} = @buttonId;";
@@ -785,7 +793,7 @@ namespace TicketingScreenDesigner {
 			return ret;
 		}
 
-		public void CheckIfScreenExists () {
+		public void CheckIfScreenExists() {
 			if (!isNewScreen && !callingForm.CheckIfScreenExists(screenId)) {
 				MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				pendingAdds.Clear();
@@ -807,7 +815,7 @@ namespace TicketingScreenDesigner {
 
 				if (!CheckIfButtonExists(buttonId)) {
 					MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					RefreshList();
+					UpdateListView();
 					return;
 				}
 
@@ -848,12 +856,8 @@ namespace TicketingScreenDesigner {
 			return HasButtons() && screenTitleTextBox.Text != string.Empty;
 		}
 
-		private void RefreshList() {
-			UpdateListView();
-		}
-
 		private void refreshButton_Click(object sender, EventArgs e) {
-			RefreshList();
+			UpdateListView();
 		}
 
 		private void ToggleActive() {
@@ -874,7 +878,7 @@ namespace TicketingScreenDesigner {
 					Add();
 					break;
 				case Keys.R:
-					RefreshList();
+					UpdateListView();
 					break;
 				case Keys.S:
 					ToggleActive();

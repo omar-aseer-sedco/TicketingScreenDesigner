@@ -83,7 +83,7 @@ namespace TicketingScreenDesigner {
 					connection.Close();
 				}
 
-				CheckButtonActivation();
+				UpdateFormButtonActivation();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -126,7 +126,7 @@ namespace TicketingScreenDesigner {
 
 				if (!CheckIfScreenExists(screenId)) {
 					MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					RefreshList();
+					UpdateListView();
 					return;
 				}
 
@@ -219,7 +219,7 @@ namespace TicketingScreenDesigner {
 			Delete();
 		}
 
-		private void CheckButtonActivation() {
+		private void UpdateFormButtonActivation() {
 			try {
 				int selectedCount = screensListView.SelectedIndices.Count;
 				if (selectedCount == 0) {
@@ -247,7 +247,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void screensListView_SelectedIndexChanged(object sender, EventArgs e) {
-			CheckButtonActivation();
+			UpdateFormButtonActivation();
 		}
 
 		private class ActiveScreenController {
@@ -409,7 +409,7 @@ namespace TicketingScreenDesigner {
 			Preview();
 		}
 
-		public List<TicketingButton> GetButtons(int screenId) {
+		public List<TicketingButton> GetButtonsByScreenId(int screenId) {
 			var ret = new List<TicketingButton>();
 
 			try {
@@ -459,11 +459,11 @@ namespace TicketingScreenDesigner {
 			try {
 				if (!CheckIfScreenExists(screenId)) {
 					MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					RefreshList();
+					UpdateListView();
 					return;
 				}
 
-				var previewForm = new PreviewForm(screenTitle, GetButtons(screenId));
+				var previewForm = new PreviewForm(screenTitle, GetButtonsByScreenId(screenId));
 				previewForm.ShowDialog();
 			}
 			catch (Exception ex) {
@@ -471,12 +471,8 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void RefreshList() {
-			UpdateListView();
-		}
-
 		private void refreshButton_Click(object sender, EventArgs e) {
-			RefreshList();
+			UpdateListView();
 		}
 
 		private void HandleKeyEvent(KeyEventArgs e) {
@@ -500,7 +496,7 @@ namespace TicketingScreenDesigner {
 					Preview();
 					break;
 				case Keys.R:
-					RefreshList();
+					UpdateListView();
 					break;
 			}
 		}
@@ -514,7 +510,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void keyboardShortcutsToolStripMenuItem_Click(object sender, EventArgs e) {
-			string shortcuts = "E/Enter: Edit\nD/Del/Backspace: Delete\nA: Add\nS: Set Active\nP: Preview\nR: Refresh";
+			string shortcuts = "E: Edit\nD/Del/Backspace: Delete\nA: Add\nS: Set Active\nP: Preview\nR: Refresh";
 
 			MessageBox.Show(shortcuts, "Keyboard shortcuts", MessageBoxButtons.OK, MessageBoxIcon.Question);
 		}

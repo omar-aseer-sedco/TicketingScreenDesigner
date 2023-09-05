@@ -4,8 +4,6 @@ using System.Data.SqlClient;
 
 namespace TicketingScreenDesigner {
 	public partial class ButtonEditor : Form {
-		private const int ISSUE_TICKET_INDEX = 0;
-		private const int SHOW_MESSAGE_INDEX = 1;
 		private const string TITLE_TEXT = "Button Editor";
 		private const int DEFAULT_PANEL_POSITION_Y = 95;
 		private const int MINIMUM_HEIGHT_ISSUE_TICKET = 206;
@@ -15,6 +13,11 @@ namespace TicketingScreenDesigner {
 		private readonly SqlConnection connection;
 		private readonly ScreenEditor callingForm;
 		private readonly bool isNewButton;
+		
+		private enum TypeIndex {
+			ISSUE_TICKET = 0,
+			SHOW_MESSAGE = 1,
+		}
 
 		private ButtonEditor() {
 			InitializeComponent();
@@ -102,7 +105,7 @@ namespace TicketingScreenDesigner {
 			try {
 				nameEnTextBox.Text = button.NameEn;
 				nameArTextBox.Text = button.NameAr;
-				typeComboBox.SelectedIndex = button.Type == ButtonsConstants.Types.ISSUE_TICKET ? ISSUE_TICKET_INDEX : SHOW_MESSAGE_INDEX;
+				typeComboBox.SelectedIndex = button.Type == ButtonsConstants.Types.ISSUE_TICKET ? (int) TypeIndex.ISSUE_TICKET : (int) TypeIndex.SHOW_MESSAGE;
 				ShowTypeSpecificFields();
 				messageEnTextBox.Text = button.MessageEn ?? string.Empty;
 				messageArTextBox.Text = button.MessageAr ?? string.Empty;
@@ -119,7 +122,7 @@ namespace TicketingScreenDesigner {
 					issueTicketPanel.Visible = issueTicketPanel.Enabled = false;
 					showMessagePanel.Visible = showMessagePanel.Enabled = false;
 				}
-				else if (typeComboBox.SelectedIndex == ISSUE_TICKET_INDEX) {
+				else if (typeComboBox.SelectedIndex == (int) TypeIndex.ISSUE_TICKET) {
 					MinimumSize = new Size(MINIMUM_WIDTH, MINIMUM_HEIGHT_ISSUE_TICKET);
 
 					issueTicketPanel.Visible = issueTicketPanel.Enabled = true;
@@ -131,7 +134,7 @@ namespace TicketingScreenDesigner {
 						Size = new Size(Size.Width, MINIMUM_HEIGHT_ISSUE_TICKET);
 					}
 				}
-				else if (typeComboBox.SelectedIndex == SHOW_MESSAGE_INDEX) {
+				else if (typeComboBox.SelectedIndex == (int) TypeIndex.SHOW_MESSAGE) {
 					MinimumSize = new Size(MINIMUM_WIDTH, MINIMUM_HEIGHT_SHOW_MESSAGE);
 
 					issueTicketPanel.Visible = issueTicketPanel.Enabled = false;
@@ -155,8 +158,8 @@ namespace TicketingScreenDesigner {
 
 		private bool IsInformationComplete() {
 			try {
-				return nameEnTextBox.Text != string.Empty && nameArTextBox.Text != string.Empty && typeComboBox.SelectedIndex != -1 && ((typeComboBox.SelectedIndex == ISSUE_TICKET_INDEX && serviceTextBox.Text != string.Empty) ||
-					(typeComboBox.SelectedIndex == SHOW_MESSAGE_INDEX && messageEnTextBox.Text != string.Empty && messageArTextBox.Text != string.Empty));
+				return nameEnTextBox.Text != string.Empty && nameArTextBox.Text != string.Empty && typeComboBox.SelectedIndex != -1 && ((typeComboBox.SelectedIndex == (int) TypeIndex.ISSUE_TICKET && serviceTextBox.Text != string.Empty) ||
+					(typeComboBox.SelectedIndex == (int) TypeIndex.SHOW_MESSAGE && messageEnTextBox.Text != string.Empty && messageArTextBox.Text != string.Empty));
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -182,7 +185,7 @@ namespace TicketingScreenDesigner {
 
 				string bankName = button.BankName;
 				int screenId = button.ScreenId;
-				string type = typeComboBox.SelectedIndex == ISSUE_TICKET_INDEX ? ButtonsConstants.Types.ISSUE_TICKET : ButtonsConstants.Types.SHOW_MESSAGE;
+				string type = typeComboBox.SelectedIndex == (int) TypeIndex.ISSUE_TICKET ? ButtonsConstants.Types.ISSUE_TICKET : ButtonsConstants.Types.SHOW_MESSAGE;
 				string nameEn = nameEnTextBox.Text;
 				string nameAr = nameArTextBox.Text;
 				string? service = serviceTextBox.Text == string.Empty ? null : serviceTextBox.Text;
@@ -191,7 +194,7 @@ namespace TicketingScreenDesigner {
 				var newButton = new TicketingButton(bankName, screenId, button.ButtonId, type, nameEn, nameAr, service, messageEn, messageAr);
 
 				if (isNewButton) {
-					callingForm.AddButtonToPendingList(newButton);
+					callingForm.AddButton(newButton);
 				}
 				else {
 					callingForm.UpdateButton(button.ButtonId, newButton);
@@ -209,8 +212,8 @@ namespace TicketingScreenDesigner {
 		private bool IsDataChanged() {
 			try {
 				return (isNewButton && (nameEnTextBox.Text != string.Empty || nameArTextBox.Text != string.Empty || typeComboBox.SelectedIndex != -1)) || (!isNewButton && (nameEnTextBox.Text != button.NameEn || nameArTextBox.Text != button.NameAr ||
-					typeComboBox.SelectedIndex != (button.Type == ButtonsConstants.Types.ISSUE_TICKET ? ISSUE_TICKET_INDEX : SHOW_MESSAGE_INDEX) || (typeComboBox.SelectedIndex == ISSUE_TICKET_INDEX && serviceTextBox.Text != button.Service) ||
-					(typeComboBox.SelectedIndex == SHOW_MESSAGE_INDEX && (messageEnTextBox.Text != button.MessageEn || messageArTextBox.Text != button.MessageAr))));
+					typeComboBox.SelectedIndex != (button.Type == ButtonsConstants.Types.ISSUE_TICKET ? (int) TypeIndex.ISSUE_TICKET : (int) TypeIndex.SHOW_MESSAGE) || (typeComboBox.SelectedIndex == (int) TypeIndex.ISSUE_TICKET && serviceTextBox.Text != button.Service) ||
+					(typeComboBox.SelectedIndex == (int) TypeIndex.SHOW_MESSAGE && (messageEnTextBox.Text != button.MessageEn || messageArTextBox.Text != button.MessageAr))));
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
