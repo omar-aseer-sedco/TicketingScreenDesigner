@@ -37,6 +37,7 @@ namespace TicketingScreenDesigner {
 
 		public ButtonEditor(SqlConnection connection, ScreenEditor callingForm, string bankName, int screenId) : this(connection, callingForm, bankName) {
 			button.ScreenId = screenId;
+			button.ButtonId = callingForm.GetNextPendingButtonId();
 		}
 
 		public ButtonEditor(SqlConnection connection, ScreenEditor callingForm, string bankName, int screenId, int buttonId) : this(connection, callingForm) {

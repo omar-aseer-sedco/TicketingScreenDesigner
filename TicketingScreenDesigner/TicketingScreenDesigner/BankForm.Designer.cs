@@ -26,8 +26,8 @@
 			components = new System.ComponentModel.Container();
 			screensListView = new ListView();
 			screenIdColumn = new ColumnHeader();
-			isActiveColumn = new ColumnHeader();
 			screenTitleColumn = new ColumnHeader();
+			isActiveColumn = new ColumnHeader();
 			addScreenButton = new Button();
 			editScreenButton = new Button();
 			deleteScreenButton = new Button();
@@ -46,7 +46,7 @@
 			// screensListView
 			// 
 			screensListView.Anchor =  AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			screensListView.Columns.AddRange(new ColumnHeader[] { screenIdColumn, isActiveColumn, screenTitleColumn });
+			screensListView.Columns.AddRange(new ColumnHeader[] { screenIdColumn, screenTitleColumn, isActiveColumn });
 			screensListView.FullRowSelect = true;
 			screensListView.Location = new Point(12, 77);
 			screensListView.Name = "screensListView";
@@ -60,17 +60,17 @@
 			// screenIdColumn
 			// 
 			screenIdColumn.Text = "Screen ID";
-			screenIdColumn.Width = 100;
-			// 
-			// isActiveColumn
-			// 
-			isActiveColumn.Text = "Active?";
-			isActiveColumn.Width = 65;
+			screenIdColumn.Width = 0;
 			// 
 			// screenTitleColumn
 			// 
 			screenTitleColumn.Text = "Screen Title";
-			screenTitleColumn.Width = 346;
+			screenTitleColumn.Width = 430;
+			// 
+			// isActiveColumn
+			// 
+			isActiveColumn.Text = "Active?";
+			isActiveColumn.Width = 80;
 			// 
 			// addScreenButton
 			// 

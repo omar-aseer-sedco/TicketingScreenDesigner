@@ -15,6 +15,7 @@ namespace TicketingScreenDesigner {
 		private readonly BankForm callingForm;
 		private readonly bool isNewScreen;
 		private int screenId;
+		private int pendingButtonId;
 
 		private ScreenEditor() {
 			InitializeComponent();
@@ -24,6 +25,7 @@ namespace TicketingScreenDesigner {
 			pendingAdds = new List<TicketingButton>();
 			pendingUpdates = new Dictionary<int, TicketingButton>();
 			pendingDeletes = new List<int>();
+			pendingButtonId = -1;
 		}
 
 		public ScreenEditor(SqlConnection connection, BankForm callingForm, string bankName) : this() {
@@ -632,7 +634,7 @@ namespace TicketingScreenDesigner {
 				screenTitleTextBox.Text = screenTitleTextBox.Text.Trim();
 
 				if (!IsInformationComplete()) {
-					MessageBox.Show("Please fill in the screen ID and add at least one button before saving the screen.", "Incomplete information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("Please fill in the screen title and add at least one button before saving the screen.", "Incomplete information", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
 
@@ -645,8 +647,7 @@ namespace TicketingScreenDesigner {
 					if (callingForm.CheckIfScreenExists(screenId)) {
 						success = UpdateCurrentScreen();
 					}
-					else
-					{
+					else {
 						MessageBox.Show("This screen no longer exists. It may have been deleted by another user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
 						callingForm.UpdateListView();
 						Close();
@@ -662,12 +663,11 @@ namespace TicketingScreenDesigner {
 				else {
 					throw new Exception("Failed to Apply all of the changes due to an unexpected error.");
 				}
+
+				Close();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				Close();
 			}
 		}
 
@@ -741,7 +741,7 @@ namespace TicketingScreenDesigner {
 		private void deleteButton_Click(object sender, EventArgs e) {
 			Delete();
 		}
-		
+
 		private void UpdateFormButtonActivation() {
 			try {
 				int selectedCount = buttonsListView.SelectedItems.Count;
@@ -892,6 +892,11 @@ namespace TicketingScreenDesigner {
 
 		private void buttonsListView_KeyDown(object sender, KeyEventArgs e) {
 			HandleKeyEvent(e);
+		}
+
+		public int GetNextPendingButtonId() {
+			--pendingButtonId;
+			return pendingButtonId;
 		}
 	}
 }

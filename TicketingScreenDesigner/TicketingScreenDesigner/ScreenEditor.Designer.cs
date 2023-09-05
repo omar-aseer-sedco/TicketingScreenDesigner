@@ -71,7 +71,7 @@
 			// idColumn
 			// 
 			idColumn.Text = "Button ID";
-			idColumn.Width = 80;
+			idColumn.Width = 0;
 			// 
 			// nameColumn
 			// 
@@ -202,6 +202,7 @@
 			Controls.Add(cancelButton);
 			Controls.Add(buttonsListView);
 			Controls.Add(saveButton);
+			MinimumSize = new Size(724, 378);
 			Name = "ScreenEditor";
 			Text = "Screen Editor";
 			KeyDown += ScreenEditor_KeyDown;
