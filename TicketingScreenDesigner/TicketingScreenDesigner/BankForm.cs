@@ -131,7 +131,7 @@ namespace TicketingScreenDesigner {
 				}
 
 				string screenTitle = screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text;
-				bool isActive = screensListView.SelectedItems[0].SubItems[ScreensConstants.IS_ACTIVE].Text == "Yes";
+				bool isActive = GetActiveScreenId() == screenId;
 				var screenEditor = new ScreenEditor(connection, this, bankName, screenId, screenTitle, isActive);
 				screenEditor.ShowDialog();
 			}
@@ -367,6 +367,7 @@ namespace TicketingScreenDesigner {
 						var confirmationResult = MessageBox.Show("Setting this screen as active will deactivate the currently active screen. Do you want to proceed?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
 						if (confirmationResult == DialogResult.No) {
+							UpdateListView();
 							return;
 						}
 

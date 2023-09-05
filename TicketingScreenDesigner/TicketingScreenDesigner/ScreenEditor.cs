@@ -635,6 +635,7 @@ namespace TicketingScreenDesigner {
 				bool success;
 
 				if (isNewScreen) {
+					MessageBox.Show("beep boop");
 					success = AddNewScreen();
 				}
 				else {
@@ -643,7 +644,7 @@ namespace TicketingScreenDesigner {
 					}
 					else
 					{
-						var confirmationResult = MessageBox.Show("This screen no longer exists. It may have been deleted by another user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						MessageBox.Show("This screen no longer exists. It may have been deleted by another user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
 						callingForm.UpdateListView();
 						Close();
 						return;
@@ -684,6 +685,7 @@ namespace TicketingScreenDesigner {
 				pendingAdds.Clear();
 				pendingUpdates.Clear();
 				pendingDeletes.Clear();
+				callingForm.UpdateListView();
 				Close();
 			}
 			catch (Exception ex) {
@@ -785,7 +787,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		public void CheckIfScreenExists () {
-			if (!callingForm.CheckIfScreenExists(screenId)) {
+			if (!isNewScreen && !callingForm.CheckIfScreenExists(screenId)) {
 				MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				pendingAdds.Clear();
 				pendingUpdates.Clear();
