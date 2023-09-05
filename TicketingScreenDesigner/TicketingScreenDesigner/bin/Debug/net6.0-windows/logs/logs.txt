@@ -159,3 +159,17 @@
   "Source": "System.Private.CoreLib",
   "StackTrace": "   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)\r\n   at System.Int32.Parse(String s)\r\n   at TicketingScreenDesigner.ScreenEditor.Delete() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 714"
 }
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Failed to Apply all of the changes due to an unexpected error.",
+  "TimeStamp": "2023-09-05T11:38:32.4372764+03:00",
+  "Severity": "Error",
+  "Source": "TicketingScreenDesigner",
+  "StackTrace": "   at TicketingScreenDesigner.ScreenEditor.saveButton_Click(Object sender, EventArgs e) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 664"
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Failed to Apply all of the changes due to an unexpected error.",
+  "TimeStamp": "2023-09-05T11:38:41.6202163+03:00",
+  "Severity": "Error",
+  "Source": "TicketingScreenDesigner",
+  "StackTrace": "   at TicketingScreenDesigner.ScreenEditor.saveButton_Click(Object sender, EventArgs e) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 664"
+}

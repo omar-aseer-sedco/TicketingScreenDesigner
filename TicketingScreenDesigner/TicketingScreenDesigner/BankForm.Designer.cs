@@ -46,7 +46,7 @@
 			// screensListView
 			// 
 			screensListView.Anchor =  AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			screensListView.Columns.AddRange(new ColumnHeader[] { screenIdColumn, screenTitleColumn, isActiveColumn });
+			screensListView.Columns.AddRange(new ColumnHeader[] { screenIdColumn, isActiveColumn, screenTitleColumn });
 			screensListView.FullRowSelect = true;
 			screensListView.Location = new Point(12, 77);
 			screensListView.Name = "screensListView";

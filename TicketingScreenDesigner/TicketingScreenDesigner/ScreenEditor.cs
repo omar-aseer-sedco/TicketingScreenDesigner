@@ -606,7 +606,8 @@ namespace TicketingScreenDesigner {
 
 					try {
 						connection.Open();
-						success = command.ExecuteNonQuery() == pendingDeletes.Count;
+						command.ExecuteNonQuery();
+						success = true;
 					}
 					catch (SqlException ex) {
 						ExceptionHelper.HandleSqlException(ex, "ButtonID");
