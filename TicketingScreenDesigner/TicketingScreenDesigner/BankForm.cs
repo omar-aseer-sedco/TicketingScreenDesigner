@@ -160,11 +160,12 @@ namespace TicketingScreenDesigner {
 				int i = 0;
 				foreach (ListViewItem row in screensListView.SelectedItems) {
 					query.Append("@P").Append(i).Append(',');
-					command.Parameters.Add("@P" + i, SqlDbType.VarChar).Value = row.SubItems[ScreensConstants.SCREEN_ID].Text;
+					command.Parameters.AddWithValue("@P" + i, row.SubItems[ScreensConstants.SCREEN_ID].Text);
+
 					++i;
 				}
 
-				query.Length--; // remove last ,
+				query.Length--;
 				query.Append(");");
 
 				command.Connection = connection;
@@ -173,7 +174,8 @@ namespace TicketingScreenDesigner {
 
 				try {
 					connection.Open();
-					success = command.ExecuteNonQuery() == selectedCount;
+					command.ExecuteNonQuery();
+					success = true;
 				}
 				catch (SqlException ex) {
 					ExceptionHelper.HandleSqlException(ex, "screen ID");

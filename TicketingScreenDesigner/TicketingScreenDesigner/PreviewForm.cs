@@ -5,13 +5,20 @@ namespace TicketingScreenDesigner {
 		private const int TOP_MARGIN = 20;
 		private const int BOTTOM_MARGIN = 60;
 		private const int SIDE_MARGIN = 60;
-		private const int TEXT_SPACING = 30;
+
+		private const int TITLE_TEXT_SPACING = 30;
+		private const int VERTICAL_CORRECTION = 30;
+		private const int HORIZONTAL_CORRECTION = 16;
+
 		private const int BUTTON_HEIGHT = 50;
 		private const int BUTTON_WIDTH = 120;
 		private const int BUTTON_SPACING_VERTICAL = 30;
 		private const int BUTTON_SPACING_HORIZONTAL = 50;
-		private const int VERTICAL_CORRECTION = 30;
-		private const int HORIZONTAL_CORRECTION = 16;
+
+		private const int LANGUAGE_BUTTON_WIDTH = 40;
+		private const int LANGUAGE_BUTTON_HEIGHT = 24;
+		private const int LANGUAGE_BUTTON_POSITION_X = 5;
+		private const int LANGUAGE_BUTTON_POSITION_Y = 5;
 
 		private readonly List<TicketingButton> ticketingButtons;
 		private readonly string titleText;
@@ -51,8 +58,8 @@ namespace TicketingScreenDesigner {
 					Text = language.ToUpper(),
 					Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point),
 					TextAlign = ContentAlignment.MiddleCenter,
-					Size = new Size(40, 24),
-					Location = new Point(5, 5),
+					Size = new Size(LANGUAGE_BUTTON_WIDTH, LANGUAGE_BUTTON_HEIGHT),
+					Location = new Point(LANGUAGE_BUTTON_POSITION_X, LANGUAGE_BUTTON_POSITION_Y),
 					Anchor = AnchorStyles.Top | AnchorStyles.Left,
 				};
 				languageButton.Click += SwitchLanguage;
@@ -93,7 +100,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private int GetNextSquareRoot(int x) {
+		private static int GetNextSquareRoot(int x) {
 			return (int) Math.Ceiling(Math.Sqrt(x));
 		}
 
@@ -103,7 +110,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void SetFormSize() {
-			int height = TOP_MARGIN + titleLabel.Height + TEXT_SPACING + (BUTTON_HEIGHT * rows) + (BUTTON_SPACING_VERTICAL * (rows - 1)) + BOTTOM_MARGIN + VERTICAL_CORRECTION;
+			int height = TOP_MARGIN + titleLabel.Height + TITLE_TEXT_SPACING + (BUTTON_HEIGHT * rows) + (BUTTON_SPACING_VERTICAL * (rows - 1)) + BOTTOM_MARGIN + VERTICAL_CORRECTION;
 			int width = (SIDE_MARGIN * 2) + Math.Max(titleLabel.Width, (BUTTON_WIDTH * columns) + (BUTTON_SPACING_HORIZONTAL * (columns - 1))) + HORIZONTAL_CORRECTION;
 
 			Size = new Size(width, height);
@@ -113,7 +120,7 @@ namespace TicketingScreenDesigner {
 			int row = index / columns, column = index % columns;
 
 			int x = SIDE_MARGIN + (column * (BUTTON_WIDTH + BUTTON_SPACING_HORIZONTAL));
-			int y = TOP_MARGIN + titleLabel.Height + TEXT_SPACING + (row * (BUTTON_HEIGHT + BUTTON_SPACING_VERTICAL));
+			int y = TOP_MARGIN + titleLabel.Height + TITLE_TEXT_SPACING + (row * (BUTTON_HEIGHT + BUTTON_SPACING_VERTICAL));
 
 			return new Point(x, y);
 		}
