@@ -45,9 +45,10 @@ namespace DataAccessLayer {
 		/// <param name="bank">The bank to be added to the database.</param>
 		public static void AddBank(Bank bank) {
 			try {
-				string query = $"INSERT INTO {BanksConstants.TABLE_NAME} VALUES (@bankName);";
+				string query = $"INSERT INTO {BanksConstants.TABLE_NAME} ({BanksConstants.BANK_NAME}, {BanksConstants.PASSWORD}) VALUES (@bankName, @password);";
 				SqlCommand command = new SqlCommand(query, connection);
 				command.Parameters.AddWithValue("@bankName", bank.BankName);
+				command.Parameters.AddWithValue("@password", bank.Password);
 
 				connection.Open();
 				command.ExecuteNonQuery();
@@ -78,7 +79,7 @@ namespace DataAccessLayer {
 
 				connection.Open();
 
-				SqlDataReader reader = command.ExecuteReader();
+				var reader = command.ExecuteReader();
 
 				while (reader.Read()) {
 					ret.Add(new TicketingScreen(bankName, (int) reader[ScreensConstants.SCREEN_ID], (string) reader[ScreensConstants.SCREEN_TITLE], (bool) reader[ScreensConstants.IS_ACTIVE]));
@@ -97,6 +98,40 @@ namespace DataAccessLayer {
 			}
 
 			return ret;
+		}
+
+		/// <summary>
+		/// Gets the password for the specified bank.
+		/// </summary>
+		/// <param name="bankName">The name of the bank.</param>
+		/// <returns>The password. If the bank does not exist, an empty string is returned.</returns>
+		public static string GetPassword(string bankName) {
+			string password = string.Empty;
+
+			try {
+				string query = $"SELECT {BanksConstants.PASSWORD} FROM {BanksConstants.TABLE_NAME} WHERE {BanksConstants.BANK_NAME} = @bankName;";
+				var command = new SqlCommand(query, connection);
+				command.Parameters.AddWithValue("@bankName", bankName);
+
+				connection.Open();
+
+				var reader = command.ExecuteReader();
+
+				if (reader.Read()) {
+					password = reader.GetString(0);
+				}
+			}
+			catch (SqlException ex) {
+				DALExceptionHelper.HandleSqlException(ex, "Screen ID");
+			}
+			catch (Exception ex) {
+				DALExceptionHelper.HandleGeneralException(ex);
+			}
+			finally {
+				connection.Close();
+			}
+
+			return password;
 		}
 	}
 }

@@ -48,7 +48,7 @@
 			// 
 			loginBankNameTextBox.Anchor =  AnchorStyles.Left | AnchorStyles.Right;
 			loginBankNameTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-			loginBankNameTextBox.Location = new Point(105, 42);
+			loginBankNameTextBox.Location = new Point(105, 50);
 			loginBankNameTextBox.Name = "loginBankNameTextBox";
 			loginBankNameTextBox.Size = new Size(205, 29);
 			loginBankNameTextBox.TabIndex = 0;
@@ -57,7 +57,7 @@
 			// 
 			label1.Anchor = AnchorStyles.Left;
 			label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-			label1.Location = new Point(6, 45);
+			label1.Location = new Point(6, 53);
 			label1.Name = "label1";
 			label1.Size = new Size(93, 21);
 			label1.TabIndex = 1;
@@ -66,11 +66,12 @@
 			// 
 			// logInButton
 			// 
+			logInButton.Anchor = AnchorStyles.Bottom;
 			logInButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			logInButton.Location = new Point(108, 237);
 			logInButton.Name = "logInButton";
 			logInButton.Size = new Size(100, 34);
-			logInButton.TabIndex = 2;
+			logInButton.TabIndex = 3;
 			logInButton.Text = "Log In";
 			logInButton.UseVisualStyleBackColor = true;
 			logInButton.Click += LogInButton_Click;
@@ -97,19 +98,20 @@
 			logInGroupBox.Controls.Add(logInButton);
 			logInGroupBox.Location = new Point(12, 71);
 			logInGroupBox.Name = "logInGroupBox";
-			logInGroupBox.Size = new Size(316, 314);
+			logInGroupBox.Size = new Size(316, 315);
 			logInGroupBox.TabIndex = 4;
 			logInGroupBox.TabStop = false;
 			logInGroupBox.Text = "Log In";
 			// 
 			// loginShowPasswordCheckBox
 			// 
+			loginShowPasswordCheckBox.Anchor = AnchorStyles.Right;
 			loginShowPasswordCheckBox.AutoSize = true;
 			loginShowPasswordCheckBox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-			loginShowPasswordCheckBox.Location = new Point(191, 150);
+			loginShowPasswordCheckBox.Location = new Point(187, 150);
 			loginShowPasswordCheckBox.Name = "loginShowPasswordCheckBox";
 			loginShowPasswordCheckBox.Size = new Size(119, 21);
-			loginShowPasswordCheckBox.TabIndex = 12;
+			loginShowPasswordCheckBox.TabIndex = 2;
 			loginShowPasswordCheckBox.Text = "Show password";
 			loginShowPasswordCheckBox.UseVisualStyleBackColor = true;
 			loginShowPasswordCheckBox.CheckedChanged += loginShowPasswordCheckBox_CheckedChanged;
@@ -118,17 +120,17 @@
 			// 
 			loginPasswordTextBox.Anchor =  AnchorStyles.Left | AnchorStyles.Right;
 			loginPasswordTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-			loginPasswordTextBox.Location = new Point(105, 92);
+			loginPasswordTextBox.Location = new Point(105, 100);
 			loginPasswordTextBox.Name = "loginPasswordTextBox";
 			loginPasswordTextBox.Size = new Size(205, 29);
-			loginPasswordTextBox.TabIndex = 3;
+			loginPasswordTextBox.TabIndex = 1;
 			loginPasswordTextBox.UseSystemPasswordChar = true;
 			// 
 			// loginPasswordLabel
 			// 
 			loginPasswordLabel.Anchor = AnchorStyles.Left;
 			loginPasswordLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-			loginPasswordLabel.Location = new Point(6, 95);
+			loginPasswordLabel.Location = new Point(6, 103);
 			loginPasswordLabel.Name = "loginPasswordLabel";
 			loginPasswordLabel.Size = new Size(93, 21);
 			loginPasswordLabel.TabIndex = 4;
@@ -155,37 +157,42 @@
 			// 
 			// registerButton
 			// 
+			registerButton.Anchor = AnchorStyles.Bottom;
 			registerButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			registerButton.Location = new Point(108, 237);
 			registerButton.Name = "registerButton";
 			registerButton.Size = new Size(100, 34);
-			registerButton.TabIndex = 13;
+			registerButton.TabIndex = 8;
 			registerButton.Text = "Register";
 			registerButton.UseVisualStyleBackColor = true;
+			registerButton.Click += registerButton_Click;
 			// 
 			// registerShowPasswordCheckBox
 			// 
+			registerShowPasswordCheckBox.Anchor = AnchorStyles.Right;
 			registerShowPasswordCheckBox.AutoSize = true;
 			registerShowPasswordCheckBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
 			registerShowPasswordCheckBox.Location = new Point(187, 200);
 			registerShowPasswordCheckBox.Name = "registerShowPasswordCheckBox";
 			registerShowPasswordCheckBox.Size = new Size(123, 23);
-			registerShowPasswordCheckBox.TabIndex = 11;
+			registerShowPasswordCheckBox.TabIndex = 7;
 			registerShowPasswordCheckBox.Text = "Show password";
 			registerShowPasswordCheckBox.UseVisualStyleBackColor = true;
 			registerShowPasswordCheckBox.CheckedChanged += registerShowPasswordCheckBox_CheckedChanged;
 			// 
 			// confirmPasswordTextBox
 			// 
+			confirmPasswordTextBox.Anchor =  AnchorStyles.Left | AnchorStyles.Right;
 			confirmPasswordTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			confirmPasswordTextBox.Location = new Point(105, 150);
 			confirmPasswordTextBox.Name = "confirmPasswordTextBox";
 			confirmPasswordTextBox.Size = new Size(205, 29);
-			confirmPasswordTextBox.TabIndex = 9;
+			confirmPasswordTextBox.TabIndex = 6;
 			confirmPasswordTextBox.UseSystemPasswordChar = true;
 			// 
 			// label4
 			// 
+			label4.Anchor = AnchorStyles.Left;
 			label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			label4.Location = new Point(6, 153);
 			label4.Name = "label4";
@@ -196,23 +203,26 @@
 			// 
 			// registerPasswordTextBox
 			// 
+			registerPasswordTextBox.Anchor =  AnchorStyles.Left | AnchorStyles.Right;
 			registerPasswordTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			registerPasswordTextBox.Location = new Point(105, 100);
 			registerPasswordTextBox.Name = "registerPasswordTextBox";
 			registerPasswordTextBox.Size = new Size(205, 29);
-			registerPasswordTextBox.TabIndex = 7;
+			registerPasswordTextBox.TabIndex = 5;
 			registerPasswordTextBox.UseSystemPasswordChar = true;
 			// 
 			// registerBankNameTextBox
 			// 
+			registerBankNameTextBox.Anchor =  AnchorStyles.Left | AnchorStyles.Right;
 			registerBankNameTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			registerBankNameTextBox.Location = new Point(105, 50);
 			registerBankNameTextBox.Name = "registerBankNameTextBox";
 			registerBankNameTextBox.Size = new Size(205, 29);
-			registerBankNameTextBox.TabIndex = 5;
+			registerBankNameTextBox.TabIndex = 4;
 			// 
 			// label2
 			// 
+			label2.Anchor = AnchorStyles.Left;
 			label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			label2.Location = new Point(6, 103);
 			label2.Name = "label2";
@@ -223,6 +233,7 @@
 			// 
 			// registerBankNameLabel
 			// 
+			registerBankNameLabel.Anchor = AnchorStyles.Left;
 			registerBankNameLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			registerBankNameLabel.Location = new Point(6, 53);
 			registerBankNameLabel.Name = "registerBankNameLabel";
@@ -240,9 +251,10 @@
 			Controls.Add(registerGroupBox);
 			Controls.Add(logInGroupBox);
 			Controls.Add(welcomeLabel);
-			MinimumSize = new Size(400, 270);
+			MinimumSize = new Size(678, 436);
 			Name = "LoginForm";
 			Text = "Log In";
+			Resize += LoginForm_Resize;
 			logInGroupBox.ResumeLayout(false);
 			logInGroupBox.PerformLayout();
 			registerGroupBox.ResumeLayout(false);

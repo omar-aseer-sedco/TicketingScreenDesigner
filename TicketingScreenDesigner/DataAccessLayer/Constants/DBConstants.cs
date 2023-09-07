@@ -9,6 +9,7 @@
     {
         public const string TABLE_NAME = "Banks";
         public const string BANK_NAME = "bank_name";
+        public const string PASSWORD = "password";
     }
 
     public static class ScreensConstants
