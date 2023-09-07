@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using LogUtils;
 
 namespace TicketingScreenDesigner {
 	public static class ExceptionHelper {
@@ -6,6 +7,9 @@ namespace TicketingScreenDesigner {
 			UniqueConstraintViolation = 2627,
 			StatementTerminated = 3621,
 			MissingQueryParamters = 8178,
+			UnableToConnect = 53,
+			UnableToOpenDatabase = 4060,
+			LoginFailed = 18456,
 		}
 
 		public static void HandleGeneralException(Exception exception) {
@@ -14,14 +18,9 @@ namespace TicketingScreenDesigner {
 			ShowErrorMessageBox(message);
 		}
 
-		public static void HandleConfigReadError(Exception exception) {
-			string message = $"Unable to read configuration file. Message: {exception.Message}";
-			LogsHelper.Log(new LogEvent(message, DateTime.Now, EventSeverity.Error, exception.Source, exception.StackTrace));
-			ShowErrorMessageBox(message);
-		}
-
 		public static void HandleSqlException(SqlException exception, string fieldName = "") {
 			bool suppressStatementTermination = false;
+			bool suppressLoginFailure = false;
 
 			foreach (SqlError error in exception.Errors) {
 				switch (error.Number) {
@@ -38,6 +37,20 @@ namespace TicketingScreenDesigner {
 					case (int) SqlErrorCodes.MissingQueryParamters:
 						LogsHelper.Log(new LogEvent(error.Message, DateTime.Now, EventSeverity.Warning, error.Source, exception.StackTrace));
 						ShowErrorMessageBox("Missing query parameters.");
+						break;
+					case (int) SqlErrorCodes.UnableToConnect:
+						LogsHelper.Log(new LogEvent(error.Message, DateTime.Now, EventSeverity.Warning, error.Source, exception.StackTrace));
+						ShowErrorMessageBox("Unable to connect to the server. It may have been configured incorrectly.");
+						break;
+					case (int) SqlErrorCodes.UnableToOpenDatabase:
+						LogsHelper.Log(new LogEvent(error.Message, DateTime.Now, EventSeverity.Warning, error.Source, exception.StackTrace));
+						ShowErrorMessageBox("Unable to open the database. It may have been configured incorrectly.");
+						suppressLoginFailure = true;
+						break;
+					case (int) SqlErrorCodes.LoginFailed:
+						LogsHelper.Log(new LogEvent(error.Message, DateTime.Now, EventSeverity.Warning, error.Source, exception.StackTrace));
+						if (!suppressLoginFailure)
+							ShowErrorMessageBox("Unable to log in to the database server.");
 						break;
 					default:
 						string message = $"Unhandled SQL Error. Code: {error.Number}\nMessage: {error.Message}";

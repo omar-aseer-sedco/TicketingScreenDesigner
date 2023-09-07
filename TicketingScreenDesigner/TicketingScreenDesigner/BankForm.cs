@@ -1,28 +1,37 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-using System.Data;
 using System.Text;
 using System.Data.SqlClient;
+using DataAccessLayer;
+using DataAccessLayer.Constants;
+using DataAccessLayer.DataClasses;
 
-namespace TicketingScreenDesigner {
-	public partial class BankForm : Form {
+namespace TicketingScreenDesigner
+{
+    public partial class BankForm : Form {
 		private const string TITLE_TEXT = "Ticketing Screen Designer";
 		private readonly string bankName;
 		private readonly SqlConnection connection;
 		private readonly ActiveScreenController activeScreenController;
+		private readonly List<TicketingScreen> screens;
 
 		private BankForm() {
 			InitializeComponent();
+			connection = DBUtils.CreateConnection();
 			bankName = "";
 			activeScreenController = new ActiveScreenController(this);
+			screens = new List<TicketingScreen>();
 		}
 
-		public BankForm(SqlConnection connection, string bankName) : this() {
-			this.connection = connection;
+		public BankForm(string bankName) : this() {
 			this.bankName = bankName;
 			Text = TITLE_TEXT + " - " + this.bankName;
 			UpdateTitleLabel();
 			UpdateListView();
+		}
+
+		public BankForm(string bankName , List<TicketingScreen> screens) : this(bankName) {
+			this.screens = screens;
 		}
 
 		private void UpdateTitleLabel() {
@@ -409,8 +418,8 @@ namespace TicketingScreenDesigner {
 			Preview();
 		}
 
-		public List<TicketingButton> GetButtonsByScreenId(int screenId) {
-			var ret = new List<TicketingButton>();
+		public List<TicketingButtonTMP> GetButtonsByScreenId(int screenId) {
+			var ret = new List<TicketingButtonTMP>();
 
 			try {
 				string query = $"SELECT * FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId;";
@@ -437,7 +446,7 @@ namespace TicketingScreenDesigner {
 						messageEn = reader[ButtonsConstants.MESSAGE_EN].ToString();
 						messageAr = reader[ButtonsConstants.MESSAGE_AR].ToString();
 
-						ret.Add(new TicketingButton(buttonBankName, buttonScreenId, buttonId, type, nameEn, nameAr, service, messageEn, messageAr));
+						ret.Add(new TicketingButtonTMP(buttonBankName, buttonScreenId, buttonId, type, nameEn, nameAr, service, messageEn, messageAr));
 					}
 				}
 				catch (SqlException ex) {

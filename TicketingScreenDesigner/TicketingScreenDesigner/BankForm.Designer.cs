@@ -26,8 +26,8 @@
 			components = new System.ComponentModel.Container();
 			screensListView = new ListView();
 			screenIdColumn = new ColumnHeader();
-			screenTitleColumn = new ColumnHeader();
 			isActiveColumn = new ColumnHeader();
+			screenTitleColumn = new ColumnHeader();
 			addScreenButton = new Button();
 			editScreenButton = new Button();
 			deleteScreenButton = new Button();
@@ -62,15 +62,15 @@
 			screenIdColumn.Text = "Screen ID";
 			screenIdColumn.Width = 0;
 			// 
-			// screenTitleColumn
-			// 
-			screenTitleColumn.Text = "Screen Title";
-			screenTitleColumn.Width = 430;
-			// 
 			// isActiveColumn
 			// 
 			isActiveColumn.Text = "Active?";
 			isActiveColumn.Width = 80;
+			// 
+			// screenTitleColumn
+			// 
+			screenTitleColumn.Text = "Screen Title";
+			screenTitleColumn.Width = 430;
 			// 
 			// addScreenButton
 			// 
@@ -204,6 +204,7 @@
 			MainMenuStrip = menuStrip1;
 			MinimumSize = new Size(670, 475);
 			Name = "BankForm";
+			StartPosition = FormStartPosition.CenterParent;
 			Text = "- Ticketing Screen Designer";
 			KeyDown += BankForm_KeyDown;
 			menuStrip1.ResumeLayout(false);

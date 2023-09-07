@@ -1,0 +1,12 @@
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\bin\Debug\net6.0\LogUtils.deps.json
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\bin\Debug\net6.0\LogUtils.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\bin\Debug\net6.0\LogUtils.pdb
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\obj\Debug\net6.0\LogUtils.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\obj\Debug\net6.0\LogUtils.AssemblyInfoInputs.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\obj\Debug\net6.0\LogUtils.AssemblyInfo.cs
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\obj\Debug\net6.0\LogUtils.csproj.CoreCompileInputs.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\obj\Debug\net6.0\LogUtils.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\obj\Debug\net6.0\refint\LogUtils.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\obj\Debug\net6.0\LogUtils.pdb
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\obj\Debug\net6.0\ref\LogUtils.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\LogHelper\obj\Debug\net6.0\LogUtils.csproj.AssemblyReference.cache

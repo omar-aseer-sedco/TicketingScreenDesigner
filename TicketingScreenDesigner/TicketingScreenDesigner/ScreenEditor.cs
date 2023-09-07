@@ -2,15 +2,18 @@
 
 using System.Data.SqlClient;
 using System.Text;
+using DataAccessLayer.Constants;
+using DataAccessLayer.DataClasses;
 
-namespace TicketingScreenDesigner {
-	public partial class ScreenEditor : Form {
+namespace TicketingScreenDesigner
+{
+    public partial class ScreenEditor : Form {
 		private const string TITLE_TEXT = "Screen Editor";
 		private readonly string bankName;
 		private readonly string screenTitle;
 		private readonly SqlConnection connection;
-		private readonly List<TicketingButton> pendingAdds;
-		private readonly Dictionary<int, TicketingButton> pendingUpdates;
+		private readonly List<TicketingButtonTMP> pendingAdds;
+		private readonly Dictionary<int, TicketingButtonTMP> pendingUpdates;
 		private readonly List<int> pendingDeletes;
 		private readonly BankForm callingForm;
 		private readonly bool isNewScreen;
@@ -22,8 +25,8 @@ namespace TicketingScreenDesigner {
 			bankName = string.Empty;
 			screenId = -1;
 			screenTitle = string.Empty;
-			pendingAdds = new List<TicketingButton>();
-			pendingUpdates = new Dictionary<int, TicketingButton>();
+			pendingAdds = new List<TicketingButtonTMP>();
+			pendingUpdates = new Dictionary<int, TicketingButtonTMP>();
 			pendingDeletes = new List<int>();
 			pendingButtonId = -1;
 		}
@@ -135,7 +138,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void AddToListView(TicketingButton button) {
+		private void AddToListView(TicketingButtonTMP button) {
 			AddToListView(button.ButtonId, button.NameEn, button.Type, button.Service, button.MessageEn);
 		}
 
@@ -247,7 +250,7 @@ namespace TicketingScreenDesigner {
 			return success;
 		}
 
-		public void AddButton(TicketingButton button) {
+		public void AddButton(TicketingButtonTMP button) {
 			try {
 				pendingAdds.Add(button);
 			}
@@ -256,7 +259,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public void UpdateButton(int buttonId, TicketingButton updatedButton) {
+		public void UpdateButton(int buttonId, TicketingButtonTMP updatedButton) {
 			try {
 				bool isPendingButton = false;
 
@@ -281,7 +284,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private string? GetButtonFieldByName(TicketingButton button, string fieldName) {
+		private string? GetButtonFieldByName(TicketingButtonTMP button, string fieldName) {
 			switch (fieldName) {
 				case "@type":
 					return button.Type;
@@ -832,7 +835,7 @@ namespace TicketingScreenDesigner {
 			Edit();
 		}
 
-		public TicketingButton? GetPendingButtonById(int buttonId) {
+		public TicketingButtonTMP? GetPendingButtonById(int buttonId) {
 			try {
 				foreach (var button in pendingAdds) {
 					if (buttonId == button.ButtonId) {

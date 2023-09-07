@@ -224,6 +224,7 @@
 			Controls.Add(typeComboBox);
 			MinimumSize = new Size(628, 233);
 			Name = "ButtonEditor";
+			StartPosition = FormStartPosition.CenterParent;
 			Text = "Button Editor";
 			showMessagePanel.ResumeLayout(false);
 			showMessagePanel.PerformLayout();

@@ -8,6 +8,9 @@
     ".NETCoreApp,Version=v6.0": {
       "TicketingScreenDesigner/1.0.0": {
         "dependencies": {
+          "BusinessLogicLayer": "1.0.0",
+          "DataAccessLayer": "1.0.0",
+          "LogUtils": "1.0.0",
           "System.Data.SqlClient": "4.8.5"
         },
         "runtime": {
@@ -88,7 +91,33 @@
           "System.Security.Principal.Windows": "4.7.0"
         }
       },
-      "System.Security.Principal.Windows/4.7.0": {}
+      "System.Security.Principal.Windows/4.7.0": {},
+      "BusinessLogicLayer/1.0.0": {
+        "dependencies": {
+          "DataAccessLayer": "1.0.0",
+          "LogUtils": "1.0.0"
+        },
+        "runtime": {
+          "BusinessLogicLayer.dll": {}
+        }
+      },
+      "DataAccessLayer/1.0.0": {
+        "dependencies": {
+          "LogUtils": "1.0.0",
+          "System.Data.SqlClient": "4.8.5"
+        },
+        "runtime": {
+          "DataAccessLayer.dll": {}
+        }
+      },
+      "LogUtils/1.0.0": {
+        "dependencies": {
+          "System.Data.SqlClient": "4.8.5"
+        },
+        "runtime": {
+          "LogUtils.dll": {}
+        }
+      }
     }
   },
   "libraries": {
@@ -159,6 +188,21 @@
       "sha512": "sha512-ojD0PX0XhneCsUbAZVKdb7h/70vyYMDYs85lwEI+LngEONe/17A0cFaRFqZU+sOEidcVswYWikYOQ9PPfjlbtQ==",
       "path": "system.security.principal.windows/4.7.0",
       "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
+    },
+    "BusinessLogicLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DataAccessLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LogUtils/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

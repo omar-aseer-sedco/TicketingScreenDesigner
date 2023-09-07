@@ -1,5 +1,7 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
+using DataAccessLayer.DataClasses;
+
 namespace TicketingScreenDesigner {
 	public class PreviewForm : Form {
 		private const int TOP_MARGIN = 20;
@@ -20,7 +22,7 @@ namespace TicketingScreenDesigner {
 		private const int LANGUAGE_BUTTON_POSITION_X = 5;
 		private const int LANGUAGE_BUTTON_POSITION_Y = 5;
 
-		private readonly List<TicketingButton> ticketingButtons;
+		private readonly List<TicketingButtonTMP> ticketingButtons;
 		private readonly string titleText;
 		private readonly int buttonCount;
 
@@ -31,7 +33,7 @@ namespace TicketingScreenDesigner {
 		private int columns;
 		private string language;
 
-		public PreviewForm(string screenTitle, List<TicketingButton> ticketingButtons) {
+		public PreviewForm(string screenTitle, List<TicketingButtonTMP> ticketingButtons) {
 			titleText = screenTitle;
 			this.ticketingButtons = ticketingButtons;
 			buttonCount = ticketingButtons.Count;

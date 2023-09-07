@@ -1,0 +1,17 @@
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\bin\Debug\net6.0\BusinessLogicLayer.deps.json
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\bin\Debug\net6.0\BusinessLogicLayer.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\bin\Debug\net6.0\BusinessLogicLayer.pdb
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\bin\Debug\net6.0\DataAccessLayer.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\bin\Debug\net6.0\LogUtils.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\bin\Debug\net6.0\LogUtils.pdb
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.csproj.AssemblyReference.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.AssemblyInfoInputs.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.AssemblyInfo.cs
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.csproj.CopyComplete
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\obj\Debug\net6.0\refint\BusinessLogicLayer.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.pdb
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\BusinessLogicLayer\obj\Debug\net6.0\ref\BusinessLogicLayer.dll

@@ -1,19 +1,21 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 using System.Data.SqlClient;
+using DataAccessLayer.DataClasses;
+using DataAccessLayer.Constants;
 
 namespace TicketingScreenDesigner {
-	public partial class ButtonEditor : Form {
+    public partial class ButtonEditor : Form {
 		private const string TITLE_TEXT = "Button Editor";
 		private const int DEFAULT_PANEL_POSITION_Y = 95;
 		private const int MINIMUM_HEIGHT_ISSUE_TICKET = 206;
 		private const int MINIMUM_HEIGHT_SHOW_MESSAGE = 233;
 		private const int MINIMUM_WIDTH = 628;
-		private readonly TicketingButton button;
+		private readonly TicketingButtonTMP button;
 		private readonly SqlConnection connection;
 		private readonly ScreenEditor callingForm;
 		private readonly bool isNewButton;
-		
+
 		private enum TypeIndex {
 			ISSUE_TICKET = 0,
 			SHOW_MESSAGE = 1,
@@ -21,7 +23,7 @@ namespace TicketingScreenDesigner {
 
 		private ButtonEditor() {
 			InitializeComponent();
-			button = new TicketingButton();
+			button = new TicketingButtonTMP();
 		}
 
 		private ButtonEditor(SqlConnection connection, ScreenEditor callingForm) : this() {
@@ -41,7 +43,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		public ButtonEditor(SqlConnection connection, ScreenEditor callingForm, string bankName, int screenId, int buttonId) : this(connection, callingForm) {
-			TicketingButton? button = GetButtonById(bankName, screenId, buttonId);
+			TicketingButtonTMP? button = GetButtonById(bankName, screenId, buttonId);
 
 			if (button is null) {
 				MessageBox.Show("This button does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -54,13 +56,13 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public ButtonEditor(SqlConnection connection, ScreenEditor callingForm, TicketingButton button) : this(connection, callingForm) {
+		public ButtonEditor(SqlConnection connection, ScreenEditor callingForm, TicketingButtonTMP button) : this(connection, callingForm) {
 			this.button = button;
 			FillTextBoxes(button);
 		}
 
-		private TicketingButton? GetButtonById(string bankName, int screenId, int buttonId) {
-			TicketingButton? ret = null;
+		private TicketingButtonTMP? GetButtonById(string bankName, int screenId, int buttonId) {
+			TicketingButtonTMP? ret = null;
 
 			try {
 				ret = callingForm.GetPendingButtonById(buttonId);
@@ -85,7 +87,7 @@ namespace TicketingScreenDesigner {
 						string? messageEn = reader[ButtonsConstants.MESSAGE_EN].ToString();
 						string? messageAr = reader[ButtonsConstants.MESSAGE_AR].ToString();
 
-						ret = new TicketingButton(bankName, screenId, buttonId, type, nameEn, nameAr, service, messageEn, messageAr);
+						ret = new TicketingButtonTMP(bankName, screenId, buttonId, type, nameEn, nameAr, service, messageEn, messageAr);
 					}
 				}
 				catch (SqlException ex) {
@@ -102,7 +104,7 @@ namespace TicketingScreenDesigner {
 			return ret;
 		}
 
-		private void FillTextBoxes(TicketingButton button) {
+		private void FillTextBoxes(TicketingButtonTMP button) {
 			try {
 				nameEnTextBox.Text = button.NameEn;
 				nameArTextBox.Text = button.NameAr;
@@ -192,7 +194,7 @@ namespace TicketingScreenDesigner {
 				string? service = serviceTextBox.Text == string.Empty ? null : serviceTextBox.Text;
 				string? messageEn = messageEnTextBox.Text == string.Empty ? null : messageEnTextBox.Text;
 				string? messageAr = messageArTextBox.Text == string.Empty ? null : messageArTextBox.Text;
-				var newButton = new TicketingButton(bankName, screenId, button.ButtonId, type, nameEn, nameAr, service, messageEn, messageAr);
+				var newButton = new TicketingButtonTMP(bankName, screenId, button.ButtonId, type, nameEn, nameAr, service, messageEn, messageAr);
 
 				if (isNewButton) {
 					callingForm.AddButton(newButton);

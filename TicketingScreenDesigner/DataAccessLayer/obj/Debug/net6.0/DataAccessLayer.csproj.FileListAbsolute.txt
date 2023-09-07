@@ -1,0 +1,15 @@
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\LogUtils.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\LogUtils.pdb
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CopyComplete
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
