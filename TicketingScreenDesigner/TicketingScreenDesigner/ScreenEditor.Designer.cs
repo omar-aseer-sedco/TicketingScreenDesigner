@@ -26,7 +26,6 @@
 			components = new System.ComponentModel.Container();
 			saveButton = new Button();
 			buttonsListView = new ListView();
-			idColumn = new ColumnHeader();
 			nameColumn = new ColumnHeader();
 			typeColumn = new ColumnHeader();
 			serviceColumn = new ColumnHeader();
@@ -57,7 +56,7 @@
 			// buttonsListView
 			// 
 			buttonsListView.Anchor =  AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			buttonsListView.Columns.AddRange(new ColumnHeader[] { idColumn, nameColumn, typeColumn, serviceColumn, messageColumn });
+			buttonsListView.Columns.AddRange(new ColumnHeader[] { nameColumn, typeColumn, serviceColumn, messageColumn });
 			buttonsListView.FullRowSelect = true;
 			buttonsListView.Location = new Point(12, 39);
 			buttonsListView.Name = "buttonsListView";
@@ -67,11 +66,6 @@
 			buttonsListView.View = View.Details;
 			buttonsListView.SelectedIndexChanged += buttonsListView_SelectedIndexChanged;
 			buttonsListView.KeyDown += buttonsListView_KeyDown;
-			// 
-			// idColumn
-			// 
-			idColumn.Text = "Button ID";
-			idColumn.Width = 0;
 			// 
 			// nameColumn
 			// 
@@ -190,7 +184,6 @@
 			AcceptButton = saveButton;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			CancelButton = cancelButton;
 			ClientSize = new Size(708, 339);
 			Controls.Add(refreshButton);
 			Controls.Add(screenTitleLabel);
@@ -222,7 +215,6 @@
 		private CheckBox activeCheckBox;
 		private Label screenTitleLabel;
 		private TextBox screenTitleTextBox;
-		private ColumnHeader idColumn;
 		private ColumnHeader nameColumn;
 		private ColumnHeader typeColumn;
 		private ColumnHeader serviceColumn;

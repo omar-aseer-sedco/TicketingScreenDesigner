@@ -62,6 +62,9 @@ namespace DataAccessLayer {
 		/// <param name="buttons">The list of buttons to be added to the database.</param>
 		public static void AddButtons(List<TicketingButton> buttons) {
 			try {
+				if (buttons.Count == 0)
+					return;
+
 				var query = new StringBuilder($"INSERT INTO {ButtonsConstants.TABLE_NAME} ({ButtonsConstants.BANK_NAME}, {ButtonsConstants.SCREEN_ID}, {ButtonsConstants.NAME_EN}, " +
 					$"{ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, {ButtonsConstants.MESSAGE_AR}) VALUES ");
 				var command = new SqlCommand() { Connection = connection };
@@ -81,9 +84,9 @@ namespace DataAccessLayer {
 
 					command.Parameters.AddWithValue("@bankName" + i, button.BankName);
 					command.Parameters.AddWithValue("@screenId" + i, button.ScreenId);
-					command.Parameters.AddWithValue("@type" + i, button.Type);
 					command.Parameters.AddWithValue("@nameEn" + i, button.NameEn);
 					command.Parameters.AddWithValue("@nameAr" + i, button.NameAr);
+					command.Parameters.AddWithValue("@type" + i, button.Type);
 					if (button is ShowMessageButton showMessageButton) {
 						command.Parameters.AddWithValue("@service" + i, DBNull.Value);
 						command.Parameters.AddWithValue("@messageEn" + i, showMessageButton.MessageEn);
@@ -101,6 +104,70 @@ namespace DataAccessLayer {
 				query.Length--;
 				command.CommandText = query.ToString();
 
+				connection.Open();
+				command.ExecuteNonQuery();
+			}
+			catch (SqlException ex) {
+				DALExceptionHelper.HandleSqlException(ex, "Button ID");
+			}
+			catch (Exception ex) {
+				DALExceptionHelper.HandleGeneralException(ex);
+			}
+			finally {
+				connection.Close();
+			}
+		}
+
+		/// <summary>
+		/// Adds multiple buttons to the screen with the given ID.
+		/// </summary>
+		/// <param name="screenId">The ID of the screen.</param>
+		/// <param name="buttons">A list of buttons to be added to the database.</param>
+		public static void AddButtons(int screenId, List<TicketingButton> buttons) {
+			try {
+				if (buttons.Count == 0)
+					return;
+
+				var query = new StringBuilder($"INSERT INTO {ButtonsConstants.TABLE_NAME} ({ButtonsConstants.BANK_NAME}, {ButtonsConstants.SCREEN_ID}, {ButtonsConstants.NAME_EN}, " +
+					$"{ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, {ButtonsConstants.MESSAGE_AR}) VALUES ");
+				var command = new SqlCommand() { Connection = connection };
+
+				int i = 0;
+				foreach (var button in buttons) {
+					query.Append('(');
+					query.Append("@bankName").Append(i).Append(',');
+					query.Append("@screenId").Append(i).Append(',');
+					query.Append("@nameEn").Append(i).Append(',');
+					query.Append("@nameAr").Append(i).Append(',');
+					query.Append("@type").Append(i).Append(',');
+					query.Append("@service").Append(i).Append(',');
+					query.Append("@messageEn").Append(i).Append(',');
+					query.Append("@messageAr").Append(i);
+					query.Append("),");
+
+					command.Parameters.AddWithValue("@bankName" + i, button.BankName);
+					command.Parameters.AddWithValue("@screenId" + i, screenId);
+					command.Parameters.AddWithValue("@nameEn" + i, button.NameEn);
+					command.Parameters.AddWithValue("@nameAr" + i, button.NameAr);
+					command.Parameters.AddWithValue("@type" + i, button.Type);
+					if (button is ShowMessageButton showMessageButton) {
+						command.Parameters.AddWithValue("@service" + i, DBNull.Value);
+						command.Parameters.AddWithValue("@messageEn" + i, showMessageButton.MessageEn);
+						command.Parameters.AddWithValue("@messageAr" + i, showMessageButton.MessageAr);
+					}
+					else if (button is IssueTicketButton issueTicketButton) {
+						command.Parameters.AddWithValue("@service" + i, issueTicketButton.Service);
+						command.Parameters.AddWithValue("@messageEn" + i, DBNull.Value);
+						command.Parameters.AddWithValue("@messageAr" + i, DBNull.Value);
+					}
+
+					++i;
+				}
+
+				query.Length--;
+				command.CommandText = query.ToString();
+
+				connection.Open();
 				command.ExecuteNonQuery();
 			}
 			catch (SqlException ex) {
@@ -151,6 +218,9 @@ namespace DataAccessLayer {
 		/// <param name="buttonIds">A list containing the IDs of the buttons to be deleted.</param>
 		public static void DeleteButtons(string bankName, int screenId, List<int> buttonIds) {
 			try {
+				if (buttonIds.Count == 0)
+					return;
+
 				var query = new StringBuilder($"DELETE FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} IN (");
 				var command = new SqlCommand() { Connection = connection };
 				command.Parameters.AddWithValue("@bankName", bankName);
@@ -167,6 +237,7 @@ namespace DataAccessLayer {
 				query.Append(");");
 				command.CommandText = query.ToString();
 
+				connection.Open();
 				command.ExecuteNonQuery();
 			}
 			catch (SqlException ex) {
@@ -232,6 +303,9 @@ namespace DataAccessLayer {
 		/// <param name="buttons">A dictionary where the keys are button IDs and the corresponding values are the updated buttons.</param>
 		public static void UpdateButtons(string bankName, int screenId, Dictionary<int, TicketingButton> buttons) {
 			try {
+				if (buttons.Count == 0)
+					return;
+
 				var query = new StringBuilder($"UPDATE {ButtonsConstants.TABLE_NAME} SET ");
 				var command = new SqlCommand() { Connection = connection };
 

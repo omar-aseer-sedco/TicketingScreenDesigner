@@ -5,7 +5,7 @@ using DataAccessLayer.Utils;
 
 namespace DataAccessLayer {
 	/// <summary>
-	/// Class that contains methods for retrieving and manipulating bank information.
+	/// Contains methods for retrieving and manipulating bank information.
 	/// </summary>
 	public static class BankOperations {
 		private static readonly SqlConnection connection = DBUtils.CreateConnection();
@@ -68,7 +68,7 @@ namespace DataAccessLayer {
 		/// Gets all the screens for the bank with the specified name.
 		/// </summary>
 		/// <param name="bankName">The name of the bank. Case insensitive.</param>
-		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank</returns>
+		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exists, an empty list is returned.</returns>
 		public static List<TicketingScreen> GetScreens(string bankName) {
 			var ret = new List<TicketingScreen>();
 

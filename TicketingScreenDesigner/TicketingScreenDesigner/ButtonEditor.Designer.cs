@@ -210,7 +210,6 @@
 			AcceptButton = saveButton;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			CancelButton = cancelButton;
 			ClientSize = new Size(612, 218);
 			Controls.Add(issueTicketPanel);
 			Controls.Add(showMessagePanel);

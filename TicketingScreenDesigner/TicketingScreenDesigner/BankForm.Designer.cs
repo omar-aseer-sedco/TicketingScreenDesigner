@@ -25,7 +25,6 @@
 		private void InitializeComponent() {
 			components = new System.ComponentModel.Container();
 			screensListView = new ListView();
-			screenIdColumn = new ColumnHeader();
 			isActiveColumn = new ColumnHeader();
 			screenTitleColumn = new ColumnHeader();
 			addScreenButton = new Button();
@@ -46,7 +45,7 @@
 			// screensListView
 			// 
 			screensListView.Anchor =  AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			screensListView.Columns.AddRange(new ColumnHeader[] { screenIdColumn, isActiveColumn, screenTitleColumn });
+			screensListView.Columns.AddRange(new ColumnHeader[] { screenTitleColumn, isActiveColumn });
 			screensListView.FullRowSelect = true;
 			screensListView.Location = new Point(12, 77);
 			screensListView.Name = "screensListView";
@@ -56,11 +55,6 @@
 			screensListView.View = View.Details;
 			screensListView.SelectedIndexChanged += screensListView_SelectedIndexChanged;
 			screensListView.KeyDown += screensListView_KeyDown;
-			// 
-			// screenIdColumn
-			// 
-			screenIdColumn.Text = "Screen ID";
-			screenIdColumn.Width = 0;
 			// 
 			// isActiveColumn
 			// 
@@ -220,7 +214,6 @@
 		private Button editScreenButton;
 		private Button deleteScreenButton;
 		private Label titleLabel;
-		private ColumnHeader screenIdColumn;
 		private ColumnHeader isActiveColumn;
 		private ColumnHeader screenTitleColumn;
 		private Button setActiveButton;

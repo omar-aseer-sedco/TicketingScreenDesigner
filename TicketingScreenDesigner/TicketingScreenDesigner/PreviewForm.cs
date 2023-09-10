@@ -1,5 +1,6 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
+using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
 
 namespace TicketingScreenDesigner {
@@ -22,7 +23,7 @@ namespace TicketingScreenDesigner {
 		private const int LANGUAGE_BUTTON_POSITION_X = 5;
 		private const int LANGUAGE_BUTTON_POSITION_Y = 5;
 
-		private readonly List<TicketingButtonTMP> ticketingButtons;
+		private readonly List<TicketingButton> ticketingButtons;
 		private readonly string titleText;
 		private readonly int buttonCount;
 
@@ -33,9 +34,10 @@ namespace TicketingScreenDesigner {
 		private int columns;
 		private string language;
 
-		public PreviewForm(string screenTitle, List<TicketingButtonTMP> ticketingButtons) {
+		public PreviewForm(string screenTitle, List<TicketingButton> ticketingButtons) {
 			titleText = screenTitle;
 			this.ticketingButtons = ticketingButtons;
+			StartPosition = FormStartPosition.CenterParent;
 			buttonCount = ticketingButtons.Count;
 			language = "en";
 			InitializeComponent();
@@ -132,19 +134,23 @@ namespace TicketingScreenDesigner {
 				return;
 
 			Button button = (Button) sender;
-			string service = "";
-			string messageEn = "";
-			string messageAr = "";
+			string message = string.Empty;
 
 			foreach (var ticketingButton in ticketingButtons) {
 				if (int.Parse(button.Name) == ticketingButton.ButtonId) {
-					service = ticketingButton.Service ?? "";
-					messageEn = ticketingButton.MessageEn ?? "";
-					messageAr = ticketingButton.MessageAr ?? "";
+					if (ticketingButton is IssueTicketButton issueTicketButton) {
+						message = issueTicketButton.Service;
+					}
+					else if (ticketingButton is ShowMessageButton showMessageButton) {
+						string messageEn = showMessageButton.MessageEn;
+						string messageAr = showMessageButton.MessageAr;
+
+						message = $"{messageEn}.\n{messageAr}.";
+					}
+
+					break;
 				}
 			}
-
-			string message = service == "" ? $"{messageEn}.\n{messageAr}." : service;
 
 			MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}

@@ -19,9 +19,9 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				if (BankController.VerifyPassword(bankName, password)) {
+				if (LoginController.VerifyPassword(bankName, password)) {
 					loginPasswordTextBox.Text = string.Empty;
-					var screens = BankController.GetScreens(bankName);
+					var screens = LoginController.GetScreens(bankName);
 					var bankForm = new BankForm(bankName, screens);
 					bankForm.ShowDialog();
 				}
@@ -41,7 +41,7 @@ namespace TicketingScreenDesigner {
 				string password = registerPasswordTextBox.Text.Trim();
 				string confirm = confirmPasswordTextBox.Text.Trim();
 
-				if (BankController.CheckIfBankExists(bankName)) {
+				if (LoginController.CheckIfBankExists(bankName)) {
 					MessageBox.Show("A bank with this name already exists. You can log in.", "Bank already exists", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
@@ -50,7 +50,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				BankController.AddBank(new Bank(bankName, password));
+				LoginController.AddBank(new Bank(bankName, password));
 				MessageBox.Show("Registration successful. You can now log in.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 				registerBankNameTextBox.Text = string.Empty;

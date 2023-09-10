@@ -3,6 +3,7 @@ using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
 using System.Data.SqlClient;
 using System.Text;
+using LogUtils;
 
 namespace DataAccessLayer {
 	/// <summary>
@@ -87,12 +88,14 @@ namespace DataAccessLayer {
 			int screenId = -1;
 
 			try {
-				int? activeScreenId = GetActiveScreenId(screen.BankName);
-				if (activeScreenId is not null) {
-					DeactivateScreen(screen.BankName, (int) activeScreenId);
+				if (screen.IsActive) {
+					int? activeScreenId = GetActiveScreenId(screen.BankName);
+					if (activeScreenId is not null) {
+						DeactivateScreen(screen.BankName, (int) activeScreenId);
+					}
 				}
 
-				string query = $"INSERT INTO {ScreensConstants.TABLE_NAME} ({ScreensConstants.BANK_NAME}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE}) VALUES (@bankName, @isActive, @screenTitle); SELECT CAST(scope_identity() AS int);";
+				string query = $"INSERT INTO {ScreensConstants.TABLE_NAME} ({ScreensConstants.BANK_NAME}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE}) VALUES (@bankName, @isActive, @screenTitle); SELECT CAST(IDENT_CURRENT('{ScreensConstants.TABLE_NAME}') AS int);";
 				var command = new SqlCommand(query, connection);
 				command.Parameters.AddWithValue("@bankName", screen.BankName);
 				command.Parameters.AddWithValue("@isActive", screen.IsActive);
@@ -321,7 +324,7 @@ namespace DataAccessLayer {
 			var buttons = new List<TicketingButton>();
 
 			string query = $"SELECT {ButtonsConstants.BUTTON_ID}, {ButtonsConstants.NAME_EN}, {ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, " +
-				$"{ButtonsConstants.MESSAGE_AR}, FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId";
+				$"{ButtonsConstants.MESSAGE_AR} FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId";
 			var command = new SqlCommand(query, connection);
 			command.Parameters.AddWithValue("@bankName", bankName);
 			command.Parameters.AddWithValue("@screenId", screenId);
