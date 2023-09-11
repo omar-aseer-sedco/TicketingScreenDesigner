@@ -5,8 +5,19 @@ using ExceptionUtils;
 
 namespace TicketingScreenDesigner {
 	public partial class LoginForm : Form {
+		private readonly LoginController loginController;
+
 		public LoginForm() {
 			InitializeComponent();
+			Show();
+
+			loginController = new LoginController(out bool success);
+
+			if (!success) {
+				LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
+				MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Environment.Exit(0);
+			}
 		}
 
 		private void LogInButton_Click(object sender, EventArgs e) {
@@ -19,7 +30,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				bool? passwordCorrect = LoginController.VerifyPassword(bankName, password);
+				bool? passwordCorrect = loginController.VerifyPassword(bankName, password);
 
 				if (passwordCorrect is null) {
 					LogsHelper.Log("Log In error.", DateTime.Now, EventSeverity.Error);
@@ -29,7 +40,7 @@ namespace TicketingScreenDesigner {
 
 				if ((bool) passwordCorrect) {
 					loginPasswordTextBox.Text = string.Empty;
-					var screens = LoginController.GetScreens(bankName);
+					var screens = loginController.GetScreens(bankName);
 					if (screens is null) {
 						LogsHelper.Log("Error retrieving bank information.", DateTime.Now, EventSeverity.Error);
 						MessageBox.Show("Error retrieving bank information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -37,7 +48,8 @@ namespace TicketingScreenDesigner {
 					}
 
 					var bankForm = new BankForm(bankName, screens);
-					bankForm.ShowDialog();
+					if (!bankForm.IsDisposed)
+						bankForm.ShowDialog();
 				}
 				else {
 					MessageBox.Show("Your bank name or your password is incorrect. Please try again.", "Invalid credentials", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -56,7 +68,7 @@ namespace TicketingScreenDesigner {
 				string password = registerPasswordTextBox.Text.Trim();
 				string confirm = confirmPasswordTextBox.Text.Trim();
 
-				bool? bankExists = LoginController.CheckIfBankExists(bankName);
+				bool? bankExists = loginController.CheckIfBankExists(bankName);
 
 				if (bankExists is null) {
 					LogsHelper.Log("Registration error.", DateTime.Now, EventSeverity.Error);
@@ -73,7 +85,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				LoginController.AddBank(new Bank(bankName, password));
+				loginController.AddBank(new Bank(bankName, password));
 				MessageBox.Show("Registration successful. You can now log in.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 				registerBankNameTextBox.Text = string.Empty;

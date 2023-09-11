@@ -8,19 +8,74 @@ namespace DataAccessLayer {
 	/// <summary>
 	/// Contains methods for retrieving and manipulating button information.
 	/// </summary>
-	public static class ButtonOperations {
-		private static readonly SqlConnection connection = DBUtils.CreateConnection();
+	public class ButtonOperations {
+		public static readonly ButtonOperations Instance = new();
+		private SqlConnection? connection;
+
+		private ButtonOperations() {
+			try {
+				connection = null;
+				connection = DBUtils.CreateConnection();
+			}
+			catch (Exception ex) {
+				Console.Error.WriteLine($"Failed to establish connection. Message: {ex.Message}");
+			}
+		}
+
+		/// <summary>
+		/// Attempts to establish the connection again.
+		/// </summary>
+		/// <returns><c>true</c> if the connection was established successfully, and <c>false</c> otherwise.</returns>
+		public bool ReinitializeConnection() {
+			try {
+				connection = DBUtils.CreateConnection();
+				return true;
+			}
+			catch {
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Verifies that the database connection is established correctly.
+		/// </summary>
+		/// <returns><c>true</c> if the connection has been established properly, and <c>false</c> otherwise.</returns>
+		public bool VerifyConnection() {
+			if (connection is null)
+				return false;
+
+			try {
+				connection.Open();
+				var command = new SqlCommand($"SELECT 1 FROM {ButtonsConstants.TABLE_NAME};", connection);
+
+				var result = command.ExecuteScalar();
+				if (result is null)
+					return false;
+
+				return (int) result == 1;
+			}
+			catch (Exception ex) {
+				Console.Error.WriteLine($"Failed to establish connection. Message: {ex.Message}");
+				return false;
+			}
+			finally {
+				connection?.Close();
+			}
+		}
 
 		/// <summary>
 		/// Adds a button to the database.
 		/// </summary>
 		/// <param name="button">The button to be added to the database.</param>
 		/// <returns>The ID of the screen that was added. If the operation fails, <c>null</c> is returned.</returns>
-		public static int? AddButton(TicketingButton button) {
+		public int? AddButton(TicketingButton button) {
 			try {
+				if (connection is null)
+					return null;
+
 				string query = $"INSERT INTO {ButtonsConstants.TABLE_NAME} ({ButtonsConstants.BANK_NAME}, {ButtonsConstants.SCREEN_ID}, {ButtonsConstants.NAME_EN}, {ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, " +
 					$"{ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, {ButtonsConstants.MESSAGE_AR}) VALUES (@bankName, @screenId, @nameEn, @nameAr, @type, @service, @messageEn, @messageAr); SELECT CAST(scope_identity() AS int);";
-				var command = new SqlCommand(query, connection);
+				var command = new SqlCommand(query, Instance.connection);
 				command.Parameters.AddWithValue("@bankName", button.BankName);
 				command.Parameters.AddWithValue("@screenId", button.ScreenId);
 				command.Parameters.AddWithValue("@nameEn", button.NameEn);
@@ -48,7 +103,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return null;
@@ -59,8 +114,11 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="buttons">The list of buttons to be added to the database.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public static bool AddButtons(List<TicketingButton> buttons) {
+		public bool AddButtons(List<TicketingButton> buttons) {
 			try {
+				if (connection is null)
+					return false;
+
 				if (buttons.Count == 0)
 					return true;
 
@@ -113,7 +171,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return false;
@@ -125,8 +183,11 @@ namespace DataAccessLayer {
 		/// <param name="screenId">The ID of the screen.</param>
 		/// <param name="buttons">A list of buttons to be added to the database.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public static bool AddButtons(int screenId, List<TicketingButton> buttons) {
+		public bool AddButtons(int screenId, List<TicketingButton> buttons) {
 			try {
+				if (connection is null)
+					return false;
+
 				if (buttons.Count == 0)
 					return true;
 
@@ -179,7 +240,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return false;
@@ -192,8 +253,11 @@ namespace DataAccessLayer {
 		/// <param name="screenId">The ID of the screen that contains the button.</param>
 		/// <param name="buttonId">The ID of the button to be deleted.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public static bool DeleteButton(string bankName, int screenId, int buttonId) {
+		public bool DeleteButton(string bankName, int screenId, int buttonId) {
 			try {
+				if (connection is null)
+					return false;
+
 				string query = $"DELETE FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} = @buttonId;";
 				var command = new SqlCommand(query, connection);
 				command.Parameters.AddWithValue("@bankName", bankName);
@@ -211,7 +275,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return false;
@@ -224,8 +288,11 @@ namespace DataAccessLayer {
 		/// <param name="screenId">The ID of the screen that contains the buttons.</param>
 		/// <param name="buttonIds">A list containing the IDs of the buttons to be deleted.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public static bool DeleteButtons(string bankName, int screenId, List<int> buttonIds) {
+		public bool DeleteButtons(string bankName, int screenId, List<int> buttonIds) {
 			try {
+				if (connection is null)
+					return false;
+
 				if (buttonIds.Count == 0)
 					return true;
 
@@ -255,7 +322,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return false;
@@ -269,8 +336,11 @@ namespace DataAccessLayer {
 		/// <param name="buttonId">The ID of the button to be updated.</param>
 		/// <param name="newButton">A <c>TicketingButton</c> object containing the updated button information.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public static bool UpdateButton(string bankName, int screenId, int buttonId, TicketingButton newButton) {
+		public bool UpdateButton(string bankName, int screenId, int buttonId, TicketingButton newButton) {
 			try {
+				if (connection is null)
+					return false;
+
 				string query = $"UPDATE {ButtonsConstants.TABLE_NAME} SET {ButtonsConstants.NAME_EN} = @nameEn, {ButtonsConstants.NAME_AR} = @nameAr, {ButtonsConstants.TYPE} = @type, {ButtonsConstants.SERVICE} = @service, " +
 					$"{ButtonsConstants.MESSAGE_EN} = @messageEn, {ButtonsConstants.MESSAGE_AR} = @messageAr WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} = @buttonId;";
 				var command = new SqlCommand(query, connection);
@@ -302,7 +372,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return false;
@@ -315,8 +385,11 @@ namespace DataAccessLayer {
 		/// <param name="screenId">The ID of the screen that contains the buttons.</param>
 		/// <param name="buttons">A dictionary where the keys are button IDs and the corresponding values are the updated buttons.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public static bool UpdateButtons(string bankName, int screenId, Dictionary<int, TicketingButton> buttons) {
+		public bool UpdateButtons(string bankName, int screenId, Dictionary<int, TicketingButton> buttons) {
 			try {
+				if (connection is null)
+					return false;
+
 				if (buttons.Count == 0)
 					return true;
 
@@ -387,7 +460,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return false;
@@ -400,10 +473,13 @@ namespace DataAccessLayer {
 		/// <param name="screenId">The ID of the screen that contains the button.</param>
 		/// <param name="buttonId">The ID of the button.</param>
 		/// <returns>A <c>TicketingButton</c> object representing the button. If the button does not exist, <EmptyButton.Value cref="EmptyButton.Value"/> is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static TicketingButton? GetButtonById(string bankName, int screenId, int buttonId) {
-			TicketingButton? button = EmptyButton.Value;
-
+		public TicketingButton? GetButtonById(string bankName, int screenId, int buttonId) {
 			try {
+				if (connection is null)
+					return null;
+
+				TicketingButton? button = EmptyButton.Value;
+
 				string query = $"SELECT {ButtonsConstants.NAME_EN}, {ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, {ButtonsConstants.MESSAGE_AR} " +
 					$"FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} = @buttonId;";
 				var command = new SqlCommand(query, connection);
@@ -442,7 +518,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return null;
@@ -455,8 +531,11 @@ namespace DataAccessLayer {
 		/// <param name="screenId">The ID of the screen that contains the button.</param>
 		/// <param name="buttonId">The ID of the button.</param>
 		/// <returns><c>true</c> if a matching button exists, and <c>false</c> if it does not. If the operation fails, <c>null</c> is returned.</returns>
-		public static bool? CheckIfButtonExists(string bankName, int screenId, int buttonId) {
+		public bool? CheckIfButtonExists(string bankName, int screenId, int buttonId) {
 			try {
+				if (connection is null)
+					return null;
+
 				string query = $"SELECT COUNT({ButtonsConstants.BUTTON_ID}) FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} = @buttonId;";
 				var command = new SqlCommand(query, connection);
 				command.Parameters.AddWithValue("@bankName", bankName);
@@ -474,7 +553,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return null;

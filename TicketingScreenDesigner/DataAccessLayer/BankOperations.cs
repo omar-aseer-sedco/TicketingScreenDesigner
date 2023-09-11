@@ -7,24 +7,77 @@ namespace DataAccessLayer {
 	/// <summary>
 	/// Contains methods for retrieving and manipulating bank information.
 	/// </summary>
-	public static class BankOperations {
-		private static readonly SqlConnection connection = DBUtils.CreateConnection();
+	public class BankOperations {
+		public static readonly BankOperations Instance = new();
+		private SqlConnection? connection;
+
+		private BankOperations() {
+			try {
+				connection = null;
+				connection = DBUtils.CreateConnection();
+			}
+			catch (Exception ex) {
+				Console.Error.WriteLine($"Failed to establish connection. Message: {ex.Message}");
+			}
+		}
+
+		/// <summary>
+		/// Attempts to establish the connection again.
+		/// </summary>
+		/// <returns><c>true</c> if the connection was established successfully, and <c>false</c> otherwise.</returns>
+		public bool ReinitializeConnection() {
+			try {
+				connection = DBUtils.CreateConnection();
+				return true;
+			}
+			catch {
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Verifies that the database connection is established correctly.
+		/// </summary>
+		/// <returns><c>true</c> if the connection has been established properly, and <c>false</c> otherwise.</returns>
+		public bool VerifyConnection() {
+			if (connection is null)
+				return false;
+
+			try {
+				connection.Open();
+				var command = new SqlCommand($"SELECT 1 FROM {BanksConstants.TABLE_NAME};", connection);
+
+				var result = command.ExecuteScalar();
+				if (result is null)
+					return false;
+
+				return (int) result == 1;
+			}
+			catch (Exception ex) {
+				Console.Error.WriteLine($"Failed to establish connection. Message: {ex.Message}");
+				return false;
+			}
+			finally {
+				connection?.Close();
+			}
+		}
 
 		/// <summary>
 		/// Checks if the bank with the specified <c>bankName</c> exists in the database.
 		/// </summary>
 		/// <param name="bankName">The name of the bank. Case insensitive.</param>
-		/// <returns><c>true</c> if the bank exists in the database, and <c>false</c> otherwise.</returns>
-		public static bool? CheckIfBankExists(string bankName) {
-			bool? exists = null;
-
+		/// <returns><c>true</c> if the bank exists in the database, and <c>false</c> if it does not. If the operation fails, <c>null</c> is returned.</returns>
+		public bool? CheckIfBankExists(string bankName) {
 			try {
+				if (connection is null)
+					return null;
+
 				string query = $"SELECT * FROM {BanksConstants.TABLE_NAME} WHERE {BanksConstants.BANK_NAME} = @bankName;";
 				var command = new SqlCommand(query, connection);
 				command.Parameters.AddWithValue("@bankName", bankName);
 
 				connection.Open();
-				exists = command.ExecuteReader().HasRows;
+				return command.ExecuteReader().HasRows;
 			}
 			catch (SqlException ex) {
 				ExceptionHelper.HandleSqlException(ex, "Bank Name");
@@ -33,10 +86,10 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
-			return exists;
+			return null;
 		}
 
 		/// <summary>
@@ -44,17 +97,18 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="bank">The bank to be added to the database.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public static bool AddBank(Bank bank) {
-			bool success = false;
-
+		public bool AddBank(Bank bank) {
 			try {
+				if (connection is null)
+					return false;
+
 				string query = $"INSERT INTO {BanksConstants.TABLE_NAME} ({BanksConstants.BANK_NAME}, {BanksConstants.PASSWORD}) VALUES (@bankName, @password);";
 				SqlCommand command = new SqlCommand(query, connection);
 				command.Parameters.AddWithValue("@bankName", bank.BankName);
 				command.Parameters.AddWithValue("@password", bank.Password);
 
 				connection.Open();
-				success = command.ExecuteNonQuery() == 1;
+				return command.ExecuteNonQuery() == 1;
 			}
 			catch (SqlException ex) {
 				ExceptionHelper.HandleSqlException(ex, "Bank Name");
@@ -63,10 +117,10 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
-			return success;
+			return false;
 		}
 
 		/// <summary>
@@ -74,10 +128,13 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="bankName">The name of the bank. Case insensitive.</param>
 		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exists, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static List<TicketingScreen>? GetScreens(string bankName) {
-			var ret = new List<TicketingScreen>();
-
+		public List<TicketingScreen>? GetScreens(string bankName) {
 			try {
+				if (connection is null)
+					return null;
+
+				var ret = new List<TicketingScreen>();
+
 				string query = $"SELECT {ScreensConstants.SCREEN_ID}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName;";
 				var command = new SqlCommand(query, connection);
 				command.Parameters.AddWithValue("@bankName", bankName);
@@ -101,7 +158,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return null;
@@ -112,10 +169,13 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="bankName">The name of the bank.</param>
 		/// <returns>The password. If the bank does not exist, an empty string is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static string? GetPassword(string bankName) {
-			string? password = string.Empty;
-
+		public string? GetPassword(string bankName) {
 			try {
+				if (connection is null)
+					return null;
+
+				string? password = string.Empty;
+
 				string query = $"SELECT {BanksConstants.PASSWORD} FROM {BanksConstants.TABLE_NAME} WHERE {BanksConstants.BANK_NAME} = @bankName;";
 				var command = new SqlCommand(query, connection);
 				command.Parameters.AddWithValue("@bankName", bankName);
@@ -137,7 +197,7 @@ namespace DataAccessLayer {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
-				connection.Close();
+				connection?.Close();
 			}
 
 			return null;

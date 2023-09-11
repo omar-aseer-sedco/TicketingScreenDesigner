@@ -6,29 +6,42 @@ using ExceptionUtils;
 
 namespace DataAccessLayer {
 	public static class DBUtils {
+		private static DBConfig? config = null;
+
 		public static SqlConnection CreateConnection() {
 			try {
-				string configFilePath = Path.Join(Directory.GetCurrentDirectory(), "config", "DB_config.txt");
+				if (config is null) {
+					string configFilePath = Path.Join(Directory.GetCurrentDirectory(), "config", "DB_config.txt");
 
-				DBConfig? config;
+					using (var reader = new StreamReader(configFilePath)) {
+						var options = new JsonSerializerOptions() {
+							AllowTrailingCommas = true,
+						};
 
-				using (StreamReader reader = new StreamReader(configFilePath)) {
-					string jsonString = reader.ReadToEnd();
-					config = JsonSerializer.Deserialize<DBConfig>(jsonString);
+						string jsonString = reader.ReadToEnd();
+						config = JsonSerializer.Deserialize<DBConfig>(jsonString, options);
+					}
+
+					if (config is null)
+						throw new NullReferenceException();
 				}
 
-				if (config is null)
-					throw new NullReferenceException();
+				string connectionString = $"server={config.Server}; database={config.Database};";
+				if (config.IntegratedSecurity is not null && config.IntegratedSecurity != string.Empty) {
+					connectionString += $" integrated security={config.IntegratedSecurity};";
+				}
+				if (config.UserId is not null && config.UserId != string.Empty && config.Password is not null) {
+					connectionString += $" User Id={config.UserId}; Password={config.Password};";
+				}
 
-				string connectionString = $"server={config.Server};database={config.Database};integrated security={config.IntegratedSecurity}";
 				return new SqlConnection(connectionString);
-			}
-			catch (ArgumentException ex) {
-				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error, ex.Source, ex.StackTrace));
-				throw;
 			}
 			catch (SqlException ex) {
 				ExceptionHelper.HandleSqlException(ex);
+				throw;
+			}
+			catch (ArgumentException ex) {
+				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error, ex.Source, ex.StackTrace));
 				throw;
 			}
 			catch (Exception ex) when (ex is FileNotFoundException || ex is DirectoryNotFoundException) {

@@ -17,7 +17,18 @@ namespace BusinessLogicLayer {
 		public int ScreenId { get; set; }
 		public string ScreenTitle { get; set; }
 
-		public ScreenController() {
+		/// <summary>
+		/// Creates a <c>ScreenController</c> object.
+		/// </summary>
+		/// <param name="success"><c>true</c> if the connection with the database was established successfully, and <c>false</c> otherwise.</param>
+		public ScreenController(out bool success) {
+			if (ScreenOperations.Instance.VerifyConnection() && ButtonOperations.Instance.VerifyConnection()) {
+				success = true;
+			}
+			else {
+				success = false;
+			}
+
 			pendingIndex = -1;
 			BankName = string.Empty;
 			ScreenId = -1;
@@ -27,11 +38,23 @@ namespace BusinessLogicLayer {
 			pendingDeletes = new HashSet<int>();
 		}
 
-		public ScreenController(string bankName) : this() {
+		/// <summary>
+		/// Creates a <c>ScreenController</c> object with the given bank name.
+		/// </summary>
+		/// <param name="success"><c>true</c> if the connection with the database was established successfully, and <c>false</c> otherwise.</param>
+		/// <param name="bankName">The name of the bank.</param>
+		public ScreenController(out bool success, string bankName) : this(out success) {
 			BankName = bankName;
 		}
 
-		public ScreenController(string bankName, int screenId, string screenTitle) : this(bankName) {
+		/// <summary>
+		/// Creates a <c>ScreenController</c> object with the given bank name and screen information.
+		/// </summary>
+		/// <param name="success"><c>true</c> if the connection with the database was established successfully, and <c>false</c> otherwise.</param>
+		/// <param name="bankName">The name of the bank.</param>
+		/// <param name="screenId">The ID fo the screen.</param>
+		/// <param name="screenTitle">The title of the screen.</param>
+		public ScreenController(out bool success, string bankName, int screenId, string screenTitle) : this(out success, bankName) {
 			ScreenId = screenId;
 			ScreenTitle = screenTitle;
 		}
@@ -41,7 +64,7 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <returns>A list of <c>TicketingButton</c> items representing the buttons in the database. If there are none, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
 		public List<TicketingButton>? GetCommittedButtons() {
-			return ScreenOperations.GetButtons(BankName, ScreenId);
+			return ScreenOperations.Instance.GetButtons(BankName, ScreenId);
 		}
 
 		/// <summary>
@@ -49,7 +72,7 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <returns>A list of <c>TicketingButton</c> items representing the buttons. If the operation fails, <c>null</c> is returned.</returns>
 		public List<TicketingButton>? GetAllButtons() {
-			var buttons = ScreenOperations.GetButtons(BankName, ScreenId);
+			var buttons = ScreenOperations.Instance.GetButtons(BankName, ScreenId);
 			if (buttons is null)
 				return null;
 
@@ -107,7 +130,7 @@ namespace BusinessLogicLayer {
 		/// <param name="button">The button to be added.</param>
 		/// <returns>The ID of the button that was added. If the operation fails, <c>null</c> is returned.</returns>
 		public int? AddButtonAndCommit(TicketingButton button) {
-			return ButtonOperations.AddButton(button);
+			return ButtonOperations.Instance.AddButton(button);
 		}
 
 		/// <summary>
@@ -116,7 +139,7 @@ namespace BusinessLogicLayer {
 		/// <param name="buttons">A list of buttons to be added.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool AddButtonsAndCommit(List<TicketingButton> buttons) {
-			return ButtonOperations.AddButtons(buttons);
+			return ButtonOperations.Instance.AddButtons(buttons);
 		}
 
 		/// <summary>
@@ -166,7 +189,7 @@ namespace BusinessLogicLayer {
 		/// <param name="newButton">A <c>TicketingButton</c> object containing the updated button information.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool UpdateButtonAndCommit(int buttonId, TicketingButton newButton) {
-			return ButtonOperations.UpdateButton(BankName, ScreenId, buttonId, newButton);
+			return ButtonOperations.Instance.UpdateButton(BankName, ScreenId, buttonId, newButton);
 		}
 
 		/// <summary>
@@ -175,7 +198,7 @@ namespace BusinessLogicLayer {
 		/// <param name="buttons">A dictionary where the keys are button IDs and the corresponding values are the updated buttons.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool UpdateButtonsAndCommit(Dictionary<int, TicketingButton> buttons) {
-			return ButtonOperations.UpdateButtons(BankName, ScreenId, buttons);
+			return ButtonOperations.Instance.UpdateButtons(BankName, ScreenId, buttons);
 		}
 
 		/// <summary>
@@ -217,7 +240,7 @@ namespace BusinessLogicLayer {
 		/// <param name="buttonId">The ID of the button to be deleted.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool DeleteButtonAndCommit(int buttonId) {
-			return ButtonOperations.DeleteButton(BankName, ScreenId, buttonId);
+			return ButtonOperations.Instance.DeleteButton(BankName, ScreenId, buttonId);
 		}
 
 		/// <summary>
@@ -226,7 +249,7 @@ namespace BusinessLogicLayer {
 		/// <param name="buttonIds">A list containing the IDs of the button to be deleted.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool DeleteButtonsAndCommit(List<int> buttonIds) {
-			return ButtonOperations.DeleteButtons(BankName, ScreenId, buttonIds);
+			return ButtonOperations.Instance.DeleteButtons(BankName, ScreenId, buttonIds);
 		}
 
 		/// <summary>
@@ -258,7 +281,7 @@ namespace BusinessLogicLayer {
 				}
 			}
 
-			bool? existsInDatabase = ButtonOperations.CheckIfButtonExists(BankName, ScreenId, buttonId);
+			bool? existsInDatabase = ButtonOperations.Instance.CheckIfButtonExists(BankName, ScreenId, buttonId);
 
 			if (existsInDatabase is null) return null;
 
@@ -277,21 +300,21 @@ namespace BusinessLogicLayer {
 			if (pendingAdds.Count == 0)
 				return true;
 
-			return ButtonOperations.AddButtons(ScreenId, pendingAdds);
+			return ButtonOperations.Instance.AddButtons(ScreenId, pendingAdds);
 		}
 
 		private bool CommitUpdates() {
 			if (pendingUpdates.Count == 0)
 				return true;
 
-			return ButtonOperations.UpdateButtons(BankName, ScreenId, pendingUpdates);
+			return ButtonOperations.Instance.UpdateButtons(BankName, ScreenId, pendingUpdates);
 		}
 
 		private bool CommitDeletes() {
 			if (pendingDeletes.Count == 0)
 				return true;
 
-			return ButtonOperations.DeleteButtons(BankName, ScreenId, pendingDeletes.ToList());
+			return ButtonOperations.Instance.DeleteButtons(BankName, ScreenId, pendingDeletes.ToList());
 		}
 	}
 }

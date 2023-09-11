@@ -22,11 +22,22 @@ namespace TicketingScreenDesigner {
 		}
 
 		public BankForm(string bankName) : this() {
-			bankController = new BankController(bankName);
+			Cursor.Current = Cursors.WaitCursor;
+
+			bankController = new BankController(out bool success, bankName);
+			if (!success) {
+				LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
+				MessageBox.Show("bankform Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Cursor.Current = Cursors.Default;
+				Close();
+			}
+
 			this.bankName = bankName;
 			Text = TITLE_TEXT + " - " + this.bankName;
 			UpdateTitleLabel();
 			UpdateListView();
+
+			Cursor.Current = Cursors.Default;
 		}
 
 		public BankForm(string bankName, List<TicketingScreen> screens) : this(bankName) {
@@ -41,7 +52,8 @@ namespace TicketingScreenDesigner {
 
 		private void Add() {
 			var screenEditor = new ScreenEditor(this, bankController);
-			screenEditor.ShowDialog();
+			if (!screenEditor.IsDisposed)
+				screenEditor.ShowDialog();
 		}
 
 		private void addScreenButton_Click(object sender, EventArgs e) {
@@ -114,7 +126,8 @@ namespace TicketingScreenDesigner {
 				var screen = new TicketingScreen(bankController.BankName, screenId, screenTitle, isActive);
 
 				var screenEditor = new ScreenEditor(this, bankController, screen);
-				screenEditor.ShowDialog();
+				if (!screenEditor.IsDisposed)
+					screenEditor.ShowDialog();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);

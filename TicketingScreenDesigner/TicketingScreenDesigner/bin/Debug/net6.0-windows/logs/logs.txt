@@ -757,3 +757,423 @@
   "Source": "Core .Net SqlClient Data Provider",
   "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.ButtonOperations.AddButtons(List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 108"
 }
+{
+  "Message": "A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)",
+  "TimeStamp": "2023-09-11T11:57:09.4831411+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken)\r\n   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)\r\n   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)\r\n   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)\r\n   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)\r\n   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal\u0026 connection)\r\n   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions, DbConnectionInternal\u0026 connection)\r\n   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal\u0026 connection)\r\n   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetPassword(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 123"
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T11:57:09.5586021+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)",
+  "TimeStamp": "2023-09-11T12:52:14.2115672+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken)\r\n   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)\r\n   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)\r\n   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)\r\n   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)\r\n   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal\u0026 connection)\r\n   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions, DbConnectionInternal\u0026 connection)\r\n   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal\u0026 connection)\r\n   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetPassword(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 156"
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T12:52:14.258713+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T14:49:45.4810475+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T14:50:33.0865524+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T14:59:00.9835449+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T15:00:37.0574977+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T15:01:26.0449958+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T15:05:23.5900073+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T15:11:02.7941221+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T15:15:51.1217806+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T15:21:40.8963935+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T15:23:19.3020591+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 207\nMessage: Invalid column name \u0027password\u0027.",
+  "TimeStamp": "2023-09-11T15:24:47.8751141+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.BankOperations.GetPassword(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 173"
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T15:24:47.9157937+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 207\nMessage: Invalid column name \u0027password\u0027.",
+  "TimeStamp": "2023-09-11T15:26:43.128292+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.BankOperations.GetPassword(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 173"
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T15:26:43.1636311+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Log In error.",
+  "TimeStamp": "2023-09-11T15:30:34.8290503+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:06:49.7253884+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:06:53.1067867+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-11T17:06:54.2878621+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.CreateHandle()\r\n   at System.Windows.Forms.Form.CreateHandle()\r\n   at System.Windows.Forms.Control.get_Handle()\r\n   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)\r\n   at System.Windows.Forms.Form.ShowDialog()\r\n   at TicketingScreenDesigner.BankForm.Edit() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\BankForm.cs:line 123"
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:08:35.7180312+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:08:37.7008171+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-11T17:08:39.8599564+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.CreateHandle()\r\n   at System.Windows.Forms.Form.CreateHandle()\r\n   at System.Windows.Forms.Control.get_Handle()\r\n   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)\r\n   at System.Windows.Forms.Form.ShowDialog()\r\n   at TicketingScreenDesigner.BankForm.Edit() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\BankForm.cs:line 123"
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:09:42.1240147+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:09:43.3075053+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:10:41.2409626+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:10:42.6780551+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:11:49.4960559+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:11:52.4003586+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:14:15.5118588+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:14:20.1244289+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:15:36.29762+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-11T17:15:38.2982909+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.CreateHandle()\r\n   at System.Windows.Forms.Form.CreateHandle()\r\n   at System.Windows.Forms.Control.get_Handle()\r\n   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)\r\n   at System.Windows.Forms.Form.ShowDialog()\r\n   at TicketingScreenDesigner.BankForm.Edit() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\BankForm.cs:line 123"
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:20:00.9249899+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-11T17:20:03.7648283+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.CreateHandle()\r\n   at System.Windows.Forms.Form.CreateHandle()\r\n   at System.Windows.Forms.Control.get_Handle()\r\n   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)\r\n   at System.Windows.Forms.Form.ShowDialog()\r\n   at TicketingScreenDesigner.BankForm.Edit() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\BankForm.cs:line 124"
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:22:09.0205346+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:23:52.2704044+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:24:13.2616219+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Could not find file \u0027C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\bin\\Debug\\net6.0-windows\\config\\DB_config.txt\u0027.",
+  "TimeStamp": "2023-09-11T17:40:45.3035658+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)\r\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\r\n   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\r\n   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\r\n   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)\r\n   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)\r\n   at System.IO.StreamReader..ctor(String path)\r\n   at DataAccessLayer.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 16"
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:40:45.42103+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. Path: $ | LineNumber: 0 | BytePositionInLine: 0.",
+  "TimeStamp": "2023-09-11T17:41:17.702972+03:00",
+  "Severity": "Error",
+  "Source": "System.Text.Json",
+  "StackTrace": "   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack\u0026 state, JsonReaderException ex)\r\n   at System.Text.Json.Serialization.JsonConverter\u00601.ReadCore(Utf8JsonReader\u0026 reader, JsonSerializerOptions options, ReadStack\u0026 state)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 utf8Json, JsonTypeInfo jsonTypeInfo, Nullable\u00601 actualByteCount)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 json, JsonTypeInfo jsonTypeInfo)\r\n   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)\r\n   at DataAccessLayer.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 18"
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T17:41:17.7720325+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The JSON object contains a trailing comma at the end which is not supported in this mode. Change the reader options. Path: $ | LineNumber: 6 | BytePositionInLine: 0.",
+  "TimeStamp": "2023-09-11T22:34:59.6991747+03:00",
+  "Severity": "Error",
+  "Source": "System.Text.Json",
+  "StackTrace": "   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack\u0026 state, JsonReaderException ex)\r\n   at System.Text.Json.Serialization.JsonConverter\u00601.ReadCore(Utf8JsonReader\u0026 reader, JsonSerializerOptions options, ReadStack\u0026 state)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 utf8Json, JsonTypeInfo jsonTypeInfo, Nullable\u00601 actualByteCount)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 json, JsonTypeInfo jsonTypeInfo)\r\n   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)\r\n   at DataAccessLayer.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 18"
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T22:34:59.849748+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The JSON object contains a trailing comma at the end which is not supported in this mode. Change the reader options. Path: $ | LineNumber: 6 | BytePositionInLine: 0.",
+  "TimeStamp": "2023-09-11T22:37:00.4024345+03:00",
+  "Severity": "Error",
+  "Source": "System.Text.Json",
+  "StackTrace": "   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack\u0026 state, JsonReaderException ex)\r\n   at System.Text.Json.Serialization.JsonConverter\u00601.ReadCore(Utf8JsonReader\u0026 reader, JsonSerializerOptions options, ReadStack\u0026 state)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 utf8Json, JsonTypeInfo jsonTypeInfo, Nullable\u00601 actualByteCount)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 json, JsonTypeInfo jsonTypeInfo)\r\n   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)\r\n   at DataAccessLayer.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 18"
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T22:37:00.5306177+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Username: , Password: sedco@123",
+  "TimeStamp": "2023-09-11T22:37:39.5613586+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Username: , Password: sedco@123",
+  "TimeStamp": "2023-09-11T22:37:43.2268778+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Username: si, Password: sedco@123",
+  "TimeStamp": "2023-09-11T22:38:30.6004014+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Username: si, Password: sedco@123",
+  "TimeStamp": "2023-09-11T22:38:33.2934118+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Username: sa, Password: sedco@123",
+  "TimeStamp": "2023-09-11T22:42:09.8277202+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Username: sa, Password: sedco@123",
+  "TimeStamp": "2023-09-11T22:42:12.9957732+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The JSON object contains a trailing comma at the end which is not supported in this mode. Change the reader options. Path: $ | LineNumber: 4 | BytePositionInLine: 0.",
+  "TimeStamp": "2023-09-11T22:42:37.1672594+03:00",
+  "Severity": "Error",
+  "Source": "System.Text.Json",
+  "StackTrace": "   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack\u0026 state, JsonReaderException ex)\r\n   at System.Text.Json.Serialization.JsonConverter\u00601.ReadCore(Utf8JsonReader\u0026 reader, JsonSerializerOptions options, ReadStack\u0026 state)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 utf8Json, JsonTypeInfo jsonTypeInfo, Nullable\u00601 actualByteCount)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 json, JsonTypeInfo jsonTypeInfo)\r\n   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)\r\n   at DataAccessLayer.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 18"
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-11T22:42:37.2664716+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Username: , Password: ",
+  "TimeStamp": "2023-09-11T22:42:51.4414673+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Username: , Password: ",
+  "TimeStamp": "2023-09-11T22:42:54.3597554+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Username: , Password: ",
+  "TimeStamp": "2023-09-11T22:45:36.966546+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Username: , Password: ",
+  "TimeStamp": "2023-09-11T22:45:39.9921271+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}

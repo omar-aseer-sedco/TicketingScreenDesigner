@@ -22,19 +22,43 @@ namespace TicketingScreenDesigner {
 		}
 
 		public ScreenEditor(BankForm callingForm, BankController bankController) : this() {
+			Cursor.Current = Cursors.WaitCursor;
+
+			screenController = new ScreenController(out bool success, bankController.BankName);
+			if (!success) {
+				LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
+				MessageBox.Show("screeneditor Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Cursor.Current = Cursors.Default;
+				Close();
+			}
+
 			isNewScreen = true;
 			Text = TITLE_TEXT + " - New Screen";
 			this.callingForm = callingForm;
 			this.bankController = bankController;
-			screenController = new ScreenController(bankController.BankName);
+
+			Cursor.Current = Cursors.Default;
 		}
 
-		public ScreenEditor(BankForm callingForm, BankController bankController, TicketingScreen screen) : this(callingForm, bankController) {
+		public ScreenEditor(BankForm callingForm, BankController bankController, TicketingScreen screen) : this() {
+			Cursor.Current = Cursors.WaitCursor;
+
+			screenController = new ScreenController(out bool success, bankController.BankName, screen.ScreenId, screen.ScreenTitle);
+			if (!success) {
+				LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
+				MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Cursor.Current = Cursors.Default;
+				Close();
+			}
+
 			isNewScreen = false;
 			Text = TITLE_TEXT + " - " + screen.ScreenTitle;
-			screenController = new ScreenController(bankController.BankName, screen.ScreenId, screen.ScreenTitle);
+			this.callingForm = callingForm;
+			this.bankController = bankController;
 			FillInfo(screen);
 			UpdateListView();
+
+			Cursor.Current = Cursors.Default;
 		}
 
 		private void FillInfo(TicketingScreen screen) {
@@ -104,7 +128,8 @@ namespace TicketingScreenDesigner {
 		private void Add() {
 			try {
 				var buttonEditor = new ButtonEditor(this, screenController);
-				buttonEditor.ShowDialog();
+				if (!buttonEditor.IsDisposed)
+					buttonEditor.ShowDialog();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -322,7 +347,8 @@ namespace TicketingScreenDesigner {
 				}
 
 				var buttonEditor = new ButtonEditor(this, screenController, button);
-				buttonEditor.ShowDialog();
+				if (!buttonEditor.IsDisposed)
+					buttonEditor.ShowDialog();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
