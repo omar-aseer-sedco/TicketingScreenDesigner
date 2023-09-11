@@ -1,6 +1,6 @@
 ﻿using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
-using DataAccessLayer.Utils;
+using ExceptionUtils;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -15,10 +15,8 @@ namespace DataAccessLayer {
 		/// Adds a button to the database.
 		/// </summary>
 		/// <param name="button">The button to be added to the database.</param>
-		/// <returns>The ID of the screen that was added. If it's equal to -1, that means that the operation failed.</returns>
-		public static int AddButton(TicketingButton button) {
-			int buttonId = -1;
-
+		/// <returns>The ID of the screen that was added. If the operation fails, <c>null</c> is returned.</returns>
+		public static int? AddButton(TicketingButton button) {
 			try {
 				string query = $"INSERT INTO {ButtonsConstants.TABLE_NAME} ({ButtonsConstants.BANK_NAME}, {ButtonsConstants.SCREEN_ID}, {ButtonsConstants.NAME_EN}, {ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, " +
 					$"{ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, {ButtonsConstants.MESSAGE_AR}) VALUES (@bankName, @screenId, @nameEn, @nameAr, @type, @service, @messageEn, @messageAr); SELECT CAST(scope_identity() AS int);";
@@ -41,29 +39,30 @@ namespace DataAccessLayer {
 
 				connection.Open();
 
-				buttonId = (int) command.ExecuteScalar();
+				return (int) command.ExecuteScalar();
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Button ID");
+				ExceptionHelper.HandleSqlException(ex, "Button ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
 
-			return buttonId;
+			return null;
 		}
 
 		/// <summary>
 		/// Adds multiple buttons to the database.
 		/// </summary>
 		/// <param name="buttons">The list of buttons to be added to the database.</param>
-		public static void AddButtons(List<TicketingButton> buttons) {
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public static bool AddButtons(List<TicketingButton> buttons) {
 			try {
 				if (buttons.Count == 0)
-					return;
+					return true;
 
 				var query = new StringBuilder($"INSERT INTO {ButtonsConstants.TABLE_NAME} ({ButtonsConstants.BANK_NAME}, {ButtonsConstants.SCREEN_ID}, {ButtonsConstants.NAME_EN}, " +
 					$"{ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, {ButtonsConstants.MESSAGE_AR}) VALUES ");
@@ -105,17 +104,19 @@ namespace DataAccessLayer {
 				command.CommandText = query.ToString();
 
 				connection.Open();
-				command.ExecuteNonQuery();
+				return command.ExecuteNonQuery() == buttons.Count;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Button ID");
+				ExceptionHelper.HandleSqlException(ex, "Button ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -123,10 +124,11 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="screenId">The ID of the screen.</param>
 		/// <param name="buttons">A list of buttons to be added to the database.</param>
-		public static void AddButtons(int screenId, List<TicketingButton> buttons) {
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public static bool AddButtons(int screenId, List<TicketingButton> buttons) {
 			try {
 				if (buttons.Count == 0)
-					return;
+					return true;
 
 				var query = new StringBuilder($"INSERT INTO {ButtonsConstants.TABLE_NAME} ({ButtonsConstants.BANK_NAME}, {ButtonsConstants.SCREEN_ID}, {ButtonsConstants.NAME_EN}, " +
 					$"{ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, {ButtonsConstants.MESSAGE_AR}) VALUES ");
@@ -168,17 +170,19 @@ namespace DataAccessLayer {
 				command.CommandText = query.ToString();
 
 				connection.Open();
-				command.ExecuteNonQuery();
+				return command.ExecuteNonQuery() == buttons.Count;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Button ID");
+				ExceptionHelper.HandleSqlException(ex, "Button ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -187,7 +191,8 @@ namespace DataAccessLayer {
 		/// <param name="bankName">The name of the bank that owns the button.</param>
 		/// <param name="screenId">The ID of the screen that contains the button.</param>
 		/// <param name="buttonId">The ID of the button to be deleted.</param>
-		public static void DeleteButton(string bankName, int screenId, int buttonId) {
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public static bool DeleteButton(string bankName, int screenId, int buttonId) {
 			try {
 				string query = $"DELETE FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} = @buttonId;";
 				var command = new SqlCommand(query, connection);
@@ -197,17 +202,19 @@ namespace DataAccessLayer {
 
 				connection.Open();
 
-				command.ExecuteNonQuery();
+				return command.ExecuteNonQuery() == 1;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Button ID");
+				ExceptionHelper.HandleSqlException(ex, "Button ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -216,10 +223,11 @@ namespace DataAccessLayer {
 		/// <param name="bankName">The name of the bank that owns the buttons.</param>
 		/// <param name="screenId">The ID of the screen that contains the buttons.</param>
 		/// <param name="buttonIds">A list containing the IDs of the buttons to be deleted.</param>
-		public static void DeleteButtons(string bankName, int screenId, List<int> buttonIds) {
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public static bool DeleteButtons(string bankName, int screenId, List<int> buttonIds) {
 			try {
 				if (buttonIds.Count == 0)
-					return;
+					return true;
 
 				var query = new StringBuilder($"DELETE FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} IN (");
 				var command = new SqlCommand() { Connection = connection };
@@ -238,17 +246,19 @@ namespace DataAccessLayer {
 				command.CommandText = query.ToString();
 
 				connection.Open();
-				command.ExecuteNonQuery();
+				return command.ExecuteNonQuery() == buttonIds.Count;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Button ID");
+				ExceptionHelper.HandleSqlException(ex, "Button ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -258,7 +268,8 @@ namespace DataAccessLayer {
 		/// <param name="screenId">The ID of the screen that contains the button.</param>
 		/// <param name="buttonId">The ID of the button to be updated.</param>
 		/// <param name="newButton">A <c>TicketingButton</c> object containing the updated button information.</param>
-		public static void UpdateButton(string bankName, int screenId, int buttonId, TicketingButton newButton) {
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public static bool UpdateButton(string bankName, int screenId, int buttonId, TicketingButton newButton) {
 			try {
 				string query = $"UPDATE {ButtonsConstants.TABLE_NAME} SET {ButtonsConstants.NAME_EN} = @nameEn, {ButtonsConstants.NAME_AR} = @nameAr, {ButtonsConstants.TYPE} = @type, {ButtonsConstants.SERVICE} = @service, " +
 					$"{ButtonsConstants.MESSAGE_EN} = @messageEn, {ButtonsConstants.MESSAGE_AR} = @messageAr WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} = @buttonId;";
@@ -282,17 +293,19 @@ namespace DataAccessLayer {
 
 				connection.Open();
 
-				command.ExecuteNonQuery();
+				return command.ExecuteNonQuery() == 1;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Button ID");
+				ExceptionHelper.HandleSqlException(ex, "Button ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -301,10 +314,11 @@ namespace DataAccessLayer {
 		/// <param name="bankName">The name of the bank that owns the buttons.</param>
 		/// <param name="screenId">The ID of the screen that contains the buttons.</param>
 		/// <param name="buttons">A dictionary where the keys are button IDs and the corresponding values are the updated buttons.</param>
-		public static void UpdateButtons(string bankName, int screenId, Dictionary<int, TicketingButton> buttons) {
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public static bool UpdateButtons(string bankName, int screenId, Dictionary<int, TicketingButton> buttons) {
 			try {
 				if (buttons.Count == 0)
-					return;
+					return true;
 
 				var query = new StringBuilder($"UPDATE {ButtonsConstants.TABLE_NAME} SET ");
 				var command = new SqlCommand() { Connection = connection };
@@ -364,17 +378,19 @@ namespace DataAccessLayer {
 
 				connection.Open();
 
-				command.ExecuteNonQuery();
+				return command.ExecuteNonQuery() == buttons.Count;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Button ID");
+				ExceptionHelper.HandleSqlException(ex, "Button ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -383,9 +399,9 @@ namespace DataAccessLayer {
 		/// <param name="bankName">The name of the bank that owns the button.</param>
 		/// <param name="screenId">The ID of the screen that contains the button.</param>
 		/// <param name="buttonId">The ID of the button.</param>
-		/// <returns>A <c>TicketingButton</c> object representing the button. If the button does not exist, <c>null</c> is returned.</returns>
+		/// <returns>A <c>TicketingButton</c> object representing the button. If the button does not exist, <EmptyButton.Value cref="EmptyButton.Value"/> is returned. If the operation fails, <c>null</c> is returned.</returns>
 		public static TicketingButton? GetButtonById(string bankName, int screenId, int buttonId) {
-			TicketingButton? button = null;
+			TicketingButton? button = EmptyButton.Value;
 
 			try {
 				string query = $"SELECT {ButtonsConstants.NAME_EN}, {ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, {ButtonsConstants.MESSAGE_AR} " +
@@ -416,18 +432,20 @@ namespace DataAccessLayer {
 						button = new ShowMessageButton(bankName, screenId, buttonId, type, nameEn, nameAr, messageEn, messageAr);
 					}
 				}
+
+				return button;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Screen ID");
+				ExceptionHelper.HandleSqlException(ex, "Screen ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
 
-			return button;
+			return null;
 		}
 
 		/// <summary>
@@ -436,10 +454,8 @@ namespace DataAccessLayer {
 		/// <param name="bankName">The name of the bank that owns the button.</param>
 		/// <param name="screenId">The ID of the screen that contains the button.</param>
 		/// <param name="buttonId">The ID of the button.</param>
-		/// <returns>Returns <c>true</c> if a matching button exists, and <c>false</c> otherwise.</returns>
-		public static bool CheckIfButtonExists(string bankName, int screenId, int buttonId) {
-			bool exists = false;
-
+		/// <returns><c>true</c> if a matching button exists, and <c>false</c> if it does not. If the operation fails, <c>null</c> is returned.</returns>
+		public static bool? CheckIfButtonExists(string bankName, int screenId, int buttonId) {
 			try {
 				string query = $"SELECT COUNT({ButtonsConstants.BUTTON_ID}) FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} = @buttonId;";
 				var command = new SqlCommand(query, connection);
@@ -449,19 +465,19 @@ namespace DataAccessLayer {
 
 				connection.Open();
 
-				exists = (int) command.ExecuteScalar() == 1;
+				return (int) command.ExecuteScalar() == 1;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Button ID");
+				ExceptionHelper.HandleSqlException(ex, "Button ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
 
-			return exists;
+			return null;
 		}
 	}
 }

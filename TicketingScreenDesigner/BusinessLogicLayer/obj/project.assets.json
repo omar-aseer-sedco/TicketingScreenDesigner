@@ -151,8 +151,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "LogUtils": "1.0.0",
-          "System.Data.SqlClient": "4.8.5"
+          "System.Data.SqlClient": "4.8.5",
+          "Utils": "1.0.0"
         },
         "compile": {
           "bin/placeholder/DataAccessLayer.dll": {}
@@ -161,17 +161,17 @@
           "bin/placeholder/DataAccessLayer.dll": {}
         }
       },
-      "LogUtils/1.0.0": {
+      "Utils/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "System.Data.SqlClient": "4.8.5"
         },
         "compile": {
-          "bin/placeholder/LogUtils.dll": {}
+          "bin/placeholder/Utils.dll": {}
         },
         "runtime": {
-          "bin/placeholder/LogUtils.dll": {}
+          "bin/placeholder/Utils.dll": {}
         }
       }
     }
@@ -495,16 +495,16 @@
       "path": "../DataAccessLayer/DataAccessLayer.csproj",
       "msbuildProject": "../DataAccessLayer/DataAccessLayer.csproj"
     },
-    "LogUtils/1.0.0": {
+    "Utils/1.0.0": {
       "type": "project",
-      "path": "../LogHelper/LogUtils.csproj",
-      "msbuildProject": "../LogHelper/LogUtils.csproj"
+      "path": "../LogHelper/Utils.csproj",
+      "msbuildProject": "../LogHelper/Utils.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "DataAccessLayer >= 1.0.0",
-      "LogUtils >= 1.0.0"
+      "Utils >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -537,8 +537,8 @@
             "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\DataAccessLayer.csproj": {
               "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\DataAccessLayer.csproj"
             },
-            "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj": {
-              "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj"
+            "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj": {
+              "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj"
             }
           }
         }

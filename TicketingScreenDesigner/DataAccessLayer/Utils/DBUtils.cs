@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Text.Json;
 using LogUtils;
-using DataAccessLayer.Utils;
+using ExceptionUtils;
 
 namespace DataAccessLayer {
 	public static class DBUtils {
@@ -28,7 +28,7 @@ namespace DataAccessLayer {
 				throw;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex);
+				ExceptionHelper.HandleSqlException(ex);
 				throw;
 			}
 			catch (Exception ex) when (ex is FileNotFoundException || ex is DirectoryNotFoundException) {
@@ -40,7 +40,7 @@ namespace DataAccessLayer {
 				throw;
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 				throw;
 			}
 		}

@@ -24,5 +24,20 @@
 			NameEn = nameEn;
 			NameAr = nameAr;
 		}
+
+		public bool IsEmpty() {
+			return this == EmptyButton.Value;
+		}
+
+		public override bool Equals(object? obj) {
+			if (obj is null) return false;
+			if (obj is not TicketingButton) return false;
+			TicketingButton other = (TicketingButton) obj;
+			return other.BankName == BankName && other.ScreenId == ScreenId && other.ButtonId == ButtonId && other.Type == Type && other.NameEn == NameEn && other.NameAr == NameAr;
+		}
+
+		public override int GetHashCode() {
+			return base.GetHashCode();
+		}
 	}
 }

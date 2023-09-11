@@ -6,10 +6,10 @@ C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\Ticketin
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
-C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\LogUtils.dll
-C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\LogUtils.pdb
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CopyComplete
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\Utils.dll
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\DataAccessLayer\bin\Debug\net6.0\Utils.pdb

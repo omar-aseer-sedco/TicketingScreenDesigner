@@ -45,6 +45,10 @@ namespace LogUtils {
 		private static readonly string logsDirectoryPath = Path.Join(Directory.GetCurrentDirectory(), "logs");
 		private static readonly string logsFilePath = Path.Join(logsDirectoryPath, "logs.txt");
 
+		public static bool IsInitialized() {
+			return Directory.Exists(logsDirectoryPath);
+		}
+
 		public static void InitializeLogsDirectory() {
 			try {
 				Directory.CreateDirectory(logsDirectoryPath);
@@ -56,6 +60,10 @@ namespace LogUtils {
 
 		public static void Log(LogEvent logEvent) {
 			try {
+				if (!IsInitialized()) {
+					InitializeLogsDirectory();
+				}
+
 				var options = new JsonSerializerOptions() {
 					WriteIndented = true,
 				};
@@ -67,6 +75,10 @@ namespace LogUtils {
 			catch (Exception ex) {
 				Console.Error.WriteLine(ex.Message);
 			}
+		}
+
+		public static void Log(string message, DateTime timestamp, EventSeverity severity) {
+			Log(new LogEvent(message, timestamp, severity));
 		}
 	}
 }

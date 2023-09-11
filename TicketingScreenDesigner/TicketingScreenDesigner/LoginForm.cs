@@ -1,12 +1,12 @@
 using BusinessLogicLayer;
 using DataAccessLayer.DataClasses;
 using LogUtils;
+using ExceptionUtils;
 
 namespace TicketingScreenDesigner {
 	public partial class LoginForm : Form {
 		public LoginForm() {
 			InitializeComponent();
-			LogsHelper.InitializeLogsDirectory();
 		}
 
 		private void LogInButton_Click(object sender, EventArgs e) {
@@ -19,9 +19,23 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				if (LoginController.VerifyPassword(bankName, password)) {
+				bool? passwordCorrect = LoginController.VerifyPassword(bankName, password);
+
+				if (passwordCorrect is null) {
+					LogsHelper.Log("Log In error.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("An error occurred. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
+				if ((bool) passwordCorrect) {
 					loginPasswordTextBox.Text = string.Empty;
 					var screens = LoginController.GetScreens(bankName);
+					if (screens is null) {
+						LogsHelper.Log("Error retrieving bank information.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Error retrieving bank information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
+					}
+
 					var bankForm = new BankForm(bankName, screens);
 					bankForm.ShowDialog();
 				}
@@ -32,6 +46,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -41,7 +56,15 @@ namespace TicketingScreenDesigner {
 				string password = registerPasswordTextBox.Text.Trim();
 				string confirm = confirmPasswordTextBox.Text.Trim();
 
-				if (LoginController.CheckIfBankExists(bankName)) {
+				bool? bankExists = LoginController.CheckIfBankExists(bankName);
+
+				if (bankExists is null) {
+					LogsHelper.Log("Registration error.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("An error occurred. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
+				if ((bool) bankExists) {
 					MessageBox.Show("A bank with this name already exists. You can log in.", "Bank already exists", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
@@ -59,6 +82,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 

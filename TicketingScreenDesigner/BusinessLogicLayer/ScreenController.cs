@@ -1,8 +1,6 @@
 ﻿using DataAccessLayer;
-using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
-using System.Data.SqlClient;
-using System.Text;
+using ExceptionUtils;
 
 namespace BusinessLogicLayer {
 	/// <summary>
@@ -41,17 +39,20 @@ namespace BusinessLogicLayer {
 		/// <summary>
 		/// Gets all the buttons that are commited to the database.
 		/// </summary>
-		/// <returns>A list of <c>TicketingButton</c> items representing the buttons in the database.</returns>
-		public List<TicketingButton> GetCommittedButtons() {
+		/// <returns>A list of <c>TicketingButton</c> items representing the buttons in the database. If there are none, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
+		public List<TicketingButton>? GetCommittedButtons() {
 			return ScreenOperations.GetButtons(BankName, ScreenId);
 		}
 
 		/// <summary>
 		/// Gets all the buttons of the screen, including pending buttons.
 		/// </summary>
-		/// <returns>A list of <c>TicketingButton</c> items representing the buttons.</returns>
-		public List<TicketingButton> GetAllButtons() {
+		/// <returns>A list of <c>TicketingButton</c> items representing the buttons. If the operation fails, <c>null</c> is returned.</returns>
+		public List<TicketingButton>? GetAllButtons() {
 			var buttons = ScreenOperations.GetButtons(BankName, ScreenId);
+			if (buttons is null)
+				return null;
+
 			foreach (var button in buttons.ToList()) {
 				if (pendingDeletes.Contains(button.ButtonId) || pendingUpdates.ContainsKey(button.ButtonId)) {
 					buttons.Remove(button);
@@ -62,14 +63,6 @@ namespace BusinessLogicLayer {
 			buttons.AddRange(pendingUpdates.Values.ToList());
 
 			return buttons;
-		}
-
-		/// <summary>
-		/// Gets the total number of buttons of the screen, including pending.
-		/// </summary>
-		/// <returns>The total number of buttons of the screen.</returns>
-		public int GetAllButtonCount() {
-			return GetAllButtons().Count;
 		}
 
 		/// <summary>
@@ -85,7 +78,7 @@ namespace BusinessLogicLayer {
 				pendingAdds.Add(button);
 			}
 			catch (Exception ex) {
-				BLLExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 		}
 
@@ -104,7 +97,7 @@ namespace BusinessLogicLayer {
 				pendingAdds.AddRange(buttons);
 			}
 			catch (Exception ex) {
-				BLLExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 		}
 
@@ -112,16 +105,18 @@ namespace BusinessLogicLayer {
 		/// Adds a button to the screen and immediately commits the change to the database.
 		/// </summary>
 		/// <param name="button">The button to be added.</param>
-		public void AddButtonAndCommit(TicketingButton button) {
-			ButtonOperations.AddButton(button);
+		/// <returns>The ID of the button that was added. If the operation fails, <c>null</c> is returned.</returns>
+		public int? AddButtonAndCommit(TicketingButton button) {
+			return ButtonOperations.AddButton(button);
 		}
 
 		/// <summary>
 		/// Adds multiple buttons to the screen and immedaitely commits the changes to the database.
 		/// </summary>
 		/// <param name="buttons">A list of buttons to be added.</param>
-		public void AddButtonsAndCommit(List<TicketingButton> buttons) {
-			ButtonOperations.AddButtons(buttons);
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public bool AddButtonsAndCommit(List<TicketingButton> buttons) {
+			return ButtonOperations.AddButtons(buttons);
 		}
 
 		/// <summary>
@@ -160,7 +155,7 @@ namespace BusinessLogicLayer {
 				}
 			}
 			catch (Exception ex) {
-				BLLExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 		}
 
@@ -169,16 +164,18 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <param name="buttonId">The ID of the button to be edited.</param>
 		/// <param name="newButton">A <c>TicketingButton</c> object containing the updated button information.</param>
-		public void UpdateButtonAndCommit(int buttonId, TicketingButton newButton) {
-			ButtonOperations.UpdateButton(BankName, ScreenId, buttonId, newButton);
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public bool UpdateButtonAndCommit(int buttonId, TicketingButton newButton) {
+			return ButtonOperations.UpdateButton(BankName, ScreenId, buttonId, newButton);
 		}
 
 		/// <summary>
 		/// Updates the buttons with the given IDs and immediately commits the changes to the database.
 		/// </summary>
 		/// <param name="buttons">A dictionary where the keys are button IDs and the corresponding values are the updated buttons.</param>
-		public void UpdateButtonsAndCommit(Dictionary<int, TicketingButton> buttons) {
-			ButtonOperations.UpdateButtons(BankName, ScreenId, buttons);
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public bool UpdateButtonsAndCommit(Dictionary<int, TicketingButton> buttons) {
+			return ButtonOperations.UpdateButtons(BankName, ScreenId, buttons);
 		}
 
 		/// <summary>
@@ -218,25 +215,26 @@ namespace BusinessLogicLayer {
 		/// Deletes the button with the specifed ID and immediately commits the change to the database.
 		/// </summary>
 		/// <param name="buttonId">The ID of the button to be deleted.</param>
-		public void DeleteButtonAndCommit(int buttonId) {
-			ButtonOperations.DeleteButton(BankName, ScreenId, buttonId);
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public bool DeleteButtonAndCommit(int buttonId) {
+			return ButtonOperations.DeleteButton(BankName, ScreenId, buttonId);
 		}
 
 		/// <summary>
 		/// Deletes the buttons with specified IDs and immediately commits the changes to the database.
 		/// </summary>
 		/// <param name="buttonIds">A list containing the IDs of the button to be deleted.</param>
-		public void DeleteButtonsAndCommit(List<int> buttonIds) {
-			ButtonOperations.DeleteButtons(BankName, ScreenId, buttonIds);
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public bool DeleteButtonsAndCommit(List<int> buttonIds) {
+			return ButtonOperations.DeleteButtons(BankName, ScreenId, buttonIds);
 		}
 
 		/// <summary>
 		/// Commits all cancellable changes (adds, deletes, and updates) to the database.
 		/// </summary>
-		public void CommitPendingChanges() {
-			CommitAdds();
-			CommitUpdates();
-			CommitDeletes();
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public bool CommitPendingChanges() {
+			return CommitAdds() && CommitUpdates() && CommitDeletes();
 		}
 
 		/// <summary>
@@ -252,15 +250,19 @@ namespace BusinessLogicLayer {
 		/// Checks if the button with the given ID exists in the database or in the pending list.
 		/// </summary>
 		/// <param name="buttonId">The ID of the button.</param>
-		/// <returns><c>true</c> if a matching button exists in the database, and <c>false</c> otherwise.</returns>
-		public bool CheckIfButtonExists(int buttonId) {
+		/// <returns><c>true</c> if a matching button exists in the database, and <c>false</c> if it does not. If the operation fails, <c>null</c> is returned.</returns>
+		public bool? CheckIfButtonExists(int buttonId) {
 			foreach (var button in pendingAdds) {
 				if (button.ButtonId == buttonId) {
 					return true;
 				}
 			}
 
-			return ButtonOperations.CheckIfButtonExists(BankName, ScreenId, buttonId) || pendingUpdates.ContainsKey(buttonId);
+			bool? existsInDatabase = ButtonOperations.CheckIfButtonExists(BankName, ScreenId, buttonId);
+
+			if (existsInDatabase is null) return null;
+
+			return (bool) existsInDatabase || pendingUpdates.ContainsKey(buttonId);
 		}
 
 		/// <summary>
@@ -271,25 +273,25 @@ namespace BusinessLogicLayer {
 			return pendingAdds.Count + pendingUpdates.Count + pendingDeletes.Count;
 		}
 
-		private void CommitAdds() {
+		private bool CommitAdds() {
 			if (pendingAdds.Count == 0)
-				return;
+				return true;
 
-			ButtonOperations.AddButtons(ScreenId, pendingAdds);
+			return ButtonOperations.AddButtons(ScreenId, pendingAdds);
 		}
 
-		private void CommitUpdates() {
+		private bool CommitUpdates() {
 			if (pendingUpdates.Count == 0)
-				return;
+				return true;
 
-			ButtonOperations.UpdateButtons(BankName, ScreenId, pendingUpdates);
+			return ButtonOperations.UpdateButtons(BankName, ScreenId, pendingUpdates);
 		}
 
-		private void CommitDeletes() {
+		private bool CommitDeletes() {
 			if (pendingDeletes.Count == 0)
-				return;
+				return true;
 
-			ButtonOperations.DeleteButtons(BankName, ScreenId, pendingDeletes.ToList());
+			return ButtonOperations.DeleteButtons(BankName, ScreenId, pendingDeletes.ToList());
 		}
 	}
 }

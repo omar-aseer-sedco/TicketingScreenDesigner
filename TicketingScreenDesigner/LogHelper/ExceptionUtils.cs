@@ -1,8 +1,8 @@
-﻿using System.Data.SqlClient;
-using LogUtils;
+﻿using LogUtils;
+using System.Data.SqlClient;
 
-namespace BusinessLogicLayer {
-	public static class BLLExceptionHelper {
+namespace ExceptionUtils {
+	public static class ExceptionHelper {
 		public enum SqlErrorCodes {
 			UniqueConstraintViolation = 2627,
 			StatementTerminated = 3621,

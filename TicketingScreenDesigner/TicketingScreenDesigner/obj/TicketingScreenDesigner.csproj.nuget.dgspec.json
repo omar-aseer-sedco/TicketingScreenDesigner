@@ -31,8 +31,8 @@
               "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\DataAccessLayer.csproj": {
                 "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\DataAccessLayer.csproj"
               },
-              "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj": {
-                "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj"
+              "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj": {
+                "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj"
               }
             }
           }
@@ -90,8 +90,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj": {
-                "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj"
+              "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj": {
+                "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj"
               }
             }
           }
@@ -131,12 +131,12 @@
         }
       }
     },
-    "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj": {
+    "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj",
-        "projectName": "LogUtils",
-        "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj",
+        "projectUniqueName": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj",
+        "projectName": "Utils",
+        "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj",
         "packagesPath": "C:\\Users\\omar.aseer\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\obj\\",
         "projectStyle": "PackageReference",
@@ -222,8 +222,8 @@
               "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\DataAccessLayer.csproj": {
                 "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\DataAccessLayer.csproj"
               },
-              "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj": {
-                "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\LogUtils.csproj"
+              "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj": {
+                "projectPath": "C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\LogHelper\\Utils.csproj"
               }
             }
           }

@@ -3,6 +3,8 @@
 using BusinessLogicLayer;
 using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
+using LogUtils;
+using ExceptionUtils;
 
 namespace TicketingScreenDesigner {
 	public partial class ScreenEditor : Form {
@@ -40,13 +42,17 @@ namespace TicketingScreenDesigner {
 			activeCheckBox.Checked = screen.IsActive;
 		}
 
-		private void SyncButtons() {
-			buttons = screenController.GetAllButtons();
-		}
-
 		public void UpdateListView() {
 			try {
-				SyncButtons();
+				List<TicketingButton>? screenButtons = screenController.GetAllButtons();
+
+				if (screenButtons is null) {
+					LogsHelper.Log("Failed to sync buttons.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("Failed to sync with database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
+				buttons = screenButtons;
 
 				buttonsListView.Items.Clear();
 
@@ -56,6 +62,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -90,6 +97,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -100,6 +108,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -108,19 +117,33 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void AddNewScreen() {
-			screenController.ScreenId = bankController.AddScreen(new TicketingScreen() {
+			int? screenId = bankController.AddScreen(new TicketingScreen() {
 				BankName = bankController.BankName,
 				ScreenTitle = screenTitleTextBox.Text,
 				IsActive = activeCheckBox.Checked,
 			});
+
+			if (screenId is null) {
+				LogsHelper.Log("Failed to add screen.", DateTime.Now, EventSeverity.Error);
+				MessageBox.Show("Failed to add screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			screenController.ScreenId = (int) screenId;
 		}
 
 		private void UpdateCurrentScreen() {
-			bankController.UpdateScreen(screenController.ScreenId, new TicketingScreen() {
+			bool success = bankController.UpdateScreen(screenController.ScreenId, new TicketingScreen() {
 				BankName = bankController.BankName,
 				ScreenTitle = screenTitleTextBox.Text,
 				IsActive = activeCheckBox.Checked,
 			});
+
+			if (!success) {
+				LogsHelper.Log("Failed to update screen.", DateTime.Now, EventSeverity.Error);
+				MessageBox.Show("Failed to update screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 		}
 
 		private void saveButton_Click(object sender, EventArgs e) {
@@ -136,7 +159,15 @@ namespace TicketingScreenDesigner {
 					AddNewScreen();
 				}
 				else {
-					if (bankController.CheckIfScreenExists(screenController.ScreenId)) {
+					bool? screenExists = bankController.CheckIfScreenExists(screenController.ScreenId);
+
+					if (screenExists is null) {
+						LogsHelper.Log("Failed to access screen.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Failed to access screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
+					}
+
+					if ((bool) screenExists) {
 						UpdateCurrentScreen();
 					}
 					else {
@@ -147,13 +178,18 @@ namespace TicketingScreenDesigner {
 					}
 				}
 
-				screenController.CommitPendingChanges();
+				if (!screenController.CommitPendingChanges()) {
+					LogsHelper.Log("Failed to commit changes.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("Failed to commit changes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
 				callingForm.UpdateListView();
 
 				Close();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -172,14 +208,13 @@ namespace TicketingScreenDesigner {
 					}
 				}
 
-				MessageBox.Show("tf");
-
 				screenController.CancelPendingChanges();
 				callingForm.UpdateListView();
 				Close();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -212,6 +247,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -238,6 +274,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -246,7 +283,14 @@ namespace TicketingScreenDesigner {
 		}
 
 		public void CheckIfScreenExists() {
-			if (!isNewScreen && !bankController.CheckIfScreenExists(screenController.ScreenId)) {
+			bool? screenExists = bankController.CheckIfScreenExists(screenController.ScreenId);
+			if (screenExists is null) {
+				LogsHelper.Log("Failed to access screen.", DateTime.Now, EventSeverity.Error);
+				MessageBox.Show("Failed to access screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (!isNewScreen && !(bool) screenExists) {
 				MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				screenController.CancelPendingChanges();
 				Close();
@@ -263,7 +307,15 @@ namespace TicketingScreenDesigner {
 
 				TicketingButton button = (TicketingButton) buttonsListView.SelectedItems[0].Tag;
 
-				if (!screenController.CheckIfButtonExists(button.ButtonId)) {
+				bool? buttonExists = screenController.CheckIfButtonExists(button.ButtonId);
+
+				if (buttonExists is null) {
+					LogsHelper.Log("Failed to access button.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("Failed to access button.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
+				if (!(bool) buttonExists) {
 					MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					UpdateListView();
 					return;
@@ -274,6 +326,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 

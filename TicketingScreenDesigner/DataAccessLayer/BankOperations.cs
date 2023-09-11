@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
-using DataAccessLayer.Utils;
+using ExceptionUtils;
 
 namespace DataAccessLayer {
 	/// <summary>
@@ -15,8 +15,8 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="bankName">The name of the bank. Case insensitive.</param>
 		/// <returns><c>true</c> if the bank exists in the database, and <c>false</c> otherwise.</returns>
-		public static bool CheckIfBankExists(string bankName) {
-			bool exists = false;
+		public static bool? CheckIfBankExists(string bankName) {
+			bool? exists = null;
 
 			try {
 				string query = $"SELECT * FROM {BanksConstants.TABLE_NAME} WHERE {BanksConstants.BANK_NAME} = @bankName;";
@@ -27,10 +27,10 @@ namespace DataAccessLayer {
 				exists = command.ExecuteReader().HasRows;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Bank Name");
+				ExceptionHelper.HandleSqlException(ex, "Bank Name");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
@@ -43,7 +43,10 @@ namespace DataAccessLayer {
 		/// Adds a bank to the database.
 		/// </summary>
 		/// <param name="bank">The bank to be added to the database.</param>
-		public static void AddBank(Bank bank) {
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
+		public static bool AddBank(Bank bank) {
+			bool success = false;
+
 			try {
 				string query = $"INSERT INTO {BanksConstants.TABLE_NAME} ({BanksConstants.BANK_NAME}, {BanksConstants.PASSWORD}) VALUES (@bankName, @password);";
 				SqlCommand command = new SqlCommand(query, connection);
@@ -51,25 +54,27 @@ namespace DataAccessLayer {
 				command.Parameters.AddWithValue("@password", bank.Password);
 
 				connection.Open();
-				command.ExecuteNonQuery();
+				success = command.ExecuteNonQuery() == 1;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Bank Name");
+				ExceptionHelper.HandleSqlException(ex, "Bank Name");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
+
+			return success;
 		}
 
 		/// <summary>
 		/// Gets all the screens for the bank with the specified name.
 		/// </summary>
 		/// <param name="bankName">The name of the bank. Case insensitive.</param>
-		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exists, an empty list is returned.</returns>
-		public static List<TicketingScreen> GetScreens(string bankName) {
+		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exists, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
+		public static List<TicketingScreen>? GetScreens(string bankName) {
 			var ret = new List<TicketingScreen>();
 
 			try {
@@ -86,27 +91,29 @@ namespace DataAccessLayer {
 				}
 
 				reader.Close();
+
+				return ret;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Screen ID");
+				ExceptionHelper.HandleSqlException(ex, "Screen ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
 
-			return ret;
+			return null;
 		}
 
 		/// <summary>
 		/// Gets the password for the specified bank.
 		/// </summary>
 		/// <param name="bankName">The name of the bank.</param>
-		/// <returns>The password. If the bank does not exist, an empty string is returned.</returns>
-		public static string GetPassword(string bankName) {
-			string password = string.Empty;
+		/// <returns>The password. If the bank does not exist, an empty string is returned. If the operation fails, <c>null</c> is returned.</returns>
+		public static string? GetPassword(string bankName) {
+			string? password = string.Empty;
 
 			try {
 				string query = $"SELECT {BanksConstants.PASSWORD} FROM {BanksConstants.TABLE_NAME} WHERE {BanksConstants.BANK_NAME} = @bankName;";
@@ -120,18 +127,20 @@ namespace DataAccessLayer {
 				if (reader.Read()) {
 					password = reader.GetString(0);
 				}
+
+				return password;
 			}
 			catch (SqlException ex) {
-				DALExceptionHelper.HandleSqlException(ex, "Screen ID");
+				ExceptionHelper.HandleSqlException(ex, "Screen ID");
 			}
 			catch (Exception ex) {
-				DALExceptionHelper.HandleGeneralException(ex);
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 			finally {
 				connection.Close();
 			}
 
-			return password;
+			return null;
 		}
 	}
 }

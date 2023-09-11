@@ -15,7 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj" />
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
-    <ProjectReference Include="..\LogHelper\LogUtils.csproj" />
+    <ProjectReference Include="..\LogHelper\Utils.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,6 +3,8 @@
 using DataAccessLayer.DataClasses;
 using DataAccessLayer.Constants;
 using BusinessLogicLayer;
+using LogUtils;
+using ExceptionUtils;
 
 namespace TicketingScreenDesigner {
 	public partial class ButtonEditor : Form {
@@ -57,6 +59,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -93,6 +96,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -120,11 +124,21 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				if (!isNewButton && !screenController.CheckIfButtonExists(button.ButtonId)) {
-					MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					callingForm.UpdateListView();
-					Close();
-					return;
+				if (!isNewButton) {
+					bool? buttonExists = screenController.CheckIfButtonExists(button.ButtonId);
+
+					if (buttonExists is null) {
+						LogsHelper.Log("Failed to access button.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Failed to access button.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
+					}
+
+					if (!(bool) buttonExists) {
+						MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						callingForm.UpdateListView();
+						Close();
+						return;
+					}
 				}
 
 				string bankName = screenController.BankName;
@@ -175,6 +189,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -192,6 +207,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -203,6 +219,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
 		}

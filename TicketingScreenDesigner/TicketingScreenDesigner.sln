@@ -5,11 +5,11 @@ VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingScreenDesigner", "TicketingScreenDesigner\TicketingScreenDesigner.csproj", "{EAADA000-F303-42B5-833C-4A74E03E7E98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogUtils", "LogHelper\LogUtils.csproj", "{79E36E9D-A6DE-47B7-BAAE-BFB2273A6EFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "LogHelper\Utils.csproj", "{79E36E9D-A6DE-47B7-BAAE-BFB2273A6EFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{473DDFAF-639D-4D90-805E-9914D3036AC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{473DDFAF-639D-4D90-805E-9914D3036AC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{C0F07ECF-3FCE-4024-911C-90B4E82E7DA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{C0F07ECF-3FCE-4024-911C-90B4E82E7DA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

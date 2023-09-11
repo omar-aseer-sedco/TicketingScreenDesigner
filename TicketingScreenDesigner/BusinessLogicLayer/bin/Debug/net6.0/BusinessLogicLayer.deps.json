@@ -9,7 +9,7 @@
       "BusinessLogicLayer/1.0.0": {
         "dependencies": {
           "DataAccessLayer": "1.0.0",
-          "LogUtils": "1.0.0"
+          "Utils": "1.0.0"
         },
         "runtime": {
           "BusinessLogicLayer.dll": {}
@@ -92,19 +92,19 @@
       "System.Security.Principal.Windows/4.7.0": {},
       "DataAccessLayer/1.0.0": {
         "dependencies": {
-          "LogUtils": "1.0.0",
-          "System.Data.SqlClient": "4.8.5"
+          "System.Data.SqlClient": "4.8.5",
+          "Utils": "1.0.0"
         },
         "runtime": {
           "DataAccessLayer.dll": {}
         }
       },
-      "LogUtils/1.0.0": {
+      "Utils/1.0.0": {
         "dependencies": {
           "System.Data.SqlClient": "4.8.5"
         },
         "runtime": {
-          "LogUtils.dll": {}
+          "Utils.dll": {}
         }
       }
     }
@@ -183,7 +183,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "LogUtils/1.0.0": {
+    "Utils/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
