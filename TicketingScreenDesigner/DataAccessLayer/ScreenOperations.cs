@@ -19,6 +19,7 @@ namespace DataAccessLayer {
 			}
 			catch (Exception ex) {
 				Console.Error.WriteLine($"Failed to establish connection. Message: {ex.Message}");
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 		}
 
@@ -41,10 +42,10 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <returns><c>true</c> if the connection has been established properly, and <c>false</c> otherwise.</returns>
 		public bool VerifyConnection() {
-			if (connection is null)
-				return false;
-
 			try {
+				if (connection is null)
+					return false;
+
 				connection.Open();
 				var command = new SqlCommand($"SELECT 1 FROM {ScreensConstants.TABLE_NAME};", connection);
 
@@ -100,20 +101,32 @@ namespace DataAccessLayer {
 			}
 
 			public bool DeactivateScreen(string bankName, int screenId) {
-				return SetIsActive(bankName, screenId, false);
+				try {
+					return SetIsActive(bankName, screenId, false);
+				}
+				catch (Exception ex) {
+					ExceptionHelper.HandleGeneralException(ex);
+					return default;
+				}
 			}
 
 			public bool ActivateScreen(string bankName, int screenId) {
-				int? currentlyActiveScreenId = GetActiveScreenId(bankName);
+				try {
+					int? currentlyActiveScreenId = GetActiveScreenId(bankName);
 
-				if (currentlyActiveScreenId is null)
-					return false;
+					if (currentlyActiveScreenId is null)
+						return false;
 
-				if (currentlyActiveScreenId != -1 && currentlyActiveScreenId != screenId) {
-					DeactivateScreen(bankName, (int) currentlyActiveScreenId);
+					if (currentlyActiveScreenId != -1 && currentlyActiveScreenId != screenId) {
+						DeactivateScreen(bankName, (int) currentlyActiveScreenId);
+					}
+
+					return SetIsActive(bankName, screenId, true);
 				}
-
-				return SetIsActive(bankName, screenId, true);
+				catch (Exception ex) {
+					ExceptionHelper.HandleGeneralException(ex);
+					return default;
+				}
 			}
 
 			private bool SetIsActive(string bankName, int screenId, bool active) {
@@ -192,10 +205,16 @@ namespace DataAccessLayer {
 		/// <param name="bankName">The name of the bank.</param>
 		/// <returns>The ID of the active screen. If there is no active screen, <c>-1</c> is returned. If the operation fails, <c>null</c> is returned.</returns>
 		public int? GetActiveScreenId(string bankName) {
-			if (connection is null)
-				return null;
+			try {
+				if (connection is null)
+					return null;
 
-			return ActiveScreenController.Instance.GetActiveScreenId(bankName);
+				return ActiveScreenController.Instance.GetActiveScreenId(bankName);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -205,10 +224,16 @@ namespace DataAccessLayer {
 		/// <param name="screenId">The ID of the screen.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool DeactivateScreen(string bankName, int screenId) {
-			if (connection is null)
-				return false;
+			try {
+				if (connection is null)
+					return false;
 
-			return ActiveScreenController.Instance.DeactivateScreen(bankName, screenId);
+				return ActiveScreenController.Instance.DeactivateScreen(bankName, screenId);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -218,10 +243,16 @@ namespace DataAccessLayer {
 		/// <param name="screenId">The ID of the screen.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool ActivateScreen(string bankName, int screenId) {
-			if (connection is null)
-				return false;
+			try {
+				if (connection is null)
+					return false;
 
-			return ActiveScreenController.Instance.ActivateScreen(bankName, screenId);
+				return ActiveScreenController.Instance.ActivateScreen(bankName, screenId);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>

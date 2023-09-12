@@ -35,12 +35,18 @@ namespace TicketingScreenDesigner {
 		private string language;
 
 		public PreviewForm(string screenTitle, List<TicketingButton> ticketingButtons) {
-			titleText = screenTitle;
-			this.ticketingButtons = ticketingButtons;
-			StartPosition = FormStartPosition.CenterParent;
-			buttonCount = ticketingButtons.Count;
-			language = "en";
-			InitializeComponent();
+			try {
+				titleText = screenTitle;
+				this.ticketingButtons = ticketingButtons;
+				StartPosition = FormStartPosition.CenterParent;
+				buttonCount = ticketingButtons.Count;
+				language = "en";
+				InitializeComponent();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void InitializeComponent() {
@@ -105,75 +111,113 @@ namespace TicketingScreenDesigner {
 		}
 
 		private static int GetNextPerfectSquareRoot(int x) {
-			return (int) Math.Ceiling(Math.Sqrt(x));
+			try {
+				return (int) Math.Ceiling(Math.Sqrt(x));
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return default;
+			}
 		}
 
 		private void SetButtonGridDimensions() {
-			rows = GetNextPerfectSquareRoot(buttonCount);
-			columns = (int) Math.Ceiling((double) buttonCount / rows);
+			try {
+				rows = GetNextPerfectSquareRoot(buttonCount);
+				columns = (int) Math.Ceiling((double) buttonCount / rows);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void SetFormSize() {
-			int height = TOP_MARGIN + titleLabel.Height + TITLE_TEXT_SPACING + (BUTTON_HEIGHT * rows) + (BUTTON_SPACING_VERTICAL * (rows - 1)) + BOTTOM_MARGIN + VERTICAL_CORRECTION;
-			int width = (SIDE_MARGIN * 2) + Math.Max(titleLabel.Width, (BUTTON_WIDTH * columns) + (BUTTON_SPACING_HORIZONTAL * (columns - 1))) + HORIZONTAL_CORRECTION;
+			try {
+				int height = TOP_MARGIN + titleLabel.Height + TITLE_TEXT_SPACING + (BUTTON_HEIGHT * rows) + (BUTTON_SPACING_VERTICAL * (rows - 1)) + BOTTOM_MARGIN + VERTICAL_CORRECTION;
+				int width = (SIDE_MARGIN * 2) + Math.Max(titleLabel.Width, (BUTTON_WIDTH * columns) + (BUTTON_SPACING_HORIZONTAL * (columns - 1))) + HORIZONTAL_CORRECTION;
 
-			Size = new Size(width, height);
+				Size = new Size(width, height);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private Point GetButtonLocation(int index) {
-			int row = index / columns, column = index % columns;
+			try {
+				int row = index / columns, column = index % columns;
 
-			int x = SIDE_MARGIN + (column * (BUTTON_WIDTH + BUTTON_SPACING_HORIZONTAL));
-			int y = TOP_MARGIN + titleLabel.Height + TITLE_TEXT_SPACING + (row * (BUTTON_HEIGHT + BUTTON_SPACING_VERTICAL));
+				int x = SIDE_MARGIN + (column * (BUTTON_WIDTH + BUTTON_SPACING_HORIZONTAL));
+				int y = TOP_MARGIN + titleLabel.Height + TITLE_TEXT_SPACING + (row * (BUTTON_HEIGHT + BUTTON_SPACING_VERTICAL));
 
-			return new Point(x, y);
+				return new Point(x, y);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return default;
+			}
 		}
 
 		private void Button_Click(object? sender, EventArgs e) {
-			if (sender is null)
-				return;
+			try {
+				if (sender is null)
+					return;
 
-			Button button = (Button) sender;
-			string message = string.Empty;
+				Button button = (Button) sender;
+				string message = string.Empty;
 
-			foreach (var ticketingButton in ticketingButtons) {
-				if (int.Parse(button.Name) == ticketingButton.ButtonId) {
-					if (ticketingButton is IssueTicketButton issueTicketButton) {
-						message = issueTicketButton.Service;
+				foreach (var ticketingButton in ticketingButtons) {
+					if (int.Parse(button.Name) == ticketingButton.ButtonId) {
+						if (ticketingButton is IssueTicketButton issueTicketButton) {
+							message = issueTicketButton.Service;
+						}
+						else if (ticketingButton is ShowMessageButton showMessageButton) {
+							string messageEn = showMessageButton.MessageEn;
+							string messageAr = showMessageButton.MessageAr;
+
+							message = $"{messageEn}.\n{messageAr}.";
+						}
+
+						break;
 					}
-					else if (ticketingButton is ShowMessageButton showMessageButton) {
-						string messageEn = showMessageButton.MessageEn;
-						string messageAr = showMessageButton.MessageAr;
-
-						message = $"{messageEn}.\n{messageAr}.";
-					}
-
-					break;
 				}
-			}
 
-			MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void SwitchLanguage(object? sender, EventArgs e) {
-			if (language == "en") {
-				for (int i = 0; i < formButtons.Count; ++i) {
-					formButtons[i].RightToLeft = RightToLeft.Yes;
-					formButtons[i].Text = ticketingButtons[i].NameAr;
+			try {
+				if (language == "en") {
+					for (int i = 0; i < formButtons.Count; ++i) {
+						formButtons[i].RightToLeft = RightToLeft.Yes;
+						formButtons[i].Text = ticketingButtons[i].NameAr;
+					}
+
+					language = "ar";
+				}
+				else {
+					for (int i = 0; i < formButtons.Count; ++i) {
+						formButtons[i].RightToLeft = RightToLeft.No;
+						formButtons[i].Text = ticketingButtons[i].NameEn;
+					}
+
+					language = "en";
 				}
 
-				language = "ar";
+				languageButton.Text = language.ToUpper();
 			}
-			else {
-				for (int i = 0; i < formButtons.Count; ++i) {
-					formButtons[i].RightToLeft = RightToLeft.No;
-					formButtons[i].Text = ticketingButtons[i].NameEn;
-				}
-
-				language = "en";
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-
-			languageButton.Text = language.ToUpper();
 		}
 	}
 }

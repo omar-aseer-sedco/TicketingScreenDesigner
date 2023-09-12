@@ -25,21 +25,39 @@ namespace TicketingScreenDesigner {
 		}
 
 		private ButtonEditor() {
-			InitializeComponent();
+			try {
+				InitializeComponent();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		public ButtonEditor(ScreenEditor callingForm, ScreenController screenController) : this() {
-			Text = TITLE_TEXT + " - New Button";
-			isNewButton = true;
-			this.callingForm = callingForm;
-			this.screenController = screenController;
+			try {
+				Text = TITLE_TEXT + " - New Button";
+				isNewButton = true;
+				this.callingForm = callingForm;
+				this.screenController = screenController;
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		public ButtonEditor(ScreenEditor callingForm, ScreenController screenController, TicketingButton button) : this(callingForm, screenController) {
-			Text = TITLE_TEXT + " - " + button.NameEn;
-			isNewButton = false;
-			this.button = button;
-			FillTextBoxes(button);
+			try {
+				Text = TITLE_TEXT + " - " + button.NameEn;
+				isNewButton = false;
+				this.button = button;
+				FillTextBoxes(button);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void FillTextBoxes(TicketingButton button) {
@@ -101,7 +119,13 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void typeComboBox_SelectedIndexChanged(object sender, EventArgs e) {
-			ShowTypeSpecificFields();
+			try {
+				ShowTypeSpecificFields();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private bool IsInformationComplete() {
@@ -225,11 +249,17 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void TrimInput() {
-			nameEnTextBox.Text = nameEnTextBox.Text.Trim();
-			nameArTextBox.Text = nameArTextBox.Text.Trim();
-			messageEnTextBox.Text = messageEnTextBox.Text.Trim();
-			messageArTextBox.Text = messageArTextBox.Text.Trim();
-			serviceTextBox.Text = serviceTextBox.Text.Trim();
+			try {
+				nameEnTextBox.Text = nameEnTextBox.Text.Trim();
+				nameArTextBox.Text = nameArTextBox.Text.Trim();
+				messageEnTextBox.Text = messageEnTextBox.Text.Trim();
+				messageArTextBox.Text = messageArTextBox.Text.Trim();
+				serviceTextBox.Text = serviceTextBox.Text.Trim();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 	}
 }

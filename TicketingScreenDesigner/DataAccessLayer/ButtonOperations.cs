@@ -41,10 +41,10 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <returns><c>true</c> if the connection has been established properly, and <c>false</c> otherwise.</returns>
 		public bool VerifyConnection() {
-			if (connection is null)
-				return false;
-
 			try {
+				if (connection is null)
+					return false;
+
 				connection.Open();
 				var command = new SqlCommand($"SELECT 1 FROM {ButtonsConstants.TABLE_NAME};", connection);
 

@@ -16,48 +16,84 @@ namespace TicketingScreenDesigner {
 		private List<TicketingScreen> screens;
 
 		private BankForm() {
-			InitializeComponent();
-			bankName = string.Empty;
-			screens = new List<TicketingScreen>();
+			try {
+				InitializeComponent();
+				bankName = string.Empty;
+				screens = new List<TicketingScreen>();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		public BankForm(string bankName) : this() {
-			Cursor.Current = Cursors.WaitCursor;
+			try {
+				Cursor.Current = Cursors.WaitCursor;
 
-			bankController = new BankController(out bool success, bankName);
-			if (!success) {
-				LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
-				MessageBox.Show("bankform Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				bankController = new BankController(out bool success, bankName);
+				if (!success) {
+					LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("bankform Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Cursor.Current = Cursors.Default;
+					Close();
+				}
+
+				this.bankName = bankName;
+				Text = TITLE_TEXT + " - " + this.bankName;
+				UpdateTitleLabel();
+				UpdateListView();
+
 				Cursor.Current = Cursors.Default;
-				Close();
 			}
-
-			this.bankName = bankName;
-			Text = TITLE_TEXT + " - " + this.bankName;
-			UpdateTitleLabel();
-			UpdateListView();
-
-			Cursor.Current = Cursors.Default;
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		public BankForm(string bankName, List<TicketingScreen> screens) : this(bankName) {
-			this.screens = screens;
+			try {
+				this.screens = screens;
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void UpdateTitleLabel() {
-			titleLabel.Text = TITLE_TEXT + " - " + bankName;
-			int sizeDifference = ClientSize.Width - titleLabel.Width;
-			titleLabel.Location = new Point(sizeDifference / 2, titleLabel.Location.Y);
+			try {
+				titleLabel.Text = TITLE_TEXT + " - " + bankName;
+				int sizeDifference = ClientSize.Width - titleLabel.Width;
+				titleLabel.Location = new Point(sizeDifference / 2, titleLabel.Location.Y);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void Add() {
-			var screenEditor = new ScreenEditor(this, bankController);
-			if (!screenEditor.IsDisposed)
-				screenEditor.ShowDialog();
+			try {
+				var screenEditor = new ScreenEditor(this, bankController);
+				if (!screenEditor.IsDisposed)
+					screenEditor.ShowDialog();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void addScreenButton_Click(object sender, EventArgs e) {
-			Add();
+			try {
+				Add();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		public void UpdateListView() {
@@ -136,15 +172,28 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void editScreenButton_Click(object sender, EventArgs e) {
-			Edit();
+			try {
+				Edit();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
-		private List<int> GetSelectedScreenIds() {
-			var selectedScreenIds = new List<int>();
-			foreach (ListViewItem row in screensListView.SelectedItems)
-				selectedScreenIds.Add((int) row.Tag);
+		private List<int>? GetSelectedScreenIds() {
+			try {
+				var selectedScreenIds = new List<int>();
+				foreach (ListViewItem row in screensListView.SelectedItems)
+					selectedScreenIds.Add((int) row.Tag);
 
-			return selectedScreenIds;
+				return selectedScreenIds;
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return null;
+			}
 		}
 
 		private void Delete() {
@@ -158,7 +207,7 @@ namespace TicketingScreenDesigner {
 				if (confirmationResult == DialogResult.No)
 					return;
 
-				if (!bankController.DeleteScreens(GetSelectedScreenIds())) {
+				if (!bankController.DeleteScreens(GetSelectedScreenIds() ?? new List<int>())) {
 					LogsHelper.Log("Failed to delete screens.", DateTime.Now, EventSeverity.Error);
 					MessageBox.Show("Failed to delete screen(s).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
@@ -173,7 +222,13 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void deleteScreenButton_Click(object sender, EventArgs e) {
-			Delete();
+			try {
+				Delete();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void UpdateFormButtonActivation() {
@@ -205,7 +260,13 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void screensListView_SelectedIndexChanged(object sender, EventArgs e) {
-			UpdateFormButtonActivation();
+			try {
+				UpdateFormButtonActivation();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void SetActive() {
@@ -247,7 +308,13 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void setActiveButton_Click(object sender, EventArgs e) {
-			SetActive();
+			try {
+				SetActive();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void Preview() {
@@ -268,7 +335,13 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void previewButton_Click(object sender, EventArgs e) {
-			Preview();
+			try {
+				Preview();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void PreviewScreenById(int screenId, string screenTitle) {
@@ -305,47 +378,77 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void refreshButton_Click(object sender, EventArgs e) {
-			UpdateListView();
+			try {
+				UpdateListView();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void HandleKeyEvent(KeyEventArgs e) {
-			switch (e.KeyCode) {
-				case Keys.Enter:
-				case Keys.E:
-					Edit();
-					break;
-				case Keys.Delete:
-				case Keys.Back:
-				case Keys.D:
-					Delete();
-					break;
-				case Keys.A:
-					Add();
-					break;
-				case Keys.S:
-					SetActive();
-					break;
-				case Keys.P:
-					Preview();
-					break;
-				case Keys.R:
-					UpdateListView();
-					break;
+			try {
+				switch (e.KeyCode) {
+					case Keys.Enter:
+					case Keys.E:
+						Edit();
+						break;
+					case Keys.Delete:
+					case Keys.Back:
+					case Keys.D:
+						Delete();
+						break;
+					case Keys.A:
+						Add();
+						break;
+					case Keys.S:
+						SetActive();
+						break;
+					case Keys.P:
+						Preview();
+						break;
+					case Keys.R:
+						UpdateListView();
+						break;
+				}
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
 		private void BankForm_KeyDown(object sender, KeyEventArgs e) {
-			HandleKeyEvent(e);
+			try {
+				HandleKeyEvent(e);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void screensListView_KeyDown(object sender, KeyEventArgs e) {
-			HandleKeyEvent(e);
+			try {
+				HandleKeyEvent(e);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void keyboardShortcutsToolStripMenuItem_Click(object sender, EventArgs e) {
-			string shortcuts = "E: Edit\nD/Del/Backspace: Delete\nA: Add\nS: Set Active\nP: Preview\nR: Refresh";
+			try {
+				string shortcuts = "E: Edit\nD/Del/Backspace: Delete\nA: Add\nS: Set Active\nP: Preview\nR: Refresh";
 
-			MessageBox.Show(shortcuts, "Keyboard shortcuts", MessageBoxButtons.OK, MessageBoxIcon.Question);
+				MessageBox.Show(shortcuts, "Keyboard shortcuts", MessageBoxButtons.OK, MessageBoxIcon.Question);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 	}
 }

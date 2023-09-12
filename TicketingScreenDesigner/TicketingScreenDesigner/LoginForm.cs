@@ -1,3 +1,5 @@
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
 using BusinessLogicLayer;
 using DataAccessLayer.DataClasses;
 using LogUtils;
@@ -8,17 +10,24 @@ namespace TicketingScreenDesigner {
 		private readonly LoginController loginController;
 
 		public LoginForm() {
-			InitializeComponent();
-			Show();
+			try {
+				InitializeComponent();
+				Show();
 
-			loginController = new LoginController(out bool success);
+				loginController = new LoginController(out bool success);
 
-			if (!success) {
-				LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
-				MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				Environment.Exit(0);
+				if (!success) {
+					LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Environment.Exit(0);
+				}
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		private void LogInButton_Click(object sender, EventArgs e) {
 			try {
@@ -99,21 +108,39 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void loginShowPasswordCheckBox_CheckedChanged(object sender, EventArgs e) {
-			loginPasswordTextBox.UseSystemPasswordChar = !loginShowPasswordCheckBox.Checked;
+			try {
+				loginPasswordTextBox.UseSystemPasswordChar = !loginShowPasswordCheckBox.Checked;
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void registerShowPasswordCheckBox_CheckedChanged(object sender, EventArgs e) {
-			registerPasswordTextBox.UseSystemPasswordChar = confirmPasswordTextBox.UseSystemPasswordChar = !registerShowPasswordCheckBox.Checked;
+			try {
+				registerPasswordTextBox.UseSystemPasswordChar = confirmPasswordTextBox.UseSystemPasswordChar = !registerShowPasswordCheckBox.Checked;
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void LoginForm_Resize(object sender, EventArgs e) {
-			int horizontalCorrection = 16;
-			int sideMargin = 12;
-			int gap = 6;
+			try {
+				int horizontalCorrection = 16;
+				int sideMargin = 12;
+				int gap = 6;
 
-			logInGroupBox.Size = new Size(((Width - horizontalCorrection) / 2) - sideMargin - (gap / 2), logInGroupBox.Height);
-			registerGroupBox.Size = logInGroupBox.Size;
-			registerGroupBox.Location = new Point(logInGroupBox.Location.X + logInGroupBox.Width + gap, logInGroupBox.Location.Y);
+				logInGroupBox.Size = new Size(((Width - horizontalCorrection) / 2) - sideMargin - (gap / 2), logInGroupBox.Height);
+				registerGroupBox.Size = logInGroupBox.Size;
+				registerGroupBox.Location = new Point(logInGroupBox.Location.X + logInGroupBox.Width + gap, logInGroupBox.Location.Y);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 	}
 }

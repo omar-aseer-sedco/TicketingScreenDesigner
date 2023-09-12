@@ -1,4 +1,7 @@
 ﻿namespace DataAccessLayer.DataClasses {
+	/// <summary>
+	/// Singleton class representing an empty screen object.
+	/// </summary>
 	public sealed class EmptyScreen : TicketingScreen {
 		private EmptyScreen() {
 			BankName = string.Empty;

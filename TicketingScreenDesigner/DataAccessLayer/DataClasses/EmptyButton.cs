@@ -1,4 +1,7 @@
 ﻿namespace DataAccessLayer.DataClasses {
+	/// <summary>
+	/// Singleton class representing an empty button object.
+	/// </summary>
 	public sealed class EmptyButton : TicketingButton {
 		private EmptyButton() { 
 			BankName = string.Empty;

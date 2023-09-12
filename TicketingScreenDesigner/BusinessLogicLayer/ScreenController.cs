@@ -1,4 +1,6 @@
-﻿using DataAccessLayer;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+using DataAccessLayer;
 using DataAccessLayer.DataClasses;
 using ExceptionUtils;
 
@@ -22,20 +24,26 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <param name="success"><c>true</c> if the connection with the database was established successfully, and <c>false</c> otherwise.</param>
 		public ScreenController(out bool success) {
-			if (ScreenOperations.Instance.VerifyConnection() && ButtonOperations.Instance.VerifyConnection()) {
-				success = true;
+			try {
+				if (ScreenOperations.Instance.VerifyConnection() && ButtonOperations.Instance.VerifyConnection()) {
+					success = true;
+				}
+				else {
+					success = false;
+				}
+
+				pendingIndex = -1;
+				BankName = string.Empty;
+				ScreenId = -1;
+				ScreenTitle = string.Empty;
+				pendingAdds = new List<TicketingButton>();
+				pendingUpdates = new Dictionary<int, TicketingButton>();
+				pendingDeletes = new HashSet<int>();
 			}
-			else {
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 				success = false;
 			}
-
-			pendingIndex = -1;
-			BankName = string.Empty;
-			ScreenId = -1;
-			ScreenTitle = string.Empty;
-			pendingAdds = new List<TicketingButton>();
-			pendingUpdates = new Dictionary<int, TicketingButton>();
-			pendingDeletes = new HashSet<int>();
 		}
 
 		/// <summary>
@@ -44,7 +52,13 @@ namespace BusinessLogicLayer {
 		/// <param name="success"><c>true</c> if the connection with the database was established successfully, and <c>false</c> otherwise.</param>
 		/// <param name="bankName">The name of the bank.</param>
 		public ScreenController(out bool success, string bankName) : this(out success) {
-			BankName = bankName;
+			try {
+				BankName = bankName;
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				success = false;
+			}
 		}
 
 		/// <summary>
@@ -55,8 +69,14 @@ namespace BusinessLogicLayer {
 		/// <param name="screenId">The ID fo the screen.</param>
 		/// <param name="screenTitle">The title of the screen.</param>
 		public ScreenController(out bool success, string bankName, int screenId, string screenTitle) : this(out success, bankName) {
-			ScreenId = screenId;
-			ScreenTitle = screenTitle;
+			try {
+				ScreenId = screenId;
+				ScreenTitle = screenTitle;
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				success = false;
+			}
 		}
 
 		/// <summary>
@@ -64,7 +84,13 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <returns>A list of <c>TicketingButton</c> items representing the buttons in the database. If there are none, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
 		public List<TicketingButton>? GetCommittedButtons() {
-			return ScreenOperations.Instance.GetButtons(BankName, ScreenId);
+			try {
+				return ScreenOperations.Instance.GetButtons(BankName, ScreenId);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -72,20 +98,26 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <returns>A list of <c>TicketingButton</c> items representing the buttons. If the operation fails, <c>null</c> is returned.</returns>
 		public List<TicketingButton>? GetAllButtons() {
-			var buttons = ScreenOperations.Instance.GetButtons(BankName, ScreenId);
-			if (buttons is null)
-				return null;
+			try {
+				var buttons = ScreenOperations.Instance.GetButtons(BankName, ScreenId);
+				if (buttons is null)
+					return null;
 
-			foreach (var button in buttons.ToList()) {
-				if (pendingDeletes.Contains(button.ButtonId) || pendingUpdates.ContainsKey(button.ButtonId)) {
-					buttons.Remove(button);
+				foreach (var button in buttons.ToList()) {
+					if (pendingDeletes.Contains(button.ButtonId) || pendingUpdates.ContainsKey(button.ButtonId)) {
+						buttons.Remove(button);
+					}
 				}
+
+				buttons.AddRange(pendingAdds);
+				buttons.AddRange(pendingUpdates.Values.ToList());
+
+				return buttons;
 			}
-
-			buttons.AddRange(pendingAdds);
-			buttons.AddRange(pendingUpdates.Values.ToList());
-
-			return buttons;
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -130,7 +162,13 @@ namespace BusinessLogicLayer {
 		/// <param name="button">The button to be added.</param>
 		/// <returns>The ID of the button that was added. If the operation fails, <c>null</c> is returned.</returns>
 		public int? AddButtonAndCommit(TicketingButton button) {
-			return ButtonOperations.Instance.AddButton(button);
+			try {
+				return ButtonOperations.Instance.AddButton(button);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -139,7 +177,13 @@ namespace BusinessLogicLayer {
 		/// <param name="buttons">A list of buttons to be added.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool AddButtonsAndCommit(List<TicketingButton> buttons) {
-			return ButtonOperations.Instance.AddButtons(buttons);
+			try {
+				return ButtonOperations.Instance.AddButtons(buttons);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -148,7 +192,12 @@ namespace BusinessLogicLayer {
 		/// <param name="buttonId">The ID of the button to be edited.</param>
 		/// <param name="newButton">A <c>TicketingButton</c> object containing the updated button information.</param>
 		public void UpdateButtonCancellable(int buttonId, TicketingButton newButton) {
-			UpdateButtonsCancellable(new Dictionary<int, TicketingButton> {{ buttonId, newButton }});
+			try {
+				UpdateButtonsCancellable(new Dictionary<int, TicketingButton> {{ buttonId, newButton }});
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
 		}
 
 		/// <summary>
@@ -189,7 +238,13 @@ namespace BusinessLogicLayer {
 		/// <param name="newButton">A <c>TicketingButton</c> object containing the updated button information.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool UpdateButtonAndCommit(int buttonId, TicketingButton newButton) {
-			return ButtonOperations.Instance.UpdateButton(BankName, ScreenId, buttonId, newButton);
+			try {
+				return ButtonOperations.Instance.UpdateButton(BankName, ScreenId, buttonId, newButton);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -198,7 +253,13 @@ namespace BusinessLogicLayer {
 		/// <param name="buttons">A dictionary where the keys are button IDs and the corresponding values are the updated buttons.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool UpdateButtonsAndCommit(Dictionary<int, TicketingButton> buttons) {
-			return ButtonOperations.Instance.UpdateButtons(BankName, ScreenId, buttons);
+			try {
+				return ButtonOperations.Instance.UpdateButtons(BankName, ScreenId, buttons);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -206,7 +267,12 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <param name="buttonId">The ID of the button to be deleted.</param>
 		public void DeleteButtonCancellable(int buttonId) {
-			DeleteButtonsCancellable(new List<int> { buttonId });
+			try {
+				DeleteButtonsCancellable(new List<int> { buttonId });
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
 		}
 
 		/// <summary>
@@ -214,23 +280,28 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <param name="buttonIds">A list containing the IDs of the button to be deleted.</param>
 		public void DeleteButtonsCancellable(List<int> buttonIds) {
-			foreach (int buttonId in buttonIds) {
-				bool isPendingList = false;
-				foreach (var pendingButton in pendingAdds) {
-					if (pendingButton.ButtonId == buttonId) {
-						pendingAdds.Remove(pendingButton);
+			try {
+				foreach (int buttonId in buttonIds) {
+					bool isPendingList = false;
+					foreach (var pendingButton in pendingAdds) {
+						if (pendingButton.ButtonId == buttonId) {
+							pendingAdds.Remove(pendingButton);
+							isPendingList = true;
+							break;
+						}
+					}
+					if (pendingUpdates.ContainsKey(buttonId)) {
+						pendingUpdates.Remove(buttonId);
 						isPendingList = true;
-						break;
+					}
+
+					if (!isPendingList) {
+						pendingDeletes.Add(buttonId);
 					}
 				}
-				if (pendingUpdates.ContainsKey(buttonId)) {
-					pendingUpdates.Remove(buttonId);
-					isPendingList = true;
-				}
-
-				if (!isPendingList) {
-					pendingDeletes.Add(buttonId);
-				}
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 			}
 		}
 
@@ -240,7 +311,13 @@ namespace BusinessLogicLayer {
 		/// <param name="buttonId">The ID of the button to be deleted.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool DeleteButtonAndCommit(int buttonId) {
-			return ButtonOperations.Instance.DeleteButton(BankName, ScreenId, buttonId);
+			try {
+				return ButtonOperations.Instance.DeleteButton(BankName, ScreenId, buttonId);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -249,7 +326,13 @@ namespace BusinessLogicLayer {
 		/// <param name="buttonIds">A list containing the IDs of the button to be deleted.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool DeleteButtonsAndCommit(List<int> buttonIds) {
-			return ButtonOperations.Instance.DeleteButtons(BankName, ScreenId, buttonIds);
+			try {
+				return ButtonOperations.Instance.DeleteButtons(BankName, ScreenId, buttonIds);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -257,16 +340,27 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public bool CommitPendingChanges() {
-			return CommitAdds() && CommitUpdates() && CommitDeletes();
+			try {
+				return CommitAdds() && CommitUpdates() && CommitDeletes();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
 		/// Cancels all cancellable changes (adds, deletes, and updates).
 		/// </summary>
 		public void CancelPendingChanges() {
-			pendingAdds.Clear();
-			pendingUpdates.Clear();
-			pendingDeletes.Clear();
+			try {
+				pendingAdds.Clear();
+				pendingUpdates.Clear();
+				pendingDeletes.Clear();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
 		}
 
 		/// <summary>
@@ -275,17 +369,23 @@ namespace BusinessLogicLayer {
 		/// <param name="buttonId">The ID of the button.</param>
 		/// <returns><c>true</c> if a matching button exists in the database, and <c>false</c> if it does not. If the operation fails, <c>null</c> is returned.</returns>
 		public bool? CheckIfButtonExists(int buttonId) {
-			foreach (var button in pendingAdds) {
-				if (button.ButtonId == buttonId) {
-					return true;
+			try {
+				foreach (var button in pendingAdds) {
+					if (button.ButtonId == buttonId) {
+						return true;
+					}
 				}
+
+				bool? existsInDatabase = ButtonOperations.Instance.CheckIfButtonExists(BankName, ScreenId, buttonId);
+
+				if (existsInDatabase is null) return null;
+
+				return (bool) existsInDatabase || pendingUpdates.ContainsKey(buttonId);
 			}
-
-			bool? existsInDatabase = ButtonOperations.Instance.CheckIfButtonExists(BankName, ScreenId, buttonId);
-
-			if (existsInDatabase is null) return null;
-
-			return (bool) existsInDatabase || pendingUpdates.ContainsKey(buttonId);
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		/// <summary>
@@ -293,28 +393,52 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <returns>The number of pending changes.</returns>
 		public int GetPendingChangeCount() {
-			return pendingAdds.Count + pendingUpdates.Count + pendingDeletes.Count;
+			try {
+				return pendingAdds.Count + pendingUpdates.Count + pendingDeletes.Count;
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return -1;
+			}
 		}
 
 		private bool CommitAdds() {
-			if (pendingAdds.Count == 0)
-				return true;
+			try {
+				if (pendingAdds.Count == 0)
+					return true;
 
-			return ButtonOperations.Instance.AddButtons(ScreenId, pendingAdds);
+				return ButtonOperations.Instance.AddButtons(ScreenId, pendingAdds);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		private bool CommitUpdates() {
-			if (pendingUpdates.Count == 0)
-				return true;
+			try {
+				if (pendingUpdates.Count == 0)
+					return true;
 
-			return ButtonOperations.Instance.UpdateButtons(BankName, ScreenId, pendingUpdates);
+				return ButtonOperations.Instance.UpdateButtons(BankName, ScreenId, pendingUpdates);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 
 		private bool CommitDeletes() {
-			if (pendingDeletes.Count == 0)
-				return true;
+			try {
+				if (pendingDeletes.Count == 0)
+					return true;
 
-			return ButtonOperations.Instance.DeleteButtons(BankName, ScreenId, pendingDeletes.ToList());
+				return ButtonOperations.Instance.DeleteButtons(BankName, ScreenId, pendingDeletes.ToList());
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
 		}
 	}
 }
