@@ -1,10 +1,12 @@
-IF NOT EXISTS(SELECT Name FROM sys.databases WHERE Name = 'TSD') BEGIN
-	CREATE DATABASE TSD;
+:setvar DB TSD
+
+IF NOT EXISTS(SELECT Name FROM sys.databases WHERE Name = '$(DB)') BEGIN
+	CREATE DATABASE $(DB);
 END
 
 GO
 
-USE TSD;
+USE $(DB);
 
 GO
 

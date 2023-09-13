@@ -1324,3 +1324,59 @@
   "Source": null,
   "StackTrace": null
 }
+{
+  "Message": "Verification failed.",
+  "TimeStamp": "2023-09-13T09:51:20.3144526+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T09:51:20.3357665+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Could not find file \u0027C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\bin\\Debug\\net6.0-windows\\config\\DB_config.txt\u0027.",
+  "TimeStamp": "2023-09-13T10:05:01.3462257+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)\r\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\r\n   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\r\n   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\r\n   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)\r\n   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)\r\n   at System.IO.StreamReader..ctor(String path)\r\n   at DataAccessLayer.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 16"
+}
+{
+  "Message": "Verification failed.",
+  "TimeStamp": "2023-09-13T10:05:01.4981462+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T10:05:01.4994391+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. Path: $ | LineNumber: 0 | BytePositionInLine: 0.",
+  "TimeStamp": "2023-09-13T10:05:35.7682406+03:00",
+  "Severity": "Error",
+  "Source": "System.Text.Json",
+  "StackTrace": "   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack\u0026 state, JsonReaderException ex)\r\n   at System.Text.Json.Serialization.JsonConverter\u00601.ReadCore(Utf8JsonReader\u0026 reader, JsonSerializerOptions options, ReadStack\u0026 state)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 utf8Json, JsonTypeInfo jsonTypeInfo, Nullable\u00601 actualByteCount)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 json, JsonTypeInfo jsonTypeInfo)\r\n   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)\r\n   at DataAccessLayer.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 22"
+}
+{
+  "Message": "Verification failed.",
+  "TimeStamp": "2023-09-13T10:05:35.8412752+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T10:05:35.8431998+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}

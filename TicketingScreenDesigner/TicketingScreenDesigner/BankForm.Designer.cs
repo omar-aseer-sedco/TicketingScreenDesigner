@@ -25,8 +25,8 @@
 		private void InitializeComponent() {
 			components = new System.ComponentModel.Container();
 			screensListView = new ListView();
-			isActiveColumn = new ColumnHeader();
 			screenTitleColumn = new ColumnHeader();
+			isActiveColumn = new ColumnHeader();
 			addScreenButton = new Button();
 			editScreenButton = new Button();
 			deleteScreenButton = new Button();
@@ -56,15 +56,15 @@
 			screensListView.SelectedIndexChanged += screensListView_SelectedIndexChanged;
 			screensListView.KeyDown += screensListView_KeyDown;
 			// 
-			// isActiveColumn
-			// 
-			isActiveColumn.Text = "Active?";
-			isActiveColumn.Width = 80;
-			// 
 			// screenTitleColumn
 			// 
 			screenTitleColumn.Text = "Screen Title";
 			screenTitleColumn.Width = 430;
+			// 
+			// isActiveColumn
+			// 
+			isActiveColumn.Text = "Active?";
+			isActiveColumn.Width = 80;
 			// 
 			// addScreenButton
 			// 
@@ -73,7 +73,7 @@
 			addScreenButton.Name = "addScreenButton";
 			addScreenButton.Size = new Size(108, 23);
 			addScreenButton.TabIndex = 1;
-			addScreenButton.Text = "Add";
+			addScreenButton.Text = "Add Screen";
 			toolTip1.SetToolTip(addScreenButton, "Add (A)\r\nAdd a new screen.");
 			addScreenButton.UseVisualStyleBackColor = true;
 			addScreenButton.Click += addScreenButton_Click;
@@ -86,7 +86,7 @@
 			editScreenButton.Name = "editScreenButton";
 			editScreenButton.Size = new Size(108, 23);
 			editScreenButton.TabIndex = 2;
-			editScreenButton.Text = "Edit";
+			editScreenButton.Text = "Edit Screen";
 			toolTip1.SetToolTip(editScreenButton, "Edit (E)\r\nEdit the currently selected screen.");
 			editScreenButton.UseVisualStyleBackColor = true;
 			editScreenButton.Click += editScreenButton_Click;
@@ -99,7 +99,7 @@
 			deleteScreenButton.Name = "deleteScreenButton";
 			deleteScreenButton.Size = new Size(108, 23);
 			deleteScreenButton.TabIndex = 3;
-			deleteScreenButton.Text = "Delete";
+			deleteScreenButton.Text = "Delete Screen";
 			toolTip1.SetToolTip(deleteScreenButton, "Delete (D/Del):\r\nDelete the currently selected screen(s).");
 			deleteScreenButton.UseVisualStyleBackColor = true;
 			deleteScreenButton.Click += deleteScreenButton_Click;
@@ -136,7 +136,7 @@
 			previewButton.Name = "previewButton";
 			previewButton.Size = new Size(108, 23);
 			previewButton.TabIndex = 6;
-			previewButton.Text = "Preview";
+			previewButton.Text = "Preview Screen";
 			toolTip1.SetToolTip(previewButton, "Preview (P):\r\nPreview how the currently selected screen would look.");
 			previewButton.UseVisualStyleBackColor = true;
 			previewButton.Click += previewButton_Click;
@@ -148,7 +148,7 @@
 			refreshButton.Name = "refreshButton";
 			refreshButton.Size = new Size(108, 23);
 			refreshButton.TabIndex = 7;
-			refreshButton.Text = "Refresh";
+			refreshButton.Text = "Refresh List";
 			toolTip1.SetToolTip(refreshButton, "Refresh (R):\r\nRefresh the screen list view.");
 			refreshButton.UseVisualStyleBackColor = true;
 			refreshButton.Click += refreshButton_Click;

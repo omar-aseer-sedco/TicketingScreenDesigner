@@ -18,7 +18,7 @@ namespace BusinessLogicLayer {
 					success = true;
 				}
 				else {
-					LogsHelper.Log("Verification failed.", DateTime.Now, EventSeverity.Error);
+					LogsHelper.Log("Verification failed - LoginController.", DateTime.Now, EventSeverity.Error);
 					success = false;
 				}
 			}

@@ -31,7 +31,7 @@ namespace DataAccessLayer {
 					connectionString += $" integrated security={config.IntegratedSecurity};";
 				}
 				if (config.UserId is not null && config.UserId != string.Empty && config.Password is not null) {
-					connectionString += $" User Id={config.UserId}; Password={config.Password};";
+					connectionString += $" User ID={config.UserId}; Password={config.Password};";
 				}
 
 				return new SqlConnection(connectionString);

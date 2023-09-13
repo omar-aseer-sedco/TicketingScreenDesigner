@@ -44,9 +44,9 @@
 			// saveButton
 			// 
 			saveButton.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
-			saveButton.Location = new Point(622, 307);
+			saveButton.Location = new Point(597, 307);
 			saveButton.Name = "saveButton";
-			saveButton.Size = new Size(75, 23);
+			saveButton.Size = new Size(100, 23);
 			saveButton.TabIndex = 0;
 			saveButton.Text = "Save";
 			toolTip1.SetToolTip(saveButton, "Save (Enter):\r\nSave your changes and close the window.");
@@ -60,7 +60,7 @@
 			buttonsListView.FullRowSelect = true;
 			buttonsListView.Location = new Point(12, 39);
 			buttonsListView.Name = "buttonsListView";
-			buttonsListView.Size = new Size(604, 261);
+			buttonsListView.Size = new Size(579, 261);
 			buttonsListView.TabIndex = 1;
 			buttonsListView.UseCompatibleStateImageBehavior = false;
 			buttonsListView.View = View.Details;
@@ -90,9 +90,9 @@
 			// cancelButton
 			// 
 			cancelButton.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
-			cancelButton.Location = new Point(542, 307);
+			cancelButton.Location = new Point(492, 307);
 			cancelButton.Name = "cancelButton";
-			cancelButton.Size = new Size(75, 23);
+			cancelButton.Size = new Size(100, 23);
 			cancelButton.TabIndex = 2;
 			cancelButton.Text = "Cancel";
 			toolTip1.SetToolTip(cancelButton, "Cancel (Esc):\r\nDiscard your changes and close the window.");
@@ -102,11 +102,11 @@
 			// addButton
 			// 
 			addButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
-			addButton.Location = new Point(622, 39);
+			addButton.Location = new Point(597, 39);
 			addButton.Name = "addButton";
-			addButton.Size = new Size(75, 23);
+			addButton.Size = new Size(100, 23);
 			addButton.TabIndex = 3;
-			addButton.Text = "Add";
+			addButton.Text = "Add Button";
 			toolTip1.SetToolTip(addButton, "Add (A):\r\nAdd a new button to the screen.");
 			addButton.UseVisualStyleBackColor = true;
 			addButton.Click += addButton_Click;
@@ -115,11 +115,11 @@
 			// 
 			deleteButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			deleteButton.Enabled = false;
-			deleteButton.Location = new Point(622, 97);
+			deleteButton.Location = new Point(597, 97);
 			deleteButton.Name = "deleteButton";
-			deleteButton.Size = new Size(75, 23);
+			deleteButton.Size = new Size(100, 23);
 			deleteButton.TabIndex = 4;
-			deleteButton.Text = "Delete";
+			deleteButton.Text = "Delete Button";
 			toolTip1.SetToolTip(deleteButton, "Delete (D/Del):\r\nDelete the currently selected button(s).");
 			deleteButton.UseVisualStyleBackColor = true;
 			deleteButton.Click += deleteButton_Click;
@@ -128,11 +128,11 @@
 			// 
 			editButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			editButton.Enabled = false;
-			editButton.Location = new Point(622, 68);
+			editButton.Location = new Point(597, 68);
 			editButton.Name = "editButton";
-			editButton.Size = new Size(75, 23);
+			editButton.Size = new Size(100, 23);
 			editButton.TabIndex = 5;
-			editButton.Text = "Edit";
+			editButton.Text = "Edit Button";
 			toolTip1.SetToolTip(editButton, "Edit (E):\r\nEdit the currently selected button.");
 			editButton.UseVisualStyleBackColor = true;
 			editButton.Click += editButton_Click;
@@ -141,7 +141,7 @@
 			// 
 			activeCheckBox.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
 			activeCheckBox.AutoSize = true;
-			activeCheckBox.Location = new Point(623, 285);
+			activeCheckBox.Location = new Point(598, 285);
 			activeCheckBox.Name = "activeCheckBox";
 			activeCheckBox.Size = new Size(59, 19);
 			activeCheckBox.TabIndex = 6;
@@ -170,11 +170,11 @@
 			// refreshButton
 			// 
 			refreshButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
-			refreshButton.Location = new Point(622, 126);
+			refreshButton.Location = new Point(597, 126);
 			refreshButton.Name = "refreshButton";
-			refreshButton.Size = new Size(75, 23);
+			refreshButton.Size = new Size(100, 23);
 			refreshButton.TabIndex = 13;
-			refreshButton.Text = "Refresh";
+			refreshButton.Text = "Refresh List";
 			toolTip1.SetToolTip(refreshButton, "Refresh (R):\r\nRefresh the button list view.");
 			refreshButton.UseVisualStyleBackColor = true;
 			refreshButton.Click += refreshButton_Click;

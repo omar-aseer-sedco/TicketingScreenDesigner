@@ -76,6 +76,11 @@ namespace TicketingScreenDesigner {
 				string password = registerPasswordTextBox.Text.Trim();
 				string confirm = confirmPasswordTextBox.Text.Trim();
 
+				if (string.IsNullOrEmpty(bankName) || string.IsNullOrEmpty(password)) {
+					MessageBox.Show("Please enter a bank name and a password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
 				bool? bankExists = loginController.CheckIfBankExists(bankName);
 
 				if (bankExists is null) {
@@ -93,8 +98,8 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				loginController.AddBank(new Bank(bankName, password));
-				MessageBox.Show("Registration successful. You can now log in.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				if (loginController.AddBank(new Bank(bankName, password)))
+					MessageBox.Show("Registration successful. You can now log in.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 				registerBankNameTextBox.Text = string.Empty;
 				registerPasswordTextBox.Text = string.Empty;

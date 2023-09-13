@@ -1,5 +1,6 @@
 {
 "Server": "(local)",
-"Database": "TSD_backup4",
-"IntegratedSecurity": "sspi",
+"Database": "TSD",
+"UserId": "sa",
+"Password": "sedco@123",
 }
