@@ -1,10 +1,5 @@
 ﻿namespace DataAccessLayer.Constants
 {
-    public static class DBConstants
-    {
-        public const string DATABASE_NAME = "TSD";
-    }
-
     public static class BanksConstants
     {
         public const string TABLE_NAME = "Banks";

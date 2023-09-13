@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using ExceptionUtils;
+using System.Text.Json;
 
 namespace LogUtils {
 	public class LogEvent {
@@ -46,7 +47,13 @@ namespace LogUtils {
 		private static readonly string logsFilePath = Path.Join(logsDirectoryPath, "logs.txt");
 
 		public static bool IsInitialized() {
-			return Directory.Exists(logsDirectoryPath);
+			try {
+				return Directory.Exists(logsDirectoryPath);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return false;
+			}
 		}
 
 		public static void InitializeLogsDirectory() {

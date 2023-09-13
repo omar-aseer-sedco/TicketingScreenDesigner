@@ -27,7 +27,6 @@ namespace TicketingScreenDesigner {
 				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		private void LogInButton_Click(object sender, EventArgs e) {
 			try {

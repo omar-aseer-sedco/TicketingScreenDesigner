@@ -1177,3 +1177,150 @@
   "Source": null,
   "StackTrace": null
 }
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-12T19:19:07.9383122+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-12T19:31:55.5146669+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "\u0027M\u0027 is an invalid escapable character within a JSON string. The string should be correctly escaped. Path: $.Server | LineNumber: 1 | BytePositionInLine: 22.",
+  "TimeStamp": "2023-09-12T19:32:35.9678736+03:00",
+  "Severity": "Error",
+  "Source": "System.Text.Json",
+  "StackTrace": "   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack\u0026 state, JsonReaderException ex)\r\n   at System.Text.Json.Serialization.JsonConverter\u00601.ReadCore(Utf8JsonReader\u0026 reader, JsonSerializerOptions options, ReadStack\u0026 state)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 utf8Json, JsonTypeInfo jsonTypeInfo, Nullable\u00601 actualByteCount)\r\n   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan\u00601 json, JsonTypeInfo jsonTypeInfo)\r\n   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)\r\n   at DataAccessLayer.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 22"
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-12T19:32:36.0674952+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-12T19:41:43.2466035+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-12T19:41:58.0453646+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T09:09:40.3442079+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T09:11:34.8356857+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T09:12:40.0037422+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T09:19:52.0379713+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T09:26:25.4178353+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T09:29:12.194111+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Verification failed.",
+  "TimeStamp": "2023-09-13T09:35:01.9626488+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T09:35:01.9743204+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "",
+  "TimeStamp": "2023-09-13T09:38:47.6243584+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Verification failed.",
+  "TimeStamp": "2023-09-13T09:38:47.6396435+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-13T09:38:47.6416391+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "1",
+  "TimeStamp": "2023-09-13T09:40:13.8770873+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Bank Form.",
+  "TimeStamp": "2023-09-13T09:40:25.2537266+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "1",
+  "TimeStamp": "2023-09-13T09:40:48.7926597+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Bank Form.",
+  "TimeStamp": "2023-09-13T09:40:51.0080534+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}

@@ -33,8 +33,8 @@ namespace TicketingScreenDesigner {
 
 				bankController = new BankController(out bool success, bankName);
 				if (!success) {
-					LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
-					MessageBox.Show("bankform Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					LogsHelper.Log("Error establishing database connection - Bank Form.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					Cursor.Current = Cursors.Default;
 					Close();
 				}

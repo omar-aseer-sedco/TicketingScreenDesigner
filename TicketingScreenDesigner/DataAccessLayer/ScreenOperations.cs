@@ -47,7 +47,7 @@ namespace DataAccessLayer {
 					return false;
 
 				connection.Open();
-				var command = new SqlCommand($"SELECT 1 FROM {ScreensConstants.TABLE_NAME};", connection);
+				var command = new SqlCommand($"SELECT 1;", connection);
 
 				var result = command.ExecuteScalar();
 				if (result is null)

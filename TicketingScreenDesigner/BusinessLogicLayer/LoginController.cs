@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DataClasses;
 using ExceptionUtils;
+using LogUtils;
 
 namespace BusinessLogicLayer {
 	/// <summary>
@@ -17,6 +18,7 @@ namespace BusinessLogicLayer {
 					success = true;
 				}
 				else {
+					LogsHelper.Log("Verification failed.", DateTime.Now, EventSeverity.Error);
 					success = false;
 				}
 			}

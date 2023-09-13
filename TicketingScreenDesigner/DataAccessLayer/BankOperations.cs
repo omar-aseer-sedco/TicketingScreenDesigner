@@ -2,6 +2,7 @@
 using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
 using ExceptionUtils;
+using LogUtils;
 
 namespace DataAccessLayer {
 	/// <summary>
@@ -45,7 +46,7 @@ namespace DataAccessLayer {
 					return false;
 
 				connection.Open();
-				var command = new SqlCommand($"SELECT 1 FROM {BanksConstants.TABLE_NAME};", connection);
+				var command = new SqlCommand($"SELECT 1;", connection);
 
 				var result = command.ExecuteScalar();
 				if (result is null)
