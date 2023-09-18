@@ -296,6 +296,10 @@ namespace TicketingScreenDesigner {
 					}
 				}
 
+				if (isNewScreen && alreadyAdded) {
+					BankController.DeleteScreens(bankName, new List<int>() { screenController.ScreenId });
+				}
+
 				screenController.CancelPendingChanges();
 				callingForm.UpdateScreensListView();
 				Close();
