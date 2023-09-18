@@ -45,7 +45,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -116,7 +116,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return default;
 			}
 		}
@@ -128,7 +128,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -141,7 +141,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -156,7 +156,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return default;
 			}
 		}
@@ -189,7 +189,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -216,7 +216,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 	}

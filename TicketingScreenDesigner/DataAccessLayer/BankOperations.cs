@@ -2,36 +2,22 @@
 using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
 using ExceptionUtils;
-using LogUtils;
+using System.Data;
 
 namespace DataAccessLayer {
 	/// <summary>
 	/// Contains methods for retrieving and manipulating bank information.
 	/// </summary>
-	public class BankOperations {
-		public static readonly BankOperations Instance = new();
-		private SqlConnection? connection;
+	public static class BankOperations {
+		private static SqlConnection? connection = null;
 
-		private BankOperations() {
+		private static bool Initialize() {
 			try {
-				connection = null;
-				connection = DBUtils.CreateConnection();
-			}
-			catch (Exception ex) {
-				Console.Error.WriteLine($"Failed to establish connection. Message: {ex.Message}");
-			}
-		}
-
-		/// <summary>
-		/// Attempts to establish the connection again.
-		/// </summary>
-		/// <returns><c>true</c> if the connection was established successfully, and <c>false</c> otherwise.</returns>
-		public bool ReinitializeConnection() {
-			try {
-				connection = DBUtils.CreateConnection();
+				connection ??= DBUtils.CreateConnection();
 				return true;
 			}
-			catch {
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
 				return false;
 			}
 		}
@@ -40,22 +26,17 @@ namespace DataAccessLayer {
 		/// Verifies that the database connection is established correctly.
 		/// </summary>
 		/// <returns><c>true</c> if the connection has been established properly, and <c>false</c> otherwise.</returns>
-		public bool VerifyConnection() {
+		public static bool VerifyConnection() {
 			try {
-				if (connection is null)
+				if (!Initialize())
 					return false;
 
-				connection.Open();
-				var command = new SqlCommand($"SELECT 1;", connection);
+				connection!.Open();
 
-				var result = command.ExecuteScalar();
-				if (result is null)
-					return false;
-
-				return (int) result == 1;
+				return true;
 			}
 			catch (Exception ex) {
-				Console.Error.WriteLine($"Failed to establish connection. Message: {ex.Message}");
+				ExceptionHelper.HandleGeneralException(ex);
 				return false;
 			}
 			finally {
@@ -68,16 +49,16 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="bankName">The name of the bank. Case insensitive.</param>
 		/// <returns><c>true</c> if the bank exists in the database, and <c>false</c> if it does not. If the operation fails, <c>null</c> is returned.</returns>
-		public bool? CheckIfBankExists(string bankName) {
+		public static bool? CheckIfBankExists(string bankName) {
 			try {
-				if (connection is null)
+				if (!Initialize())
 					return null;
 
 				string query = $"SELECT * FROM {BanksConstants.TABLE_NAME} WHERE {BanksConstants.BANK_NAME} = @bankName;";
 				var command = new SqlCommand(query, connection);
-				command.Parameters.AddWithValue("@bankName", bankName);
+				command.Parameters.Add("@bankName", SqlDbType.VarChar, BanksConstants.BANK_NAME_SIZE).Value = bankName;
 
-				connection.Open();
+				connection!.Open();
 				return command.ExecuteReader().HasRows;
 			}
 			catch (SqlException ex) {
@@ -98,17 +79,17 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="bank">The bank to be added to the database.</param>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public bool AddBank(Bank bank) {
+		public static bool AddBank(Bank bank) {
 			try {
-				if (connection is null)
+				if (!Initialize())
 					return false;
 
 				string query = $"INSERT INTO {BanksConstants.TABLE_NAME} ({BanksConstants.BANK_NAME}, {BanksConstants.PASSWORD}) VALUES (@bankName, @password);";
 				SqlCommand command = new SqlCommand(query, connection);
-				command.Parameters.AddWithValue("@bankName", bank.BankName);
-				command.Parameters.AddWithValue("@password", bank.Password);
+				command.Parameters.Add("@bankName", SqlDbType.VarChar, BanksConstants.BANK_NAME_SIZE).Value = bank.BankName;
+				command.Parameters.Add("@password", SqlDbType.VarChar, BanksConstants.PASSWORD_SIZE).Value = bank.Password;
 
-				connection.Open();
+				connection!.Open();
 				return command.ExecuteNonQuery() == 1;
 			}
 			catch (SqlException ex) {
@@ -129,18 +110,18 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="bankName">The name of the bank. Case insensitive.</param>
 		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exists, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public List<TicketingScreen>? GetScreens(string bankName) {
+		public static List<TicketingScreen>? GetScreens(string bankName) {
 			try {
-				if (connection is null)
+				if (!Initialize())
 					return null;
 
 				var ret = new List<TicketingScreen>();
 
 				string query = $"SELECT {ScreensConstants.SCREEN_ID}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName;";
 				var command = new SqlCommand(query, connection);
-				command.Parameters.AddWithValue("@bankName", bankName);
+				command.Parameters.Add("@bankName", SqlDbType.VarChar, BanksConstants.BANK_NAME_SIZE).Value = bankName;
 
-				connection.Open();
+				connection!.Open();
 
 				var reader = command.ExecuteReader();
 
@@ -170,18 +151,18 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="bankName">The name of the bank.</param>
 		/// <returns>The password. If the bank does not exist, an empty string is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public string? GetPassword(string bankName) {
+		public static string? GetPassword(string bankName) {
 			try {
-				if (connection is null)
+				if (!Initialize())
 					return null;
 
 				string? password = string.Empty;
 
 				string query = $"SELECT {BanksConstants.PASSWORD} FROM {BanksConstants.TABLE_NAME} WHERE {BanksConstants.BANK_NAME} = @bankName;";
 				var command = new SqlCommand(query, connection);
-				command.Parameters.AddWithValue("@bankName", bankName);
+				command.Parameters.Add("@bankName", SqlDbType.VarChar, BanksConstants.BANK_NAME_SIZE).Value = bankName;
 
-				connection.Open();
+				connection!.Open();
 
 				var reader = command.ExecuteReader();
 

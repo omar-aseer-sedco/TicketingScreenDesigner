@@ -1380,3 +1380,801 @@
   "Source": null,
   "StackTrace": null
 }
+{
+  "Message": "The parameterized query \u0027(@bankName varchar(255),@screenId int)SELECT COUNT(screen_id) FR\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T12:27:21.7156142+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteScalar()\r\n   at DataAccessLayer.ScreenOperations.CheckIfScreenExists(String bankName, Int32 screenId) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 273"
+}
+{
+  "Message": "Failed to access screen.",
+  "TimeStamp": "2023-09-17T12:27:21.7945333+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName varchar(255),@screenId int)SELECT COUNT(screen_id) FR\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T12:27:33.0274846+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteScalar()\r\n   at DataAccessLayer.ScreenOperations.CheckIfScreenExists(String bankName, Int32 screenId) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 273"
+}
+{
+  "Message": "Failed to access screen.",
+  "TimeStamp": "2023-09-17T12:27:33.0297589+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName varchar(255),@isActive bit,@screenTitle varchar(255))\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T12:27:35.1028118+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteScalar()\r\n   at DataAccessLayer.ScreenOperations.AddScreen(TicketingScreen screen) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 74"
+}
+{
+  "Message": "Failed to add screen.",
+  "TimeStamp": "2023-09-17T12:27:35.1049982+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T12:27:36.5788699+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName varchar(255),@isActive bit,@screenTitle varchar(255))\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T12:27:42.2323014+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteScalar()\r\n   at DataAccessLayer.ScreenOperations.AddScreen(TicketingScreen screen) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 74"
+}
+{
+  "Message": "Failed to add screen.",
+  "TimeStamp": "2023-09-17T12:27:42.233878+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T12:27:43.2228719+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName nvarchar(4000),@screenId int)SELECT COUNT(screen_id) \u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T12:34:42.4633325+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteScalar()\r\n   at DataAccessLayer.ScreenOperations.CheckIfScreenExists(String bankName, Int32 screenId) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 274"
+}
+{
+  "Message": "Failed to access screen.",
+  "TimeStamp": "2023-09-17T12:34:42.5013647+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName varchar(255),@isActive bit,@screenTitle varchar(255))\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T12:34:44.6649579+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteScalar()\r\n   at DataAccessLayer.ScreenOperations.AddScreen(TicketingScreen screen) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 74"
+}
+{
+  "Message": "Failed to add screen.",
+  "TimeStamp": "2023-09-17T12:34:44.6667386+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T12:34:46.0269686+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName nvarchar(4000),@screenId int)SELECT COUNT(screen_id) \u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T12:36:06.6184662+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteScalar()\r\n   at DataAccessLayer.ScreenOperations.CheckIfScreenExists(String bankName, Int32 screenId) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 275"
+}
+{
+  "Message": "Failed to access screen.",
+  "TimeStamp": "2023-09-17T12:36:06.6595274+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName nvarchar(4000),@isActive bit,@screenTitle varchar(255\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T12:36:08.9539822+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteScalar()\r\n   at DataAccessLayer.ScreenOperations.AddScreen(TicketingScreen screen) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 75"
+}
+{
+  "Message": "Failed to add screen.",
+  "TimeStamp": "2023-09-17T12:36:08.9557691+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T12:36:09.73146+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName varchar(255),@screenId int)SELECT button_id, name_en,\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T12:48:08.402081+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ScreenOperations.GetButtons(String bankName, Int32 screenId) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 311"
+}
+{
+  "Message": "Failed to sync buttons.",
+  "TimeStamp": "2023-09-17T12:48:08.4394976+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName nvarchar(4000),@screenId int)SELECT COUNT(screen_id) \u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T12:48:18.4228361+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteScalar()\r\n   at DataAccessLayer.ScreenOperations.CheckIfScreenExists(String bankName, Int32 screenId) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 275"
+}
+{
+  "Message": "Failed to access screen.",
+  "TimeStamp": "2023-09-17T12:48:18.4245015+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName varchar(255),@screenId int)SELECT button_id, name_en,\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T13:01:03.1090422+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ScreenOperations.GetButtons(String bankName, Int32 screenId) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 311"
+}
+{
+  "Message": "Failed to sync buttons.",
+  "TimeStamp": "2023-09-17T13:01:03.1488624+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName nvarchar(4000),@screenId int)SELECT button_id, name_e\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T13:01:55.0832097+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ScreenOperations.GetButtons(String bankName, Int32 screenId) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 312"
+}
+{
+  "Message": "Failed to sync buttons.",
+  "TimeStamp": "2023-09-17T13:01:55.1190083+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName varchar(255),@screenId int)SELECT button_id, name_en,\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T13:10:41.7753236+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ScreenOperations.GetButtons(String bankName, Int32 screenId) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 312"
+}
+{
+  "Message": "Failed to sync buttons.",
+  "TimeStamp": "2023-09-17T13:10:41.8167051+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "bankName is null",
+  "TimeStamp": "2023-09-17T14:49:50.5251592+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "The parameterized query \u0027(@bankName varchar(255),@screenId int)SELECT button_id, name_en,\u0027 expects the parameter \u0027@bankName\u0027, which was not supplied.",
+  "TimeStamp": "2023-09-17T14:49:50.6157157+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ScreenOperations.GetButtons(String bankName, Int32 screenId) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ScreenOperations.cs:line 311"
+}
+{
+  "Message": "Failed to sync buttons.",
+  "TimeStamp": "2023-09-17T14:49:50.6476254+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T14:58:47.8420692+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T14:59:08.0017846+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Data.SqlTypes.SqlNullValueException\nMessage: Data is Null. This method or property cannot be called on Null values.",
+  "TimeStamp": "2023-09-17T15:03:45.0146497+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlBuffer.get_String()\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 112"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T15:03:45.0526295+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Button insert error: The INSERT statement conflicted with the FOREIGN KEY constraint \u0022FK_TICKETING_BUTTONS_TICKETING_SCREENS\u0022. The conflict occurred in database \u0022TSD\u0022, table \u0022dbo.TicketingScreens\u0022.",
+  "TimeStamp": "2023-09-17T15:04:00.3812656+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T15:04:00.3890005+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Button insert error: The INSERT statement conflicted with the FOREIGN KEY constraint \u0022FK_TICKETING_BUTTONS_TICKETING_SCREENS\u0022. The conflict occurred in database \u0022TSD\u0022, table \u0022dbo.TicketingScreens\u0022.",
+  "TimeStamp": "2023-09-17T15:06:11.6317961+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T15:06:11.6457095+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Data.SqlTypes.SqlNullValueException\nMessage: Data is Null. This method or property cannot be called on Null values.",
+  "TimeStamp": "2023-09-17T15:06:36.6227013+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlBuffer.get_String()\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 112"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T15:06:36.658372+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "ScreenID: 76",
+  "TimeStamp": "2023-09-17T15:16:19.3446967+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "ScreenID: 77",
+  "TimeStamp": "2023-09-17T15:16:25.6445696+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Button insert error: The INSERT statement conflicted with the FOREIGN KEY constraint \u0022FK_TICKETING_BUTTONS_TICKETING_SCREENS\u0022. The conflict occurred in database \u0022TSD\u0022, table \u0022dbo.TicketingScreens\u0022.",
+  "TimeStamp": "2023-09-17T15:16:25.6510732+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T15:16:25.6542432+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "ScreenID: 78",
+  "TimeStamp": "2023-09-17T15:21:42.5334424+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "In ScreenController.CommitAdds. Screen ID: 78",
+  "TimeStamp": "2023-09-17T15:21:42.55093+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Button insert error: The INSERT statement conflicted with the FOREIGN KEY constraint \u0022FK_TICKETING_BUTTONS_TICKETING_SCREENS\u0022. The conflict occurred in database \u0022TSD\u0022, table \u0022dbo.TicketingScreens\u0022.",
+  "TimeStamp": "2023-09-17T15:21:42.5993372+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T15:21:42.6027594+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "ScreenID: 78",
+  "TimeStamp": "2023-09-17T15:35:17.5039632+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "ScreenID: 78",
+  "TimeStamp": "2023-09-17T15:38:59.5484897+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "\nbank1 78 -2 1 b \u0644\u0627 b   \nbank1 78 -3 2 c \u0624  c \u0624 \n",
+  "TimeStamp": "2023-09-17T15:38:59.5814878+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "ScreenID: 79",
+  "TimeStamp": "2023-09-17T15:39:17.8234841+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "\n 79 -2 1 a \u0634 a   \n 79 -3 2 b \u0644\u0627  b \u0644\u0627 \n",
+  "TimeStamp": "2023-09-17T15:39:17.8263304+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Button insert error: The INSERT statement conflicted with the FOREIGN KEY constraint \u0022FK_TICKETING_BUTTONS_TICKETING_SCREENS\u0022. The conflict occurred in database \u0022TSD\u0022, table \u0022dbo.TicketingScreens\u0022.",
+  "TimeStamp": "2023-09-17T15:39:17.8314111+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Button insert error: The INSERT statement conflicted with the FOREIGN KEY constraint \u0022FK_TICKETING_BUTTONS_TICKETING_SCREENS\u0022. The conflict occurred in database \u0022TSD\u0022, table \u0022dbo.TicketingScreens\u0022.",
+  "TimeStamp": "2023-09-17T15:39:17.833248+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T15:39:17.8352121+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "ScreenID: 80",
+  "TimeStamp": "2023-09-17T15:44:28.8166919+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "\nbank1 80 -2 1 a \u0634 a   \nbank1 80 -3 1 b \u0644\u0627 b   \n",
+  "TimeStamp": "2023-09-17T15:44:28.8546105+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 2812\nMessage: Could not find stored procedure \u0027UpdateButtons\u0027.",
+  "TimeStamp": "2023-09-17T16:51:35.0482423+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 252"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T16:51:35.0873035+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 2628\nMessage: String or binary data would be truncated in table \u0027tempdb.dbo.#BB738B0D\u0027, column \u0027name_en\u0027. Truncated value: \u0027aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\u0027.",
+  "TimeStamp": "2023-09-17T16:56:15.1923083+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 110"
+}
+{
+  "Message": "Unhandled SQL Error. Code: 8061\nMessage: The data for table-valued parameter \u0022@buttons\u0022 doesn\u0027t conform to the table type of the parameter. SQL Server error is: 2628, state: 1",
+  "TimeStamp": "2023-09-17T16:56:15.2296228+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 110"
+}
+{
+  "Message": "The statement has been terminated.",
+  "TimeStamp": "2023-09-17T16:56:15.2313408+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 110"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T16:56:15.2330236+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 2628\nMessage: String or binary data would be truncated in table \u0027tempdb.dbo.#BC67AF46\u0027, column \u0027name_en\u0027. Truncated value: \u0027aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\u0027.",
+  "TimeStamp": "2023-09-17T18:02:37.3812302+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 110"
+}
+{
+  "Message": "Unhandled SQL Error. Code: 8061\nMessage: The data for table-valued parameter \u0022@buttons\u0022 doesn\u0027t conform to the table type of the parameter. SQL Server error is: 2628, state: 1",
+  "TimeStamp": "2023-09-17T18:02:37.423697+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 110"
+}
+{
+  "Message": "The statement has been terminated.",
+  "TimeStamp": "2023-09-17T18:02:37.4256548+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 110"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T18:02:37.4269609+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.IndexOutOfRangeException\nMessage: Index was outside the bounds of the array.",
+  "TimeStamp": "2023-09-17T18:02:50.3876092+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlDataReader.CheckDataIsReady(Int32 columnIndex, Boolean allowPartiallyReadColumn, Boolean permitAsync, String methodName)\r\n   at System.Data.SqlClient.SqlDataReader.GetString(Int32 i)\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 117"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T18:02:50.3902203+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.IndexOutOfRangeException\nMessage: Index was outside the bounds of the array.",
+  "TimeStamp": "2023-09-17T18:06:08.1259287+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlDataReader.CheckDataIsReady(Int32 columnIndex, Boolean allowPartiallyReadColumn, Boolean permitAsync, String methodName)\r\n   at System.Data.SqlClient.SqlDataReader.GetString(Int32 i)\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 117"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T18:06:08.1689513+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.IndexOutOfRangeException\nMessage: Index was outside the bounds of the array.",
+  "TimeStamp": "2023-09-17T18:10:37.9868151+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlDataReader.CheckDataIsReady(Int32 columnIndex, Boolean allowPartiallyReadColumn, Boolean permitAsync, String methodName)\r\n   at System.Data.SqlClient.SqlDataReader.GetString(Int32 i)\r\n   at DataAccessLayer.ButtonOperations.AddButtons(Int32 screenId, List\u00601 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 117"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T18:10:38.0201281+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 2628\nMessage: String or binary data would be truncated in table \u0027tempdb.dbo.#ABA9F2D6\u0027, column \u0027name_en\u0027. Truncated value: \u0027aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\u0027.",
+  "TimeStamp": "2023-09-17T18:13:22.0022772+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "Unhandled SQL Error. Code: 8061\nMessage: The data for table-valued parameter \u0022@buttons\u0022 doesn\u0027t conform to the table type of the parameter. SQL Server error is: 2628, state: 1",
+  "TimeStamp": "2023-09-17T18:13:22.043266+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "The statement has been terminated.",
+  "TimeStamp": "2023-09-17T18:13:22.0452203+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T18:13:22.0471643+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 2628\nMessage: String or binary data would be truncated in table \u0027tempdb.dbo.#ABA9F2D6\u0027, column \u0027name_en\u0027. Truncated value: \u0027aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\u0027.",
+  "TimeStamp": "2023-09-17T18:13:58.1906965+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "Unhandled SQL Error. Code: 8061\nMessage: The data for table-valued parameter \u0022@buttons\u0022 doesn\u0027t conform to the table type of the parameter. SQL Server error is: 2628, state: 1",
+  "TimeStamp": "2023-09-17T18:13:58.2319227+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "The statement has been terminated.",
+  "TimeStamp": "2023-09-17T18:13:58.233718+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T18:13:58.2353402+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 2628\nMessage: String or binary data would be truncated in table \u0027tempdb.dbo.#AC9E170F\u0027, column \u0027name_en\u0027. Truncated value: \u0027aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\u0027.",
+  "TimeStamp": "2023-09-17T18:16:10.8621787+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "Unhandled SQL Error. Code: 8061\nMessage: The data for table-valued parameter \u0022@buttons\u0022 doesn\u0027t conform to the table type of the parameter. SQL Server error is: 2628, state: 1",
+  "TimeStamp": "2023-09-17T18:16:10.9037782+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "The statement has been terminated.",
+  "TimeStamp": "2023-09-17T18:16:10.9051617+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T18:16:10.9066068+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 2628\nMessage: String or binary data would be truncated in table \u0027tempdb.dbo.#AD923B48\u0027, column \u0027name_en\u0027. Truncated value: \u0027aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\u0027.",
+  "TimeStamp": "2023-09-17T18:22:59.7227982+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "Unhandled SQL Error. Code: 8061\nMessage: The data for table-valued parameter \u0022@buttons\u0022 doesn\u0027t conform to the table type of the parameter. SQL Server error is: 2628, state: 1",
+  "TimeStamp": "2023-09-17T18:22:59.7587207+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "The statement has been terminated.",
+  "TimeStamp": "2023-09-17T18:22:59.7600371+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.UpdateButtons(String bankName, Int32 screenId, Dictionary\u00602 buttons) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 254"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-17T18:22:59.7611007+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: ExecuteReader requires the command to have a transaction when the connection assigned to the command is in a pending local transaction.  The Transaction property of the command has not been initialized.",
+  "TimeStamp": "2023-09-18T09:52:56.0377913+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 118"
+}
+{
+  "Message": "",
+  "TimeStamp": "2023-09-18T09:52:56.1667548+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T09:52:56.1680772+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: ExecuteReader requires the command to have a transaction when the connection assigned to the command is in a pending local transaction.  The Transaction property of the command has not been initialized.",
+  "TimeStamp": "2023-09-18T09:55:23.612389+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 122"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T09:55:23.6505495+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: There is already an open DataReader associated with this Command which must be closed first.",
+  "TimeStamp": "2023-09-18T09:56:35.1279961+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)\r\n   at System.Data.SqlClient.SqlInternalTransaction.Rollback()\r\n   at System.Data.SqlClient.SqlTransaction.Rollback()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 176\r\n   at BusinessLogicLayer.ScreenController.CommitPendingChanges(List\u00601\u0026 failedIds) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\BusinessLogicLayer\\ScreenController.cs:line 198"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T09:56:35.1694914+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 102\nMessage: Incorrect syntax near \u0027)\u0027.",
+  "TimeStamp": "2023-09-18T09:59:41.4934461+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 166"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T09:59:41.528576+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "DELETE FROM TicketingButtons WHERE bank_name = @bankName AND screen_id = @screenId AND button_id IN );",
+  "TimeStamp": "2023-09-18T10:01:42.9864801+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 102\nMessage: Incorrect syntax near \u0027)\u0027.",
+  "TimeStamp": "2023-09-18T10:01:43.0287311+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 167"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T10:01:43.0570388+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T10:03:28.9743303+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T10:03:59.3843155+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T10:05:13.0360042+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "success is null.",
+  "TimeStamp": "2023-09-18T10:08:31.2565296+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T10:08:31.2693271+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "success is null.",
+  "TimeStamp": "2023-09-18T10:19:18.6598518+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T10:19:18.6713863+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "success is null.",
+  "TimeStamp": "2023-09-18T10:20:23.0582523+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-18T10:20:23.0701653+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}

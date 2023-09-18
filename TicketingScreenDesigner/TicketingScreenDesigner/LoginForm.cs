@@ -7,16 +7,12 @@ using ExceptionUtils;
 
 namespace TicketingScreenDesigner {
 	public partial class LoginForm : Form {
-		private readonly LoginController loginController;
-
 		public LoginForm() {
 			try {
 				InitializeComponent();
 				Show();
 
-				loginController = new LoginController(out bool success);
-
-				if (!success) {
+				if (!LoginController.Initialize()) {
 					LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
 					MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					Environment.Exit(0);
@@ -24,7 +20,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -38,7 +34,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				bool? passwordCorrect = loginController.VerifyPassword(bankName, password);
+				bool? passwordCorrect = LoginController.VerifyPassword(bankName, password);
 
 				if (passwordCorrect is null) {
 					LogsHelper.Log("Log In error.", DateTime.Now, EventSeverity.Error);
@@ -48,7 +44,7 @@ namespace TicketingScreenDesigner {
 
 				if ((bool) passwordCorrect) {
 					loginPasswordTextBox.Text = string.Empty;
-					var screens = loginController.GetScreens(bankName);
+					var screens = LoginController.GetScreens(bankName);
 					if (screens is null) {
 						LogsHelper.Log("Error retrieving bank information.", DateTime.Now, EventSeverity.Error);
 						MessageBox.Show("Error retrieving bank information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -66,7 +62,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -81,7 +77,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				bool? bankExists = loginController.CheckIfBankExists(bankName);
+				bool? bankExists = LoginController.CheckIfBankExists(bankName);
 
 				if (bankExists is null) {
 					LogsHelper.Log("Registration error.", DateTime.Now, EventSeverity.Error);
@@ -98,7 +94,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				if (loginController.AddBank(new Bank(bankName, password)))
+				if (LoginController.AddBank(new Bank(bankName, password)))
 					MessageBox.Show("Registration successful. You can now log in.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 				registerBankNameTextBox.Text = string.Empty;
@@ -107,7 +103,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -117,7 +113,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -127,7 +123,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -143,7 +139,7 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show($"Unhandled Error.\nType: {ex.GetType()}\nMessage: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 	}

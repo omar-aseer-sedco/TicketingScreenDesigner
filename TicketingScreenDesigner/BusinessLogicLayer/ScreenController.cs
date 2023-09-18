@@ -26,7 +26,7 @@ namespace BusinessLogicLayer {
 		/// <param name="success"><c>true</c> if the connection with the database was established successfully, and <c>false</c> otherwise.</param>
 		public ScreenController(out bool success) {
 			try {
-				if (ScreenOperations.Instance.VerifyConnection() && ButtonOperations.Instance.VerifyConnection()) {
+				if (ScreenOperations.VerifyConnection() && ButtonOperations.VerifyConnection()) {
 					success = true;
 				}
 				else {
@@ -82,26 +82,12 @@ namespace BusinessLogicLayer {
 		}
 
 		/// <summary>
-		/// Gets all the buttons that are commited to the database.
-		/// </summary>
-		/// <returns>A list of <c>TicketingButton</c> items representing the buttons in the database. If there are none, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public List<TicketingButton>? GetCommittedButtons() {
-			try {
-				return ScreenOperations.Instance.GetButtons(BankName, ScreenId);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		/// <summary>
 		/// Gets all the buttons of the screen, including pending buttons.
 		/// </summary>
 		/// <returns>A list of <c>TicketingButton</c> items representing the buttons. If the operation fails, <c>null</c> is returned.</returns>
 		public List<TicketingButton>? GetAllButtons() {
 			try {
-				var buttons = ScreenOperations.Instance.GetButtons(BankName, ScreenId);
+				var buttons = ScreenOperations.GetButtons(BankName, ScreenId);
 				if (buttons is null)
 					return null;
 
@@ -129,8 +115,7 @@ namespace BusinessLogicLayer {
 		public void AddButtonCancellable(TicketingButton button) {
 			try {
 				if (button.ButtonId == 0) {
-					button.ButtonId = pendingIndex;
-					--pendingIndex;
+					button.ButtonId = GetNextPendingIndex();
 				}
 				pendingAdds.Add(button);
 			}
@@ -140,137 +125,32 @@ namespace BusinessLogicLayer {
 		}
 
 		/// <summary>
-		/// Adds buttons to the screen. The operation is not committed to the database until <CommitChanges cref="CommitPendingChanges()"/> is called.
-		/// </summary>
-		/// <param name="buttons">A list of <c>TicketingButton</c> objects representing the buttons to be added.</param>
-		public void AddButtonsCancellable(List<TicketingButton> buttons) {
-			try {
-				foreach (var button in buttons) {
-					if (button.ButtonId == 0) {
-						button.ButtonId = pendingIndex;
-						--pendingIndex;
-					}
-				}
-				pendingAdds.AddRange(buttons);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-		}
-
-		/// <summary>
-		/// Adds a button to the screen and immediately commits the change to the database.
-		/// </summary>
-		/// <param name="button">The button to be added.</param>
-		/// <returns>The ID of the button that was added. If the operation fails, <c>null</c> is returned.</returns>
-		public int? AddButtonAndCommit(TicketingButton button) {
-			try {
-				return ButtonOperations.Instance.AddButton(button);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		/// <summary>
-		/// Adds multiple buttons to the screen and immedaitely commits the changes to the database.
-		/// </summary>
-		/// <param name="buttons">A list of buttons to be added.</param>
-		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public bool AddButtonsAndCommit(List<TicketingButton> buttons) {
-			try {
-				return ButtonOperations.Instance.AddButtons(buttons);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		/// <summary>
 		/// Updates the button with the given ID. The operation is not commited to the database until <CommitChanges cref="CommitPendingChanges()"/> is called.
 		/// </summary>
-		/// <param name="buttonId">The ID of the button to be edited.</param>
+		/// <param name="buttonId">The ID of the button to be edited. The ID should not be 0.</param>
 		/// <param name="newButton">A <c>TicketingButton</c> object containing the updated button information.</param>
 		public void UpdateButtonCancellable(int buttonId, TicketingButton newButton) {
 			try {
-				UpdateButtonsCancellable(new Dictionary<int, TicketingButton> {{ buttonId, newButton }});
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-		}
+				if (buttonId == 0)
+					throw new ArgumentOutOfRangeException(nameof(buttonId), "Button ID should not be 0. It has to be either negative (for an uncommited button) or positive (for a committed button).");
 
-		/// <summary>
-		/// Updates the buttons with the given buttons IDs. The operation is not commited to the database until <CommitChanges cref="CommitPendingChanges()"/> is called.
-		/// </summary>
-		/// <param name="buttons">A dictionary where the keys are button IDs and the corresponding values are the updated buttons.</param>
-		public void UpdateButtonsCancellable(Dictionary<int, TicketingButton> buttons) {
-			try {
-				foreach (var button in buttons) {
-					bool isPendingList = false;
-					for (int i = 0; i < pendingAdds.Count; ++i) {
-						if (pendingAdds[i].ButtonId == button.Key) {
-							pendingAdds[i] = button.Value;
-							isPendingList = true;
-							break;
-						}
-					}
-					if (!isPendingList && pendingUpdates.ContainsKey(button.Key)) {
-						pendingUpdates[button.Key] = button.Value;
+				bool isPendingList = false;
+				for (int i = 0; i < pendingAdds.Count; ++i) {
+					if (pendingAdds[i].ButtonId == buttonId) {
+						pendingAdds[i] = newButton;
 						isPendingList = true;
-					}
-
-					if (!isPendingList) {
-						pendingUpdates.Add(button.Key != 0 ? button.Key : pendingIndex, button.Value);
-						--pendingIndex;
+						break;
 					}
 				}
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-		}
 
-		/// <summary>
-		/// Updates the button with the given ID and immediately commits the change to the database.
-		/// </summary>
-		/// <param name="buttonId">The ID of the button to be edited.</param>
-		/// <param name="newButton">A <c>TicketingButton</c> object containing the updated button information.</param>
-		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public bool UpdateButtonAndCommit(int buttonId, TicketingButton newButton) {
-			try {
-				return ButtonOperations.Instance.UpdateButton(BankName, ScreenId, buttonId, newButton);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
+				if (!isPendingList && pendingUpdates.ContainsKey(buttonId)) {
+					pendingUpdates[buttonId] = newButton;
+					isPendingList = true;
+				}
 
-		/// <summary>
-		/// Updates the buttons with the given IDs and immediately commits the changes to the database.
-		/// </summary>
-		/// <param name="buttons">A dictionary where the keys are button IDs and the corresponding values are the updated buttons.</param>
-		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public bool UpdateButtonsAndCommit(Dictionary<int, TicketingButton> buttons) {
-			try {
-				return ButtonOperations.Instance.UpdateButtons(BankName, ScreenId, buttons);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		/// <summary>
-		/// Deletes the button with the specified ID. The delete operation is not committed to the database until <CommitChanges cref="CommitPendingChanges()"/> is called.
-		/// </summary>
-		/// <param name="buttonId">The ID of the button to be deleted.</param>
-		public void DeleteButtonCancellable(int buttonId) {
-			try {
-				DeleteButtonsCancellable(new List<int> { buttonId });
+				if (!isPendingList) {
+					pendingUpdates.Add(buttonId, newButton);
+				}
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -308,45 +188,31 @@ namespace BusinessLogicLayer {
 		}
 
 		/// <summary>
-		/// Deletes the button with the specifed ID and immediately commits the change to the database.
-		/// </summary>
-		/// <param name="buttonId">The ID of the button to be deleted.</param>
-		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public bool DeleteButtonAndCommit(int buttonId) {
-			try {
-				return ButtonOperations.Instance.DeleteButton(BankName, ScreenId, buttonId);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		/// <summary>
-		/// Deletes the buttons with specified IDs and immediately commits the changes to the database.
-		/// </summary>
-		/// <param name="buttonIds">A list containing the IDs of the button to be deleted.</param>
-		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public bool DeleteButtonsAndCommit(List<int> buttonIds) {
-			try {
-				return ButtonOperations.Instance.DeleteButtons(BankName, ScreenId, buttonIds);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		/// <summary>
 		/// Commits all cancellable changes (adds, deletes, and updates) to the database.
 		/// </summary>
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
-		public bool CommitPendingChanges() {
+		public bool CommitPendingChanges(out List<int>? failedIds) {
 			try {
-				return CommitAdds() && CommitUpdates() && CommitDeletes();
+				failedIds = new List<int>();
+
+				var success = ButtonOperations.AtomicCommit(BankName, ScreenId, pendingAdds, pendingUpdates, pendingDeletes.ToList());
+
+				if (success is null)
+					return default;
+
+				bool ret = true;
+				foreach (var i in success) {
+					if (!i.Value) {
+						failedIds.Add(i.Key);
+						ret = false;
+					}
+				}
+
+				return ret;
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				failedIds = default;
 				return default;
 			}
 		}
@@ -378,7 +244,7 @@ namespace BusinessLogicLayer {
 					}
 				}
 
-				bool? existsInDatabase = ButtonOperations.Instance.CheckIfButtonExists(BankName, ScreenId, buttonId);
+				bool? existsInDatabase = ButtonOperations.CheckIfButtonExists(BankName, ScreenId, buttonId);
 
 				if (existsInDatabase is null) return null;
 
@@ -404,43 +270,13 @@ namespace BusinessLogicLayer {
 			}
 		}
 
-		private bool CommitAdds() {
-			try {
-				if (pendingAdds.Count == 0)
-					return true;
-
-				return ButtonOperations.Instance.AddButtons(ScreenId, pendingAdds);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		private bool CommitUpdates() {
-			try {
-				if (pendingUpdates.Count == 0)
-					return true;
-
-				return ButtonOperations.Instance.UpdateButtons(BankName, ScreenId, pendingUpdates);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		private bool CommitDeletes() {
-			try {
-				if (pendingDeletes.Count == 0)
-					return true;
-
-				return ButtonOperations.Instance.DeleteButtons(BankName, ScreenId, pendingDeletes.ToList());
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
+		/// <summary>
+		/// Returns a temporary index for a button that is still not committed to the database.
+		/// </summary>
+		/// <returns>The temporary index. It is always a negative number.</returns>
+		public int GetNextPendingIndex() {
+			--pendingIndex;
+			return pendingIndex;
 		}
 	}
 }

@@ -6,7 +6,7 @@ namespace LogUtils {
 		public LogEvent(string message, DateTime timeStamp, EventSeverity severity) {
 			Message = message;
 			TimeStamp = timeStamp;
-			Severity = GetSeverity(severity);
+			Severity = Enum.GetName(severity) ?? "Unknown";
 			Source = null;
 			StackTrace = null;
 		}
@@ -14,19 +14,6 @@ namespace LogUtils {
 		public LogEvent(string message, DateTime timeStamp, EventSeverity severity, string? source, string? stackTrace) : this(message, timeStamp, severity) {
 			Source = source;
 			StackTrace = stackTrace;
-		}
-
-		private string GetSeverity(EventSeverity severity) {
-			switch (severity) {
-				case EventSeverity.Error:
-					return "Error";
-				case EventSeverity.Warning:
-					return "Warning";
-				case EventSeverity.Info:
-					return "Info";
-				default:
-					return "Undefined";
-			}
 		}
 
 		public string Message { get; private set; }
