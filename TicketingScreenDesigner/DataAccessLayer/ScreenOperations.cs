@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
 using ExceptionUtils;
+using LogUtils;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
@@ -137,12 +138,18 @@ namespace DataAccessLayer {
 					return false;
 
 				int? currentlyActiveScreenId = GetActiveScreenId(bankName);
-				if (currentlyActiveScreenId is null)
+				if (currentlyActiveScreenId is null) {
 					return false;
+				}
+
+				if (!active && currentlyActiveScreenId == -1) {
+					return true;
+				}
 
 				if (active && currentlyActiveScreenId != screenId) {
-					if (!SetIsActive(bankName, (int) currentlyActiveScreenId, false))
+					if (!SetIsActive(bankName, (int) currentlyActiveScreenId, false)) {
 						return false;
+					}
 				}
 
 				string query = $"UPDATE {ScreensConstants.TABLE_NAME} SET {ScreensConstants.IS_ACTIVE} = @isActive WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} = @screenId";
@@ -150,7 +157,7 @@ namespace DataAccessLayer {
 				command.Parameters.Add("@isActive", SqlDbType.Bit).Value = active;
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ScreensConstants.BANK_NAME_SIZE).Value = bankName;
 				command.Parameters.Add("@screenId", SqlDbType.Int).Value = screenId;
-
+				
 				connection!.Open();
 
 				return command.ExecuteNonQuery() == 1;

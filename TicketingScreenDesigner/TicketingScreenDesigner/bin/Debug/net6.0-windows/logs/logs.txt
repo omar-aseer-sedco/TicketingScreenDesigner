@@ -2220,3 +2220,73 @@
   "Source": "System.Private.CoreLib",
   "StackTrace": "   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)\r\n   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)\r\n   at System.Threading.Tasks.Task.Wait()\r\n   at TicketingScreenDesigner.ScreenEditor..ctor(BankForm callingForm, String bankName, TicketingScreen screen) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 83"
 }
+{
+  "Message": "Failed to activate screen.",
+  "TimeStamp": "2023-09-19T15:38:54.0832595+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to activate screen.",
+  "TimeStamp": "2023-09-19T15:38:58.3025702+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "xxFailed to activate screen.",
+  "TimeStamp": "2023-09-19T15:39:54.7537739+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "beepboopbeep",
+  "TimeStamp": "2023-09-19T15:41:21.1687287+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to activate screen.",
+  "TimeStamp": "2023-09-19T15:41:21.182595+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "beepboopbeep",
+  "TimeStamp": "2023-09-19T15:43:13.0090771+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to activate screen.",
+  "TimeStamp": "2023-09-19T15:43:13.0220668+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "UPDATE TicketingScreens SET is_active = @isActive WHERE bank_name = @bankName AND screen_id = @screenId",
+  "TimeStamp": "2023-09-19T15:43:52.6215805+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "beepboopbeep",
+  "TimeStamp": "2023-09-19T15:43:52.6392994+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Failed to activate screen.",
+  "TimeStamp": "2023-09-19T15:43:52.6414513+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}

@@ -39,6 +39,7 @@
 			keyboardShortcutsToolStripMenuItem = new ToolStripMenuItem();
 			contextMenuStrip1 = new ContextMenuStrip(components);
 			toolTip1 = new ToolTip(components);
+			statusLabel = new Label();
 			menuStrip1.SuspendLayout();
 			SuspendLayout();
 			// 
@@ -49,7 +50,7 @@
 			screensListView.FullRowSelect = true;
 			screensListView.Location = new Point(12, 77);
 			screensListView.Name = "screensListView";
-			screensListView.Size = new Size(515, 366);
+			screensListView.Size = new Size(515, 338);
 			screensListView.TabIndex = 0;
 			screensListView.UseCompatibleStateImageBehavior = false;
 			screensListView.View = View.Details;
@@ -181,11 +182,21 @@
 			contextMenuStrip1.Name = "contextMenuStrip1";
 			contextMenuStrip1.Size = new Size(61, 4);
 			// 
+			// statusLabel
+			// 
+			statusLabel.Anchor =  AnchorStyles.Bottom | AnchorStyles.Left;
+			statusLabel.AutoSize = true;
+			statusLabel.Location = new Point(9, 426);
+			statusLabel.Name = "statusLabel";
+			statusLabel.Size = new Size(0, 15);
+			statusLabel.TabIndex = 9;
+			// 
 			// BankForm
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(654, 454);
+			Controls.Add(statusLabel);
 			Controls.Add(refreshButton);
 			Controls.Add(previewButton);
 			Controls.Add(setActiveButton);
@@ -224,5 +235,6 @@
 		private ToolStripMenuItem helpToolStripMenuItem;
 		private ToolStripMenuItem keyboardShortcutsToolStripMenuItem;
 		private ToolTip toolTip1;
+		private Label statusLabel;
 	}
 }

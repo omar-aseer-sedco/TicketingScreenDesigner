@@ -14,6 +14,12 @@ namespace TicketingScreenDesigner {
 
 		private List<TicketingScreen> screens;
 
+		private enum StatusLabelStates {
+			UPDATING,
+			UP_TO_DATE,
+			ERROR
+		}
+
 		private BankForm() {
 			try {
 				InitializeComponent();
@@ -99,6 +105,8 @@ namespace TicketingScreenDesigner {
 
 		public async Task UpdateScreensListView() {
 			try {
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
+
 				List<TicketingScreen>? bankScreens = await BankController.GetScreens(bankName);
 
 				if (bankScreens is null) {
@@ -110,11 +118,28 @@ namespace TicketingScreenDesigner {
 				screens = bankScreens;
 				Invoke(new MethodInvoker(() => AddScreensToListView(screens)));
 
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
+
 				Invoke(UpdateFormButtonActivation);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
 				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void UpdateStatusLabel(StatusLabelStates state) {
+			switch (state) {
+				case StatusLabelStates.UPDATING:
+					statusLabel.Text = "Updating...";
+					break;
+				case StatusLabelStates.UP_TO_DATE:
+					statusLabel.Text = $"Last update was {DateTime.Now.ToShortTimeString()}";
+					break;
+				case StatusLabelStates.ERROR:
+					statusLabel.Text = "An error has occurred.";
+					break;
 			}
 		}
 
@@ -283,7 +308,7 @@ namespace TicketingScreenDesigner {
 				int selectedScreenId = (int) screensListView.SelectedItems[0].Tag;
 				int? currentlyActiveScreenId = BankController.GetActiveScreenId(bankName);
 
-				if (currentlyActiveScreenId != null) {
+				if (currentlyActiveScreenId is not null && currentlyActiveScreenId != -1) {
 					if (currentlyActiveScreenId == selectedScreenId) {
 						MessageBox.Show("The selected screen is already active.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 						return;

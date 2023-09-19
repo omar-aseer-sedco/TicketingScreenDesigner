@@ -182,12 +182,12 @@
 			// 
 			// statusLabel
 			// 
+			statusLabel.Anchor =  AnchorStyles.Bottom | AnchorStyles.Left;
 			statusLabel.AutoSize = true;
 			statusLabel.Location = new Point(12, 311);
 			statusLabel.Name = "statusLabel";
-			statusLabel.Size = new Size(65, 15);
+			statusLabel.Size = new Size(0, 15);
 			statusLabel.TabIndex = 14;
-			statusLabel.Text = "Up to date.";
 			// 
 			// ScreenEditor
 			// 

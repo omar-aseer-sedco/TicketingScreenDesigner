@@ -17,19 +17,17 @@ namespace TicketingScreenDesigner {
 		private List<TicketingButton> buttons;
 		private bool alreadyAdded;
 
-		private delegate void AddButtonsToListViewDelegate(List<TicketingButton> buttonsToAdd);
-		private AddButtonsToListViewDelegate addButtonsToListViewDelegate;
-
-		private delegate void UpdateStatusLabelDelegate(string text);
-		private UpdateStatusLabelDelegate updateStatusLabelDelegate;
+		private enum StatusLabelStates {
+			UPDATING,
+			UP_TO_DATE,
+			ERROR
+		}
 
 		private ScreenEditor() {
 			try {
 				InitializeComponent();
 				buttons = new List<TicketingButton>();
 				alreadyAdded = false;
-				addButtonsToListViewDelegate = new AddButtonsToListViewDelegate(AddButtonsToListView);
-				updateStatusLabelDelegate = new UpdateStatusLabelDelegate(UpdateStatusLabel);
 				HandleCreated += ScreenEditor_HandleCreated;
 			}
 			catch (Exception ex) {
@@ -106,7 +104,7 @@ namespace TicketingScreenDesigner {
 
 		public async Task UpdateButtonsListView() {
 			try {
-				Invoke(updateStatusLabelDelegate, "Status: Updating...");
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
 
 				List<TicketingButton>? screenButtons = await screenController.GetAllButtons();
 
@@ -118,19 +116,13 @@ namespace TicketingScreenDesigner {
 
 				buttons = screenButtons;
 
-				if (InvokeRequired)
-					Invoke(addButtonsToListViewDelegate, buttons);
-				else
-					AddButtonsToListView(buttons);
+				Invoke(new MethodInvoker(() => AddButtonsToListView(buttons)));
 
-				if (InvokeRequired)
-					Invoke(updateStatusLabelDelegate, "Status: Up to date.");
-				else
-					UpdateStatusLabel("Status: Up to date.");
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				Invoke(updateStatusLabelDelegate, "Status: An error has occurred.");
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
 				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -143,8 +135,18 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void UpdateStatusLabel(string text) {
-			statusLabel.Text = text;
+		private void UpdateStatusLabel(StatusLabelStates state) {
+			switch (state) {
+				case StatusLabelStates.UPDATING:
+					statusLabel.Text = "Updating...";
+					break;
+				case StatusLabelStates.UP_TO_DATE:
+					statusLabel.Text = $"Last update was {DateTime.Now.ToShortTimeString()}";
+					break;
+				case StatusLabelStates.ERROR:
+					statusLabel.Text = "An error has occurred.";
+					break;
+			}
 		}
 
 		private void AddButtonToListView(TicketingButton button) {
