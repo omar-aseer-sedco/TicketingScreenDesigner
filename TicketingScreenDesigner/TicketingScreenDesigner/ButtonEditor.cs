@@ -139,7 +139,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void saveButton_Click(object sender, EventArgs e) {
+		private async void saveButton_Click(object sender, EventArgs e) {
 			try {
 				TrimInput();
 
@@ -159,7 +159,7 @@ namespace TicketingScreenDesigner {
 
 					if (!(bool) buttonExists) {
 						MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-						callingForm.UpdateButtonsListView();
+						await callingForm.UpdateButtonsListView();
 						Close();
 						return;
 					}
@@ -209,7 +209,7 @@ namespace TicketingScreenDesigner {
 				}
 
 				callingForm.CheckIfScreenExists();
-				callingForm.UpdateButtonsListView();
+				await callingForm.UpdateButtonsListView();
 				Close();
 			}
 			catch (Exception ex) {

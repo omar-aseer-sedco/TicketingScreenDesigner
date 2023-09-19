@@ -18,6 +18,7 @@ namespace TicketingScreenDesigner {
 			try {
 				InitializeComponent();
 				screens = new List<TicketingScreen>();
+				HandleCreated += BankForm_HandleCreated;
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -39,7 +40,6 @@ namespace TicketingScreenDesigner {
 				this.bankName = bankName;
 				Text = TITLE_TEXT + " - " + this.bankName;
 				UpdateTitleLabel();
-				UpdateScreensListView();
 
 				Cursor.Current = Cursors.Default;
 			}
@@ -57,6 +57,10 @@ namespace TicketingScreenDesigner {
 				ExceptionHelper.HandleGeneralException(ex);
 				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+		}
+
+		private async void BankForm_HandleCreated(object? sender, EventArgs e) {
+			await UpdateScreensListView();
 		}
 
 		private void UpdateTitleLabel() {
@@ -93,9 +97,9 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public void UpdateScreensListView() {
+		public async Task UpdateScreensListView() {
 			try {
-				List<TicketingScreen>? bankScreens = BankController.GetScreens(bankName);
+				List<TicketingScreen>? bankScreens = await BankController.GetScreens(bankName);
 
 				if (bankScreens is null) {
 					LogsHelper.Log("Failed to sync screens.", DateTime.Now, EventSeverity.Error);
@@ -104,26 +108,9 @@ namespace TicketingScreenDesigner {
 				}
 
 				screens = bankScreens;
+				Invoke(new MethodInvoker(() => AddScreensToListView(screens)));
 
-				screensListView.Items.Clear();
-
-				foreach (var screen in screens) {
-					ListViewItem row = new() {
-						Name = ScreensConstants.SCREEN_TITLE,
-						Text = screen.ScreenTitle
-					};
-
-					ListViewItem.ListViewSubItem isActive = new() {
-						Name = ScreensConstants.IS_ACTIVE,
-						Text = screen.IsActive ? "Yes" : "No"
-					};
-					row.SubItems.Add(isActive);
-
-					row.Tag = screen.ScreenId;
-					screensListView.Items.Add(row);
-				}
-
-				UpdateFormButtonActivation();
+				Invoke(UpdateFormButtonActivation);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -131,7 +118,27 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void EditScreen() {
+		private void AddScreensToListView(List<TicketingScreen> screensToAdd) {
+			screensListView.Items.Clear();
+
+			foreach (var screen in screensToAdd) {
+				ListViewItem row = new() {
+					Name = ScreensConstants.SCREEN_TITLE,
+					Text = screen.ScreenTitle
+				};
+
+				ListViewItem.ListViewSubItem isActive = new() {
+					Name = ScreensConstants.IS_ACTIVE,
+					Text = screen.IsActive ? "Yes" : "No"
+				};
+				row.SubItems.Add(isActive);
+
+				row.Tag = screen.ScreenId;
+				screensListView.Items.Add(row);
+			}
+		}
+
+		private async Task EditScreen() {
 			try {
 				if (screensListView.SelectedItems.Count != 1) {
 					MessageBox.Show("Select one screen to edit.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -150,7 +157,7 @@ namespace TicketingScreenDesigner {
 
 				if (!(bool) screenExists) {
 					MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					UpdateScreensListView();
+					await UpdateScreensListView();
 					return;
 				}
 
@@ -168,9 +175,9 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void editScreenButton_Click(object sender, EventArgs e) {
+		private async void editScreenButton_Click(object sender, EventArgs e) {
 			try {
-				EditScreen();
+				await EditScreen();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -193,7 +200,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void DeleteScreen() {
+		private async Task DeleteScreen() {
 			try {
 				if (screensListView.SelectedItems.Count == 0) {
 					MessageBox.Show("Select a screen to delete.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -210,7 +217,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				UpdateScreensListView();
+				await UpdateScreensListView();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -218,9 +225,9 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void deleteScreenButton_Click(object sender, EventArgs e) {
+		private async void deleteScreenButton_Click(object sender, EventArgs e) {
 			try {
-				DeleteScreen();
+				await DeleteScreen();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -266,7 +273,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void SetScreenToActive() {
+		private async Task SetScreenToActive() {
 			try {
 				if (screensListView.SelectedItems.Count != 1) {
 					MessageBox.Show("Select one screen to activate.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -296,7 +303,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				UpdateScreensListView();
+				await UpdateScreensListView();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -304,9 +311,9 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void setActiveButton_Click(object sender, EventArgs e) {
+		private async void setActiveButton_Click(object sender, EventArgs e) {
 			try {
-				SetScreenToActive();
+				await SetScreenToActive();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -314,7 +321,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void PreviewScreen() {
+		private async Task PreviewScreen() {
 			try {
 				if (screensListView.SelectedItems.Count != 1) {
 					MessageBox.Show("Select one screen to preview.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -323,7 +330,7 @@ namespace TicketingScreenDesigner {
 
 				int screenId = (int) screensListView.SelectedItems[0].Tag;
 				string screenTitle = screensListView.SelectedItems[0].SubItems[ScreensConstants.SCREEN_TITLE].Text;
-				PreviewScreenById(screenId, screenTitle);
+				await PreviewScreenById(screenId, screenTitle);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -331,9 +338,9 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void previewButton_Click(object sender, EventArgs e) {
+		private async void previewButton_Click(object sender, EventArgs e) {
 			try {
-				PreviewScreen();
+				await PreviewScreen();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -341,7 +348,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void PreviewScreenById(int screenId, string screenTitle) {
+		private async Task PreviewScreenById(int screenId, string screenTitle) {
 			try {
 				bool? screenExists = BankController.CheckIfScreenExists(bankName, screenId);
 
@@ -353,11 +360,13 @@ namespace TicketingScreenDesigner {
 
 				if (!(bool) screenExists) {
 					MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					UpdateScreensListView();
+					await UpdateScreensListView();
 					return;
 				}
 
-				List<TicketingButton>? buttons = BankController.GetButtons(bankName, screenId);
+				Cursor.Current = Cursors.WaitCursor;
+				List<TicketingButton>? buttons = await BankController.GetButtons(bankName, screenId);
+				Cursor.Current = Cursors.Default;
 
 				if (buttons is null) {
 					LogsHelper.Log("Failed to get buttons.", DateTime.Now, EventSeverity.Error);
@@ -374,9 +383,9 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void refreshButton_Click(object sender, EventArgs e) {
+		private async void refreshButton_Click(object sender, EventArgs e) {
 			try {
-				UpdateScreensListView();
+				await UpdateScreensListView();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -384,29 +393,29 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void HandleKeyEvent(KeyEventArgs e) {
+		private async void HandleKeyEvent(KeyEventArgs e) {
 			try {
 				switch (e.KeyCode) {
 					case Keys.Enter:
 					case Keys.E:
-						EditScreen();
+						await EditScreen();
 						break;
 					case Keys.Delete:
 					case Keys.Back:
 					case Keys.D:
-						DeleteScreen();
+						await DeleteScreen();
 						break;
 					case Keys.A:
 						AddScreen();
 						break;
 					case Keys.S:
-						SetScreenToActive();
+						await SetScreenToActive();
 						break;
 					case Keys.P:
-						PreviewScreen();
+						await PreviewScreen();
 						break;
 					case Keys.R:
-						UpdateScreensListView();
+						await UpdateScreensListView();
 						break;
 				}
 			}

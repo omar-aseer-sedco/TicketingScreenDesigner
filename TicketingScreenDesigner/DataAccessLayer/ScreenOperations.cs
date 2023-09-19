@@ -141,7 +141,7 @@ namespace DataAccessLayer {
 					return false;
 
 				if (active && currentlyActiveScreenId != screenId) {
-					if (!SetIsActive(bankName, screenId, false))
+					if (!SetIsActive(bankName, (int) currentlyActiveScreenId, false))
 						return false;
 				}
 
@@ -291,7 +291,7 @@ namespace DataAccessLayer {
 		/// <param name="bankName">The name of the bank that owns the screen.</param>
 		/// <param name="screenId">The ID of the screen.</param>
 		/// <returns>A list of <c>TicketingButton</c> objects representing the buttons on the screen. If there are no buttons, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static List<TicketingButton>? GetButtons(string bankName, int screenId) {
+		public static async Task<List<TicketingButton>?> GetButtons(string bankName, int screenId) {
 			try {
 				if (!Initialize())
 					return null;
@@ -304,9 +304,9 @@ namespace DataAccessLayer {
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ButtonsConstants.BANK_NAME_SIZE).Value = bankName;
 				command.Parameters.Add("@screenId", SqlDbType.Int).Value = screenId;
 
-				connection!.Open();
+				await connection!.OpenAsync();
 
-				var reader = command.ExecuteReader();
+				var reader = await command.ExecuteReaderAsync();
 
 				while (reader.Read()) {
 					int buttonId = (int) reader[ButtonsConstants.BUTTON_ID];

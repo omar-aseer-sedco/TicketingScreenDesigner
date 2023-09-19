@@ -17,11 +17,20 @@ namespace TicketingScreenDesigner {
 		private List<TicketingButton> buttons;
 		private bool alreadyAdded;
 
+		private delegate void AddButtonsToListViewDelegate(List<TicketingButton> buttonsToAdd);
+		private AddButtonsToListViewDelegate addButtonsToListViewDelegate;
+
+		private delegate void UpdateStatusLabelDelegate(string text);
+		private UpdateStatusLabelDelegate updateStatusLabelDelegate;
+
 		private ScreenEditor() {
 			try {
 				InitializeComponent();
 				buttons = new List<TicketingButton>();
 				alreadyAdded = false;
+				addButtonsToListViewDelegate = new AddButtonsToListViewDelegate(AddButtonsToListView);
+				updateStatusLabelDelegate = new UpdateStatusLabelDelegate(UpdateStatusLabel);
+				HandleCreated += ScreenEditor_HandleCreated;
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -71,7 +80,6 @@ namespace TicketingScreenDesigner {
 				this.callingForm = callingForm;
 				this.bankName = bankName;
 				FillInfo(screen);
-				UpdateButtonsListView();
 
 				Cursor.Current = Cursors.Default;
 			}
@@ -79,6 +87,10 @@ namespace TicketingScreenDesigner {
 				ExceptionHelper.HandleGeneralException(ex);
 				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+		}
+
+		private async void ScreenEditor_HandleCreated(object? sender, EventArgs e) {
+			await UpdateButtonsListView();
 		}
 
 		private void FillInfo(TicketingScreen screen) {
@@ -92,9 +104,11 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public void UpdateButtonsListView() {
+		public async Task UpdateButtonsListView() {
 			try {
-				List<TicketingButton>? screenButtons = screenController.GetAllButtons();
+				Invoke(updateStatusLabelDelegate, "Status: Updating...");
+
+				List<TicketingButton>? screenButtons = await screenController.GetAllButtons();
 
 				if (screenButtons is null) {
 					LogsHelper.Log("Failed to sync buttons.", DateTime.Now, EventSeverity.Error);
@@ -104,16 +118,33 @@ namespace TicketingScreenDesigner {
 
 				buttons = screenButtons;
 
-				buttonsListView.Items.Clear();
+				if (InvokeRequired)
+					Invoke(addButtonsToListViewDelegate, buttons);
+				else
+					AddButtonsToListView(buttons);
 
-				foreach (var button in buttons) {
-					AddButtonToListView(button);
-				}
+				if (InvokeRequired)
+					Invoke(updateStatusLabelDelegate, "Status: Up to date.");
+				else
+					UpdateStatusLabel("Status: Up to date.");
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
+				Invoke(updateStatusLabelDelegate, "Status: An error has occurred.");
 				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+		}
+
+		private void AddButtonsToListView(List<TicketingButton> buttonsToAdd) {
+			buttonsListView.Items.Clear();
+
+			foreach (var button in buttonsToAdd) {
+				AddButtonToListView(button);
+			}
+		}
+
+		private void UpdateStatusLabel(string text) {
+			statusLabel.Text = text;
 		}
 
 		private void AddButtonToListView(TicketingButton button) {
@@ -216,7 +247,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void saveButton_Click(object sender, EventArgs e) {
+		private async void saveButton_Click(object sender, EventArgs e) {
 			try {
 				TrimInput();
 
@@ -244,7 +275,7 @@ namespace TicketingScreenDesigner {
 					}
 					else {
 						MessageBox.Show("This screen no longer exists. It may have been deleted by another user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-						callingForm.UpdateScreensListView();
+						await callingForm.UpdateScreensListView();
 						Close();
 						return;
 					}
@@ -271,7 +302,7 @@ namespace TicketingScreenDesigner {
 					MessageBox.Show("Failed to commit changes. Please check for errors.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
-				callingForm.UpdateScreensListView();
+				await callingForm.UpdateScreensListView();
 
 				Close();
 			}
@@ -286,7 +317,7 @@ namespace TicketingScreenDesigner {
 			return screenController.GetPendingChangeCount() != 0 || (isNewScreen && screenTitleTextBox.Text != string.Empty) || (!isNewScreen && screenTitleTextBox.Text != screenController.ScreenTitle);
 		}
 
-		private void cancelButton_Click(object sender, EventArgs e) {
+		private async void cancelButton_Click(object sender, EventArgs e) {
 			try {
 				if (IsDataChanged()) {
 					var confirmationResult = MessageBox.Show("Are you sure you want to quit? You will lose any unsaved changes.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -301,7 +332,7 @@ namespace TicketingScreenDesigner {
 				}
 
 				screenController.CancelPendingChanges();
-				callingForm.UpdateScreensListView();
+				await callingForm.UpdateScreensListView();
 				Close();
 			}
 			catch (Exception ex) {
@@ -326,7 +357,7 @@ namespace TicketingScreenDesigner {
 			return null;
 		}
 
-		private void DeleteButton() {
+		private async void DeleteButton() {
 			try {
 				int selectedCount = buttonsListView.SelectedItems.Count;
 
@@ -343,7 +374,7 @@ namespace TicketingScreenDesigner {
 
 				screenController.DeleteButtonsCancellable(GetSelectedButtonIds() ?? new List<int>());
 
-				UpdateButtonsListView();
+				await UpdateButtonsListView();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -416,7 +447,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void EditButton() {
+		private async void EditButton() {
 			try {
 				if (buttonsListView.SelectedItems.Count != 1) {
 					MessageBox.Show("Select one button to edit.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -425,7 +456,7 @@ namespace TicketingScreenDesigner {
 
 				TicketingButton button = (TicketingButton) buttonsListView.SelectedItems[0].Tag;
 
-				bool? screenExists = BankController.CheckIfScreenExists(bankName,screenController.ScreenId);
+				bool? screenExists = BankController.CheckIfScreenExists(bankName, screenController.ScreenId);
 				bool? buttonExists = screenController.CheckIfButtonExists(button.ButtonId);
 
 				if (screenExists is null || buttonExists is null) {
@@ -436,14 +467,14 @@ namespace TicketingScreenDesigner {
 
 				if (!(bool) screenExists) {
 					MessageBox.Show("This screen no longer exists. It may have been deleted by another user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					callingForm.UpdateScreensListView();
+					await callingForm.UpdateScreensListView();
 					Close();
 					return;
 				}
 
 				if (!(bool) buttonExists) {
 					MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					UpdateButtonsListView();
+					await UpdateButtonsListView();
 					return;
 				}
 
@@ -480,9 +511,9 @@ namespace TicketingScreenDesigner {
 			return false;
 		}
 
-		private void refreshButton_Click(object sender, EventArgs e) {
+		private async void refreshButton_Click(object sender, EventArgs e) {
 			try {
-				UpdateButtonsListView();
+				await UpdateButtonsListView();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -500,7 +531,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void HandleKeyEvent(KeyEventArgs e) {
+		private async void HandleKeyEvent(KeyEventArgs e) {
 			try {
 				switch (e.KeyCode) {
 					case Keys.E:
@@ -515,7 +546,7 @@ namespace TicketingScreenDesigner {
 						AddButton();
 						break;
 					case Keys.R:
-						UpdateButtonsListView();
+						await UpdateButtonsListView();
 						break;
 					case Keys.S:
 						ToggleIsScreenActive();

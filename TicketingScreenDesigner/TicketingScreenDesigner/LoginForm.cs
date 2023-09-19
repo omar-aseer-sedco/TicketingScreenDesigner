@@ -24,7 +24,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void LogInButton_Click(object sender, EventArgs e) {
+		private async void LogInButton_Click(object sender, EventArgs e) {
 			try {
 				string bankName = loginBankNameTextBox.Text.Trim();
 				string password = loginPasswordTextBox.Text.Trim();
@@ -44,7 +44,7 @@ namespace TicketingScreenDesigner {
 
 				if ((bool) passwordCorrect) {
 					loginPasswordTextBox.Text = string.Empty;
-					var screens = LoginController.GetScreens(bankName);
+					var screens = await LoginController.GetScreens(bankName);
 					if (screens is null) {
 						LogsHelper.Log("Error retrieving bank information.", DateTime.Now, EventSeverity.Error);
 						MessageBox.Show("Error retrieving bank information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

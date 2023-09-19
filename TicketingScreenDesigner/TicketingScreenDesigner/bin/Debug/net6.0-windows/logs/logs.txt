@@ -2178,3 +2178,45 @@
   "Source": null,
   "StackTrace": null
 }
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Cross-thread operation not valid: Control \u0027buttonsListView\u0027 accessed from a thread other than the thread it was created on.",
+  "TimeStamp": "2023-09-19T11:24:58.2179207+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.get_Handle()\r\n   at Interop.User32.SendMessageW(IHandle hWnd, WM Msg, IntPtr wParam, IntPtr lParam)\r\n   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Clear()\r\n   at System.Windows.Forms.ListView.ListViewItemCollection.Clear()\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListView() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 109"
+}
+{
+  "Message": "Unhandled Error.\nType: System.AggregateException\nMessage: One or more errors occurred. (Cross-thread operation not valid: Control \u0027statusLabel\u0027 accessed from a thread other than the thread it was created on.)",
+  "TimeStamp": "2023-09-19T11:24:58.3494065+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)\r\n   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)\r\n   at System.Threading.Tasks.Task.Wait()\r\n   at TicketingScreenDesigner.ButtonEditor.saveButton_Click(Object sender, EventArgs e) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ButtonEditor.cs:line 212"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.",
+  "TimeStamp": "2023-09-19T11:34:24.8310575+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListView() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 105"
+}
+{
+  "Message": "Unhandled Error.\nType: System.AggregateException\nMessage: One or more errors occurred. (Invoke or BeginInvoke cannot be called on a control until the window handle has been created.)",
+  "TimeStamp": "2023-09-19T11:34:24.908829+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)\r\n   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)\r\n   at System.Threading.Tasks.Task.Wait()\r\n   at TicketingScreenDesigner.ScreenEditor..ctor(BankForm callingForm, String bankName, TicketingScreen screen) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 82"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.",
+  "TimeStamp": "2023-09-19T12:18:38.5746414+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListView() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 110"
+}
+{
+  "Message": "Unhandled Error.\nType: System.AggregateException\nMessage: One or more errors occurred. (Invoke or BeginInvoke cannot be called on a control until the window handle has been created.)",
+  "TimeStamp": "2023-09-19T12:18:38.6562756+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)\r\n   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)\r\n   at System.Threading.Tasks.Task.Wait()\r\n   at TicketingScreenDesigner.ScreenEditor..ctor(BankForm callingForm, String bankName, TicketingScreen screen) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 83"
+}

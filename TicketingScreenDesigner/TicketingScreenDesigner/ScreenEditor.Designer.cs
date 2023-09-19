@@ -39,6 +39,7 @@
 			screenTitleTextBox = new TextBox();
 			refreshButton = new Button();
 			toolTip1 = new ToolTip(components);
+			statusLabel = new Label();
 			SuspendLayout();
 			// 
 			// saveButton
@@ -179,12 +180,22 @@
 			refreshButton.UseVisualStyleBackColor = true;
 			refreshButton.Click += refreshButton_Click;
 			// 
+			// statusLabel
+			// 
+			statusLabel.AutoSize = true;
+			statusLabel.Location = new Point(12, 311);
+			statusLabel.Name = "statusLabel";
+			statusLabel.Size = new Size(65, 15);
+			statusLabel.TabIndex = 14;
+			statusLabel.Text = "Up to date.";
+			// 
 			// ScreenEditor
 			// 
 			AcceptButton = saveButton;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(708, 339);
+			Controls.Add(statusLabel);
 			Controls.Add(refreshButton);
 			Controls.Add(screenTitleLabel);
 			Controls.Add(screenTitleTextBox);
@@ -221,5 +232,6 @@
 		private ColumnHeader messageColumn;
 		private Button refreshButton;
 		private ToolTip toolTip1;
+		private Label statusLabel;
 	}
 }

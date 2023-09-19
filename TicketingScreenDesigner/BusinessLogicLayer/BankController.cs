@@ -132,12 +132,12 @@ namespace BusinessLogicLayer {
 		/// </summary>
 		/// <param name="bankName">The name of the bank.</param>
 		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exist, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static List<TicketingScreen>? GetScreens(string bankName) {
+		public async static Task<List<TicketingScreen>?> GetScreens(string bankName) {
 			try {
 				if (!Initialize())
 					return default;
 
-				return BankOperations.GetScreens(bankName);
+				return await BankOperations.GetScreens(bankName);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -189,12 +189,12 @@ namespace BusinessLogicLayer {
 		/// <param name="bankName">The name of the bank.</param>
 		/// <param name="screenId">The ID of the screen</param>
 		/// <returns>A list of <c>TicketingButton</c> items representing the buttons of the screen. If the screen does not have buttons, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static List<TicketingButton>? GetButtons(string bankName, int screenId) {
+		public static async Task<List<TicketingButton>?> GetButtons(string bankName, int screenId) {
 			try {
 				if (!Initialize())
 					return default;
 
-				return ScreenOperations.GetButtons(bankName, screenId);
+				return await ScreenOperations.GetButtons(bankName, screenId);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);

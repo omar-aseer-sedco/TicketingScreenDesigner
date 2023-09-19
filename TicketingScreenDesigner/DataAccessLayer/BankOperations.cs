@@ -110,7 +110,7 @@ namespace DataAccessLayer {
 		/// </summary>
 		/// <param name="bankName">The name of the bank. Case insensitive.</param>
 		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exists, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static List<TicketingScreen>? GetScreens(string bankName) {
+		public async static Task<List<TicketingScreen>?> GetScreens(string bankName) {
 			try {
 				if (!Initialize())
 					return null;
@@ -123,7 +123,7 @@ namespace DataAccessLayer {
 
 				connection!.Open();
 
-				var reader = command.ExecuteReader();
+				var reader = await command.ExecuteReaderAsync();
 
 				while (reader.Read()) {
 					ret.Add(new TicketingScreen(bankName, (int) reader[ScreensConstants.SCREEN_ID], (string) reader[ScreensConstants.SCREEN_TITLE], (bool) reader[ScreensConstants.IS_ACTIVE]));
