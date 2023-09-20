@@ -211,6 +211,7 @@
 			Name = "BankForm";
 			StartPosition = FormStartPosition.CenterParent;
 			Text = "- Ticketing Screen Designer";
+			FormClosed += BankForm_FormClosed;
 			KeyDown += BankForm_KeyDown;
 			menuStrip1.ResumeLayout(false);
 			menuStrip1.PerformLayout();

@@ -1,4 +1,6 @@
-﻿namespace DataAccessLayer.Constants
+﻿using System.Data.SqlClient;
+
+namespace DataAccessLayer.Constants
 {
 	public static class BanksConstants
 	{
@@ -60,5 +62,12 @@
 			ISSUE_TICKET = 1,
 			SHOW_MESSAGE = 2,
 		}
+	}
+
+	public delegate void DatabaseNotificationDelegate(SqlNotificationInfo info);
+
+	public enum NotifiableEntityTypes {
+		Screens,
+		Buttons,
 	}
 }

@@ -4,10 +4,14 @@ using System.Text.Json;
 using LogUtils;
 using ExceptionUtils;
 
-namespace DataAccessLayer {
+namespace DataAccessLayer.Utils {
 	public static class DBUtils {
 		private static DBConfig? config = null;
 
+		/// <summary>
+		/// Creates an <c>SqlConnection</c> object. The connection string is obtained from a config file.
+		/// </summary>
+		/// <returns>The SqlConnection.</returns>
 		public static SqlConnection CreateConnection() {
 			try {
 				if (config is null) {
@@ -35,10 +39,6 @@ namespace DataAccessLayer {
 				}
 
 				return new SqlConnection(connectionString);
-			}
-			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex);
-				throw;
 			}
 			catch (ArgumentException ex) {
 				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error, ex.Source, ex.StackTrace));

@@ -2290,3 +2290,424 @@
   "Source": null,
   "StackTrace": null
 }
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: ExecuteNonQuery: Connection property has not been initialized.",
+  "TimeStamp": "2023-09-20T12:39:14.6389404+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 139"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: ExecuteNonQuery: Connection property has not been initialized.",
+  "TimeStamp": "2023-09-20T12:39:44.978354+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 139"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: ExecuteNonQuery: Connection property has not been initialized.",
+  "TimeStamp": "2023-09-20T12:44:27.3357386+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 139"
+}
+{
+  "Message": "Unhandled Error.\nType: System.Data.SqlClient.SqlException\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T13:03:26.8521672+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 141"
+}
+{
+  "Message": "refreshonchange called",
+  "TimeStamp": "2023-09-20T13:27:31.2097606+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Data.SqlClient.SqlException\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T13:27:31.255036+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 141"
+}
+{
+  "Message": "command: SELECT screen_id FROM TicketingScreens WHERE bank_name = @bankName;",
+  "TimeStamp": "2023-09-20T13:29:28.0235942+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "command: SELECT screen_id FROM TicketingScreens WHERE bank_name = @bankName;",
+  "TimeStamp": "2023-09-20T13:29:28.0576571+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Data.SqlClient.SqlException\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T13:29:28.0907046+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 142"
+}
+{
+  "Message": "command: SELECT screen_id FROM TicketingScreens WHERE bank_name = bank1;",
+  "TimeStamp": "2023-09-20T13:36:34.853402+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Data.SqlClient.SqlException\nMessage: Invalid column name \u0027bank1\u0027.",
+  "TimeStamp": "2023-09-20T13:36:34.9207769+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 143"
+}
+{
+  "Message": "command: SELECT screen_id FROM TicketingScreens WHERE bank_name = \u0027bank1\u0027;",
+  "TimeStamp": "2023-09-20T13:37:08.5043861+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "command: SELECT screen_id FROM TicketingScreens WHERE bank_name = \u0027bank1\u0027;",
+  "TimeStamp": "2023-09-20T13:37:08.5369261+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Data.SqlClient.SqlException\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T13:37:08.5674754+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 143"
+}
+{
+  "Message": "command: SELECT screen_id FROM TicketingScreens WHERE bank_name = @bankName;",
+  "TimeStamp": "2023-09-20T14:29:31.2508376+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "command: SELECT screen_id FROM TicketingScreens WHERE bank_name = @bankName;",
+  "TimeStamp": "2023-09-20T14:29:31.2840817+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Data.SqlClient.SqlException\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T14:29:31.3174202+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 142"
+}
+{
+  "Message": "command: SELECT screen_id FROM TicketingScreens WHERE bank_name = @bankName;",
+  "TimeStamp": "2023-09-20T14:31:11.872065+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Invalid",
+  "TimeStamp": "2023-09-20T14:45:01.2436944+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "45",
+  "TimeStamp": "2023-09-20T16:14:04.6413445+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "45",
+  "TimeStamp": "2023-09-20T16:18:21.2324536+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "45",
+  "TimeStamp": "2023-09-20T16:21:02.2323617+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "45",
+  "TimeStamp": "2023-09-20T16:26:06.7420942+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "45",
+  "TimeStamp": "2023-09-20T16:29:57.9683455+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "45",
+  "TimeStamp": "2023-09-20T16:34:19.5093203+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "45",
+  "TimeStamp": "2023-09-20T16:45:39.2504299+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Invalid",
+  "TimeStamp": "2023-09-20T16:51:24.1320585+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Invalid",
+  "TimeStamp": "2023-09-20T16:52:52.0073756+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Calling client delegate.",
+  "TimeStamp": "2023-09-20T16:52:52.0195381+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+==============================================================
+{
+  "Message": "Event args info: Invalid",
+  "TimeStamp": "2023-09-20T16:53:35.5618431+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Data.SqlClient.SqlException\nMessage: Login failed for user \u0027sa\u0027.",
+  "TimeStamp": "2023-09-20T16:56:14.2002549+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken)\r\n   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)\r\n   at System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)\r\n   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal\u0026 connection)\r\n   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at SqlDependencyProcessDispatcher.SqlConnectionContainer..ctor(SqlConnectionContainerHashHelper hashHelper, String appDomainKey, Boolean useDefaults)\r\n   at SqlDependencyProcessDispatcher.Start(String connectionString, String\u0026 server, DbConnectionPoolIdentity\u0026 identity, String\u0026 user, String\u0026 database, String\u0026 queueService, String appDomainKey, SqlDependencyPerAppDomainDispatcher dispatcher, Boolean\u0026 errorOccurred, Boolean\u0026 appDomainStart, Boolean useDefaults)\r\n   at System.Data.SqlClient.SqlDependency.Start(String connectionString, String queue, Boolean useDefaults)\r\n   at DataAccessLayer.Utils.SqlListener.Start() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 86"
+}
+{
+  "Message": "Event args info: Invalid",
+  "TimeStamp": "2023-09-20T16:57:24.4341365+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Invalid",
+  "TimeStamp": "2023-09-20T18:43:32.2070018+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Invalid",
+  "TimeStamp": "2023-09-20T18:45:22.2700328+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Invalid",
+  "TimeStamp": "2023-09-20T18:46:05.3909317+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: ExecuteNonQuery requires an open and available Connection. The connection\u0027s current state is closed.",
+  "TimeStamp": "2023-09-20T18:47:56.0964842+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 147"
+}
+{
+  "Message": "Event args info: Invalid",
+  "TimeStamp": "2023-09-20T18:48:26.7849993+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 9202\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T18:48:26.8271367+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 147"
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-20T18:59:18.0824155+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 9202\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T18:59:18.1554402+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 149"
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-20T19:02:11.3662512+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 9202\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T19:02:11.4205813+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()\r\n   at System.Data.SqlClient.SqlDataReader.get_MetaData()\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 149"
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-20T19:03:53.8651858+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: AlreadyChanged",
+  "TimeStamp": "2023-09-20T19:03:53.8839328+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unable to resubscribe to SQL dependency.",
+  "TimeStamp": "2023-09-20T19:03:53.8856973+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 9202\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T19:03:53.91909+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 149"
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-20T19:05:35.4051255+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: AlreadyChanged",
+  "TimeStamp": "2023-09-20T19:05:35.4200579+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unable to resubscribe to SQL dependency.",
+  "TimeStamp": "2023-09-20T19:05:35.421525+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 9202\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T19:05:35.4580068+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 150"
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-20T19:06:54.1508241+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled SQL Error. Code: 9202\nMessage: The query notification subscription message is invalid.",
+  "TimeStamp": "2023-09-20T19:06:54.2012406+03:00",
+  "Severity": "Error",
+  "Source": "Core .Net SqlClient Data Provider",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action\u00601 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean\u0026 dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 152"
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-20T19:13:48.378326+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: This SqlCommand object is already associated with another SqlDependency object.",
+  "TimeStamp": "2023-09-20T19:13:48.4178148+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlDependency.AddCommandInternal(SqlCommand cmd)\r\n   at System.Data.SqlClient.SqlDependency..ctor(SqlCommand command, String options, Int32 timeout)\r\n   at DataAccessLayer.Utils.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\SqlListener.cs:line 149"
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-20T19:35:44.7516201+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-20T19:35:47.8951316+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-20T19:35:57.4259427+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-20T19:36:05.1270402+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-20T19:36:08.2451094+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-20T19:38:39.7433921+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}

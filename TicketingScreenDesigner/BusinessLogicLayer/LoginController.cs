@@ -70,16 +70,34 @@ namespace BusinessLogicLayer {
 		}
 
 		/// <summary>
-		/// Gets the screens of the specified bank.
+		/// Asynchronously gets the screens of the specified bank.
 		/// </summary>
 		/// <param name="bankName">The name of the bank.</param>
 		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens owned by the bank. If the bank does not exist, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static async Task<List<TicketingScreen>?> GetScreens(string bankName) {
+		public static async Task<List<TicketingScreen>?> GetScreensAsync(string bankName) {
 			try {
 				if (!Initialize())
 					return default;
 
-				return await BankOperations.GetScreens(bankName);
+				return await BankOperations.GetScreensAsync(bankName);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
+		}
+
+		/// <summary>
+		/// Gets the screens of the specified bank.
+		/// </summary>
+		/// <param name="bankName">The name of the bank.</param>
+		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens owned by the bank. If the bank does not exist, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
+		public static List<TicketingScreen>? GetScreens(string bankName) {
+			try {
+				if (!Initialize())
+					return default;
+
+				return BankOperations.GetScreens(bankName);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);

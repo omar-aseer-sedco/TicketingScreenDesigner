@@ -277,7 +277,7 @@ namespace TicketingScreenDesigner {
 					}
 					else {
 						MessageBox.Show("This screen no longer exists. It may have been deleted by another user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-						await callingForm.UpdateScreensListView();
+						await callingForm.UpdateScreensListViewAsync();
 						Close();
 						return;
 					}
@@ -304,7 +304,7 @@ namespace TicketingScreenDesigner {
 					MessageBox.Show("Failed to commit changes. Please check for errors.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
-				await callingForm.UpdateScreensListView();
+				await callingForm.UpdateScreensListViewAsync();
 
 				Close();
 			}
@@ -334,7 +334,7 @@ namespace TicketingScreenDesigner {
 				}
 
 				screenController.CancelPendingChanges();
-				await callingForm.UpdateScreensListView();
+				await callingForm.UpdateScreensListViewAsync();
 				Close();
 			}
 			catch (Exception ex) {
@@ -469,7 +469,7 @@ namespace TicketingScreenDesigner {
 
 				if (!(bool) screenExists) {
 					MessageBox.Show("This screen no longer exists. It may have been deleted by another user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					await callingForm.UpdateScreensListView();
+					await callingForm.UpdateScreensListViewAsync();
 					Close();
 					return;
 				}

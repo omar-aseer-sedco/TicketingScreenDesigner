@@ -1,6 +1,7 @@
 ﻿using System.Data.SqlClient;
 using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
+using DataAccessLayer.Utils;
 using ExceptionUtils;
 using System.Data;
 
@@ -106,11 +107,11 @@ namespace DataAccessLayer {
 		}
 
 		/// <summary>
-		/// Gets all the screens for the bank with the specified name.
+		/// Asynchronously gets all the screens for the bank with the specified name.
 		/// </summary>
 		/// <param name="bankName">The name of the bank. Case insensitive.</param>
-		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exists, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public async static Task<List<TicketingScreen>?> GetScreens(string bankName) {
+		/// <returns>A task containing a list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exists, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
+		public async static Task<List<TicketingScreen>?> GetScreensAsync(string bankName) {
 			try {
 				if (!Initialize())
 					return null;
@@ -124,6 +125,47 @@ namespace DataAccessLayer {
 				connection!.Open();
 
 				var reader = await command.ExecuteReaderAsync();
+
+				while (await reader.ReadAsync()) {
+					ret.Add(new TicketingScreen(bankName, (int) reader[ScreensConstants.SCREEN_ID], (string) reader[ScreensConstants.SCREEN_TITLE], (bool) reader[ScreensConstants.IS_ACTIVE]));
+				}
+
+				reader.Close();
+
+				return ret;
+			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "Screen ID");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
+			finally {
+				connection?.Close();
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Gets all the screens for the bank with the specified name.
+		/// </summary>
+		/// <param name="bankName">The name of the bank. Case insensitive.</param>
+		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exists, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
+		public static List<TicketingScreen>? GetScreens(string bankName) {
+			try {
+				if (!Initialize())
+					return null;
+
+				var ret = new List<TicketingScreen>();
+
+				string query = $"SELECT {ScreensConstants.SCREEN_ID}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName;";
+				var command = new SqlCommand(query, connection);
+				command.Parameters.Add("@bankName", SqlDbType.VarChar, BanksConstants.BANK_NAME_SIZE).Value = bankName;
+
+				connection!.Open();
+
+				var reader = command.ExecuteReader();
 
 				while (reader.Read()) {
 					ret.Add(new TicketingScreen(bankName, (int) reader[ScreensConstants.SCREEN_ID], (string) reader[ScreensConstants.SCREEN_TITLE], (bool) reader[ScreensConstants.IS_ACTIVE]));

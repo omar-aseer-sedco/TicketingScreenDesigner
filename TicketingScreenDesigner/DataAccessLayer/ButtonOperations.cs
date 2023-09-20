@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
+using DataAccessLayer.Utils;
 using ExceptionUtils;
 using LogUtils;
 using System.Data;

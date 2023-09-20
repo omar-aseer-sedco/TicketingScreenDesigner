@@ -5,12 +5,14 @@ using DataAccessLayer.DataClasses;
 using BusinessLogicLayer;
 using LogUtils;
 using ExceptionUtils;
+using System.Data.SqlClient;
 
 namespace TicketingScreenDesigner {
 	public partial class BankForm : Form {
 		private const string TITLE_TEXT = "Ticketing Screen Designer";
 
 		private readonly string bankName;
+		private readonly DatabaseListener databaseListener;
 
 		private List<TicketingScreen> screens;
 
@@ -47,6 +49,10 @@ namespace TicketingScreenDesigner {
 				Text = TITLE_TEXT + " - " + this.bankName;
 				UpdateTitleLabel();
 
+				databaseListener = new DatabaseListener(NotifiableEntityTypes.Screens, this.bankName, -1);
+				databaseListener.SubscribeToDelegate(RefreshOnChange);
+				databaseListener.Start();
+
 				Cursor.Current = Cursors.Default;
 			}
 			catch (Exception ex) {
@@ -65,8 +71,14 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
+		private void RefreshOnChange(SqlNotificationInfo info) {
+			if (info == SqlNotificationInfo.Insert || info == SqlNotificationInfo.Update || info == SqlNotificationInfo.Delete) {
+				UpdateScreensListView();
+			}
+		}
+
 		private async void BankForm_HandleCreated(object? sender, EventArgs e) {
-			await UpdateScreensListView();
+			await UpdateScreensListViewAsync();
 		}
 
 		private void UpdateTitleLabel() {
@@ -103,11 +115,37 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public async Task UpdateScreensListView() {
+		public async Task UpdateScreensListViewAsync() {
 			try {
 				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
 
-				List<TicketingScreen>? bankScreens = await BankController.GetScreens(bankName);
+				List<TicketingScreen>? bankScreens = await BankController.GetScreensAsync(bankName);
+
+				if (bankScreens is null) {
+					LogsHelper.Log("Failed to sync screens.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("Failed to sync with database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
+				screens = bankScreens;
+				Invoke(new MethodInvoker(() => AddScreensToListView(screens)));
+
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
+
+				Invoke(UpdateFormButtonActivation);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		public void UpdateScreensListView() {
+			try {
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
+
+				List<TicketingScreen>? bankScreens = BankController.GetScreens(bankName);
 
 				if (bankScreens is null) {
 					LogsHelper.Log("Failed to sync screens.", DateTime.Now, EventSeverity.Error);
@@ -182,7 +220,7 @@ namespace TicketingScreenDesigner {
 
 				if (!(bool) screenExists) {
 					MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					await UpdateScreensListView();
+					await UpdateScreensListViewAsync();
 					return;
 				}
 
@@ -242,7 +280,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				await UpdateScreensListView();
+				await UpdateScreensListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -328,7 +366,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				await UpdateScreensListView();
+				await UpdateScreensListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -385,7 +423,7 @@ namespace TicketingScreenDesigner {
 
 				if (!(bool) screenExists) {
 					MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					await UpdateScreensListView();
+					await UpdateScreensListViewAsync();
 					return;
 				}
 
@@ -410,7 +448,7 @@ namespace TicketingScreenDesigner {
 
 		private async void refreshButton_Click(object sender, EventArgs e) {
 			try {
-				await UpdateScreensListView();
+				await UpdateScreensListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -440,7 +478,7 @@ namespace TicketingScreenDesigner {
 						await PreviewScreen();
 						break;
 					case Keys.R:
-						await UpdateScreensListView();
+						await UpdateScreensListViewAsync();
 						break;
 				}
 			}
@@ -480,6 +518,10 @@ namespace TicketingScreenDesigner {
 				ExceptionHelper.HandleGeneralException(ex);
 				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+		}
+
+		private void BankForm_FormClosed(object sender, FormClosedEventArgs e) {
+			databaseListener.Stop();
 		}
 	}
 }

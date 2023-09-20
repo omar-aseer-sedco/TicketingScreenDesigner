@@ -128,16 +128,34 @@ namespace BusinessLogicLayer {
 		}
 
 		/// <summary>
-		/// Gets all the screens for the bank.
+		/// Asynchronously gets all the screens for the bank.
 		/// </summary>
 		/// <param name="bankName">The name of the bank.</param>
 		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exist, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public async static Task<List<TicketingScreen>?> GetScreens(string bankName) {
+		public async static Task<List<TicketingScreen>?> GetScreensAsync(string bankName) {
 			try {
 				if (!Initialize())
 					return default;
 
-				return await BankOperations.GetScreens(bankName);
+				return await BankOperations.GetScreensAsync(bankName);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
+		}
+
+		/// <summary>
+		/// Gets all the screens for the bank.
+		/// </summary>
+		/// <param name="bankName">The name of the bank.</param>
+		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exist, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
+		public static List<TicketingScreen>? GetScreens(string bankName) {
+			try {
+				if (!Initialize())
+					return default;
+
+				return BankOperations.GetScreens(bankName);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -194,7 +212,7 @@ namespace BusinessLogicLayer {
 				if (!Initialize())
 					return default;
 
-				return await ScreenOperations.GetButtons(bankName, screenId);
+				return await ScreenOperations.GetButtonsAsync(bankName, screenId);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);

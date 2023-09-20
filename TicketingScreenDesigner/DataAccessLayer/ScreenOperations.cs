@@ -1,7 +1,7 @@
 ﻿using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
+using DataAccessLayer.Utils;
 using ExceptionUtils;
-using LogUtils;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
@@ -298,7 +298,7 @@ namespace DataAccessLayer {
 		/// <param name="bankName">The name of the bank that owns the screen.</param>
 		/// <param name="screenId">The ID of the screen.</param>
 		/// <returns>A list of <c>TicketingButton</c> objects representing the buttons on the screen. If there are no buttons, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static async Task<List<TicketingButton>?> GetButtons(string bankName, int screenId) {
+		public static async Task<List<TicketingButton>?> GetButtonsAsync(string bankName, int screenId) {
 			try {
 				if (!Initialize())
 					return null;

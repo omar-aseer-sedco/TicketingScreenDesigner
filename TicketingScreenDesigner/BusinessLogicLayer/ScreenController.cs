@@ -87,7 +87,7 @@ namespace BusinessLogicLayer {
 		/// <returns>A list of <c>TicketingButton</c> items representing the buttons. If the operation fails, <c>null</c> is returned.</returns>
 		public async Task<List<TicketingButton>?> GetAllButtons() {
 			try {
-				var buttons = await ScreenOperations.GetButtons(BankName, ScreenId);
+				var buttons = await ScreenOperations.GetButtonsAsync(BankName, ScreenId);
 				if (buttons is null)
 					return null;
 

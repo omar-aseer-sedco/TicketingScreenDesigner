@@ -1,6 +1,5 @@
 {
 "Server": "(local)",
 "Database": "TSD",
-"UserId": "sa",
-"Password": "sedco@123",
+"IntegratedSecurity": "sspi",
 }
