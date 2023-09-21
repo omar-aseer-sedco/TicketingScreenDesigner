@@ -521,7 +521,34 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void BankForm_FormClosed(object sender, FormClosedEventArgs e) {
-			screenChangesListener.Stop();
+			try {
+				screenChangesListener.Stop();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e) {
+			try {
+				var changePasswordForm = new ChangePasswordForm(bankName);
+				changePasswordForm.ShowDialog();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void logOutToolStripMenuItem_Click(object sender, EventArgs e) {
+			try {
+				Close();
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 	}
 }

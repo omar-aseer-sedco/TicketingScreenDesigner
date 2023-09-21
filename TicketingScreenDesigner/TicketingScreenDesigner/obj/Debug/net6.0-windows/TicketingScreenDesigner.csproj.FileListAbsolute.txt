@@ -56,3 +56,4 @@ C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\Ticketin
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\bin\Debug\net6.0-windows\BusinessLogicLayer.pdb
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\bin\Debug\net6.0-windows\Utils.dll
 C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\bin\Debug\net6.0-windows\Utils.pdb
+C:\Users\omar.aseer\Desktop\Projects\Task 1 - Ticketing Screen Designer\TicketingScreenDesigner\TicketingScreenDesigner\obj\Debug\net6.0-windows\TicketingScreenDesigner.ChangePasswordForm.resources

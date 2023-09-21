@@ -226,5 +226,37 @@ namespace DataAccessLayer {
 
 			return null;
 		}
+
+		public static bool ChangePassword(string bankName, string newPassword) {
+			try {
+				if (!Initialize())
+					return false;
+
+				newPassword = newPassword.Trim();
+				if (newPassword == string.Empty)
+					return false;
+
+				string query = $"UPDATE {BanksConstants.TABLE_NAME} SET {BanksConstants.PASSWORD} = @password WHERE {BanksConstants.BANK_NAME} = @bankName;";
+				var command = new SqlCommand(query, connection);
+				command.Parameters.Add("@password", SqlDbType.VarChar, BanksConstants.PASSWORD_SIZE).Value = newPassword;
+				command.Parameters.Add("@bankName", SqlDbType.VarChar, BanksConstants.BANK_NAME_SIZE).Value = bankName;
+
+				connection!.Open();
+				command.ExecuteNonQuery();
+
+				return true;
+			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex, "Screen ID");
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
+			finally {
+				connection?.Close();
+			}
+
+			return false;
+		}
 	}
 }

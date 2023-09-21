@@ -35,6 +35,9 @@
 			previewButton = new Button();
 			refreshButton = new Button();
 			menuStrip1 = new MenuStrip();
+			accountToolStripMenuItem = new ToolStripMenuItem();
+			changePasswordToolStripMenuItem = new ToolStripMenuItem();
+			logOutToolStripMenuItem = new ToolStripMenuItem();
 			helpToolStripMenuItem = new ToolStripMenuItem();
 			keyboardShortcutsToolStripMenuItem = new ToolStripMenuItem();
 			contextMenuStrip1 = new ContextMenuStrip(components);
@@ -156,12 +159,33 @@
 			// 
 			// menuStrip1
 			// 
-			menuStrip1.Items.AddRange(new ToolStripItem[] { helpToolStripMenuItem });
+			menuStrip1.Items.AddRange(new ToolStripItem[] { accountToolStripMenuItem, helpToolStripMenuItem });
 			menuStrip1.Location = new Point(0, 0);
 			menuStrip1.Name = "menuStrip1";
 			menuStrip1.Size = new Size(654, 24);
 			menuStrip1.TabIndex = 8;
 			menuStrip1.Text = "menuStrip1";
+			// 
+			// accountToolStripMenuItem
+			// 
+			accountToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { changePasswordToolStripMenuItem, logOutToolStripMenuItem });
+			accountToolStripMenuItem.Name = "accountToolStripMenuItem";
+			accountToolStripMenuItem.Size = new Size(64, 20);
+			accountToolStripMenuItem.Text = "Account";
+			// 
+			// changePasswordToolStripMenuItem
+			// 
+			changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
+			changePasswordToolStripMenuItem.Size = new Size(180, 22);
+			changePasswordToolStripMenuItem.Text = "Change password";
+			changePasswordToolStripMenuItem.Click += changePasswordToolStripMenuItem_Click;
+			// 
+			// logOutToolStripMenuItem
+			// 
+			logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+			logOutToolStripMenuItem.Size = new Size(180, 22);
+			logOutToolStripMenuItem.Text = "Log out";
+			logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -237,5 +261,8 @@
 		private ToolStripMenuItem keyboardShortcutsToolStripMenuItem;
 		private ToolTip toolTip1;
 		private Label statusLabel;
+		private ToolStripMenuItem accountToolStripMenuItem;
+		private ToolStripMenuItem changePasswordToolStripMenuItem;
+		private ToolStripMenuItem logOutToolStripMenuItem;
 	}
 }

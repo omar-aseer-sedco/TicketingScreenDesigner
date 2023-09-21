@@ -125,5 +125,27 @@ namespace BusinessLogicLayer {
 				return default;
 			}
 		}
+
+		public static bool? ChangePassword(string bankName, string oldPassword, string newPassword) {
+			try {
+				if (!Initialize())
+					return null;
+
+				newPassword = newPassword.Trim();
+				if (newPassword == string.Empty)
+					return null;
+
+				bool? verification = VerifyPassword(bankName, oldPassword);
+				if (verification is null || verification == false)
+					return verification;
+
+				bool success = BankOperations.ChangePassword(bankName, newPassword);
+				return success ? success : null;
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return null;
+			}
+		}
 	}
 }
