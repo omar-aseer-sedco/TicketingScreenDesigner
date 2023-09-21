@@ -1,6 +1,5 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-using System.Data;
 using DataAccessLayer.Constants;
 using ExceptionUtils;
 using LogUtils;
@@ -10,21 +9,18 @@ namespace DataAccessLayer.Utils {
 	/// <summary>
 	/// This class is used to listen for database changes that match a certain entity type, bank, and (optionally) screen.
 	/// </summary>
-	public class SqlListener {
-		private readonly SqlConnection? connection;
+	public abstract class SqlListener {
 		private SqlDependency dependency;
-		private SqlCommand command;
-		private readonly NotifiableEntityTypes entityType;
-		private readonly string bankName;
-		private readonly int screenId;
+		protected readonly SqlConnection? connection;
 
 		/// <summary>
 		/// The delegate that gets called when the dependency triggers a change.
 		/// </summary>
 		public DatabaseNotificationDelegate ClientDelegate { get; set; }
-
-		public string CommandText { get; private set; }
-
+		/// <summary>
+		/// A SQL query representing the command that is used to subscribe to the dependency.
+		/// </summary>
+		public string CommandText { get; protected set; }
 		/// <summary>
 		/// returns <c>true</c> if <c>SqlDependency</c> has been successfully started, and <c>false</c> otherwise.
 		/// </summary>
@@ -33,40 +29,13 @@ namespace DataAccessLayer.Utils {
 		/// <summary>
 		/// Creates an instance of <c>SqlListener</c>.
 		/// </summary>
-		/// <param name="entityType">The type of the entity to listen for (screens or buttons).</param>
-		/// <param name="bankName">The name of the bank for which to listen.</param>
-		/// <param name="screenId">The ID of the screen for which to listen. This is only used if <c>entityType</c> is set to Buttons.</param>
-		public SqlListener(NotifiableEntityTypes entityType, string bankName, int screenId) {
+		public SqlListener() {
 			try {
-				try {
-					connection = DBUtils.CreateConnection();
-				}
-				catch (Exception ex) {
-					ExceptionHelper.HandleGeneralException(ex);
-					LogsHelper.Log("SqlListener - Failed to create connection.", DateTime.Now, EventSeverity.Error);
-				}
-
-				this.entityType = entityType;
-				this.bankName = bankName;
-				this.screenId = screenId;
+				connection = DBUtils.CreateConnection();
 			}
 			catch (Exception ex) {
+				LogsHelper.Log("SqlListener - Failed to create connection.", DateTime.Now, EventSeverity.Error);
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-		}
-
-		private void CreateCommand() {
-			if (entityType == NotifiableEntityTypes.Screens) {
-				CommandText = $"SELECT {ScreensConstants.SCREEN_ID} FROM dbo.{ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName;";
-			}
-			else if (entityType == NotifiableEntityTypes.Buttons) {
-				CommandText = $"SELECT {ButtonsConstants.BUTTON_ID} FROM dbo.{ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId;";
-			}
-
-			command = new SqlCommand(CommandText, connection);
-			command.Parameters.Add("@bankName", SqlDbType.VarChar, BanksConstants.BANK_NAME_SIZE).Value = bankName;
-			if (entityType == NotifiableEntityTypes.Buttons) {
-				command.Parameters.Add("@screenId", SqlDbType.Int).Value = screenId;
 			}
 		}
 
@@ -124,6 +93,12 @@ namespace DataAccessLayer.Utils {
 			}
 		}
 
+		/// <summary>
+		/// Creates the command that is used to subscribe to the dependency.
+		/// </summary>
+		/// <returns>An instance of <c>SqlCommand</c>.</returns>
+		protected abstract SqlCommand CreateCommand();
+
 		private void OnDependencyChange(object? sender, SqlNotificationEventArgs e) {
 			try {
 				LogsHelper.Log("Event args info: " + Enum.GetName(e.Info), DateTime.Now, EventSeverity.Info);
@@ -149,7 +124,7 @@ namespace DataAccessLayer.Utils {
 
 		private void SubscribeToDependency() {
 			try {
-				CreateCommand();
+				SqlCommand command = CreateCommand();
 				dependency = new SqlDependency(command);
 				dependency.OnChange += new OnChangeEventHandler(OnDependencyChange);
 				command.ExecuteNonQuery();

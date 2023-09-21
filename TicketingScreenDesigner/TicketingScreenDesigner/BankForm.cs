@@ -12,7 +12,7 @@ namespace TicketingScreenDesigner {
 		private const string TITLE_TEXT = "Ticketing Screen Designer";
 
 		private readonly string bankName;
-		private readonly DatabaseListener databaseListener;
+		private readonly ScreenChangesListener screenChangesListener;
 
 		private List<TicketingScreen> screens;
 
@@ -49,9 +49,9 @@ namespace TicketingScreenDesigner {
 				Text = TITLE_TEXT + " - " + this.bankName;
 				UpdateTitleLabel();
 
-				databaseListener = new DatabaseListener(NotifiableEntityTypes.Screens, this.bankName, -1);
-				databaseListener.SubscribeToDelegate(RefreshOnChange);
-				databaseListener.Start();
+				screenChangesListener = new ScreenChangesListener(this.bankName);
+				screenChangesListener.SubscribeToDelegate(RefreshOnChange);
+				screenChangesListener.Start();
 
 				Cursor.Current = Cursors.Default;
 			}
@@ -521,7 +521,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void BankForm_FormClosed(object sender, FormClosedEventArgs e) {
-			databaseListener.Stop();
+			screenChangesListener.Stop();
 		}
 	}
 }

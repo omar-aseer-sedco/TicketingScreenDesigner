@@ -210,6 +210,7 @@
 			Name = "ScreenEditor";
 			StartPosition = FormStartPosition.CenterParent;
 			Text = "Screen Editor";
+			FormClosed += ScreenEditor_FormClosed;
 			KeyDown += ScreenEditor_KeyDown;
 			ResumeLayout(false);
 			PerformLayout();

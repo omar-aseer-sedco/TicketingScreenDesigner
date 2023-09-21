@@ -5,6 +5,7 @@ using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
 using LogUtils;
 using ExceptionUtils;
+using System.Data.SqlClient;
 
 namespace TicketingScreenDesigner {
 	public partial class ScreenEditor : Form {
@@ -14,6 +15,7 @@ namespace TicketingScreenDesigner {
 		private readonly BankForm callingForm;
 		private readonly string bankName;
 		private readonly ScreenController screenController;
+		private readonly ButtonChangesListener buttonChangesListener;
 		private List<TicketingButton> buttons;
 		private bool alreadyAdded;
 
@@ -79,6 +81,10 @@ namespace TicketingScreenDesigner {
 				this.bankName = bankName;
 				FillInfo(screen);
 
+				buttonChangesListener = new ButtonChangesListener(this.bankName, screenController.ScreenId);
+				buttonChangesListener.SubscribeToDelegate(RefreshOnChange);
+				buttonChangesListener.Start();
+
 				Cursor.Current = Cursors.Default;
 			}
 			catch (Exception ex) {
@@ -87,8 +93,14 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
+		private async void RefreshOnChange(SqlNotificationInfo info) {
+			if (info == SqlNotificationInfo.Insert || info == SqlNotificationInfo.Update || info == SqlNotificationInfo.Delete) {
+				await UpdateButtonsListViewAsync();
+			}
+		}
+
 		private async void ScreenEditor_HandleCreated(object? sender, EventArgs e) {
-			await UpdateButtonsListView();
+			await UpdateButtonsListViewAsync();
 		}
 
 		private void FillInfo(TicketingScreen screen) {
@@ -102,11 +114,36 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public async Task UpdateButtonsListView() {
+		public async Task UpdateButtonsListViewAsync() {
 			try {
 				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
 
-				List<TicketingButton>? screenButtons = await screenController.GetAllButtons();
+				List<TicketingButton>? screenButtons = await screenController.GetAllButtonsAsync();
+
+				if (screenButtons is null) {
+					LogsHelper.Log("Failed to sync buttons.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("Failed to sync with database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
+				buttons = screenButtons;
+
+				Invoke(new MethodInvoker(() => AddButtonsToListView(buttons)));
+
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
+				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		public void UpdateButtonsListView() {
+			try {
+				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
+
+				List<TicketingButton>? screenButtons = screenController.GetAllButtons();
 
 				if (screenButtons is null) {
 					LogsHelper.Log("Failed to sync buttons.", DateTime.Now, EventSeverity.Error);
@@ -376,7 +413,7 @@ namespace TicketingScreenDesigner {
 
 				screenController.DeleteButtonsCancellable(GetSelectedButtonIds() ?? new List<int>());
 
-				await UpdateButtonsListView();
+				await UpdateButtonsListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -476,7 +513,7 @@ namespace TicketingScreenDesigner {
 
 				if (!(bool) buttonExists) {
 					MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					await UpdateButtonsListView();
+					await UpdateButtonsListViewAsync();
 					return;
 				}
 
@@ -515,7 +552,7 @@ namespace TicketingScreenDesigner {
 
 		private async void refreshButton_Click(object sender, EventArgs e) {
 			try {
-				await UpdateButtonsListView();
+				await UpdateButtonsListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -548,7 +585,7 @@ namespace TicketingScreenDesigner {
 						AddButton();
 						break;
 					case Keys.R:
-						await UpdateButtonsListView();
+						await UpdateButtonsListViewAsync();
 						break;
 					case Keys.S:
 						ToggleIsScreenActive();
@@ -589,6 +626,10 @@ namespace TicketingScreenDesigner {
 				ExceptionHelper.HandleGeneralException(ex);
 				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+		}
+
+		private void ScreenEditor_FormClosed(object sender, FormClosedEventArgs e) {
+			buttonChangesListener.Stop();
 		}
 	}
 }

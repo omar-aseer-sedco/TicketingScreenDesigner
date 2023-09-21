@@ -159,7 +159,7 @@ namespace TicketingScreenDesigner {
 
 					if (!(bool) buttonExists) {
 						MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-						await callingForm.UpdateButtonsListView();
+						await callingForm.UpdateButtonsListViewAsync();
 						Close();
 						return;
 					}
@@ -209,7 +209,7 @@ namespace TicketingScreenDesigner {
 				}
 
 				callingForm.CheckIfScreenExists();
-				await callingForm.UpdateButtonsListView();
+				await callingForm.UpdateButtonsListViewAsync();
 				Close();
 			}
 			catch (Exception ex) {

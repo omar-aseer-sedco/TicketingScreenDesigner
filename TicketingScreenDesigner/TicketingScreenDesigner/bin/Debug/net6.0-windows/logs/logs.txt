@@ -2711,3 +2711,87 @@
   "Source": null,
   "StackTrace": null
 }
+{
+  "Message": "Event args info: Update",
+  "TimeStamp": "2023-09-20T19:43:09.1841277+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Update",
+  "TimeStamp": "2023-09-20T19:43:16.9760234+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-20T19:43:20.7552874+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-21T09:36:19.2457985+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-21T09:36:44.1652258+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-21T09:49:08.1316388+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-21T09:49:11.064452+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-21T10:12:23.9061234+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-21T10:12:50.2706651+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-21T10:17:36.1990217+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-21T10:17:43.0152245+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-21T10:23:28.8298357+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
