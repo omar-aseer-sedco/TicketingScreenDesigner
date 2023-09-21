@@ -88,24 +88,6 @@ namespace BusinessLogicLayer {
 		}
 
 		/// <summary>
-		/// Gets the screens of the specified bank.
-		/// </summary>
-		/// <param name="bankName">The name of the bank.</param>
-		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens owned by the bank. If the bank does not exist, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static List<TicketingScreen>? GetScreens(string bankName) {
-			try {
-				if (!Initialize())
-					return default;
-
-				return BankOperations.GetScreens(bankName);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		/// <summary>
 		/// Verifies the password for the specified bank.
 		/// </summary>
 		/// <param name="bankName">The name of the bank.</param>
@@ -126,6 +108,13 @@ namespace BusinessLogicLayer {
 			}
 		}
 
+		/// <summary>
+		/// Changes the password for the given bank.
+		/// </summary>
+		/// <param name="bankName">The name of the bank.</param>
+		/// <param name="oldPassword">The original password.</param>
+		/// <param name="newPassword">The new password.</param>
+		/// <returns><c>true</c> if the password is changed successfully, <c>false</c> if the given old password is incorrect, and <c>null</c> if the operation fails.</returns>
 		public static bool? ChangePassword(string bankName, string oldPassword, string newPassword) {
 			try {
 				if (!Initialize())

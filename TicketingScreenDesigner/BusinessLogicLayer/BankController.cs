@@ -146,24 +146,6 @@ namespace BusinessLogicLayer {
 		}
 
 		/// <summary>
-		/// Gets all the screens for the bank.
-		/// </summary>
-		/// <param name="bankName">The name of the bank.</param>
-		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exist, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static List<TicketingScreen>? GetScreens(string bankName) {
-			try {
-				if (!Initialize())
-					return default;
-
-				return BankOperations.GetScreens(bankName);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		/// <summary>
 		/// Sets the screen with the given ID as the active screen. If a different screen is already active, it is deactivated.
 		/// </summary>
 		/// <param name="bankName">The name of the bank.</param>

@@ -2795,3 +2795,17 @@
   "Source": null,
   "StackTrace": null
 }
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-21T11:54:27.0330989+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-21T11:54:31.6402298+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}

@@ -71,9 +71,9 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void RefreshOnChange(SqlNotificationInfo info) {
+		private async void RefreshOnChange(SqlNotificationInfo info) {
 			if (info == SqlNotificationInfo.Insert || info == SqlNotificationInfo.Update || info == SqlNotificationInfo.Delete) {
-				UpdateScreensListView();
+				await UpdateScreensListViewAsync();
 			}
 		}
 
@@ -120,32 +120,6 @@ namespace TicketingScreenDesigner {
 				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
 
 				List<TicketingScreen>? bankScreens = await BankController.GetScreensAsync(bankName);
-
-				if (bankScreens is null) {
-					LogsHelper.Log("Failed to sync screens.", DateTime.Now, EventSeverity.Error);
-					MessageBox.Show("Failed to sync with database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return;
-				}
-
-				screens = bankScreens;
-				Invoke(new MethodInvoker(() => AddScreensToListView(screens)));
-
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
-
-				Invoke(UpdateFormButtonActivation);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-
-		public void UpdateScreensListView() {
-			try {
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
-
-				List<TicketingScreen>? bankScreens = BankController.GetScreens(bankName);
 
 				if (bankScreens is null) {
 					LogsHelper.Log("Failed to sync screens.", DateTime.Now, EventSeverity.Error);

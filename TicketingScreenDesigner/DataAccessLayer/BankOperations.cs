@@ -148,47 +148,6 @@ namespace DataAccessLayer {
 		}
 
 		/// <summary>
-		/// Gets all the screens for the bank with the specified name.
-		/// </summary>
-		/// <param name="bankName">The name of the bank. Case insensitive.</param>
-		/// <returns>A list of <c>TicketingScreen</c> objects representing the screens of the bank. If the bank does not exists, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
-		public static List<TicketingScreen>? GetScreens(string bankName) {
-			try {
-				if (!Initialize())
-					return null;
-
-				var ret = new List<TicketingScreen>();
-
-				string query = $"SELECT {ScreensConstants.SCREEN_ID}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName;";
-				var command = new SqlCommand(query, connection);
-				command.Parameters.Add("@bankName", SqlDbType.VarChar, BanksConstants.BANK_NAME_SIZE).Value = bankName;
-
-				connection!.Open();
-
-				var reader = command.ExecuteReader();
-
-				while (reader.Read()) {
-					ret.Add(new TicketingScreen(bankName, (int) reader[ScreensConstants.SCREEN_ID], (string) reader[ScreensConstants.SCREEN_TITLE], (bool) reader[ScreensConstants.IS_ACTIVE]));
-				}
-
-				reader.Close();
-
-				return ret;
-			}
-			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "Screen ID");
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				connection?.Close();
-			}
-
-			return null;
-		}
-
-		/// <summary>
 		/// Gets the password for the specified bank.
 		/// </summary>
 		/// <param name="bankName">The name of the bank.</param>
@@ -227,6 +186,12 @@ namespace DataAccessLayer {
 			return null;
 		}
 
+		/// <summary>
+		/// Changes the password for the specifed bank.
+		/// </summary>
+		/// <param name="bankName">The name of the bank.</param>
+		/// <param name="newPassword">The new password.</param>
+		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public static bool ChangePassword(string bankName, string newPassword) {
 			try {
 				if (!Initialize())

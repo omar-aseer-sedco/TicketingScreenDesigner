@@ -109,33 +109,6 @@ namespace BusinessLogicLayer {
 		}
 
 		/// <summary>
-		/// Gets all the buttons of the screen, including pending buttons.
-		/// </summary>
-		/// <returns>A list of <c>TicketingButton</c> items representing the buttons. If the operation fails, <c>null</c> is returned.</returns>
-		public List<TicketingButton>? GetAllButtons() {
-			try {
-				var buttons = ScreenOperations.GetButtons(BankName, ScreenId);
-				if (buttons is null)
-					return null;
-
-				foreach (var button in buttons.ToList()) {
-					if (pendingDeletes.Contains(button.ButtonId) || pendingUpdates.ContainsKey(button.ButtonId)) {
-						buttons.Remove(button);
-					}
-				}
-
-				buttons.AddRange(pendingAdds);
-				buttons.AddRange(pendingUpdates.Values.ToList());
-
-				return buttons;
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return default;
-			}
-		}
-
-		/// <summary>
 		/// Adds a button to the screen. The operation is not committed to the database until <CommitChanges cref="CommitPendingChanges()"/> is called.
 		/// </summary>
 		/// <param name="button">The button to be added.</param>

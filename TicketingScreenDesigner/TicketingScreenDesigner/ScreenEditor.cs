@@ -139,31 +139,6 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public void UpdateButtonsListView() {
-			try {
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
-
-				List<TicketingButton>? screenButtons = screenController.GetAllButtons();
-
-				if (screenButtons is null) {
-					LogsHelper.Log("Failed to sync buttons.", DateTime.Now, EventSeverity.Error);
-					MessageBox.Show("Failed to sync with database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return;
-				}
-
-				buttons = screenButtons;
-
-				Invoke(new MethodInvoker(() => AddButtonsToListView(buttons)));
-
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-
 		private void AddButtonsToListView(List<TicketingButton> buttonsToAdd) {
 			buttonsListView.Items.Clear();
 
