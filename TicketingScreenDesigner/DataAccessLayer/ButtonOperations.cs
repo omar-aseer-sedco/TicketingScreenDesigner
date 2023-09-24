@@ -13,38 +13,17 @@ namespace DataAccessLayer {
 	/// Contains methods for retrieving and manipulating button information.
 	/// </summary>
 	public static class ButtonOperations {
-		private static SqlConnection? connection = null;
-
-		private static bool Initialize() {
-			try {
-				connection ??= DBUtils.CreateConnection();
-				return true;
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return false;
-			}
-		}
-
 		/// <summary>
 		/// Verifies that the database connection is established correctly.
 		/// </summary>
 		/// <returns><c>true</c> if the connection has been established properly, and <c>false</c> otherwise.</returns>
 		public static bool VerifyConnection() {
 			try {
-				if (!Initialize())
-					return default;
-
-				connection!.Open();
-
-				return true;
+				return DBUtils.VerifyConnection();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 				return false;
-			}
-			finally {
-				connection?.Close();
 			}
 		}
 
@@ -57,27 +36,19 @@ namespace DataAccessLayer {
 		/// <returns><c>true</c> if a matching button exists, and <c>false</c> if it does not. If the operation fails, <c>null</c> is returned.</returns>
 		public static bool? CheckIfButtonExists(string bankName, int screenId, int buttonId) {
 			try {
-				if (!Initialize())
-					return default;
-
 				string query = $"SELECT COUNT({ButtonsConstants.BUTTON_ID}) FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} = @buttonId;";
-				var command = new SqlCommand(query, connection);
+				var command = new SqlCommand(query);
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ButtonsConstants.BANK_NAME_SIZE).Value = bankName;
 				command.Parameters.Add("@screenId", SqlDbType.Int).Value = screenId;
 				command.Parameters.Add("@buttonId", SqlDbType.Int).Value = buttonId;
 
-				connection!.Open();
-
-				return (int) command.ExecuteScalar() == 1;
+				return (int) DBUtils.ExecuteScalar(command) == 1;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "Button ID");
+				ExceptionHelper.HandleSqlException(ex);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				connection?.Close();
 			}
 
 			return null;
@@ -97,9 +68,8 @@ namespace DataAccessLayer {
 			SqlTransaction? transaction = null;
 
 			try {
-				if (!Initialize())
-					return default;
-				
+				using var connection = DBUtils.CreateConnection();
+
 				var success = new Dictionary<int, bool>();
 				if (buttonsToAdd.Count == 0 && buttonsToUpdate.Count == 0 && buttonsToDelete.Count == 0)
 					return success;
@@ -112,6 +82,10 @@ namespace DataAccessLayer {
 
 				if (addButtonsCommand is null || updateButtonsCommand is null || deleteButtonsCommand is null)
 					return default;
+				
+				addButtonsCommand.Connection = connection;
+				updateButtonsCommand.Connection = connection;
+				deleteButtonsCommand.Connection = connection;
 
 				connection!.Open();
 				transaction = connection!.BeginTransaction();
@@ -181,17 +155,15 @@ namespace DataAccessLayer {
 				}
 
 				return success;
+
 			}
 			catch (SqlException ex) {
 				transaction?.Rollback();
-				ExceptionHelper.HandleSqlException(ex, "Button ID");
+				ExceptionHelper.HandleSqlException(ex);
 			}
 			catch (Exception ex) {
 				transaction?.Rollback();
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				connection?.Close();
 			}
 
 			return default;
@@ -234,7 +206,7 @@ namespace DataAccessLayer {
 					dataTable.Rows.Add(row);
 				}
 
-				var command = new SqlCommand(ButtonsConstants.ADD_BUTTONS_PROCEDURE, connection);
+				var command = new SqlCommand(ButtonsConstants.ADD_BUTTONS_PROCEDURE);
 				command.CommandType = CommandType.StoredProcedure;
 				SqlParameter addButtonsParameter = command.Parameters.AddWithValue(ButtonsConstants.ADD_BUTTONS_PARAMETER_NAME, dataTable);
 				addButtonsParameter.SqlDbType = SqlDbType.Structured;
@@ -286,7 +258,7 @@ namespace DataAccessLayer {
 					dataTable.Rows.Add(row);
 				}
 
-				var command = new SqlCommand(ButtonsConstants.UPDATE_BUTTONS_PROCEDURE, connection);
+				var command = new SqlCommand(ButtonsConstants.UPDATE_BUTTONS_PROCEDURE);
 				command.CommandType = CommandType.StoredProcedure;
 				SqlParameter updateButtonsParameter = command.Parameters.AddWithValue(ButtonsConstants.UPDATE_BUTTONS_PARAMETER_NAME, dataTable);
 				updateButtonsParameter.SqlDbType = SqlDbType.Structured;
@@ -304,7 +276,7 @@ namespace DataAccessLayer {
 		private static SqlCommand? CreateDeleteButtonsCommand(string bankName, int screenId, List<int> buttonIds) {
 			try {
 				var query = new StringBuilder($"DELETE FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId AND {ButtonsConstants.BUTTON_ID} IN (");
-				var command = new SqlCommand() { Connection = connection };
+				var command = new SqlCommand();
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ButtonsConstants.BANK_NAME_SIZE).Value = bankName;
 				command.Parameters.Add("@screenId", SqlDbType.Int).Value = screenId;
 

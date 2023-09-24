@@ -17,7 +17,7 @@ namespace ExceptionUtils {
 			LogsHelper.Log(new LogEvent(message, DateTime.Now, EventSeverity.Error, exception.Source, exception.StackTrace));
 		}
 
-		public static void HandleSqlException(SqlException exception, string fieldName = "") {
+		public static void HandleSqlException(SqlException exception) {
 			foreach (SqlError error in exception.Errors) {
 				switch (error.Number) {
 					case (int) SqlErrorCodes.UniqueConstraintViolation:

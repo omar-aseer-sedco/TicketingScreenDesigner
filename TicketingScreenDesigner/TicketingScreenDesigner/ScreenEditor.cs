@@ -1,13 +1,15 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-using BusinessLogicLayer;
 using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
 using LogUtils;
 using ExceptionUtils;
 using System.Data.SqlClient;
+using BusinessLogicLayer.Listeners;
+using BusinessLogicLayer.Controllers;
 
-namespace TicketingScreenDesigner {
+namespace TicketingScreenDesigner
+{
 	public partial class ScreenEditor : Form {
 		private const string TITLE_TEXT = "Screen Editor";
 
@@ -116,7 +118,8 @@ namespace TicketingScreenDesigner {
 
 		public async Task UpdateButtonsListViewAsync() {
 			try {
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
+				if (!IsDisposed && IsHandleCreated)
+					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
 
 				List<TicketingButton>? screenButtons = await screenController.GetAllButtonsAsync();
 
@@ -128,13 +131,16 @@ namespace TicketingScreenDesigner {
 
 				buttons = screenButtons;
 
-				Invoke(new MethodInvoker(() => AddButtonsToListView(buttons)));
+				if (!IsDisposed && IsHandleCreated)
+					Invoke(new MethodInvoker(() => AddButtonsToListView(buttons)));
 
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
+				if (!IsDisposed && IsHandleCreated)
+					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
+				if (!IsDisposed && IsHandleCreated)
+					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
 				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -604,7 +610,7 @@ namespace TicketingScreenDesigner {
 		}
 
 		private void ScreenEditor_FormClosed(object sender, FormClosedEventArgs e) {
-			buttonChangesListener.Stop();
+			buttonChangesListener?.Stop();
 		}
 	}
 }

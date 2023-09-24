@@ -2,12 +2,13 @@
 
 using DataAccessLayer.DataClasses;
 using DataAccessLayer.Constants;
-using BusinessLogicLayer;
 using LogUtils;
 using ExceptionUtils;
+using BusinessLogicLayer.Controllers;
 
-namespace TicketingScreenDesigner {
-	public partial class ButtonEditor : Form {
+namespace TicketingScreenDesigner
+{
+    public partial class ButtonEditor : Form {
 		private const string TITLE_TEXT = "Button Editor";
 		private const int DEFAULT_PANEL_POSITION_Y = 95;
 		private const int MINIMUM_HEIGHT_ISSUE_TICKET = 206;

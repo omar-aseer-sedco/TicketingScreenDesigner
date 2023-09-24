@@ -2809,3 +2809,1185 @@
   "Source": null,
   "StackTrace": null
 }
+{
+  "Message": "Event args info: Update",
+  "TimeStamp": "2023-09-21T13:19:48.0375901+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-21T13:19:48.0745613+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.",
+  "TimeStamp": "2023-09-21T13:19:48.1214458+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 121"
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-21T13:25:42.7944101+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T13:25:42.9752259+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "Event args info: Update",
+  "TimeStamp": "2023-09-21T13:25:55.1675181+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T13:25:55.2355155+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-21T13:25:55.2495755+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.",
+  "TimeStamp": "2023-09-21T13:25:55.2710666+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 121"
+}
+{
+  "Message": "Event args info: Update",
+  "TimeStamp": "2023-09-21T13:39:08.6281291+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T13:39:08.8000898+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 121"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T13:39:08.8304085+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-21T13:39:11.3575734+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.",
+  "TimeStamp": "2023-09-21T13:39:11.3825321+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 121"
+}
+{
+  "Message": "Event args info: Update",
+  "TimeStamp": "2023-09-21T13:40:12.9603846+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidCastException\nMessage: Unable to cast object of type \u0027System.Data.ProviderBase.DbConnectionClosedConnecting\u0027 to type \u0027System.Data.SqlClient.SqlInternalConnectionTds\u0027.",
+  "TimeStamp": "2023-09-21T13:40:13.1389665+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 121"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T13:40:13.1713295+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Update",
+  "TimeStamp": "2023-09-21T13:40:16.6169283+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.",
+  "TimeStamp": "2023-09-21T13:40:16.639935+03:00",
+  "Severity": "Error",
+  "Source": "System.Windows.Forms",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 121"
+}
+{
+  "Message": "Event args info: Update",
+  "TimeStamp": "2023-09-21T13:46:03.4652503+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Delete",
+  "TimeStamp": "2023-09-21T13:46:03.4876344+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Update",
+  "TimeStamp": "2023-09-21T13:47:33.2859279+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-21T13:47:33.4227736+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 121"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T13:47:33.4585436+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Event args info: Insert",
+  "TimeStamp": "2023-09-21T13:47:34.949469+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-21T13:58:51.4715656+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 121"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T13:58:51.5187507+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidCastException\nMessage: Unable to cast object of type \u0027System.Data.ProviderBase.DbConnectionClosedConnecting\u0027 to type \u0027System.Data.SqlClient.SqlInternalConnectionTds\u0027.",
+  "TimeStamp": "2023-09-21T13:59:06.8989789+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 121"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T13:59:06.9404022+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Connection state: Closed",
+  "TimeStamp": "2023-09-21T14:50:31.4945167+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T14:52:52.2223187+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T14:52:52.2665698+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T15:02:28.9056482+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T15:02:29.0648418+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-21T15:08:41.9102241+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T15:08:42.2318252+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T15:41:17.5960906+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T15:41:17.6399074+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-21T15:51:02.7630133+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T15:51:02.805604+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T15:56:05.5122969+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T15:56:05.557462+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T15:56:43.4456982+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T15:56:43.4855245+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-21T16:07:08.9522007+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T16:07:08.9906968+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T16:08:22.9377708+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T16:08:22.9823847+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-21T16:08:27.244672+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T16:08:27.246463+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T16:08:40.4704481+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T16:08:40.4736484+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T16:13:41.4179716+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-21T16:14:37.8953615+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Unhandled Error.\nType: System.NullReferenceException\nMessage: Object reference not set to an instance of an object.",
+  "TimeStamp": "2023-09-21T16:14:37.9204415+03:00",
+  "Severity": "Error",
+  "Source": "TicketingScreenDesigner",
+  "StackTrace": "   at TicketingScreenDesigner.BankForm.AddScreensToListView(List\u00601 screensToAdd) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\BankForm.cs:line 166\r\n   at TicketingScreenDesigner.BankForm.\u003CUpdateScreensListViewAsync\u003Eb__13_1() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\BankForm.cs:line 136\r\n   at System.Windows.Forms.Control.InvokeMarshaledCallbackDo(ThreadMethodEntry tme)\r\n   at System.Windows.Forms.Control.InvokeMarshaledCallbackHelper(Object obj)\r\n   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Windows.Forms.Control.InvokeMarshaledCallback(ThreadMethodEntry tme)\r\n   at System.Windows.Forms.Control.InvokeMarshaledCallbacks()\r\n--- End of stack trace from previous location ---\r\n   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.BankForm.UpdateScreensListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\BankForm.cs:line 136"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-21T16:38:07.5381466+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T16:38:07.5838767+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T16:38:20.0487025+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T16:38:20.0502857+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-21T16:38:27.0820992+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-21T16:38:27.0837798+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T08:20:35.0974652+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-24T08:20:35.2332291+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T08:20:54.7414322+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-24T08:20:54.7446378+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-24T08:21:06.9492457+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.BankOperations.GetScreensAsync(String bankName) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\BankOperations.cs:line 122"
+}
+{
+  "Message": "Failed to sync screens.",
+  "TimeStamp": "2023-09-24T08:21:06.9508926+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidCastException\nMessage: Unable to cast object of type \u0027System.Data.ProviderBase.DbConnectionClosedConnecting\u0027 to type \u0027System.Data.SqlClient.SqlInternalConnectionTds\u0027.",
+  "TimeStamp": "2023-09-24T08:24:23.5526057+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection does not support MultipleActiveResultSets.",
+  "TimeStamp": "2023-09-24T08:24:42.0968831+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)\r\n   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T08:27:07.0328684+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidCastException\nMessage: Unable to cast object of type \u0027System.Data.ProviderBase.DbConnectionClosedConnecting\u0027 to type \u0027System.Data.SqlClient.SqlInternalConnectionTds\u0027.",
+  "TimeStamp": "2023-09-24T08:27:40.9198638+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-24T08:31:13.7927004+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-24T08:31:19.1429494+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: BeginExecuteReader requires an open and available Connection. The connection\u0027s current state is closed.",
+  "TimeStamp": "2023-09-24T08:46:44.9702162+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 116"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T08:46:57.0334542+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidCastException\nMessage: Unable to cast object of type \u0027System.Data.ProviderBase.DbConnectionClosedConnecting\u0027 to type \u0027System.Data.SqlClient.SqlInternalConnectionTds\u0027.",
+  "TimeStamp": "2023-09-24T08:47:00.17138+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: This SqlTransaction has completed; it is no longer usable.",
+  "TimeStamp": "2023-09-24T09:10:21.0180082+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlTransaction.ZombieCheck()\r\n   at System.Data.SqlClient.SqlTransaction.Rollback()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 178\r\n   at BusinessLogicLayer.Controllers.ScreenController.CommitPendingChanges(List\u00601\u0026 failedIds) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\BusinessLogicLayer\\Controllers\\ScreenController.cs:line 198"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-24T09:10:21.0543165+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: This SqlTransaction has completed; it is no longer usable.",
+  "TimeStamp": "2023-09-24T09:10:23.7221985+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlTransaction.ZombieCheck()\r\n   at System.Data.SqlClient.SqlTransaction.Rollback()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 178\r\n   at BusinessLogicLayer.Controllers.ScreenController.CommitPendingChanges(List\u00601\u0026 failedIds) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\BusinessLogicLayer\\Controllers\\ScreenController.cs:line 198"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-24T09:10:23.7240309+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: This SqlTransaction has completed; it is no longer usable.",
+  "TimeStamp": "2023-09-24T09:10:44.3608545+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlTransaction.ZombieCheck()\r\n   at System.Data.SqlClient.SqlTransaction.Rollback()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 178\r\n   at BusinessLogicLayer.Controllers.ScreenController.CommitPendingChanges(List\u00601\u0026 failedIds) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\BusinessLogicLayer\\Controllers\\ScreenController.cs:line 198"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-24T09:10:44.3629544+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invalid operation. The connection is closed.",
+  "TimeStamp": "2023-09-24T09:10:49.4045274+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.GetOpenTdsConnection()\r\n   at System.Data.SqlClient.SqlCommand.CachedAsyncState.SetActiveConnectionAndResult(TaskCompletionSource\u00601 completion, String endMethod, SqlConnection activeConnection)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T09:12:36.1215209+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T09:42:42.9980455+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidCastException\nMessage: Unable to cast object of type \u0027System.Data.ProviderBase.DbConnectionClosedConnecting\u0027 to type \u0027System.Data.SqlClient.SqlInternalConnectionTds\u0027.",
+  "TimeStamp": "2023-09-24T09:44:51.763218+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T09:48:47.2388383+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.Open()\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T09:48:47.2825908+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T09:53:54.3050698+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T09:53:54.3439818+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-24T09:56:07.3989+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T09:56:07.4430444+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is open.",
+  "TimeStamp": "2023-09-24T10:04:50.6530183+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:04:50.6922469+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:05:38.6049794+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:05:38.6447992+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:06:21.6376127+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:06:21.6810118+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:09:43.9646228+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:09:44.0094183+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:15:45.2114354+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection does not support MultipleActiveResultSets.",
+  "TimeStamp": "2023-09-24T10:20:27.8831129+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)\r\n   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:20:27.9354389+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:20:33.7899737+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:20:33.7918513+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection does not support MultipleActiveResultSets.",
+  "TimeStamp": "2023-09-24T10:20:46.029853+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)\r\n   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:20:46.0721756+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:20:59.0497819+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:20:59.0905785+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection does not support MultipleActiveResultSets.",
+  "TimeStamp": "2023-09-24T10:21:02.3197046+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)\r\n   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:21:02.3220932+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection does not support MultipleActiveResultSets.",
+  "TimeStamp": "2023-09-24T10:21:09.1873012+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.CachedAsyncState.SetActiveConnectionAndResult(TaskCompletionSource\u00601 completion, String endMethod, SqlConnection activeConnection)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:21:09.1895673+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:24:00.1839723+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:24:00.2267179+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invalid operation. The connection is closed.",
+  "TimeStamp": "2023-09-24T10:25:35.9984639+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.GetOpenTdsConnection()\r\n   at System.Data.SqlClient.SqlCommand.CachedAsyncState.SetActiveConnectionAndResult(TaskCompletionSource\u00601 completion, String endMethod, SqlConnection activeConnection)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:25:36.0374063+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: ExecuteNonQuery requires an open and available Connection. The connection\u0027s current state is closed.",
+  "TimeStamp": "2023-09-24T10:25:46.2195077+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource\u00601 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataAccessLayer.Listeners.SqlListener.SubscribeToDependency() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Listeners\\SqlListener.cs:line 130"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: There is already an open DataReader associated with this Command which must be closed first.",
+  "TimeStamp": "2023-09-24T10:25:49.2505777+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)\r\n   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:25:49.2534423+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: There is already an open DataReader associated with this Command which must be closed first.",
+  "TimeStamp": "2023-09-24T10:25:55.3874698+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)\r\n   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:25:55.3896015+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection does not support MultipleActiveResultSets.",
+  "TimeStamp": "2023-09-24T10:31:41.0275859+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.CachedAsyncState.SetActiveConnectionAndResult(TaskCompletionSource\u00601 completion, String endMethod, SqlConnection activeConnection)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:31:41.0677314+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection does not support MultipleActiveResultSets.",
+  "TimeStamp": "2023-09-24T10:32:10.5337949+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)\r\n   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:32:10.573355+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invalid operation. The connection is closed.",
+  "TimeStamp": "2023-09-24T10:32:40.1521818+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.GetOpenTdsConnection()\r\n   at System.Data.SqlClient.SqlCommand.CachedAsyncState.SetActiveConnectionAndResult(TaskCompletionSource\u00601 completion, String endMethod, SqlConnection activeConnection)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:32:40.1957277+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection does not support MultipleActiveResultSets.",
+  "TimeStamp": "2023-09-24T10:34:04.2195934+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)\r\n   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:34:04.2592959+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:35:37.0175699+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:35:37.0557344+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invalid operation. The connection is closed.",
+  "TimeStamp": "2023-09-24T10:35:45.2757197+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.GetOpenTdsConnection()\r\n   at System.Data.SqlClient.SqlCommand.CachedAsyncState.SetActiveConnectionAndResult(TaskCompletionSource\u00601 completion, String endMethod, SqlConnection activeConnection)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:35:45.2780853+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:35:50.9197685+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:35:50.9224884+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invalid operation. The connection is closed.",
+  "TimeStamp": "2023-09-24T10:35:53.2587596+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.GetOpenTdsConnection()\r\n   at System.Data.SqlClient.SqlCommand.CachedAsyncState.SetActiveConnectionAndResult(TaskCompletionSource\u00601 completion, String endMethod, SqlConnection activeConnection)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:35:53.2606963+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:35:57.7792737+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:35:57.7815075+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The connection was not closed. The connection\u0027s current state is connecting.",
+  "TimeStamp": "2023-09-24T10:36:00.7814107+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource\u00601 retry, DbConnectionOptions userOptions)\r\n   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource\u00601 retry)\r\n   at System.Data.SqlClient.SqlConnection.OpenAsync(CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 112"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:36:00.7988239+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invalid operation. The connection is closed.",
+  "TimeStamp": "2023-09-24T10:36:22.0256255+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.TdsParser.TdsExecuteRPC(_SqlRPC[] rpcArray, Int32 timeout, Boolean inSchema, SqlNotificationRequest notificationRequest, TdsParserStateObject stateObj, Boolean isCommandProc, Boolean sync, TaskCompletionSource\u00601 completion, Int32 startRpc, Int32 startParam)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task\u0026 task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:36:22.063751+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invalid operation. The connection is closed.",
+  "TimeStamp": "2023-09-24T10:37:46.7352401+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.GetOpenTdsConnection()\r\n   at System.Data.SqlClient.SqlCommand.CachedAsyncState.SetActiveConnectionAndResult(TaskCompletionSource\u00601 completion, String endMethod, SqlConnection activeConnection)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:37:46.775534+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: Invalid operation. The connection is closed.",
+  "TimeStamp": "2023-09-24T10:37:51.1006147+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlConnection.GetOpenTdsConnection()\r\n   at System.Data.SqlClient.SqlCommand.WaitForAsyncResults(IAsyncResult asyncResult)\r\n   at System.Data.SqlClient.SqlCommand.InternalEndExecuteReader(IAsyncResult asyncResult, String endMethod)\r\n   at System.Data.SqlClient.SqlCommand.EndExecuteReaderInternal(IAsyncResult asyncResult)\r\n   at System.Data.SqlClient.SqlCommand.EndExecuteReader(IAsyncResult asyncResult)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncCoreLogic(IAsyncResult iar, Func\u00602 endFunction, Action\u00601 endAction, Task\u00601 promise, Boolean requiresSynchronization)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 114"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:37:51.1023636+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: BeginExecuteReader requires an open and available Connection. The connection\u0027s current state is closed.",
+  "TimeStamp": "2023-09-24T10:39:02.3519255+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 116"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:39:02.3931073+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: BeginExecuteReader requires an open and available Connection. The connection\u0027s current state is closed.",
+  "TimeStamp": "2023-09-24T10:39:02.5565914+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 116"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:39:02.5581935+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: BeginExecuteReader requires an open and available Connection. The connection\u0027s current state is closed.",
+  "TimeStamp": "2023-09-24T10:39:03.834845+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 116"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:39:03.8371609+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: BeginExecuteReader requires an open and available Connection. The connection\u0027s current state is closed.",
+  "TimeStamp": "2023-09-24T10:39:04.7350441+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.BeginExecuteReader(AsyncCallback callback, Object stateObject, CommandBehavior behavior)\r\n   at System.Threading.Tasks.TaskFactory\u00601.FromAsyncImpl[TArg1](Func\u00604 beginMethod, Func\u00602 endFunction, Action\u00601 endAction, TArg1 arg1, Object state, TaskCreationOptions creationOptions)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)\r\n--- End of stack trace from previous location ---\r\n   at DataAccessLayer.Utils.DBUtils.ExecuteReaderAsync(SqlConnection connection, SqlCommand command, ReaderDelegate readerDelegate) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 116"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T10:39:04.7368676+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-24T10:40:35.4255549+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 124"
+}
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-24T10:58:09.0457206+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 122"
+}
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-24T10:59:47.5165417+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 122"
+}
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-24T11:00:55.4300445+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 122"
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: This SqlTransaction has completed; it is no longer usable.",
+  "TimeStamp": "2023-09-24T11:29:54.9359434+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlTransaction.ZombieCheck()\r\n   at System.Data.SqlClient.SqlTransaction.Rollback()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 160\r\n   at BusinessLogicLayer.Controllers.ScreenController.CommitPendingChanges(List\u00601\u0026 failedIds) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\BusinessLogicLayer\\Controllers\\ScreenController.cs:line 198"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-24T11:29:54.9814013+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: This SqlTransaction has completed; it is no longer usable.",
+  "TimeStamp": "2023-09-24T11:29:57.8474787+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlTransaction.ZombieCheck()\r\n   at System.Data.SqlClient.SqlTransaction.Rollback()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 160\r\n   at BusinessLogicLayer.Controllers.ScreenController.CommitPendingChanges(List\u00601\u0026 failedIds) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\BusinessLogicLayer\\Controllers\\ScreenController.cs:line 198"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-24T11:29:57.8493654+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: This SqlTransaction has completed; it is no longer usable.",
+  "TimeStamp": "2023-09-24T11:31:35.9716054+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlTransaction.ZombieCheck()\r\n   at System.Data.SqlClient.SqlTransaction.Rollback()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 161\r\n   at BusinessLogicLayer.Controllers.ScreenController.CommitPendingChanges(List\u00601\u0026 failedIds) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\BusinessLogicLayer\\Controllers\\ScreenController.cs:line 198"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-24T11:31:36.0088644+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: ExecuteReader: Connection property has not been initialized.",
+  "TimeStamp": "2023-09-24T11:42:44.6629036+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at System.Data.SqlClient.SqlCommand.ValidateCommand(Boolean async, String method)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource\u00601 completion, Int32 timeout, Task\u0026 task, Boolean asyncWrite, String method)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteReader()\r\n   at DataAccessLayer.ButtonOperations.AtomicCommit(String bankName, Int32 screenId, List\u00601 buttonsToAdd, Dictionary\u00602 buttonsToUpdate, List\u00601 buttonsToDelete) in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\ButtonOperations.cs:line 95"
+}
+{
+  "Message": "Failed to commit changes.",
+  "TimeStamp": "2023-09-24T11:42:44.6978264+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-24T11:44:53.9238204+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 122"
+}

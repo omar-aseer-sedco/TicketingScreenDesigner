@@ -2,12 +2,14 @@
 
 using DataAccessLayer.Constants;
 using DataAccessLayer.DataClasses;
-using BusinessLogicLayer;
 using LogUtils;
 using ExceptionUtils;
 using System.Data.SqlClient;
+using BusinessLogicLayer.Listeners;
+using BusinessLogicLayer.Controllers;
 
-namespace TicketingScreenDesigner {
+namespace TicketingScreenDesigner
+{
 	public partial class BankForm : Form {
 		private const string TITLE_TEXT = "Ticketing Screen Designer";
 
@@ -117,6 +119,9 @@ namespace TicketingScreenDesigner {
 
 		public async Task UpdateScreensListViewAsync() {
 			try {
+				if (!IsHandleCreated)
+					return;
+
 				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
 
 				List<TicketingScreen>? bankScreens = await BankController.GetScreensAsync(bankName);
@@ -136,7 +141,8 @@ namespace TicketingScreenDesigner {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
+				if (IsHandleCreated)
+					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
 				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}

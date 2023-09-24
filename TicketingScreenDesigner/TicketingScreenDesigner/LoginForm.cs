@@ -1,10 +1,11 @@
-using BusinessLogicLayer;
 using DataAccessLayer.DataClasses;
 using LogUtils;
 using ExceptionUtils;
+using BusinessLogicLayer.Controllers;
 
-namespace TicketingScreenDesigner {
-	public partial class LoginForm : Form {
+namespace TicketingScreenDesigner
+{
+    public partial class LoginForm : Form {
 		public LoginForm() {
 			try {
 				InitializeComponent();

@@ -11,38 +11,17 @@ namespace DataAccessLayer {
 	/// Contains methods for retrieving and manipulating screen information.
 	/// </summary>
 	public static class ScreenOperations {
-		private static SqlConnection? connection = null;
-
-		private static bool Initialize() {
-			try {
-				connection ??= DBUtils.CreateConnection();
-				return true;
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				return false;
-			}
-		}
-
 		/// <summary>
 		/// Verifies that the database connection is established correctly.
 		/// </summary>
 		/// <returns><c>true</c> if the connection has been established properly, and <c>false</c> otherwise.</returns>
 		public static bool VerifyConnection() {
 			try {
-				if (!Initialize())
-					return false;
-
-				connection!.Open();
-
-				return true;
+				return DBUtils.VerifyConnection();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 				return false;
-			}
-			finally {
-				connection?.Close();
 			}
 		}
 
@@ -53,9 +32,6 @@ namespace DataAccessLayer {
 		/// <returns>The ID of the screen that was added. If the operation fails, <c>null</c> is returned.</returns>
 		public static int? AddScreen(TicketingScreen screen) {
 			try {
-				if (!Initialize())
-					return null;
-
 				if (screen.IsActive) {
 					int? activeScreenId = GetActiveScreenId(screen.BankName);
 					if (activeScreenId is null)
@@ -65,23 +41,19 @@ namespace DataAccessLayer {
 				}
 
 				string query = $"INSERT INTO {ScreensConstants.TABLE_NAME} ({ScreensConstants.BANK_NAME}, {ScreensConstants.IS_ACTIVE}, {ScreensConstants.SCREEN_TITLE}) VALUES (@bankName, @isActive, @screenTitle); SELECT CAST(IDENT_CURRENT('{ScreensConstants.TABLE_NAME}') AS int);";
-				var command = new SqlCommand(query, connection);
+				var command = new SqlCommand(query);
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ScreensConstants.BANK_NAME_SIZE).Value = screen.BankName;
 				command.Parameters.Add("@isActive", SqlDbType.Bit).Value = screen.IsActive;
 				command.Parameters.Add("@screenTitle", SqlDbType.VarChar, ScreensConstants.SCREEN_TITLE_SIZE).Value = screen.ScreenTitle;
 
-				connection!.Open();
-
-				return (int) command.ExecuteScalar();
+				int result = (int) DBUtils.ExecuteScalar(command);
+				return result == -1 ? null : result;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "Screen ID");
+				ExceptionHelper.HandleSqlException(ex);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				connection?.Close();
 			}
 
 			return null;
@@ -94,32 +66,24 @@ namespace DataAccessLayer {
 		/// <returns>The ID of the active screen. If there is no active screen, <c>-1</c> is returned. If the operation fails, <c>null</c> is returned.</returns>
 		public static int? GetActiveScreenId(string bankName) {
 			try {
-				if (!Initialize())
-					return null;
-
 				int? ret = -1;
 
 				string query = $"SELECT {ScreensConstants.SCREEN_ID} FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.IS_ACTIVE} = 1;";
-				var command = new SqlCommand(query, connection);
+				var command = new SqlCommand(query);
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ScreensConstants.BANK_NAME_SIZE).Value = bankName;
 
-				connection!.Open();
-
-				var reader = command.ExecuteReader();
-
-				if (reader.Read())
-					ret = reader.GetInt32(0);
+				DBUtils.ExecuteReader(command, reader => {
+					if (reader.Read())
+						ret = reader.GetInt32(0);
+				});
 
 				return ret;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "Screen ID");
+				ExceptionHelper.HandleSqlException(ex);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				connection?.Close();
 			}
 
 			return null;
@@ -134,9 +98,6 @@ namespace DataAccessLayer {
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public static bool SetIsActive(string bankName, int screenId, bool active) {
 			try {
-				if (!Initialize())
-					return false;
-
 				int? currentlyActiveScreenId = GetActiveScreenId(bankName);
 				if (currentlyActiveScreenId is null) {
 					return false;
@@ -153,23 +114,18 @@ namespace DataAccessLayer {
 				}
 
 				string query = $"UPDATE {ScreensConstants.TABLE_NAME} SET {ScreensConstants.IS_ACTIVE} = @isActive WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} = @screenId";
-				var command = new SqlCommand(query, connection);
+				var command = new SqlCommand(query);
 				command.Parameters.Add("@isActive", SqlDbType.Bit).Value = active;
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ScreensConstants.BANK_NAME_SIZE).Value = bankName;
 				command.Parameters.Add("@screenId", SqlDbType.Int).Value = screenId;
 				
-				connection!.Open();
-
-				return command.ExecuteNonQuery() == 1;
+				return DBUtils.ExecuteNonQuery(command) == 1;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "Screen ID");
+				ExceptionHelper.HandleSqlException(ex);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				connection?.Close();
 			}
 
 			return false;
@@ -183,11 +139,8 @@ namespace DataAccessLayer {
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public static bool DeleteScreens(string bankName, List<int> screenIds) {
 			try {
-				if (!Initialize())
-					return false;
-
 				var query = new StringBuilder($"DELETE FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} IN (");
-				var command = new SqlCommand() { Connection = connection };
+				var command = new SqlCommand();
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ScreensConstants.BANK_NAME_SIZE).Value = bankName;
 
 				int i = 0;
@@ -202,17 +155,13 @@ namespace DataAccessLayer {
 				query.Append(");");
 				command.CommandText = query.ToString();
 
-				connection!.Open();
-				return command.ExecuteNonQuery() == screenIds.Count;
+				return DBUtils.ExecuteNonQuery(command) == screenIds.Count;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "screen ID");
+				ExceptionHelper.HandleSqlException(ex);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				connection?.Close();
 			}
 
 			return false;
@@ -227,33 +176,25 @@ namespace DataAccessLayer {
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public static bool UpdateScreen(string bankName, int screenId, TicketingScreen newScreen) {
 			try {
-				if (!Initialize())
-					return false;
-
 				int? activeScreenId = GetActiveScreenId(bankName);
 				if (activeScreenId is not null && activeScreenId != screenId) {
 					SetIsActive(bankName, (int) activeScreenId, false);
 				}
 
 				string query = $"UPDATE {ScreensConstants.TABLE_NAME} SET {ScreensConstants.SCREEN_TITLE} = @screenTitle, {ScreensConstants.IS_ACTIVE} = @isActive WHERE {ScreensConstants.SCREEN_ID} = @screenId AND {ScreensConstants.BANK_NAME} = @bankName";
-				var command = new SqlCommand(query, connection);
+				var command = new SqlCommand(query);
 				command.Parameters.Add("@screenTitle", SqlDbType.VarChar, ScreensConstants.SCREEN_TITLE_SIZE).Value = newScreen.ScreenTitle;
 				command.Parameters.Add("@isActive", SqlDbType.Bit).Value = newScreen.IsActive;
 				command.Parameters.Add("@screenId", SqlDbType.Int).Value = screenId;
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ScreensConstants.BANK_NAME_SIZE).Value = bankName;
 
-				connection!.Open();
-
-				return command.ExecuteNonQuery() == 1;
+				return DBUtils.ExecuteNonQuery(command) == 1;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "screen ID");
+				ExceptionHelper.HandleSqlException(ex);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				connection?.Close();
 			}
 
 			return false;
@@ -267,26 +208,18 @@ namespace DataAccessLayer {
 		/// <returns><c>true</c> if a matching screen exists, and <c>false</c> if it does not. If the operation fails, <c>null</c> is returned.</returns>
 		public static bool? CheckIfScreenExists(string bankName, int screenId) {
 			try {
-				if (!Initialize())
-					return null;
-
 				string query = $"SELECT COUNT({ScreensConstants.SCREEN_ID}) FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} = @screenId;";
-				var command = new SqlCommand(query, connection);
+				var command = new SqlCommand(query);
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ScreensConstants.BANK_NAME_SIZE).Value = bankName;
 				command.Parameters.Add("@screenId", SqlDbType.Int).Value = screenId;
 
-				connection!.Open();
-
-				return (int) command.ExecuteScalar() == 1;
+				return (int) DBUtils.ExecuteScalar(command) == 1;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "Screen ID");
+				ExceptionHelper.HandleSqlException(ex);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				connection?.Close();
 			}
 
 			return null;
@@ -300,52 +233,44 @@ namespace DataAccessLayer {
 		/// <returns>A list of <c>TicketingButton</c> objects representing the buttons on the screen. If there are no buttons, an empty list is returned. If the operation fails, <c>null</c> is returned.</returns>
 		public static async Task<List<TicketingButton>?> GetButtonsAsync(string bankName, int screenId) {
 			try {
-				if (!Initialize())
-					return null;
-
 				var buttons = new List<TicketingButton>();
 
 				string query = $"SELECT {ButtonsConstants.BUTTON_ID}, {ButtonsConstants.NAME_EN}, {ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, " +
 					$"{ButtonsConstants.MESSAGE_AR} FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId";
-				var command = new SqlCommand(query, connection);
+				var command = new SqlCommand(query);
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ButtonsConstants.BANK_NAME_SIZE).Value = bankName;
 				command.Parameters.Add("@screenId", SqlDbType.Int).Value = screenId;
 
-				await connection!.OpenAsync();
+				await DBUtils.ExecuteReaderAsync(command, async reader => {
+					while (await reader.ReadAsync()) {
+						int buttonId = (int) reader[ButtonsConstants.BUTTON_ID];
+						string nameEn = (string) reader[ButtonsConstants.NAME_EN];
+						string nameAr = (string) reader[ButtonsConstants.NAME_AR];
+						ButtonsConstants.Types type = (ButtonsConstants.Types) reader[ButtonsConstants.TYPE];
 
-				var reader = await command.ExecuteReaderAsync();
+						if (type == ButtonsConstants.Types.ISSUE_TICKET) {
+							string service = (string) reader[ButtonsConstants.SERVICE];
 
-				while (reader.Read()) {
-					int buttonId = (int) reader[ButtonsConstants.BUTTON_ID];
-					string nameEn = (string) reader[ButtonsConstants.NAME_EN];
-					string nameAr = (string) reader[ButtonsConstants.NAME_AR];
-					ButtonsConstants.Types type = (ButtonsConstants.Types) reader[ButtonsConstants.TYPE];
+							buttons.Add(new IssueTicketButton(bankName, screenId, buttonId, type, nameEn, nameAr, service));
+						}
+						else if (type == ButtonsConstants.Types.SHOW_MESSAGE) {
+							string messageEn = (string) reader[ButtonsConstants.MESSAGE_EN];
+							string messageAr = (string) reader[ButtonsConstants.MESSAGE_AR];
 
-					if (type == ButtonsConstants.Types.ISSUE_TICKET) {
-						string service = (string) reader[ButtonsConstants.SERVICE];
-
-						buttons.Add(new IssueTicketButton(bankName, screenId, buttonId, type, nameEn, nameAr, service));
+							buttons.Add(new ShowMessageButton(bankName, screenId, buttonId, type, nameEn, nameAr, messageEn, messageAr));
+						}
 					}
-					else if (type == ButtonsConstants.Types.SHOW_MESSAGE) {
-						string messageEn = (string) reader[ButtonsConstants.MESSAGE_EN];
-						string messageAr = (string) reader[ButtonsConstants.MESSAGE_AR];
 
-						buttons.Add(new ShowMessageButton(bankName, screenId, buttonId, type, nameEn, nameAr, messageEn, messageAr));
-					}
-				}
-
-				reader.Close();
+					reader.Close();
+				});
 
 				return buttons;
 			}
 			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex, "Screen ID");
+				ExceptionHelper.HandleSqlException(ex);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-			}
-			finally {
-				connection?.Close();
 			}
 
 			return null;
