@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using LogUtils;
@@ -33,12 +32,19 @@ namespace DataAccessLayer.Utils {
 						throw new NullReferenceException();
 				}
 
-				string connectionString = $"server={config.Server}; database={config.Database}; MultipleActiveResultSets=True;";
+				bool authenticated = false;
+				string connectionString = $"server={config.Server}; database={config.Database};";
 				if (config.IntegratedSecurity is not null && config.IntegratedSecurity != string.Empty) {
 					connectionString += $" integrated security={config.IntegratedSecurity};";
+					authenticated = true;
 				}
 				if (config.UserId is not null && config.UserId != string.Empty && config.Password is not null) {
 					connectionString += $" User ID={config.UserId}; Password={config.Password};";
+					authenticated = true;
+				}
+
+				if (config.Server == string.Empty || config.Database == string.Empty || !authenticated) {
+					throw new Exception("Configuration information missing.");
 				}
 
 				return new SqlConnection(connectionString);

@@ -87,8 +87,8 @@ namespace DataAccessLayer {
 				updateButtonsCommand.Connection = connection;
 				deleteButtonsCommand.Connection = connection;
 
-				connection!.Open();
-				transaction = connection!.BeginTransaction();
+				connection.Open();
+				transaction = connection.BeginTransaction();
 
 				addButtonsCommand.Transaction = transaction;
 				updateButtonsCommand.Transaction = transaction;

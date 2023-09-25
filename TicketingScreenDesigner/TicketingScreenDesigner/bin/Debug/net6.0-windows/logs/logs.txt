@@ -3991,3 +3991,199 @@
   "Source": "System.Private.CoreLib",
   "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 122"
 }
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-24T12:10:48.5809038+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 122"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T13:02:35.0144349+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.InvalidOperationException\nMessage: The SQL Server Service Broker for the current database is not enabled, and as a result query notifications are not supported.  Please enable the Service Broker for this database if you wish to use notifications.",
+  "TimeStamp": "2023-09-24T13:02:35.0737636+03:00",
+  "Severity": "Error",
+  "Source": "System.Data.SqlClient",
+  "StackTrace": "   at SqlDependencyProcessDispatcher.SqlConnectionContainer..ctor(SqlConnectionContainerHashHelper hashHelper, String appDomainKey, Boolean useDefaults)\r\n   at SqlDependencyProcessDispatcher.Start(String connectionString, String\u0026 server, DbConnectionPoolIdentity\u0026 identity, String\u0026 user, String\u0026 database, String\u0026 queueService, String appDomainKey, SqlDependencyPerAppDomainDispatcher dispatcher, Boolean\u0026 errorOccurred, Boolean\u0026 appDomainStart, Boolean useDefaults)\r\n   at SqlDependencyProcessDispatcher.StartWithDefault(String connectionString, String\u0026 server, DbConnectionPoolIdentity\u0026 identity, String\u0026 user, String\u0026 database, String\u0026 service, String appDomainKey, SqlDependencyPerAppDomainDispatcher dispatcher, Boolean\u0026 errorOccurred, Boolean\u0026 appDomainStart)\r\n   at System.Data.SqlClient.SqlDependency.Start(String connectionString, String queue, Boolean useDefaults)\r\n   at System.Data.SqlClient.SqlDependency.Start(String connectionString)\r\n   at DataAccessLayer.Listeners.SqlListener.Start() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Listeners\\SqlListener.cs:line 58"
+}
+{
+  "Message": "BankOperations.GetScreensAsync is returning empty",
+  "TimeStamp": "2023-09-24T13:02:35.1156708+03:00",
+  "Severity": "Info",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Configuration information missing.",
+  "TimeStamp": "2023-09-24T13:06:26.4884274+03:00",
+  "Severity": "Error",
+  "Source": "DataAccessLayer",
+  "StackTrace": "   at DataAccessLayer.Utils.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 47"
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Configuration information missing.",
+  "TimeStamp": "2023-09-24T13:06:26.5115333+03:00",
+  "Severity": "Error",
+  "Source": "DataAccessLayer",
+  "StackTrace": "   at DataAccessLayer.Utils.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 47\r\n   at DataAccessLayer.Utils.DBUtils.VerifyConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 76"
+}
+{
+  "Message": "Verification failed - LoginController.",
+  "TimeStamp": "2023-09-24T13:06:26.5128128+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-24T13:06:26.5138408+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Configuration information missing.",
+  "TimeStamp": "2023-09-24T13:06:34.0691037+03:00",
+  "Severity": "Error",
+  "Source": "DataAccessLayer",
+  "StackTrace": "   at DataAccessLayer.Utils.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 47"
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Configuration information missing.",
+  "TimeStamp": "2023-09-24T13:06:34.0915656+03:00",
+  "Severity": "Error",
+  "Source": "DataAccessLayer",
+  "StackTrace": "   at DataAccessLayer.Utils.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 47\r\n   at DataAccessLayer.Utils.DBUtils.VerifyConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 76"
+}
+{
+  "Message": "Verification failed - LoginController.",
+  "TimeStamp": "2023-09-24T13:06:34.0926233+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-24T13:06:34.0939552+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Configuration information missing.",
+  "TimeStamp": "2023-09-24T13:06:40.950465+03:00",
+  "Severity": "Error",
+  "Source": "DataAccessLayer",
+  "StackTrace": "   at DataAccessLayer.Utils.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 47"
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Configuration information missing.",
+  "TimeStamp": "2023-09-24T13:06:40.9710749+03:00",
+  "Severity": "Error",
+  "Source": "DataAccessLayer",
+  "StackTrace": "   at DataAccessLayer.Utils.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 47\r\n   at DataAccessLayer.Utils.DBUtils.VerifyConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 76"
+}
+{
+  "Message": "Verification failed - LoginController.",
+  "TimeStamp": "2023-09-24T13:06:40.9722912+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-24T13:06:40.973406+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Configuration information missing.",
+  "TimeStamp": "2023-09-24T13:06:46.9143469+03:00",
+  "Severity": "Error",
+  "Source": "DataAccessLayer",
+  "StackTrace": "   at DataAccessLayer.Utils.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 47"
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Configuration information missing.",
+  "TimeStamp": "2023-09-24T13:06:46.9346167+03:00",
+  "Severity": "Error",
+  "Source": "DataAccessLayer",
+  "StackTrace": "   at DataAccessLayer.Utils.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 47\r\n   at DataAccessLayer.Utils.DBUtils.VerifyConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 76"
+}
+{
+  "Message": "Verification failed - LoginController.",
+  "TimeStamp": "2023-09-24T13:06:46.9359141+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-24T13:06:46.9369391+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Configuration information missing.",
+  "TimeStamp": "2023-09-24T13:07:11.0884843+03:00",
+  "Severity": "Error",
+  "Source": "DataAccessLayer",
+  "StackTrace": "   at DataAccessLayer.Utils.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 47"
+}
+{
+  "Message": "Unhandled Error.\nType: System.Exception\nMessage: Configuration information missing.",
+  "TimeStamp": "2023-09-24T13:07:11.1087032+03:00",
+  "Severity": "Error",
+  "Source": "DataAccessLayer",
+  "StackTrace": "   at DataAccessLayer.Utils.DBUtils.CreateConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 47\r\n   at DataAccessLayer.Utils.DBUtils.VerifyConnection() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\DataAccessLayer\\Utils\\DBUtils.cs:line 76"
+}
+{
+  "Message": "Verification failed - LoginController.",
+  "TimeStamp": "2023-09-24T13:07:11.109938+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Error establishing database connection - Login.",
+  "TimeStamp": "2023-09-24T13:07:11.1109547+03:00",
+  "Severity": "Error",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Unhandled Error.\nType: System.ObjectDisposedException\nMessage: Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-24T15:18:15.8037876+03:00",
+  "Severity": "Error",
+  "Source": "System.Private.CoreLib",
+  "StackTrace": "   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)\r\n   at System.Windows.Forms.Control.Invoke(Delegate method)\r\n   at TicketingScreenDesigner.ScreenEditor.UpdateButtonsListViewAsync() in C:\\Users\\omar.aseer\\Desktop\\Projects\\Task 1 - Ticketing Screen Designer\\TicketingScreenDesigner\\TicketingScreenDesigner\\ScreenEditor.cs:line 125"
+}
+{
+  "Message": "Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-25T08:53:14.1766444+03:00",
+  "Severity": "Warning",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-25T08:53:27.0323331+03:00",
+  "Severity": "Warning",
+  "Source": null,
+  "StackTrace": null
+}
+{
+  "Message": "Cannot access a disposed object.\r\nObject name: \u0027ScreenEditor\u0027.",
+  "TimeStamp": "2023-09-25T08:53:32.5056999+03:00",
+  "Severity": "Warning",
+  "Source": null,
+  "StackTrace": null
+}

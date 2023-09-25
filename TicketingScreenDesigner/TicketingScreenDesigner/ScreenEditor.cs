@@ -8,8 +8,7 @@ using System.Data.SqlClient;
 using BusinessLogicLayer.Listeners;
 using BusinessLogicLayer.Controllers;
 
-namespace TicketingScreenDesigner
-{
+namespace TicketingScreenDesigner {
 	public partial class ScreenEditor : Form {
 		private const string TITLE_TEXT = "Screen Editor";
 
@@ -118,7 +117,7 @@ namespace TicketingScreenDesigner
 
 		public async Task UpdateButtonsListViewAsync() {
 			try {
-				if (!IsDisposed && IsHandleCreated)
+				if (IsHandleCreated)
 					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
 
 				List<TicketingButton>? screenButtons = await screenController.GetAllButtonsAsync();
@@ -131,15 +130,18 @@ namespace TicketingScreenDesigner
 
 				buttons = screenButtons;
 
-				if (!IsDisposed && IsHandleCreated)
+				if (IsHandleCreated)
 					Invoke(new MethodInvoker(() => AddButtonsToListView(buttons)));
 
-				if (!IsDisposed && IsHandleCreated)
+				if (IsHandleCreated)
 					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
+			}
+			catch (ObjectDisposedException ex) {
+				LogsHelper.Log(ex.Message, DateTime.Now, EventSeverity.Warning);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				if (!IsDisposed && IsHandleCreated)
+				if (IsHandleCreated)
 					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
 				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
