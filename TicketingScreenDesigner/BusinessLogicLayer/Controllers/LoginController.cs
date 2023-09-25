@@ -1,5 +1,5 @@
-﻿using DataAccessLayer;
-using DataAccessLayer.DataClasses;
+﻿using DataAccessLayer.DataClasses;
+using DataAccessLayer.DBOperations;
 using ExceptionUtils;
 using LogUtils;
 

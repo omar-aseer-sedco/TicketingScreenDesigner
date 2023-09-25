@@ -5,6 +5,9 @@ using LogUtils;
 using ExceptionUtils;
 
 namespace DataAccessLayer.Utils {
+	/// <summary>
+	/// Contains methods for managing SQL connections and executing SQL commands.
+	/// </summary>
 	public static class DBUtils {
 		private static DBConfig? config = null;
 
@@ -34,11 +37,11 @@ namespace DataAccessLayer.Utils {
 
 				bool authenticated = false;
 				string connectionString = $"server={config.Server}; database={config.Database};";
-				if (config.IntegratedSecurity is not null && config.IntegratedSecurity != string.Empty) {
+				if (config.IntegratedSecurity != string.Empty) {
 					connectionString += $" integrated security={config.IntegratedSecurity};";
 					authenticated = true;
 				}
-				if (config.UserId is not null && config.UserId != string.Empty && config.Password is not null) {
+				if (config.UserId != string.Empty && config.Password != string.Empty) {
 					connectionString += $" User ID={config.UserId}; Password={config.Password};";
 					authenticated = true;
 				}
@@ -119,9 +122,8 @@ namespace DataAccessLayer.Utils {
 				command.Connection = connection;
 				connection.Open();
 
-				using (var reader = command.ExecuteReader()) {
-					readerDelegate(reader);
-				}
+				using var reader = command.ExecuteReader();
+				readerDelegate(reader);
 			}
 			catch (SqlException ex) {
 				ExceptionHelper.HandleSqlException(ex);
