@@ -3,9 +3,8 @@ using LogUtils;
 using ExceptionUtils;
 using BusinessLogicLayer.Controllers;
 
-namespace TicketingScreenDesigner
-{
-    public partial class LoginForm : Form {
+namespace TicketingScreenDesigner {
+	public partial class LoginForm : Form {
 		public LoginForm() {
 			try {
 				InitializeComponent();
@@ -44,7 +43,7 @@ namespace TicketingScreenDesigner
 				if ((bool) passwordCorrect) {
 					loginPasswordTextBox.Text = string.Empty;
 					var screens = await LoginController.GetScreensAsync(bankName);
-					
+
 					if (screens is null) {
 						LogsHelper.Log("Error retrieving bank information.", DateTime.Now, EventSeverity.Error);
 						MessageBox.Show("Error retrieving bank information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

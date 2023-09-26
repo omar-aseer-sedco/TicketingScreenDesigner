@@ -63,7 +63,6 @@
 			buttonsListView.Location = new Point(12, 39);
 			buttonsListView.Name = "buttonsListView";
 			buttonsListView.Size = new Size(579, 285);
-			buttonsListView.Sorting = SortOrder.Ascending;
 			buttonsListView.TabIndex = 1;
 			buttonsListView.UseCompatibleStateImageBehavior = false;
 			buttonsListView.View = View.Details;

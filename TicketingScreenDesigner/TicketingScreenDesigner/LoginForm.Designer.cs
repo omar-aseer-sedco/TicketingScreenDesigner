@@ -107,10 +107,10 @@
 			// 
 			loginShowPasswordCheckBox.Anchor = AnchorStyles.Right;
 			loginShowPasswordCheckBox.AutoSize = true;
-			loginShowPasswordCheckBox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+			loginShowPasswordCheckBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
 			loginShowPasswordCheckBox.Location = new Point(187, 150);
 			loginShowPasswordCheckBox.Name = "loginShowPasswordCheckBox";
-			loginShowPasswordCheckBox.Size = new Size(119, 21);
+			loginShowPasswordCheckBox.Size = new Size(123, 23);
 			loginShowPasswordCheckBox.TabIndex = 2;
 			loginShowPasswordCheckBox.Text = "Show password";
 			loginShowPasswordCheckBox.UseVisualStyleBackColor = true;

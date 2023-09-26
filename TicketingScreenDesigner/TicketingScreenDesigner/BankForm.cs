@@ -8,8 +8,7 @@ using System.Data.SqlClient;
 using BusinessLogicLayer.Listeners;
 using BusinessLogicLayer.Controllers;
 
-namespace TicketingScreenDesigner
-{
+namespace TicketingScreenDesigner {
 	public partial class BankForm : Form {
 		private const string TITLE_TEXT = "Ticketing Screen Designer";
 

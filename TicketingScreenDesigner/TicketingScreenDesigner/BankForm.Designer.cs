@@ -48,6 +48,7 @@
 			// 
 			// screensListView
 			// 
+			screensListView.AllowColumnReorder = true;
 			screensListView.Anchor =  AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 			screensListView.Columns.AddRange(new ColumnHeader[] { screenTitleColumn, isActiveColumn });
 			screensListView.FullRowSelect = true;
@@ -176,14 +177,14 @@
 			// changePasswordToolStripMenuItem
 			// 
 			changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
-			changePasswordToolStripMenuItem.Size = new Size(180, 22);
+			changePasswordToolStripMenuItem.Size = new Size(168, 22);
 			changePasswordToolStripMenuItem.Text = "Change password";
 			changePasswordToolStripMenuItem.Click += changePasswordToolStripMenuItem_Click;
 			// 
 			// logOutToolStripMenuItem
 			// 
 			logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-			logOutToolStripMenuItem.Size = new Size(180, 22);
+			logOutToolStripMenuItem.Size = new Size(168, 22);
 			logOutToolStripMenuItem.Text = "Log out";
 			logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
 			// 
