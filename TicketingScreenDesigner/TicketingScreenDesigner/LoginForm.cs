@@ -109,6 +109,7 @@ namespace TicketingScreenDesigner {
 		private void loginShowPasswordCheckBox_CheckedChanged(object sender, EventArgs e) {
 			try {
 				loginPasswordTextBox.UseSystemPasswordChar = !loginShowPasswordCheckBox.Checked;
+				LogsHelper.Log("beep boop", DateTime.Now, EventSeverity.Info);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);

@@ -87,7 +87,7 @@
 			// 
 			editScreenButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			editScreenButton.Enabled = false;
-			editScreenButton.Location = new Point(534, 106);
+			editScreenButton.Location = new Point(534, 104);
 			editScreenButton.Name = "editScreenButton";
 			editScreenButton.Size = new Size(108, 23);
 			editScreenButton.TabIndex = 2;
@@ -100,7 +100,7 @@
 			// 
 			deleteScreenButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			deleteScreenButton.Enabled = false;
-			deleteScreenButton.Location = new Point(534, 135);
+			deleteScreenButton.Location = new Point(534, 131);
 			deleteScreenButton.Name = "deleteScreenButton";
 			deleteScreenButton.Size = new Size(108, 23);
 			deleteScreenButton.TabIndex = 3;
@@ -124,7 +124,7 @@
 			// 
 			setActiveButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			setActiveButton.Enabled = false;
-			setActiveButton.Location = new Point(534, 164);
+			setActiveButton.Location = new Point(534, 158);
 			setActiveButton.Name = "setActiveButton";
 			setActiveButton.Size = new Size(108, 23);
 			setActiveButton.TabIndex = 5;
@@ -137,7 +137,7 @@
 			// 
 			previewButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			previewButton.Enabled = false;
-			previewButton.Location = new Point(534, 193);
+			previewButton.Location = new Point(534, 185);
 			previewButton.Name = "previewButton";
 			previewButton.Size = new Size(108, 23);
 			previewButton.TabIndex = 6;
@@ -149,7 +149,7 @@
 			// refreshButton
 			// 
 			refreshButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
-			refreshButton.Location = new Point(533, 222);
+			refreshButton.Location = new Point(533, 212);
 			refreshButton.Name = "refreshButton";
 			refreshButton.Size = new Size(108, 23);
 			refreshButton.TabIndex = 7;

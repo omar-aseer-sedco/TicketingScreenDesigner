@@ -31,11 +31,11 @@ namespace LogUtils {
 
 	public static class LogsHelper {
 		private static readonly string logsDirectoryPath = Path.Join(Directory.GetCurrentDirectory(), "logs");
-		private static readonly string logsFilePath = Path.Join(logsDirectoryPath, "logs.txt");
+		private static readonly string logsFilePath = Path.Join(logsDirectoryPath, "logs.json");
 
 		public static bool IsInitialized() {
 			try {
-				return Directory.Exists(logsDirectoryPath);
+				return Directory.Exists(logsDirectoryPath) && File.Exists(logsFilePath);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -43,9 +43,15 @@ namespace LogUtils {
 			}
 		}
 
-		public static void InitializeLogsDirectory() {
+		public static void InitializeLogsFile() {
 			try {
-				Directory.CreateDirectory(logsDirectoryPath);
+				if (!File.Exists(logsFilePath)) {
+					if (!Directory.Exists(logsDirectoryPath))
+						Directory.CreateDirectory(logsDirectoryPath);
+
+					using var fileWriter = File.AppendText(logsFilePath);
+					fileWriter.WriteLine("[]");
+				}
 			}
 			catch (Exception ex) {
 				Console.Error.WriteLine(ex.Message);
@@ -54,16 +60,26 @@ namespace LogUtils {
 
 		public static void Log(LogEvent logEvent) {
 			try {
-				if (!IsInitialized()) {
-					InitializeLogsDirectory();
-				}
+				InitializeLogsFile();
 
 				var options = new JsonSerializerOptions() {
 					WriteIndented = true,
 				};
 
+				bool isFirstLog = true;
+				using (var fileStream = new FileStream(logsFilePath, FileMode.Open, FileAccess.ReadWrite)) {
+					fileStream.Seek(1, SeekOrigin.Begin);
+					if (fileStream.ReadByte() == '{')
+						isFirstLog = false;
+
+					fileStream.Seek(-3, SeekOrigin.End);
+					if (fileStream.ReadByte() == ']')
+						fileStream.SetLength(fileStream.Length - 3);
+				}
+
 				using var fileWriter = File.AppendText(logsFilePath);
-				fileWriter.WriteLine(JsonSerializer.Serialize(logEvent, typeof(LogEvent), options));
+				fileWriter.Write((isFirstLog ? "" : ",\n") + JsonSerializer.Serialize(logEvent, typeof(LogEvent), options));
+				fileWriter.WriteLine("]");
 			}
 			catch (Exception ex) {
 				Console.Error.WriteLine(ex.Message);

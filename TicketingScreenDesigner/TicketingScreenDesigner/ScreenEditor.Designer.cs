@@ -62,7 +62,7 @@
 			buttonsListView.FullRowSelect = true;
 			buttonsListView.Location = new Point(12, 39);
 			buttonsListView.Name = "buttonsListView";
-			buttonsListView.Size = new Size(579, 285);
+			buttonsListView.Size = new Size(579, 286);
 			buttonsListView.TabIndex = 1;
 			buttonsListView.UseCompatibleStateImageBehavior = false;
 			buttonsListView.View = View.Details;
@@ -104,7 +104,7 @@
 			// addButton
 			// 
 			addButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
-			addButton.Location = new Point(597, 39);
+			addButton.Location = new Point(597, 38);
 			addButton.Name = "addButton";
 			addButton.Size = new Size(100, 23);
 			addButton.TabIndex = 3;
@@ -117,7 +117,7 @@
 			// 
 			deleteButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			deleteButton.Enabled = false;
-			deleteButton.Location = new Point(597, 97);
+			deleteButton.Location = new Point(597, 92);
 			deleteButton.Name = "deleteButton";
 			deleteButton.Size = new Size(100, 23);
 			deleteButton.TabIndex = 4;
@@ -130,7 +130,7 @@
 			// 
 			editButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
 			editButton.Enabled = false;
-			editButton.Location = new Point(597, 68);
+			editButton.Location = new Point(597, 65);
 			editButton.Name = "editButton";
 			editButton.Size = new Size(100, 23);
 			editButton.TabIndex = 5;
@@ -143,7 +143,7 @@
 			// 
 			activeCheckBox.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
 			activeCheckBox.AutoSize = true;
-			activeCheckBox.Location = new Point(598, 309);
+			activeCheckBox.Location = new Point(598, 310);
 			activeCheckBox.Name = "activeCheckBox";
 			activeCheckBox.Size = new Size(59, 19);
 			activeCheckBox.TabIndex = 6;
@@ -172,7 +172,7 @@
 			// refreshButton
 			// 
 			refreshButton.Anchor =  AnchorStyles.Top | AnchorStyles.Right;
-			refreshButton.Location = new Point(597, 126);
+			refreshButton.Location = new Point(597, 119);
 			refreshButton.Name = "refreshButton";
 			refreshButton.Size = new Size(100, 23);
 			refreshButton.TabIndex = 13;
