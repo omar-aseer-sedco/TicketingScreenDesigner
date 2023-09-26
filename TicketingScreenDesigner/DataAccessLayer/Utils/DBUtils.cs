@@ -14,13 +14,13 @@ namespace DataAccessLayer.Utils {
 		public delegate void ReaderDelegate(SqlDataReader reader);
 
 		/// <summary>
-		/// Creates an <c>SqlConnection</c> object. The connection string is obtained from a config file.
+		/// Creates an <c>SqlConnection</c> object. The connection data is obtained from a config file.
 		/// </summary>
 		/// <returns>The SqlConnection.</returns>
 		public static SqlConnection CreateConnection() {
 			try {
 				if (config is null) {
-					string configFilePath = Path.Join(Directory.GetCurrentDirectory(), "config", "DB_config.txt");
+					string configFilePath = Path.Join(Directory.GetCurrentDirectory(), "config", "DB_config.json");
 
 					using (var reader = new StreamReader(configFilePath)) {
 						var options = new JsonSerializerOptions() {
@@ -35,13 +35,15 @@ namespace DataAccessLayer.Utils {
 						throw new NullReferenceException();
 				}
 
+				config.TrimData();
+
 				bool authenticated = false;
 				string connectionString = $"server={config.Server}; database={config.Database};";
 				if (config.IntegratedSecurity != string.Empty) {
 					connectionString += $" integrated security={config.IntegratedSecurity};";
 					authenticated = true;
 				}
-				if (config.UserId != string.Empty && config.Password != string.Empty) {
+				else if (config.UserId != string.Empty && config.Password != string.Empty) {
 					connectionString += $" User ID={config.UserId}; Password={config.Password};";
 					authenticated = true;
 				}
@@ -90,7 +92,6 @@ namespace DataAccessLayer.Utils {
 		/// <summary>
 		/// Calls <c>ExecuteNonQuery</c> using the given command.
 		/// </summary>
-		/// <param name="connection">The connection</param>
 		/// <param name="command">The command to execute.</param>
 		/// <returns>The number of rows affected by the operation.</returns>
 		public static int ExecuteNonQuery(SqlCommand command) {

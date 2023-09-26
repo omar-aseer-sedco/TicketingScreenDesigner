@@ -45,7 +45,7 @@
 			// saveButton
 			// 
 			saveButton.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
-			saveButton.Location = new Point(597, 307);
+			saveButton.Location = new Point(597, 330);
 			saveButton.Name = "saveButton";
 			saveButton.Size = new Size(100, 23);
 			saveButton.TabIndex = 0;
@@ -56,12 +56,14 @@
 			// 
 			// buttonsListView
 			// 
+			buttonsListView.AllowColumnReorder = true;
 			buttonsListView.Anchor =  AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 			buttonsListView.Columns.AddRange(new ColumnHeader[] { nameColumn, typeColumn, serviceColumn, messageColumn });
 			buttonsListView.FullRowSelect = true;
 			buttonsListView.Location = new Point(12, 39);
 			buttonsListView.Name = "buttonsListView";
-			buttonsListView.Size = new Size(579, 261);
+			buttonsListView.Size = new Size(579, 285);
+			buttonsListView.Sorting = SortOrder.Ascending;
 			buttonsListView.TabIndex = 1;
 			buttonsListView.UseCompatibleStateImageBehavior = false;
 			buttonsListView.View = View.Details;
@@ -91,7 +93,7 @@
 			// cancelButton
 			// 
 			cancelButton.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
-			cancelButton.Location = new Point(492, 307);
+			cancelButton.Location = new Point(492, 330);
 			cancelButton.Name = "cancelButton";
 			cancelButton.Size = new Size(100, 23);
 			cancelButton.TabIndex = 2;
@@ -142,7 +144,7 @@
 			// 
 			activeCheckBox.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
 			activeCheckBox.AutoSize = true;
-			activeCheckBox.Location = new Point(598, 285);
+			activeCheckBox.Location = new Point(598, 309);
 			activeCheckBox.Name = "activeCheckBox";
 			activeCheckBox.Size = new Size(59, 19);
 			activeCheckBox.TabIndex = 6;
@@ -184,7 +186,7 @@
 			// 
 			statusLabel.Anchor =  AnchorStyles.Bottom | AnchorStyles.Left;
 			statusLabel.AutoSize = true;
-			statusLabel.Location = new Point(12, 311);
+			statusLabel.Location = new Point(9, 334);
 			statusLabel.Name = "statusLabel";
 			statusLabel.Size = new Size(0, 15);
 			statusLabel.TabIndex = 14;
@@ -194,7 +196,8 @@
 			AcceptButton = saveButton;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(708, 339);
+			ClientSize = new Size(708, 362);
+			ControlBox = false;
 			Controls.Add(statusLabel);
 			Controls.Add(refreshButton);
 			Controls.Add(screenTitleLabel);

@@ -6,14 +6,12 @@ using LogUtils;
 using ExceptionUtils;
 using BusinessLogicLayer.Controllers;
 
-namespace TicketingScreenDesigner
-{
-    public partial class ButtonEditor : Form {
+namespace TicketingScreenDesigner {
+	public partial class ButtonEditor : Form {
 		private const string TITLE_TEXT = "Button Editor";
 		private const int DEFAULT_PANEL_POSITION_Y = 95;
 		private const int MINIMUM_HEIGHT_ISSUE_TICKET = 206;
 		private const int MINIMUM_HEIGHT_SHOW_MESSAGE = 233;
-		private const int MINIMUM_WIDTH = 628;
 
 		private readonly ScreenEditor callingForm;
 		private readonly ScreenController screenController;
@@ -31,7 +29,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -44,7 +42,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -57,7 +55,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -78,7 +76,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -89,7 +87,7 @@ namespace TicketingScreenDesigner
 					showMessagePanel.Visible = showMessagePanel.Enabled = false;
 				}
 				else if (typeComboBox.SelectedIndex == (int) TypeIndex.ISSUE_TICKET) {
-					MinimumSize = new Size(MINIMUM_WIDTH, MINIMUM_HEIGHT_ISSUE_TICKET);
+					MinimumSize = new Size(MinimumSize.Width, MINIMUM_HEIGHT_ISSUE_TICKET);
 
 					issueTicketPanel.Visible = issueTicketPanel.Enabled = true;
 					showMessagePanel.Visible = showMessagePanel.Enabled = false;
@@ -101,7 +99,7 @@ namespace TicketingScreenDesigner
 					}
 				}
 				else if (typeComboBox.SelectedIndex == (int) TypeIndex.SHOW_MESSAGE) {
-					MinimumSize = new Size(MINIMUM_WIDTH, MINIMUM_HEIGHT_SHOW_MESSAGE);
+					MinimumSize = new Size(MinimumSize.Width, MINIMUM_HEIGHT_SHOW_MESSAGE);
 
 					issueTicketPanel.Visible = issueTicketPanel.Enabled = false;
 					showMessagePanel.Visible = showMessagePanel.Enabled = true;
@@ -115,7 +113,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -125,7 +123,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -215,7 +213,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -233,7 +231,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -245,7 +243,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
 		}
@@ -260,7 +258,7 @@ namespace TicketingScreenDesigner
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show("An unexpected error has occurred. Check the logs for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 	}

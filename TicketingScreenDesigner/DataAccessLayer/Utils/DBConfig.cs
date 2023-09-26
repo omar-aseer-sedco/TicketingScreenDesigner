@@ -21,5 +21,13 @@
 			UserId = userId;
 			Password = password;
 		}
+
+		public void TrimData() {
+			Server = Server.Trim();
+			Database = Database.Trim();
+			IntegratedSecurity = IntegratedSecurity.Trim();
+			UserId = UserId.Trim();
+			Password = Password.Trim();
+		}
 	}
 }

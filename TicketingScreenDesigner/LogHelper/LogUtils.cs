@@ -62,9 +62,8 @@ namespace LogUtils {
 					WriteIndented = true,
 				};
 
-				using (var fileWriter = File.AppendText(logsFilePath)) {
-					fileWriter.WriteLine(JsonSerializer.Serialize(logEvent, typeof(LogEvent), options));
-				}
+				using var fileWriter = File.AppendText(logsFilePath);
+				fileWriter.WriteLine(JsonSerializer.Serialize(logEvent, typeof(LogEvent), options));
 			}
 			catch (Exception ex) {
 				Console.Error.WriteLine(ex.Message);

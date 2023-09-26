@@ -1,9 +1,7 @@
 ﻿using System.Data.SqlClient;
 
-namespace DataAccessLayer.Constants
-{
-	public static class BanksConstants
-	{
+namespace DataAccessLayer.Constants {
+	public static class BanksConstants {
 		public const string TABLE_NAME = "Banks";
 		public const string BANK_NAME = "bank_name";
 		public const string PASSWORD = "password";
@@ -11,8 +9,7 @@ namespace DataAccessLayer.Constants
 		public const int PASSWORD_SIZE = 255;
 	}
 
-	public static class ScreensConstants
-	{
+	public static class ScreensConstants {
 		public const string TABLE_NAME = "TicketingScreens";
 		public const string BANK_NAME = "bank_name";
 		public const string SCREEN_ID = "screen_id";
@@ -39,7 +36,7 @@ namespace DataAccessLayer.Constants
 		public const int SERVICE_SIZE = 255;
 		public const int MESSAGE_EN_SIZE = 1000;
 		public const int MESSAGE_AR_SIZE = 1000;
-		
+
 		public const string TMP_ID = "tmp_id";
 		public const string ADD_BUTTONS_PROCEDURE = "AddButtons";
 		public const string ADD_BUTTONS_PARAMETER_NAME = "@buttons";
@@ -65,9 +62,4 @@ namespace DataAccessLayer.Constants
 	}
 
 	public delegate void DatabaseNotificationDelegate(SqlNotificationInfo info);
-
-	public enum NotifiableEntityTypes {
-		Screens,
-		Buttons,
-	}
 }
