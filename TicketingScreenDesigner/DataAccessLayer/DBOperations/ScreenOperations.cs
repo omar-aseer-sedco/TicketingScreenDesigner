@@ -143,6 +143,13 @@ namespace DataAccessLayer.DBOperations {
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public static bool DeleteScreens(string bankName, List<int> screenIds) {
 			try {
+				const int MAX_PARAMETERS = 1000;
+
+				if (screenIds.Count > MAX_PARAMETERS) {
+					DeleteScreens(bankName, screenIds.GetRange(MAX_PARAMETERS, screenIds.Count - MAX_PARAMETERS));
+					screenIds = screenIds.GetRange(0, MAX_PARAMETERS);
+				}
+
 				var query = new StringBuilder($"DELETE FROM {ScreensConstants.TABLE_NAME} WHERE {ScreensConstants.BANK_NAME} = @bankName AND {ScreensConstants.SCREEN_ID} IN (");
 				var command = new SqlCommand();
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ScreensConstants.BANK_NAME_SIZE).Value = bankName;
