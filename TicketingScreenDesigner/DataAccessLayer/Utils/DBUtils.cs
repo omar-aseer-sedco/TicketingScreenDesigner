@@ -23,6 +23,10 @@ namespace DataAccessLayer.Utils {
 				if (config is null) {
 					string configFilePath = Path.Join(Directory.GetCurrentDirectory(), "config", "DB_config.json");
 
+					if (!File.Exists(configFilePath) && File.Exists(Path.Join(Directory.GetCurrentDirectory(), "config", "DB_config.txt"))) {
+						File.Move(Path.Join(Directory.GetCurrentDirectory(), "config", "DB_config.txt"), configFilePath);
+					}
+
 					using (var reader = new StreamReader(configFilePath)) {
 						var options = new JsonSerializerOptions() {
 							AllowTrailingCommas = true,

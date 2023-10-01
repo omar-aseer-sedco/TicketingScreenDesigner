@@ -3,9 +3,8 @@
 using BusinessLogicLayer.Controllers;
 using ExceptionUtils;
 
-namespace TicketingScreenDesigner
-{
-    public partial class ChangePasswordForm : Form {
+namespace TicketingScreenDesigner {
+	public partial class ChangePasswordForm : Form {
 		private readonly string bankName;
 
 		private ChangePasswordForm() {

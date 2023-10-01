@@ -128,6 +128,7 @@
 			Controls.Add(label2);
 			Controls.Add(oldPasswordLabel);
 			Name = "ChangePasswordForm";
+			StartPosition = FormStartPosition.CenterParent;
 			Text = "Change Password";
 			ResumeLayout(false);
 			PerformLayout();
