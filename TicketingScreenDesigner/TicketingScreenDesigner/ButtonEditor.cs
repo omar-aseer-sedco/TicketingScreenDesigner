@@ -170,6 +170,7 @@ namespace TicketingScreenDesigner {
 					newButton = new IssueTicketButton() {
 						BankName = bankName,
 						ScreenId = screenId,
+						ButtonId = button?.ButtonId ?? -1,
 						Type = type,
 						NameEn = nameEn,
 						NameAr = nameAr,
@@ -182,6 +183,7 @@ namespace TicketingScreenDesigner {
 					newButton = new ShowMessageButton() {
 						BankName = bankName,
 						ScreenId = screenId,
+						ButtonId = button?.ButtonId ?? -1,
 						Type = type,
 						NameEn = nameEn,
 						NameAr = nameAr,

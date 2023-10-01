@@ -95,13 +95,19 @@ namespace BusinessLogicLayer.Controllers {
 					return null;
 
 				foreach (var button in buttons.ToList()) {
-					if (pendingDeletes.Contains(button.ButtonId) || pendingUpdates.ContainsKey(button.ButtonId)) {
+					if (pendingUpdates.ContainsKey(button.ButtonId)) {
 						buttons.Remove(button);
 					}
 				}
 
 				buttons.AddRange(pendingAdds);
 				buttons.AddRange(pendingUpdates.Values.ToList());
+
+				foreach (var button in buttons.ToList()) {
+					if (pendingDeletes.Contains(button.ButtonId)) {
+						buttons.Remove(button);
+					}
+				}
 
 				return buttons;
 			}
@@ -175,10 +181,9 @@ namespace BusinessLogicLayer.Controllers {
 							break;
 						}
 					}
-					if (pendingUpdates.ContainsKey(buttonId)) {
-						pendingUpdates.Remove(buttonId);
-						isPendingList = true;
-					}
+					//if (pendingUpdates.ContainsKey(buttonId)) {
+					//	pendingUpdates.Remove(buttonId);
+					//}
 
 					if (!isPendingList) {
 						pendingDeletes.Add(buttonId);
