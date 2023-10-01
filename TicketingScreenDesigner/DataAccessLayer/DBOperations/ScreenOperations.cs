@@ -143,7 +143,7 @@ namespace DataAccessLayer.DBOperations {
 		/// <returns><c>true</c> if the operation succeeds, and <c>false</c> if it fails.</returns>
 		public static bool DeleteScreens(string bankName, List<int> screenIds) {
 			try {
-				const int MAX_PARAMETERS = 1000;
+				const int MAX_PARAMETERS = 2000;
 
 				if (screenIds.Count > MAX_PARAMETERS) {
 					DeleteScreens(bankName, screenIds.GetRange(MAX_PARAMETERS, screenIds.Count - MAX_PARAMETERS));

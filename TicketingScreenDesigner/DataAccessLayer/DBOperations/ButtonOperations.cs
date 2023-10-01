@@ -289,7 +289,7 @@ namespace DataAccessLayer.DBOperations {
 
 		private static List<SqlCommand>? CreateDeleteButtonsCommandList(string bankName, int screenId, List<int> buttonIds) {
 			try {
-				const int MAX_PARAMETERS = 1000;
+				const int MAX_PARAMETERS = 2000;
 
 				List<SqlCommand> commandList = new();
 

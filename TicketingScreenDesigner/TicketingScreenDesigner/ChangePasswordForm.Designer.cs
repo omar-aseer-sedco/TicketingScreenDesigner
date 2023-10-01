@@ -35,8 +35,9 @@
 			// 
 			// changePasswordButton
 			// 
+			changePasswordButton.Anchor = AnchorStyles.Bottom;
 			changePasswordButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-			changePasswordButton.Location = new Point(135, 207);
+			changePasswordButton.Location = new Point(145, 207);
 			changePasswordButton.Name = "changePasswordButton";
 			changePasswordButton.Size = new Size(160, 34);
 			changePasswordButton.TabIndex = 24;
@@ -46,9 +47,10 @@
 			// 
 			// showPasswordTextBox
 			// 
+			showPasswordTextBox.Anchor =  AnchorStyles.Bottom | AnchorStyles.Right;
 			showPasswordTextBox.AutoSize = true;
 			showPasswordTextBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-			showPasswordTextBox.Location = new Point(293, 170);
+			showPasswordTextBox.Location = new Point(316, 171);
 			showPasswordTextBox.Name = "showPasswordTextBox";
 			showPasswordTextBox.Size = new Size(123, 23);
 			showPasswordTextBox.TabIndex = 23;
@@ -58,10 +60,11 @@
 			// 
 			// confirmPasswordTextBox
 			// 
+			confirmPasswordTextBox.Anchor =  AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			confirmPasswordTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			confirmPasswordTextBox.Location = new Point(132, 120);
 			confirmPasswordTextBox.Name = "confirmPasswordTextBox";
-			confirmPasswordTextBox.Size = new Size(286, 29);
+			confirmPasswordTextBox.Size = new Size(307, 29);
 			confirmPasswordTextBox.TabIndex = 21;
 			confirmPasswordTextBox.UseSystemPasswordChar = true;
 			// 
@@ -77,19 +80,21 @@
 			// 
 			// newPasswordTextBox
 			// 
+			newPasswordTextBox.Anchor =  AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			newPasswordTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			newPasswordTextBox.Location = new Point(132, 70);
 			newPasswordTextBox.Name = "newPasswordTextBox";
-			newPasswordTextBox.Size = new Size(286, 29);
+			newPasswordTextBox.Size = new Size(307, 29);
 			newPasswordTextBox.TabIndex = 20;
 			newPasswordTextBox.UseSystemPasswordChar = true;
 			// 
 			// oldPasswordTextBox
 			// 
+			oldPasswordTextBox.Anchor =  AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			oldPasswordTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			oldPasswordTextBox.Location = new Point(132, 20);
 			oldPasswordTextBox.Name = "oldPasswordTextBox";
-			oldPasswordTextBox.Size = new Size(286, 29);
+			oldPasswordTextBox.Size = new Size(307, 29);
 			oldPasswordTextBox.TabIndex = 19;
 			oldPasswordTextBox.UseSystemPasswordChar = true;
 			// 
@@ -118,7 +123,7 @@
 			AcceptButton = changePasswordButton;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(430, 260);
+			ClientSize = new Size(451, 260);
 			Controls.Add(changePasswordButton);
 			Controls.Add(showPasswordTextBox);
 			Controls.Add(confirmPasswordTextBox);
@@ -127,6 +132,9 @@
 			Controls.Add(oldPasswordTextBox);
 			Controls.Add(label2);
 			Controls.Add(oldPasswordLabel);
+			FormBorderStyle = FormBorderStyle.Fixed3D;
+			MaximizeBox = false;
+			MinimumSize = new Size(467, 299);
 			Name = "ChangePasswordForm";
 			StartPosition = FormStartPosition.CenterParent;
 			Text = "Change Password";
