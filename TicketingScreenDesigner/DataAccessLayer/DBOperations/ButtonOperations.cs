@@ -86,21 +86,21 @@ namespace DataAccessLayer.DBOperations {
 
 				var addButtonsCommand = CreateAddButtonsCommand(bankName, screenId, buttonsToAdd);
 				var updateButtonsCommand = CreateUpdateButtonsCommand(bankName, screenId, buttonsToUpdate);
-				var deleteButtonsCommand = CreateDeleteButtonsCommand(bankName, screenId, buttonsToDelete);
+				var deleteButtonsCommands = CreateDeleteButtonsCommandList(bankName, screenId, buttonsToDelete);
 
-				if (addButtonsCommand is null || updateButtonsCommand is null || deleteButtonsCommand is null)
+				if (addButtonsCommand is null || updateButtonsCommand is null || deleteButtonsCommands is null) {
+					LogsHelper.Log("Failed to create command(s).", DateTime.Now, EventSeverity.Error);
 					return default;
+				}
 
 				addButtonsCommand.Connection = connection;
 				updateButtonsCommand.Connection = connection;
-				deleteButtonsCommand.Connection = connection;
 
 				connection.Open();
 				transaction = connection.BeginTransaction();
 
 				addButtonsCommand.Transaction = transaction;
 				updateButtonsCommand.Transaction = transaction;
-				deleteButtonsCommand.Transaction = transaction;
 
 				if (buttonsToAdd.Count > 0) {
 					var addButtonsReader = addButtonsCommand.ExecuteReader();
@@ -151,7 +151,12 @@ namespace DataAccessLayer.DBOperations {
 				}
 
 				if (buttonsToDelete.Count > 0) {
-					deleteButtonsCommand.ExecuteNonQuery();
+					foreach (var command in deleteButtonsCommands) {
+						command.Connection = connection;
+						command.Transaction = transaction;
+
+						command.ExecuteNonQuery();
+					}
 				}
 
 				if (allSucceeded) {
@@ -274,6 +279,40 @@ namespace DataAccessLayer.DBOperations {
 				updateButtonsParameter.TypeName = ButtonsConstants.UPDATE_BUTTONS_PARAMETER_TYPE;
 
 				return command;
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
+
+			return null;
+		}
+
+		private static List<SqlCommand>? CreateDeleteButtonsCommandList(string bankName, int screenId, List<int> buttonIds) {
+			try {
+				const int MAX_PARAMETERS = 1000;
+
+				List<SqlCommand> commandList = new();
+
+				while (buttonIds.Count > 0) {
+					if (buttonIds.Count > MAX_PARAMETERS) {
+						var nextCommand = CreateDeleteButtonsCommand(bankName, screenId, buttonIds.GetRange(0, MAX_PARAMETERS));
+						buttonIds = buttonIds.GetRange(MAX_PARAMETERS, buttonIds.Count - MAX_PARAMETERS);
+						if (nextCommand is null)
+							return null;
+
+						commandList.Add(nextCommand);
+					}
+					else {
+						var nextCommand = CreateDeleteButtonsCommand(bankName, screenId, buttonIds);
+						if (nextCommand is null)
+							return null;
+
+						commandList.Add(nextCommand);
+						break;
+					}
+				}
+
+				return commandList;
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
