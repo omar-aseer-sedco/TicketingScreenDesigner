@@ -155,6 +155,14 @@ namespace DataAccessLayer.DBOperations {
 						command.Connection = connection;
 						command.Transaction = transaction;
 
+						LogsHelper.Log("uhm", DateTime.Now, EventSeverity.Info);
+						LogsHelper.Log(command.CommandText, DateTime.Now, EventSeverity.Info);
+						string parameters = "";
+						foreach (SqlParameter parameter in command.Parameters) {
+							parameters += parameter.ParameterName + " = " + parameter.Value + "; ";
+						}
+						LogsHelper.Log(parameters, DateTime.Now, EventSeverity.Info);
+
 						command.ExecuteNonQuery();
 					}
 				}

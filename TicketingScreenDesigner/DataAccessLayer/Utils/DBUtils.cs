@@ -72,9 +72,20 @@ namespace DataAccessLayer.Utils {
 				result = InitializationStatus.FILE_CORRUPTED;
 				return default;
 			}
+			catch (Exception ex) when (ex is SqlException || ex.Message == "Configuration information missing.") {
+				if (ex is SqlException sqlException) {
+					ExceptionHelper.HandleSqlException(sqlException);
+				}
+				else {
+					ExceptionHelper.HandleGeneralException(ex);
+				}
+
+				result = InitializationStatus.FAILED_TO_CONNECT;
+				return default;
+			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				result = InitializationStatus.FAILED_TO_CONNECT;
+				result = InitializationStatus.UNDEFINED_ERROR;
 				return default;
 			}
 		}
