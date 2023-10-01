@@ -13,10 +13,8 @@ namespace TicketingScreenDesigner {
 		private const int MINIMUM_HEIGHT_ISSUE_TICKET = 206;
 		private const int MINIMUM_HEIGHT_SHOW_MESSAGE = 233;
 
-		private readonly ScreenEditor callingForm;
 		private readonly ScreenController screenController;
 		private readonly TicketingButton button;
-		private readonly bool isNewButton;
 
 		private enum TypeIndex {
 			ISSUE_TICKET = 0,
@@ -33,11 +31,9 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public ButtonEditor(ScreenEditor callingForm, ScreenController screenController) : this() {
+		public ButtonEditor(ScreenController screenController) : this() {
 			try {
 				Text = TITLE_TEXT + " - New Button";
-				isNewButton = true;
-				this.callingForm = callingForm;
 				this.screenController = screenController;
 			}
 			catch (Exception ex) {
@@ -46,10 +42,9 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public ButtonEditor(ScreenEditor callingForm, ScreenController screenController, TicketingButton button) : this(callingForm, screenController) {
+		public ButtonEditor(ScreenController screenController, TicketingButton button) : this(screenController) {
 			try {
 				Text = TITLE_TEXT + " - " + button.NameEn;
-				isNewButton = false;
 				this.button = button;
 				FillTextBoxes(button);
 			}
@@ -138,7 +133,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private async void saveButton_Click(object sender, EventArgs e) {
+		private void saveButton_Click(object sender, EventArgs e) {
 			try {
 				TrimInput();
 
@@ -147,7 +142,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				if (!isNewButton) {
+				if (button is not null) {
 					bool? buttonExists = screenController.CheckIfButtonExists(button.ButtonId);
 
 					if (buttonExists is null) {
@@ -158,7 +153,6 @@ namespace TicketingScreenDesigner {
 
 					if (!(bool) buttonExists) {
 						MessageBox.Show("This button no longer exists. It may have been deleted by a different user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-						await callingForm.UpdateButtonsListViewAsync();
 						Close();
 						return;
 					}
@@ -199,7 +193,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				if (isNewButton) {
+				if (button is null) {
 					newButton.ButtonId = screenController.GetNextPendingIndex();
 					screenController.AddButtonCancellable(newButton);
 				}
@@ -207,8 +201,6 @@ namespace TicketingScreenDesigner {
 					screenController.UpdateButtonCancellable(button.ButtonId, newButton);
 				}
 
-				callingForm.CheckIfScreenExists();
-				await callingForm.UpdateButtonsListViewAsync();
 				Close();
 			}
 			catch (Exception ex) {
@@ -237,7 +229,7 @@ namespace TicketingScreenDesigner {
 
 		private bool IsDataChanged() {
 			try {
-				return (isNewButton && (nameEnTextBox.Text != string.Empty || nameArTextBox.Text != string.Empty || typeComboBox.SelectedIndex != -1)) || (!isNewButton && (nameEnTextBox.Text != button.NameEn || nameArTextBox.Text != button.NameAr ||
+				return (button is null && (nameEnTextBox.Text != string.Empty || nameArTextBox.Text != string.Empty || typeComboBox.SelectedIndex != -1)) || (button is not null && (nameEnTextBox.Text != button.NameEn || nameArTextBox.Text != button.NameAr ||
 					typeComboBox.SelectedIndex != (button is IssueTicketButton ? (int) TypeIndex.ISSUE_TICKET : (int) TypeIndex.SHOW_MESSAGE) || (button is IssueTicketButton issueTicketButton && serviceTextBox.Text != issueTicketButton.Service) ||
 					(button is ShowMessageButton showMessageButton && (messageEnTextBox.Text != showMessageButton.MessageEn || messageArTextBox.Text != showMessageButton.MessageAr))));
 			}

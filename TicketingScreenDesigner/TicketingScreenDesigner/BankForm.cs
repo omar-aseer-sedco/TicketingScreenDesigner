@@ -39,11 +39,33 @@ namespace TicketingScreenDesigner {
 			try {
 				Cursor.Current = Cursors.WaitCursor;
 
-				if (!BankController.Initialize()) {
-					LogsHelper.Log("Error establishing database connection - Bank Form.", DateTime.Now, EventSeverity.Error);
-					MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					Cursor.Current = Cursors.Default;
-					Close();
+				var status = BankController.Initialize();
+
+				switch (status) {
+					case InitializationStatus.FAILED_TO_CONNECT:
+						LogsHelper.Log("Error establishing database connection - BankForm.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
+					case InitializationStatus.FILE_CORRUPTED:
+						LogsHelper.Log("Configuration file corrupted.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("The configuration file is corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
+					case InitializationStatus.FILE_NOT_FOUND:
+						LogsHelper.Log("Configration file not found", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("The configuration file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
+					case InitializationStatus.UNDEFINED_ERROR:
+						LogsHelper.Log("Error establishing database connection - BankForm.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Failed to establish database connection due to an unexpected error.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
 				}
 
 				this.bankName = bankName;
@@ -94,11 +116,12 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void AddScreen() {
+		private async Task AddScreen() {
 			try {
-				var screenEditor = new ScreenEditor(this, bankName);
+				var screenEditor = new ScreenEditor(bankName);
 				if (!screenEditor.IsDisposed)
 					screenEditor.ShowDialog();
+				await UpdateScreensListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -106,9 +129,9 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void addScreenButton_Click(object sender, EventArgs e) {
+		private async void addScreenButton_Click(object sender, EventArgs e) {
 			try {
-				AddScreen();
+				await AddScreen();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -210,9 +233,10 @@ namespace TicketingScreenDesigner {
 				bool isActive = screensListView.SelectedItems[0].SubItems[ScreensConstants.IS_ACTIVE].Text == "Yes";
 				var screen = new TicketingScreen(bankName, screenId, screenTitle, isActive);
 
-				var screenEditor = new ScreenEditor(this, bankName, screen);
+				var screenEditor = new ScreenEditor(bankName, screen);
 				if (!screenEditor.IsDisposed)
 					screenEditor.ShowDialog();
+				await UpdateScreensListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -459,7 +483,7 @@ namespace TicketingScreenDesigner {
 						await DeleteScreen();
 						break;
 					case Keys.A:
-						AddScreen();
+						await AddScreen();
 						break;
 					case Keys.S:
 						await SetScreenToActive();

@@ -2,6 +2,7 @@
 
 using DataAccessLayer.DataClasses;
 using DataAccessLayer.DBOperations;
+using DataAccessLayer.Constants;
 using ExceptionUtils;
 using LogUtils;
 
@@ -24,14 +25,16 @@ namespace BusinessLogicLayer.Controllers {
 		/// Creates a <c>ScreenController</c> object.
 		/// </summary>
 		/// <param name="success"><c>true</c> if the connection with the database was established successfully, and <c>false</c> otherwise.</param>
-		public ScreenController(out bool success) {
+		public ScreenController(out InitializationStatus success) {
 			try {
-				if (ScreenOperations.VerifyConnection() && ButtonOperations.VerifyConnection()) {
-					success = true;
+				var screenVerificationStatus = ScreenOperations.VerifyConnection();
+				var buttonVerificationStatus = ButtonOperations.VerifyConnection();
+				if (screenVerificationStatus == InitializationStatus.SUCCESS && buttonVerificationStatus == InitializationStatus.SUCCESS) {
+					success = InitializationStatus.SUCCESS;
 				}
 				else {
 					LogsHelper.Log("Verification failed - ScreenController.", DateTime.Now, EventSeverity.Error);
-					success = false;
+					success = screenVerificationStatus == InitializationStatus.SUCCESS ? buttonVerificationStatus : screenVerificationStatus;
 				}
 
 				pendingIndex = -1;
@@ -44,7 +47,7 @@ namespace BusinessLogicLayer.Controllers {
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				success = false;
+				success = InitializationStatus.UNDEFINED_ERROR;
 			}
 		}
 
@@ -53,13 +56,13 @@ namespace BusinessLogicLayer.Controllers {
 		/// </summary>
 		/// <param name="success"><c>true</c> if the connection with the database was established successfully, and <c>false</c> otherwise.</param>
 		/// <param name="bankName">The name of the bank.</param>
-		public ScreenController(out bool success, string bankName) : this(out success) {
+		public ScreenController(out InitializationStatus success, string bankName) : this(out success) {
 			try {
 				BankName = bankName;
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				success = false;
+				success = InitializationStatus.UNDEFINED_ERROR;
 			}
 		}
 
@@ -70,14 +73,14 @@ namespace BusinessLogicLayer.Controllers {
 		/// <param name="bankName">The name of the bank.</param>
 		/// <param name="screenId">The ID fo the screen.</param>
 		/// <param name="screenTitle">The title of the screen.</param>
-		public ScreenController(out bool success, string bankName, int screenId, string screenTitle) : this(out success, bankName) {
+		public ScreenController(out InitializationStatus success, string bankName, int screenId, string screenTitle) : this(out success, bankName) {
 			try {
 				ScreenId = screenId;
 				ScreenTitle = screenTitle;
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				success = false;
+				success = InitializationStatus.UNDEFINED_ERROR;
 			}
 		}
 

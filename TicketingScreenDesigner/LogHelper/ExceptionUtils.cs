@@ -28,7 +28,7 @@ namespace ExceptionUtils {
 					case (int) SqlErrorCodes.UnableToConnect:
 					case (int) SqlErrorCodes.UnableToOpenDatabase:
 					case (int) SqlErrorCodes.LoginFailed:
-						LogsHelper.Log(new LogEvent(error.Message, DateTime.Now, EventSeverity.Error, error.Source, exception.StackTrace));
+						LogsHelper.Log(new LogEvent(error.Message + " Error code: " + error.Number, DateTime.Now, EventSeverity.Error, error.Source, exception.StackTrace));
 						break;
 					default:
 						LogsHelper.Log(new LogEvent($"Unhandled SQL Error. Code: {error.Number}\nMessage: {error.Message}", DateTime.Now, EventSeverity.Error, error.Source, exception.StackTrace));

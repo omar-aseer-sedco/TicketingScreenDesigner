@@ -4,7 +4,6 @@ using DataAccessLayer.DataClasses;
 using DataAccessLayer.Utils;
 using ExceptionUtils;
 using System.Data;
-using LogUtils;
 
 namespace DataAccessLayer.DBOperations {
 	/// <summary>
@@ -15,13 +14,17 @@ namespace DataAccessLayer.DBOperations {
 		/// Verifies that the database connection is established correctly.
 		/// </summary>
 		/// <returns><c>true</c> if the connection has been established properly, and <c>false</c> otherwise.</returns>
-		public static bool VerifyConnection() {
+		public static InitializationStatus VerifyConnection() {
 			try {
 				return DBUtils.VerifyConnection();
 			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex);
+				return InitializationStatus.FAILED_TO_CONNECT;
+			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				return false;
+				return InitializationStatus.UNDEFINED_ERROR;
 			}
 		}
 
@@ -85,13 +88,17 @@ namespace DataAccessLayer.DBOperations {
 				var command = new SqlCommand(query);
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, BanksConstants.BANK_NAME_SIZE).Value = bankName;
 
-				await DBUtils.ExecuteReaderAsync(command, async reader => {
-					while (await reader.ReadAsync()) {
-						ret.Add(new TicketingScreen(bankName, (int) reader[ScreensConstants.SCREEN_ID], (string) reader[ScreensConstants.SCREEN_TITLE], (bool) reader[ScreensConstants.IS_ACTIVE]));
-					}
+				using var connection = DBUtils.CreateConnection(out var status);
+				if (status != InitializationStatus.SUCCESS || connection is null)
+					return default;
 
-					reader.Close();
-				});
+				command.Connection = connection;
+
+				await connection.OpenAsync();
+				using var reader = await command.ExecuteReaderAsync();
+				while (await reader.ReadAsync()) {
+					ret.Add(new TicketingScreen(bankName, (int) reader[ScreensConstants.SCREEN_ID], (string) reader[ScreensConstants.SCREEN_TITLE], (bool) reader[ScreensConstants.IS_ACTIVE]));
+				}
 
 				return ret;
 			}

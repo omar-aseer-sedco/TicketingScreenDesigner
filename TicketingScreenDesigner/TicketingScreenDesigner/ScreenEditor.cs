@@ -12,13 +12,10 @@ namespace TicketingScreenDesigner {
 	public partial class ScreenEditor : Form {
 		private const string TITLE_TEXT = "Screen Editor";
 
-		private readonly bool isNewScreen;
-		private readonly BankForm callingForm;
 		private readonly string bankName;
 		private readonly ScreenController screenController;
 		private readonly ButtonChangesListener buttonChangesListener;
 		private List<TicketingButton> buttons;
-		private bool alreadyAdded;
 
 		private enum StatusLabelStates {
 			UPDATING,
@@ -30,7 +27,6 @@ namespace TicketingScreenDesigner {
 			try {
 				InitializeComponent();
 				buttons = new List<TicketingButton>();
-				alreadyAdded = false;
 				HandleCreated += ScreenEditor_HandleCreated;
 			}
 			catch (Exception ex) {
@@ -39,21 +35,40 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public ScreenEditor(BankForm callingForm, string bankName) : this() {
+		public ScreenEditor(string bankName) : this() {
 			try {
 				Cursor.Current = Cursors.WaitCursor;
 
-				screenController = new ScreenController(out bool success, bankName);
-				if (!success) {
-					LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
-					MessageBox.Show("screeneditor Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					Cursor.Current = Cursors.Default;
-					Close();
+				screenController = new ScreenController(out InitializationStatus status, bankName);
+
+				switch (status) {
+					case InitializationStatus.FAILED_TO_CONNECT:
+						LogsHelper.Log("Error establishing database connection - ScreenEditor.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
+					case InitializationStatus.FILE_CORRUPTED:
+						LogsHelper.Log("Configuration file corrupted.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("The configuration file is corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
+					case InitializationStatus.FILE_NOT_FOUND:
+						LogsHelper.Log("Configration file not found", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("The configuration file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
+					case InitializationStatus.UNDEFINED_ERROR:
+						LogsHelper.Log("Error establishing database connection - ScreenEditor.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Failed to establish database connection due to an unexpected error.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
 				}
 
-				isNewScreen = true;
 				Text = TITLE_TEXT + " - New Screen";
-				this.callingForm = callingForm;
 				this.bankName = bankName;
 
 				Cursor.Current = Cursors.Default;
@@ -64,21 +79,40 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public ScreenEditor(BankForm callingForm, string bankName, TicketingScreen screen) : this() {
+		public ScreenEditor(string bankName, TicketingScreen screen) : this() {
 			try {
 				Cursor.Current = Cursors.WaitCursor;
 
-				screenController = new ScreenController(out bool success, bankName, screen.ScreenId, screen.ScreenTitle);
-				if (!success) {
-					LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
-					MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					Cursor.Current = Cursors.Default;
-					Close();
+				screenController = new ScreenController(out InitializationStatus status, bankName, screen.ScreenId, screen.ScreenTitle);
+
+				switch (status) {
+					case InitializationStatus.FAILED_TO_CONNECT:
+						LogsHelper.Log("Error establishing database connection - ScreenEditor.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
+					case InitializationStatus.FILE_CORRUPTED:
+						LogsHelper.Log("Configuration file corrupted.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("The configuration file is corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
+					case InitializationStatus.FILE_NOT_FOUND:
+						LogsHelper.Log("Configration file not found", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("The configuration file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
+					case InitializationStatus.UNDEFINED_ERROR:
+						LogsHelper.Log("Error establishing database connection - ScreenEditor.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Failed to establish database connection due to an unexpected error.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Cursor.Current = Cursors.Default;
+						Close();
+						break;
 				}
 
-				isNewScreen = false;
 				Text = TITLE_TEXT + " - " + screen.ScreenTitle;
-				this.callingForm = callingForm;
 				this.bankName = bankName;
 				FillInfo(screen);
 
@@ -204,11 +238,13 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private void AddButton() {
+		private async void AddButton() {
 			try {
-				var buttonEditor = new ButtonEditor(this, screenController);
+				var buttonEditor = new ButtonEditor(screenController);
 				if (!buttonEditor.IsDisposed)
 					buttonEditor.ShowDialog();
+				CheckIfScreenExists();
+				await UpdateButtonsListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -241,7 +277,6 @@ namespace TicketingScreenDesigner {
 				}
 
 				screenController.ScreenId = (int) screenId;
-				alreadyAdded = true;
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -269,7 +304,7 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		private async void saveButton_Click(object sender, EventArgs e) {
+		private void saveButton_Click(object sender, EventArgs e) {
 			try {
 				TrimInput();
 
@@ -278,26 +313,25 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				if (isNewScreen) {
-					if (!alreadyAdded) {
+				bool? screenExists = BankController.CheckIfScreenExists(bankName, screenController.ScreenId);
+
+				if (screenExists is null) {
+					LogsHelper.Log("Failed to access screen.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("Failed to access screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
+				if (screenController.ScreenId == -1) {
+					if (!(bool) screenExists) {
 						AddNewScreen();
 					}
 				}
 				else {
-					bool? screenExists = BankController.CheckIfScreenExists(bankName, screenController.ScreenId);
-
-					if (screenExists is null) {
-						LogsHelper.Log("Failed to access screen.", DateTime.Now, EventSeverity.Error);
-						MessageBox.Show("Failed to access screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-						return;
-					}
-
 					if ((bool) screenExists) {
 						UpdateCurrentScreen();
 					}
 					else {
 						MessageBox.Show("This screen no longer exists. It may have been deleted by another user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-						await callingForm.UpdateScreensListViewAsync();
 						Close();
 						return;
 					}
@@ -324,7 +358,6 @@ namespace TicketingScreenDesigner {
 					MessageBox.Show("Failed to commit changes. Please check for errors.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
-				await callingForm.UpdateScreensListViewAsync();
 
 				Close();
 			}
@@ -336,10 +369,10 @@ namespace TicketingScreenDesigner {
 
 		private bool IsDataChanged() {
 			TrimInput();
-			return screenController.GetPendingChangeCount() != 0 || (isNewScreen && screenTitleTextBox.Text != string.Empty) || (!isNewScreen && screenTitleTextBox.Text != screenController.ScreenTitle);
+			return screenController.GetPendingChangeCount() != 0 || (screenController.ScreenId == -1 && screenTitleTextBox.Text != string.Empty) || (screenController.ScreenId != -1 && screenTitleTextBox.Text != screenController.ScreenTitle);
 		}
 
-		private async void cancelButton_Click(object sender, EventArgs e) {
+		private void cancelButton_Click(object sender, EventArgs e) {
 			try {
 				if (IsDataChanged()) {
 					var confirmationResult = MessageBox.Show("Are you sure you want to quit? You will lose any unsaved changes.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -349,12 +382,19 @@ namespace TicketingScreenDesigner {
 					}
 				}
 
-				if (isNewScreen && alreadyAdded) {
+				bool? screenExists = BankController.CheckIfScreenExists(bankName, screenController.ScreenId);
+
+				if (screenExists is null) {
+					LogsHelper.Log("Failed to access screen.", DateTime.Now, EventSeverity.Error);
+					MessageBox.Show("Failed to access screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
+				if (screenController.ScreenId == -1 && (bool) screenExists) {
 					BankController.DeleteScreens(bankName, new List<int>() { screenController.ScreenId });
 				}
 
 				screenController.CancelPendingChanges();
-				await callingForm.UpdateScreensListViewAsync();
 				Close();
 			}
 			catch (Exception ex) {
@@ -464,7 +504,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				if (!isNewScreen && !(bool) screenExists) {
+				if (screenController.ScreenId != -1 && !(bool) screenExists) {
 					MessageBox.Show("This screen no longer exists. It may have been deleted by a different user.", "Nothing to do", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					screenController.CancelPendingChanges();
 					Close();
@@ -497,7 +537,6 @@ namespace TicketingScreenDesigner {
 
 				if (!(bool) screenExists) {
 					MessageBox.Show("This screen no longer exists. It may have been deleted by another user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					await callingForm.UpdateScreensListViewAsync();
 					Close();
 					return;
 				}
@@ -508,9 +547,11 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
-				var buttonEditor = new ButtonEditor(this, screenController, button);
+				var buttonEditor = new ButtonEditor(screenController, button);
 				if (!buttonEditor.IsDisposed)
 					buttonEditor.ShowDialog();
+				CheckIfScreenExists();
+				await UpdateButtonsListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);

@@ -1,4 +1,5 @@
 using DataAccessLayer.DataClasses;
+using DataAccessLayer.Constants;
 using LogUtils;
 using ExceptionUtils;
 using BusinessLogicLayer.Controllers;
@@ -10,10 +11,29 @@ namespace TicketingScreenDesigner {
 				InitializeComponent();
 				Show();
 
-				if (!LoginController.Initialize()) {
-					LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
-					MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					Environment.Exit(0);
+				var status = LoginController.Initialize();
+
+				switch (status) {
+					case InitializationStatus.FAILED_TO_CONNECT:
+						LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Error establishing database connection. The database may have been configured incorrectly, or you may not have access to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Environment.Exit(0);
+						break;
+					case InitializationStatus.FILE_CORRUPTED:
+						LogsHelper.Log("Configuration file corrupted.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("The configuration file is corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Environment.Exit(0);
+						break;
+					case InitializationStatus.FILE_NOT_FOUND:
+						LogsHelper.Log("Configration file not found", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("The configuration file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Environment.Exit(0);
+						break;
+					case InitializationStatus.UNDEFINED_ERROR:
+						LogsHelper.Log("Error establishing database connection - Login.", DateTime.Now, EventSeverity.Error);
+						MessageBox.Show("Failed to establish database connection due to an unexpected error.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Environment.Exit(0);
+						break;
 				}
 			}
 			catch (Exception ex) {
@@ -42,7 +62,7 @@ namespace TicketingScreenDesigner {
 
 				if ((bool) passwordCorrect) {
 					loginPasswordTextBox.Text = string.Empty;
-					var screens = await LoginController.GetScreensAsync(bankName);
+					var screens = await BankController.GetScreensAsync(bankName);
 
 					if (screens is null) {
 						LogsHelper.Log("Error retrieving bank information.", DateTime.Now, EventSeverity.Error);
@@ -55,7 +75,7 @@ namespace TicketingScreenDesigner {
 						bankForm.ShowDialog();
 				}
 				else {
-					MessageBox.Show("Your bank name or your password is incorrect. Please try again.", "Invalid credentials", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("Your bank name or your password is incorrect. Please try again.", "Invalid credentials", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
 			}

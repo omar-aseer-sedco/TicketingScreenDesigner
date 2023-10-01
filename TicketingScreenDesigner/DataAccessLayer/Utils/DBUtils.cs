@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using System.Text.Json;
 using LogUtils;
 using ExceptionUtils;
+using DataAccessLayer.Constants;
 
 namespace DataAccessLayer.Utils {
 	/// <summary>
@@ -17,7 +18,7 @@ namespace DataAccessLayer.Utils {
 		/// Creates an <c>SqlConnection</c> object. The connection data is obtained from a config file.
 		/// </summary>
 		/// <returns>The SqlConnection.</returns>
-		public static SqlConnection CreateConnection() {
+		public static SqlConnection? CreateConnection(out InitializationStatus result) {
 			try {
 				if (config is null) {
 					string configFilePath = Path.Join(Directory.GetCurrentDirectory(), "config", "DB_config.json");
@@ -52,40 +53,46 @@ namespace DataAccessLayer.Utils {
 					throw new Exception("Configuration information missing.");
 				}
 
-				return new SqlConnection(connectionString);
-			}
-			catch (ArgumentException ex) {
-				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error, ex.Source, ex.StackTrace));
-				throw;
+				var connection = new SqlConnection(connectionString);
+
+				result = InitializationStatus.SUCCESS;
+				return connection;
 			}
 			catch (Exception ex) when (ex is FileNotFoundException || ex is DirectoryNotFoundException) {
 				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error, ex.Source, ex.StackTrace));
-				throw;
+				result = InitializationStatus.FILE_NOT_FOUND;
+				return default;
 			}
-			catch (Exception ex) when (ex is SerializationException || ex is NullReferenceException || ex is JsonException) {
+			catch (Exception ex) when (ex is SerializationException || ex is NullReferenceException || ex is JsonException || ex is ArgumentException) {
 				LogsHelper.Log(new LogEvent(ex.Message, DateTime.Now, EventSeverity.Error, ex.Source, ex.StackTrace));
-				throw;
+				result = InitializationStatus.FILE_CORRUPTED;
+				return default;
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				throw;
+				result = InitializationStatus.FAILED_TO_CONNECT;
+				return default;
 			}
 		}
 
 		/// <summary>
 		/// Creates a connection and verifies that no errors occur opening it.
 		/// </summary>
-		/// <returns><c>true</c> if the connection can be established correctly, and <c>false</c> otherwise.</returns>
-		public static bool VerifyConnection() {
+		/// <returns>A value from the <InitializationStatus cref="InitializationStatus"/> enum.</returns>
+		public static InitializationStatus VerifyConnection() {
 			try {
-				using var connection = CreateConnection();
-				connection.Open();
+				using var connection = CreateConnection(out InitializationStatus status);
+				connection?.Open();
 
-				return true;
+				return status;
+			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex);
+				return InitializationStatus.FAILED_TO_CONNECT;
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				return false;
+				return InitializationStatus.UNDEFINED_ERROR;
 			}
 		}
 
@@ -96,7 +103,12 @@ namespace DataAccessLayer.Utils {
 		/// <returns>The number of rows affected by the operation.</returns>
 		public static int ExecuteNonQuery(SqlCommand command) {
 			try {
-				using var connection = CreateConnection();
+				using var connection = CreateConnection(out InitializationStatus status);
+
+				if (status != InitializationStatus.SUCCESS || connection is null) {
+					return -1;
+				}
+
 				command.Connection = connection;
 				connection.Open();
 
@@ -117,14 +129,21 @@ namespace DataAccessLayer.Utils {
 		/// </summary>
 		/// <param name="command">The command to execute.</param>
 		/// <param name="readerDelegate">A <c>ReaderDelegate</c> that gets executed on the reader.</param>
-		public static void ExecuteReader(SqlCommand command, ReaderDelegate readerDelegate) {
+		public static bool ExecuteReader(SqlCommand command, ReaderDelegate readerDelegate) {
 			try {
-				using var connection = CreateConnection();
+				using var connection = CreateConnection(out InitializationStatus status);
+
+				if (status != InitializationStatus.SUCCESS || connection is null) {
+					return false;
+				}
+
 				command.Connection = connection;
 				connection.Open();
 
 				using var reader = command.ExecuteReader();
 				readerDelegate(reader);
+
+				return true;
 			}
 			catch (SqlException ex) {
 				ExceptionHelper.HandleSqlException(ex);
@@ -132,6 +151,8 @@ namespace DataAccessLayer.Utils {
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -140,14 +161,21 @@ namespace DataAccessLayer.Utils {
 		/// <param name="command">The command to execute.</param>
 		/// <param name="readerDelegate">A <c>ReaderDelegate</c> that gets executed on the reader.</param>
 		/// <returns>A task representing the asynchronous operation.</returns>
-		public static async Task ExecuteReaderAsync(SqlCommand command, ReaderDelegate readerDelegate) {
+		public static async Task<bool> ExecuteReaderAsync(SqlCommand command, ReaderDelegate readerDelegate) {
 			try {
-				using var connection = CreateConnection();
+				using var connection = CreateConnection(out InitializationStatus status);
+
+				if (status != InitializationStatus.SUCCESS || connection is null) {
+					return false;
+				}
+
 				command.Connection = connection;
 				await connection.OpenAsync();
 
 				using var reader = await command.ExecuteReaderAsync();
 				readerDelegate(reader);
+
+				return true;
 			}
 			catch (SqlException ex) {
 				ExceptionHelper.HandleSqlException(ex);
@@ -155,6 +183,8 @@ namespace DataAccessLayer.Utils {
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -164,7 +194,12 @@ namespace DataAccessLayer.Utils {
 		/// <returns>The result of <c>command.ExecuteScalar</c> call.</returns>
 		public static object ExecuteScalar(SqlCommand command) {
 			try {
-				using var connection = CreateConnection();
+				using var connection = CreateConnection(out InitializationStatus status);
+
+				if (status != InitializationStatus.SUCCESS || connection is null) {
+					return false;
+				}
+
 				command.Connection = connection;
 				connection.Open();
 
@@ -177,7 +212,7 @@ namespace DataAccessLayer.Utils {
 				ExceptionHelper.HandleGeneralException(ex);
 			}
 
-			return -1;
+			return false;
 		}
 	}
 }

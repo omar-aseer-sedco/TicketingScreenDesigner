@@ -15,13 +15,17 @@ namespace DataAccessLayer.DBOperations {
 		/// Verifies that the database connection is established correctly.
 		/// </summary>
 		/// <returns><c>true</c> if the connection has been established properly, and <c>false</c> otherwise.</returns>
-		public static bool VerifyConnection() {
+		public static InitializationStatus VerifyConnection() {
 			try {
 				return DBUtils.VerifyConnection();
 			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex);
+				return InitializationStatus.FAILED_TO_CONNECT;
+			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				return false;
+				return InitializationStatus.UNDEFINED_ERROR;
 			}
 		}
 
@@ -240,29 +244,35 @@ namespace DataAccessLayer.DBOperations {
 				var command = new SqlCommand(query);
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ButtonsConstants.BANK_NAME_SIZE).Value = bankName;
 				command.Parameters.Add("@screenId", SqlDbType.Int).Value = screenId;
+				command.CommandTimeout = 0;
 
-				await DBUtils.ExecuteReaderAsync(command, async reader => {
-					while (await reader.ReadAsync()) {
-						int buttonId = (int) reader[ButtonsConstants.BUTTON_ID];
-						string nameEn = (string) reader[ButtonsConstants.NAME_EN];
-						string nameAr = (string) reader[ButtonsConstants.NAME_AR];
-						ButtonsConstants.Types type = (ButtonsConstants.Types) reader[ButtonsConstants.TYPE];
+				using var connection = DBUtils.CreateConnection(out var status);
+				if (status != InitializationStatus.SUCCESS || connection is null)
+					return default;
 
-						if (type == ButtonsConstants.Types.ISSUE_TICKET) {
-							string service = (string) reader[ButtonsConstants.SERVICE];
+				command.Connection = connection;
 
-							buttons.Add(new IssueTicketButton(bankName, screenId, buttonId, type, nameEn, nameAr, service));
-						}
-						else if (type == ButtonsConstants.Types.SHOW_MESSAGE) {
-							string messageEn = (string) reader[ButtonsConstants.MESSAGE_EN];
-							string messageAr = (string) reader[ButtonsConstants.MESSAGE_AR];
+				await connection.OpenAsync();
+				using var reader = await command.ExecuteReaderAsync();
 
-							buttons.Add(new ShowMessageButton(bankName, screenId, buttonId, type, nameEn, nameAr, messageEn, messageAr));
-						}
+				while (await reader.ReadAsync()) {
+					int buttonId = (int) reader[ButtonsConstants.BUTTON_ID];
+					string nameEn = (string) reader[ButtonsConstants.NAME_EN];
+					string nameAr = (string) reader[ButtonsConstants.NAME_AR];
+					ButtonsConstants.Types type = (ButtonsConstants.Types) reader[ButtonsConstants.TYPE];
+
+					if (type == ButtonsConstants.Types.ISSUE_TICKET) {
+						string service = (string) reader[ButtonsConstants.SERVICE];
+
+						buttons.Add(new IssueTicketButton(bankName, screenId, buttonId, type, nameEn, nameAr, service));
 					}
+					else if (type == ButtonsConstants.Types.SHOW_MESSAGE) {
+						string messageEn = (string) reader[ButtonsConstants.MESSAGE_EN];
+						string messageAr = (string) reader[ButtonsConstants.MESSAGE_AR];
 
-					reader.Close();
-				});
+						buttons.Add(new ShowMessageButton(bankName, screenId, buttonId, type, nameEn, nameAr, messageEn, messageAr));
+					}
+				}
 
 				return buttons;
 			}

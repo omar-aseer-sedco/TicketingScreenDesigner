@@ -32,7 +32,11 @@ namespace DataAccessLayer.Listeners {
 		/// </summary>
 		public SqlListener() {
 			try {
-				connection = DBUtils.CreateConnection();
+				connection = DBUtils.CreateConnection(out InitializationStatus status);
+
+				if (status != InitializationStatus.SUCCESS || connection is null) {
+					throw new Exception("Failed to create connection. Error: " + Enum.GetName(status));
+				}
 			}
 			catch (Exception ex) {
 				LogsHelper.Log("SqlListener - Failed to create connection.", DateTime.Now, EventSeverity.Error);

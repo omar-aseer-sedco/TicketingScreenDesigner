@@ -17,13 +17,17 @@ namespace DataAccessLayer.DBOperations {
 		/// Verifies that the database connection is established correctly.
 		/// </summary>
 		/// <returns><c>true</c> if the connection has been established properly, and <c>false</c> otherwise.</returns>
-		public static bool VerifyConnection() {
+		public static InitializationStatus VerifyConnection() {
 			try {
 				return DBUtils.VerifyConnection();
 			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex);
+				return InitializationStatus.FAILED_TO_CONNECT;
+			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
-				return false;
+				return InitializationStatus.UNDEFINED_ERROR;
 			}
 		}
 
@@ -68,7 +72,11 @@ namespace DataAccessLayer.DBOperations {
 			SqlTransaction? transaction = null;
 
 			try {
-				using var connection = DBUtils.CreateConnection();
+				using var connection = DBUtils.CreateConnection(out InitializationStatus status);
+
+				if (status != InitializationStatus.SUCCESS || connection is null) {
+					return default;
+				}
 
 				var success = new Dictionary<int, bool>();
 				if (buttonsToAdd.Count == 0 && buttonsToUpdate.Count == 0 && buttonsToDelete.Count == 0)
