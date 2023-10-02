@@ -7,9 +7,12 @@ using ExceptionUtils;
 using System.Data.SqlClient;
 using BusinessLogicLayer.Listeners;
 using BusinessLogicLayer.Controllers;
+using System.Windows.Forms;
 
 namespace TicketingScreenDesigner {
 	public partial class ScreenEditor : Form {
+		public DialogResult Result { get; private set; }
+
 		private const string TITLE_TEXT = "Screen Editor";
 
 		private readonly string bankName;
@@ -149,10 +152,12 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public async Task UpdateButtonsListViewAsync() {
+		private async Task UpdateButtonsListViewAsync() {
 			try {
-				if (IsHandleCreated)
-					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
+				if (!IsHandleCreated)
+					return;
+
+				BeginInvoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
 
 				List<TicketingButton>? screenButtons = await screenController.GetAllButtonsAsync();
 
@@ -164,28 +169,35 @@ namespace TicketingScreenDesigner {
 
 				buttons = screenButtons;
 
-				if (IsHandleCreated)
-					Invoke(new MethodInvoker(() => AddButtonsToListView(buttons)));
+				BeginInvoke(new MethodInvoker(() => buttonsListView.Items.Clear()));
 
-				if (IsHandleCreated)
-					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
+				const int CHUNK_SIZE = 100;
+
+				for (int i = 0; i < buttons.Count; i += CHUNK_SIZE) {
+					List<TicketingButton> chunk = buttons.GetRange(i, CHUNK_SIZE);
+
+					await Task.Delay(1);
+
+					BeginInvoke(new MethodInvoker(() => {
+						foreach (var button in chunk) {
+							AddButtonToListView(button);
+						}
+					}));
+				}
+
+				BeginInvoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
 			}
 			catch (ObjectDisposedException ex) {
+				LogsHelper.Log(ex.Message, DateTime.Now, EventSeverity.Warning);
+			}
+			catch (InvalidOperationException ex) {
 				LogsHelper.Log(ex.Message, DateTime.Now, EventSeverity.Warning);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 				if (IsHandleCreated)
-					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
+					BeginInvoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
 				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-
-		private void AddButtonsToListView(List<TicketingButton> buttonsToAdd) {
-			buttonsListView.Items.Clear();
-
-			foreach (var button in buttonsToAdd) {
-				AddButtonToListView(button);
 			}
 		}
 
@@ -244,7 +256,8 @@ namespace TicketingScreenDesigner {
 				if (!buttonEditor.IsDisposed)
 					buttonEditor.ShowDialog();
 				CheckIfScreenExists();
-				await UpdateButtonsListViewAsync();
+				if (buttonEditor.Result == DialogResult.OK)
+					await UpdateButtonsListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -359,6 +372,7 @@ namespace TicketingScreenDesigner {
 					return;
 				}
 
+				Result = DialogResult.OK;
 				Close();
 			}
 			catch (Exception ex) {
@@ -395,6 +409,7 @@ namespace TicketingScreenDesigner {
 				}
 
 				screenController.CancelPendingChanges();
+				Result = DialogResult.Cancel;
 				Close();
 			}
 			catch (Exception ex) {
@@ -551,7 +566,8 @@ namespace TicketingScreenDesigner {
 				if (!buttonEditor.IsDisposed)
 					buttonEditor.ShowDialog();
 				CheckIfScreenExists();
-				await UpdateButtonsListViewAsync();
+				if (buttonEditor.Result == DialogResult.OK)
+					await UpdateButtonsListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);

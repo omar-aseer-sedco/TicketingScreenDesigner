@@ -14,7 +14,6 @@ namespace TicketingScreenDesigner {
 
 		private readonly string bankName;
 		private readonly ScreenChangesListener screenChangesListener;
-
 		private List<TicketingScreen> screens;
 
 		private enum StatusLabelStates {
@@ -121,7 +120,8 @@ namespace TicketingScreenDesigner {
 				var screenEditor = new ScreenEditor(bankName);
 				if (!screenEditor.IsDisposed)
 					screenEditor.ShowDialog();
-				await UpdateScreensListViewAsync();
+				if (screenEditor.Result == DialogResult.OK)
+					await UpdateScreensListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
@@ -139,12 +139,12 @@ namespace TicketingScreenDesigner {
 			}
 		}
 
-		public async Task UpdateScreensListViewAsync() {
+		private async Task UpdateScreensListViewAsync() {
 			try {
 				if (!IsHandleCreated)
 					return;
 
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
+				BeginInvoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UPDATING)));
 
 				List<TicketingScreen>? bankScreens = await BankController.GetScreensAsync(bankName);
 
@@ -155,19 +155,49 @@ namespace TicketingScreenDesigner {
 				}
 
 				screens = bankScreens;
-				Invoke(new MethodInvoker(() => AddScreensToListView(screens)));
 
-				Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
+				BeginInvoke(new MethodInvoker(() => screensListView.Items.Clear()));
 
-				Invoke(UpdateFormButtonActivation);
+				const int CHUNK_SIZE = 100;
+
+				for (int i = 0; i < screens.Count; i += CHUNK_SIZE) {
+					List<TicketingScreen> chunk = screens.GetRange(i, CHUNK_SIZE);
+
+					await Task.Delay(1);
+
+					BeginInvoke(new MethodInvoker(() => {
+						foreach (var screen in chunk) {
+							ListViewItem row = new() {
+								Name = ScreensConstants.SCREEN_TITLE,
+								Text = screen.ScreenTitle
+							};
+
+							ListViewItem.ListViewSubItem isActive = new() {
+								Name = ScreensConstants.IS_ACTIVE,
+								Text = screen.IsActive ? "Yes" : "No"
+							};
+							row.SubItems.Add(isActive);
+
+							row.Tag = screen.ScreenId;
+							screensListView.Items.Add(row);
+						}
+					}));
+				}
+
+				BeginInvoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
+
+				BeginInvoke(UpdateFormButtonActivation);
 			}
 			catch (ObjectDisposedException ex) {
+				LogsHelper.Log(ex.Message, DateTime.Now, EventSeverity.Warning);
+			}
+			catch (InvalidOperationException ex) {
 				LogsHelper.Log(ex.Message, DateTime.Now, EventSeverity.Warning);
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);
 				if (IsHandleCreated)
-					Invoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
+					BeginInvoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.ERROR)));
 				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -183,26 +213,6 @@ namespace TicketingScreenDesigner {
 				case StatusLabelStates.ERROR:
 					statusLabel.Text = "An error has occurred.";
 					break;
-			}
-		}
-
-		private void AddScreensToListView(List<TicketingScreen> screensToAdd) {
-			screensListView.Items.Clear();
-
-			foreach (var screen in screensToAdd) {
-				ListViewItem row = new() {
-					Name = ScreensConstants.SCREEN_TITLE,
-					Text = screen.ScreenTitle
-				};
-
-				ListViewItem.ListViewSubItem isActive = new() {
-					Name = ScreensConstants.IS_ACTIVE,
-					Text = screen.IsActive ? "Yes" : "No"
-				};
-				row.SubItems.Add(isActive);
-
-				row.Tag = screen.ScreenId;
-				screensListView.Items.Add(row);
 			}
 		}
 
@@ -236,7 +246,8 @@ namespace TicketingScreenDesigner {
 				var screenEditor = new ScreenEditor(bankName, screen);
 				if (!screenEditor.IsDisposed)
 					screenEditor.ShowDialog();
-				await UpdateScreensListViewAsync();
+				if (screenEditor.Result == DialogResult.OK)
+					await UpdateScreensListViewAsync();
 			}
 			catch (Exception ex) {
 				ExceptionHelper.HandleGeneralException(ex);

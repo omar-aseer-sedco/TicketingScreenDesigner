@@ -171,38 +171,6 @@ namespace DataAccessLayer.Utils {
 		}
 
 		/// <summary>
-		/// Calls <c>ExecuteReaderAsync</c> using the given command. The delegate is then executed on the reader.
-		/// </summary>
-		/// <param name="command">The command to execute.</param>
-		/// <param name="readerDelegate">A <c>ReaderDelegate</c> that gets executed on the reader.</param>
-		/// <returns>A task representing the asynchronous operation.</returns>
-		public static async Task<bool> ExecuteReaderAsync(SqlCommand command, ReaderDelegate readerDelegate) {
-			try {
-				using var connection = CreateConnection(out InitializationStatus status);
-
-				if (status != InitializationStatus.SUCCESS || connection is null) {
-					return false;
-				}
-
-				command.Connection = connection;
-				await connection.OpenAsync();
-
-				using var reader = await command.ExecuteReaderAsync();
-				readerDelegate(reader);
-
-				return true;
-			}
-			catch (SqlException ex) {
-				ExceptionHelper.HandleSqlException(ex);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-			}
-
-			return false;
-		}
-
-		/// <summary>
 		/// Calls <c>ExecuteScalar</c> using the given command.
 		/// </summary>
 		/// <param name="command">The command to execute.</param>

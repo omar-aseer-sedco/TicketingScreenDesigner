@@ -8,6 +8,8 @@ using BusinessLogicLayer.Controllers;
 
 namespace TicketingScreenDesigner {
 	public partial class ButtonEditor : Form {
+		public DialogResult Result { get; private set; }
+
 		private const string TITLE_TEXT = "Button Editor";
 		private const int DEFAULT_PANEL_POSITION_Y = 95;
 		private const int MINIMUM_HEIGHT_ISSUE_TICKET = 206;
@@ -163,7 +165,7 @@ namespace TicketingScreenDesigner {
 				ButtonsConstants.Types type = typeComboBox.SelectedIndex == (int) TypeIndex.ISSUE_TICKET ? ButtonsConstants.Types.ISSUE_TICKET : ButtonsConstants.Types.SHOW_MESSAGE;
 				string nameEn = nameEnTextBox.Text;
 				string nameAr = nameArTextBox.Text;
-
+				
 				TicketingButton newButton;
 				if (type == ButtonsConstants.Types.ISSUE_TICKET) {
 					string service = serviceTextBox.Text;
@@ -203,6 +205,7 @@ namespace TicketingScreenDesigner {
 					screenController.UpdateButtonCancellable(button.ButtonId, newButton);
 				}
 
+				Result = DialogResult.OK;
 				Close();
 			}
 			catch (Exception ex) {
@@ -221,6 +224,7 @@ namespace TicketingScreenDesigner {
 					}
 				}
 
+				Result = DialogResult.Cancel;
 				Close();
 			}
 			catch (Exception ex) {
