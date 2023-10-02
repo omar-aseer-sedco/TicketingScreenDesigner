@@ -7,7 +7,7 @@ using ExceptionUtils;
 using System.Data.SqlClient;
 using BusinessLogicLayer.Listeners;
 using BusinessLogicLayer.Controllers;
-using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace TicketingScreenDesigner {
 	public partial class ScreenEditor : Form {
@@ -171,19 +171,76 @@ namespace TicketingScreenDesigner {
 
 				BeginInvoke(new MethodInvoker(() => buttonsListView.Items.Clear()));
 
-				const int CHUNK_SIZE = 100;
+				//const int CHUNK_SIZE = 100;
 
-				for (int i = 0; i < buttons.Count; i += CHUNK_SIZE) {
-					List<TicketingButton> chunk = buttons.GetRange(i, CHUNK_SIZE);
+				//for (int i = 0; i < buttons.Count; i += CHUNK_SIZE) {
+				//	List<TicketingButton> chunk = buttons.GetRange(i, CHUNK_SIZE);
 
-					await Task.Delay(1);
+				//	await Task.Run(() => {
+				//		BeginInvoke(new MethodInvoker(() => {
+				//			foreach (var button in chunk) {
+				//				ListViewItem row = new() {
+				//					Name = ButtonsConstants.NAME_EN,
+				//					Text = button.NameEn
+				//				};
 
-					BeginInvoke(new MethodInvoker(() => {
-						foreach (var button in chunk) {
-							AddButtonToListView(button);
-						}
-					}));
-				}
+				//				ListViewItem.ListViewSubItem buttonType = new() {
+				//					Name = ButtonsConstants.TYPE,
+				//					Text = button.Type == ButtonsConstants.Types.ISSUE_TICKET ? "Issue Ticket" : "Show Message"
+				//				};
+				//				row.SubItems.Add(buttonType);
+
+				//				ListViewItem.ListViewSubItem buttonService = new() {
+				//					Name = ButtonsConstants.SERVICE,
+				//					Text = button is IssueTicketButton issueTicketButton ? issueTicketButton.Service : string.Empty
+				//				};
+				//				row.SubItems.Add(buttonService);
+
+				//				ListViewItem.ListViewSubItem buttonMessageEn = new() {
+				//					Name = ButtonsConstants.MESSAGE_EN,
+				//					Text = button is ShowMessageButton showMessageButton ? showMessageButton.MessageEn : string.Empty
+				//				};
+				//				row.SubItems.Add(buttonMessageEn);
+
+				//				row.Tag = button;
+
+				//				buttonsListView.Items.Add(row);
+				//			}
+				//		}));
+				//	});
+				//}
+
+				List<ListViewItem> listViewItems = new();
+				await Task.Run(() => {
+					foreach (var button in buttons) {
+						ListViewItem row = new() {
+							Name = ButtonsConstants.NAME_EN,
+							Text = button.NameEn
+						};
+
+						ListViewItem.ListViewSubItem buttonType = new() {
+							Name = ButtonsConstants.TYPE,
+							Text = button.Type == ButtonsConstants.Types.ISSUE_TICKET ? "Issue Ticket" : "Show Message"
+						};
+						row.SubItems.Add(buttonType);
+
+						ListViewItem.ListViewSubItem buttonService = new() {
+							Name = ButtonsConstants.SERVICE,
+							Text = button is IssueTicketButton issueTicketButton ? issueTicketButton.Service : string.Empty
+						};
+						row.SubItems.Add(buttonService);
+
+						ListViewItem.ListViewSubItem buttonMessageEn = new() {
+							Name = ButtonsConstants.MESSAGE_EN,
+							Text = button is ShowMessageButton showMessageButton ? showMessageButton.MessageEn : string.Empty
+						};
+						row.SubItems.Add(buttonMessageEn);
+
+						row.Tag = button;
+						listViewItems.Add(row);
+					}
+				});
+				BeginInvoke(new MethodInvoker(() => buttonsListView.Items.AddRange(listViewItems.ToArray())));
 
 				BeginInvoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
 			}
@@ -212,41 +269,6 @@ namespace TicketingScreenDesigner {
 				case StatusLabelStates.ERROR:
 					statusLabel.Text = "An error has occurred.";
 					break;
-			}
-		}
-
-		private void AddButtonToListView(TicketingButton button) {
-			try {
-				ListViewItem row = new() {
-					Name = ButtonsConstants.NAME_EN,
-					Text = button.NameEn
-				};
-
-				ListViewItem.ListViewSubItem buttonType = new() {
-					Name = ButtonsConstants.TYPE,
-					Text = button.Type == ButtonsConstants.Types.ISSUE_TICKET ? "Issue Ticket" : "Show Message"
-				};
-				row.SubItems.Add(buttonType);
-
-				ListViewItem.ListViewSubItem buttonService = new() {
-					Name = ButtonsConstants.SERVICE,
-					Text = button is IssueTicketButton issueTicketButton ? issueTicketButton.Service : string.Empty
-				};
-				row.SubItems.Add(buttonService);
-
-				ListViewItem.ListViewSubItem buttonMessageEn = new() {
-					Name = ButtonsConstants.MESSAGE_EN,
-					Text = button is ShowMessageButton showMessageButton ? showMessageButton.MessageEn : string.Empty
-				};
-				row.SubItems.Add(buttonMessageEn);
-
-				row.Tag = button;
-
-				buttonsListView.Items.Add(row);
-			}
-			catch (Exception ex) {
-				ExceptionHelper.HandleGeneralException(ex);
-				MessageBox.Show(ErrorMessages.UNEXPECTED_ERROR_MESSAGE, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
