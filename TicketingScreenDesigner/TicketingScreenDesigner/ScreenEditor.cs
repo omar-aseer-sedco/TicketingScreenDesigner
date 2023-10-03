@@ -169,49 +169,10 @@ namespace TicketingScreenDesigner {
 
 				buttons = screenButtons;
 
-				BeginInvoke(new MethodInvoker(() => buttonsListView.Items.Clear()));
-
-				//const int CHUNK_SIZE = 100;
-
-				//for (int i = 0; i < buttons.Count; i += CHUNK_SIZE) {
-				//	List<TicketingButton> chunk = buttons.GetRange(i, CHUNK_SIZE);
-
-				//	await Task.Run(() => {
-				//		BeginInvoke(new MethodInvoker(() => {
-				//			foreach (var button in chunk) {
-				//				ListViewItem row = new() {
-				//					Name = ButtonsConstants.NAME_EN,
-				//					Text = button.NameEn
-				//				};
-
-				//				ListViewItem.ListViewSubItem buttonType = new() {
-				//					Name = ButtonsConstants.TYPE,
-				//					Text = button.Type == ButtonsConstants.Types.ISSUE_TICKET ? "Issue Ticket" : "Show Message"
-				//				};
-				//				row.SubItems.Add(buttonType);
-
-				//				ListViewItem.ListViewSubItem buttonService = new() {
-				//					Name = ButtonsConstants.SERVICE,
-				//					Text = button is IssueTicketButton issueTicketButton ? issueTicketButton.Service : string.Empty
-				//				};
-				//				row.SubItems.Add(buttonService);
-
-				//				ListViewItem.ListViewSubItem buttonMessageEn = new() {
-				//					Name = ButtonsConstants.MESSAGE_EN,
-				//					Text = button is ShowMessageButton showMessageButton ? showMessageButton.MessageEn : string.Empty
-				//				};
-				//				row.SubItems.Add(buttonMessageEn);
-
-				//				row.Tag = button;
-
-				//				buttonsListView.Items.Add(row);
-				//			}
-				//		}));
-				//	});
-				//}
-
-				List<ListViewItem> listViewItems = new();
 				await Task.Run(() => {
+					BeginInvoke(new MethodInvoker(() => buttonsListView.Items.Clear()));
+
+					List<ListViewItem> listViewItems = new();
 					foreach (var button in buttons) {
 						ListViewItem row = new() {
 							Name = ButtonsConstants.NAME_EN,
@@ -239,8 +200,9 @@ namespace TicketingScreenDesigner {
 						row.Tag = button;
 						listViewItems.Add(row);
 					}
+
+					BeginInvoke(new MethodInvoker(() => buttonsListView.Items.AddRange(listViewItems.ToArray())));
 				});
-				BeginInvoke(new MethodInvoker(() => buttonsListView.Items.AddRange(listViewItems.ToArray())));
 
 				BeginInvoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
 			}

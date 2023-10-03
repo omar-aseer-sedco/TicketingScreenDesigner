@@ -156,36 +156,10 @@ namespace TicketingScreenDesigner {
 
 				screens = bankScreens;
 
-				BeginInvoke(new MethodInvoker(() => screensListView.Items.Clear()));
-
-				//const int CHUNK_SIZE = 100;
-
-				//for (int i = 0; i < screens.Count; i += CHUNK_SIZE) {
-				//	List<TicketingScreen> chunk = screens.GetRange(i, CHUNK_SIZE);
-
-				//	await Task.Run(() => {
-				//		BeginInvoke(new MethodInvoker(() => {
-				//			foreach (var screen in chunk) {
-				//				ListViewItem row = new() {
-				//					Name = ScreensConstants.SCREEN_TITLE,
-				//					Text = screen.ScreenTitle
-				//				};
-
-				//				ListViewItem.ListViewSubItem isActive = new() {
-				//					Name = ScreensConstants.IS_ACTIVE,
-				//					Text = screen.IsActive ? "Yes" : "No"
-				//				};
-				//				row.SubItems.Add(isActive);
-
-				//				row.Tag = screen.ScreenId;
-				//				screensListView.Items.Add(row);
-				//			}
-				//		}));
-				//	});
-				//}
-
-				List<ListViewItem> listViewItems = new();
 				await Task.Run(() => {
+					BeginInvoke(new MethodInvoker(() => screensListView.Items.Clear()));
+					
+					List<ListViewItem> listViewItems = new();
 					foreach (var screen in screens) {
 						ListViewItem row = new() {
 							Name = ScreensConstants.SCREEN_TITLE,
@@ -201,8 +175,9 @@ namespace TicketingScreenDesigner {
 						row.Tag = screen.ScreenId;
 						listViewItems.Add(row);
 					}
+
+					BeginInvoke(new MethodInvoker(() => screensListView.Items.AddRange(listViewItems.ToArray())));
 				});
-				BeginInvoke(new MethodInvoker(() => screensListView.Items.AddRange(listViewItems.ToArray())));
 
 				BeginInvoke(new MethodInvoker(() => UpdateStatusLabel(StatusLabelStates.UP_TO_DATE)));
 
