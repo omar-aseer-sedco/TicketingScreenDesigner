@@ -8,8 +8,8 @@ namespace DataAccessLayer.DataClasses {
 			ServiceId = 0;
 		}
 
-		public IssueTicketButton(string bankName, int screenId, int buttonId, ButtonsConstants.Types type, string nameEn, string nameAr, int service) : base(bankName, screenId, buttonId, type, nameEn, nameAr) {
-			ServiceId = service;
+		public IssueTicketButton(string bankName, int screenId, int buttonId, ButtonsConstants.Types type, string nameEn, string nameAr, int serviceId) : base(bankName, screenId, buttonId, type, nameEn, nameAr) {
+			ServiceId = serviceId;
 		}
 	}
 }

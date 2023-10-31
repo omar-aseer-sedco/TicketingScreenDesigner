@@ -178,7 +178,7 @@ namespace DataAccessLayer.DBOperations {
 		/// Gets all the services for a given bank name.
 		/// </summary>
 		/// <param name="bankName">The name of the bank.</param>
-		/// <returns>An <c>IEnumerable</c> of the services of the bank.</returns>
+		/// <returns>A list of the services of the bank. If the operation fails, <c>null</c> is returned.</returns>
 		public static List<BankService>? GetServices(string bankName) {
 			try {
 				string query = $"SELECT * FROM {BankServicesConstants.TABLE_NAME} WHERE {BankServicesConstants.BANK_NAME} = @bankName;";
@@ -223,7 +223,13 @@ namespace DataAccessLayer.DBOperations {
 			return default;
 		}
 
-		public static BankService? GetService(string bankName, int serviceId) {
+        /// <summary>
+        /// Gets the service with the given bank name and ID.
+        /// </summary>
+        /// <param name="bankName">The name of the bank.</param>
+        /// <param name="serviceId">The ID of the service.</param>
+        /// <returns>A <c>BankService</c> object representing the service. If the operation fails, <c>null</c> is returned.</returns>
+        public static BankService? GetService(string bankName, int serviceId) {
 			try {
                 string query = $"SELECT * FROM {BankServicesConstants.TABLE_NAME} WHERE {BankServicesConstants.BANK_NAME} = @bankName AND {BankServicesConstants.BANK_SERVICE_ID} = @bankServiceId;";
                 var command = new SqlCommand(query);

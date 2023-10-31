@@ -287,6 +287,10 @@ namespace BusinessLogicLayer.Controllers {
 			return pendingIndex;
 		}
 
+		/// <summary>
+		/// Gets all the services for the bank.
+		/// </summary>
+		/// <returns>A list of services for the bank. If the operation fails, <c>null</c> is returned.</returns>
 		public List<BankService>? GetServices() {
 			try {
 				return BankOperations.GetServices(BankName);
@@ -297,6 +301,11 @@ namespace BusinessLogicLayer.Controllers {
 			}
 		}
 
+		/// <summary>
+		/// Gets the service with the specified ID.
+		/// </summary>
+		/// <param name="serviceId">The ID of the service.</param>
+		/// <returns>A <c>BankService</c> object representing the service. If the operation fails, <c>null</c> is returned.</returns>
 		public BankService? GetService(int serviceId) {
 			try {
 				return BankOperations.GetService(BankName, serviceId);
