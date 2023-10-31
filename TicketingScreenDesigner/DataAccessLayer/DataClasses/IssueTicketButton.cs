@@ -2,14 +2,14 @@
 
 namespace DataAccessLayer.DataClasses {
 	public class IssueTicketButton : TicketingButton {
-		public string Service { get; set; }
+		public int ServiceId { get; set; }
 
 		public IssueTicketButton() : base() { 
-			Service = string.Empty;
+			ServiceId = 0;
 		}
 
-		public IssueTicketButton(string bankName, int screenId, int buttonId, ButtonsConstants.Types type, string nameEn, string nameAr, string service) : base(bankName, screenId, buttonId, type, nameEn, nameAr) {
-			Service = service;
+		public IssueTicketButton(string bankName, int screenId, int buttonId, ButtonsConstants.Types type, string nameEn, string nameAr, int service) : base(bankName, screenId, buttonId, type, nameEn, nameAr) {
+			ServiceId = service;
 		}
 	}
 }

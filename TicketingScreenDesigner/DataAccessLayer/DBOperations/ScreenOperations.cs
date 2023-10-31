@@ -246,7 +246,7 @@ namespace DataAccessLayer.DBOperations {
 			try {
 				var buttons = new List<TicketingButton>();
 
-				string query = $"SELECT {ButtonsConstants.BUTTON_ID}, {ButtonsConstants.NAME_EN}, {ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN}, " +
+				string query = $"SELECT {ButtonsConstants.BUTTON_ID}, {ButtonsConstants.NAME_EN}, {ButtonsConstants.NAME_AR}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE_ID}, {ButtonsConstants.MESSAGE_EN}, " +
 					$"{ButtonsConstants.MESSAGE_AR} FROM {ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId";
 				var command = new SqlCommand(query);
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, ButtonsConstants.BANK_NAME_SIZE).Value = bankName;
@@ -269,9 +269,9 @@ namespace DataAccessLayer.DBOperations {
 					ButtonsConstants.Types type = (ButtonsConstants.Types) reader[ButtonsConstants.TYPE];
 
 					if (type == ButtonsConstants.Types.ISSUE_TICKET) {
-						string service = (string) reader[ButtonsConstants.SERVICE];
+						int serviceId = reader[ButtonsConstants.SERVICE_ID] == DBNull.Value ? 0 : (int) reader[ButtonsConstants.SERVICE_ID];
 
-						buttons.Add(new IssueTicketButton(bankName, screenId, buttonId, type, nameEn, nameAr, service));
+						buttons.Add(new IssueTicketButton(bankName, screenId, buttonId, type, nameEn, nameAr, serviceId));
 					}
 					else if (type == ButtonsConstants.Types.SHOW_MESSAGE) {
 						string messageEn = (string) reader[ButtonsConstants.MESSAGE_EN];

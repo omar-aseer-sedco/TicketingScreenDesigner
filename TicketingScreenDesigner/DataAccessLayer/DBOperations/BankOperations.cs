@@ -173,5 +173,98 @@ namespace DataAccessLayer.DBOperations {
 
 			return false;
 		}
+
+		/// <summary>
+		/// Gets all the services for a given bank name.
+		/// </summary>
+		/// <param name="bankName">The name of the bank.</param>
+		/// <returns>An <c>IEnumerable</c> of the services of the bank.</returns>
+		public static List<BankService>? GetServices(string bankName) {
+			try {
+				string query = $"SELECT * FROM {BankServicesConstants.TABLE_NAME} WHERE {BankServicesConstants.BANK_NAME} = @bankName;";
+				var command = new SqlCommand(query);
+				command.Parameters.Add("@bankName", SqlDbType.VarChar, BankServicesConstants.BANK_NAME_SIZE).Value = bankName;
+
+				List<BankService> bankServices = new List<BankService>();
+				DBUtils.ExecuteReader(command, (reader) => {
+					while (reader.Read()) {
+						int bankServiceId = (int) reader[BankServicesConstants.BANK_SERVICE_ID];
+						string nameEn = (string) reader[BankServicesConstants.NAME_EN];
+						string nameAr = (string) reader[BankServicesConstants.NAME_AR];
+						bool active = (bool) reader[BankServicesConstants.ACTIVE];
+						int maxDailyTickets = (int) reader[BankServicesConstants.MAX_DAILY_TICKETS];
+						int minServiceTime = (int) reader[BankServicesConstants.MIN_SERVICE_TIME];
+						int maxServiceTime = (int) reader[BankServicesConstants.MAX_SERVICE_TIME];
+
+						bankServices.Add(new BankService() {
+							BankName = bankName,
+							BankServiceId = bankServiceId,
+							NameEn = nameEn,
+							NameAr = nameAr,
+							Active = active,
+							MaxDailyTickets = maxDailyTickets,
+							MinServiceTime = minServiceTime,
+							MaxServiceTime = maxServiceTime,
+						});
+					}
+
+					reader.Close();
+				});
+
+				return bankServices;
+			}
+			catch (SqlException ex) {
+				ExceptionHelper.HandleSqlException(ex);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+			}
+
+			return default;
+		}
+
+		public static BankService? GetService(string bankName, int serviceId) {
+			try {
+                string query = $"SELECT * FROM {BankServicesConstants.TABLE_NAME} WHERE {BankServicesConstants.BANK_NAME} = @bankName AND {BankServicesConstants.BANK_SERVICE_ID} = @bankServiceId;";
+                var command = new SqlCommand(query);
+                command.Parameters.Add("@bankName", SqlDbType.VarChar, BankServicesConstants.BANK_NAME_SIZE).Value = bankName;
+                command.Parameters.Add("@bankServiceId", SqlDbType.Int).Value = serviceId;
+
+                BankService? bankService = null;
+                DBUtils.ExecuteReader(command, (reader) => {
+                    if (reader.Read()) {
+                        string nameEn = (string) reader[BankServicesConstants.NAME_EN];
+                        string nameAr = (string) reader[BankServicesConstants.NAME_AR];
+                        bool active = (bool) reader[BankServicesConstants.ACTIVE];
+                        int maxDailyTickets = (int) reader[BankServicesConstants.MAX_DAILY_TICKETS];
+                        int minServiceTime = (int) reader[BankServicesConstants.MIN_SERVICE_TIME];
+                        int maxServiceTime = (int) reader[BankServicesConstants.MAX_SERVICE_TIME];
+
+                        bankService = new BankService() {
+                            BankName = bankName,
+                            BankServiceId = serviceId,
+                            NameEn = nameEn,
+                            NameAr = nameAr,
+                            Active = active,
+                            MaxDailyTickets = maxDailyTickets,
+                            MinServiceTime = minServiceTime,
+                            MaxServiceTime = maxServiceTime,
+                        };
+                    }
+
+                    reader.Close();
+                });
+
+                return bankService;
+            }
+            catch (SqlException ex) {
+                ExceptionHelper.HandleSqlException(ex);
+            }
+            catch (Exception ex) {
+                ExceptionHelper.HandleGeneralException(ex);
+            }
+
+            return default;
+        }
 	}
 }

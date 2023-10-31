@@ -155,13 +155,10 @@ namespace DataAccessLayer.DBOperations {
 						command.Connection = connection;
 						command.Transaction = transaction;
 
-						LogsHelper.Log("uhm", DateTime.Now, EventSeverity.Info);
-						LogsHelper.Log(command.CommandText, DateTime.Now, EventSeverity.Info);
 						string parameters = "";
 						foreach (SqlParameter parameter in command.Parameters) {
 							parameters += parameter.ParameterName + " = " + parameter.Value + "; ";
 						}
-						LogsHelper.Log(parameters, DateTime.Now, EventSeverity.Info);
 
 						command.ExecuteNonQuery();
 					}
@@ -200,7 +197,7 @@ namespace DataAccessLayer.DBOperations {
 				dataTable.Columns.Add(ButtonsConstants.TYPE, typeof(int));
 				dataTable.Columns.Add(ButtonsConstants.NAME_EN, typeof(string));
 				dataTable.Columns.Add(ButtonsConstants.NAME_AR, typeof(string));
-				dataTable.Columns.Add(ButtonsConstants.SERVICE, typeof(string));
+				dataTable.Columns.Add(ButtonsConstants.SERVICE_ID, typeof(int));
 				dataTable.Columns.Add(ButtonsConstants.MESSAGE_EN, typeof(string));
 				dataTable.Columns.Add(ButtonsConstants.MESSAGE_AR, typeof(string));
 
@@ -215,12 +212,12 @@ namespace DataAccessLayer.DBOperations {
 					row[ButtonsConstants.NAME_AR] = button.NameAr;
 
 					if (button is IssueTicketButton issueTicketButton) {
-						row[ButtonsConstants.SERVICE] = issueTicketButton.Service;
+						row[ButtonsConstants.SERVICE_ID] = issueTicketButton.ServiceId;
 						row[ButtonsConstants.MESSAGE_EN] = null;
 						row[ButtonsConstants.MESSAGE_AR] = null;
 					}
 					else if (button is ShowMessageButton showMessageButton) {
-						row[ButtonsConstants.SERVICE] = null;
+						row[ButtonsConstants.SERVICE_ID] = DBNull.Value;
 						row[ButtonsConstants.MESSAGE_EN] = showMessageButton.MessageEn;
 						row[ButtonsConstants.MESSAGE_AR] = showMessageButton.MessageAr;
 					}
@@ -252,7 +249,7 @@ namespace DataAccessLayer.DBOperations {
 				dataTable.Columns.Add(ButtonsConstants.TYPE, typeof(int));
 				dataTable.Columns.Add(ButtonsConstants.NAME_EN, typeof(string));
 				dataTable.Columns.Add(ButtonsConstants.NAME_AR, typeof(string));
-				dataTable.Columns.Add(ButtonsConstants.SERVICE, typeof(string));
+				dataTable.Columns.Add(ButtonsConstants.SERVICE_ID, typeof(int));
 				dataTable.Columns.Add(ButtonsConstants.MESSAGE_EN, typeof(string));
 				dataTable.Columns.Add(ButtonsConstants.MESSAGE_AR, typeof(string));
 
@@ -267,12 +264,12 @@ namespace DataAccessLayer.DBOperations {
 					row[ButtonsConstants.NAME_AR] = button.Value.NameAr;
 
 					if (button.Value is IssueTicketButton issueTicketButton) {
-						row[ButtonsConstants.SERVICE] = issueTicketButton.Service;
+						row[ButtonsConstants.SERVICE_ID] = issueTicketButton.ServiceId;
 						row[ButtonsConstants.MESSAGE_EN] = null;
 						row[ButtonsConstants.MESSAGE_AR] = null;
 					}
 					else if (button.Value is ShowMessageButton showMessageButton) {
-						row[ButtonsConstants.SERVICE] = null;
+						row[ButtonsConstants.SERVICE_ID] = null;
 						row[ButtonsConstants.MESSAGE_EN] = showMessageButton.MessageEn;
 						row[ButtonsConstants.MESSAGE_AR] = showMessageButton.MessageAr;
 					}

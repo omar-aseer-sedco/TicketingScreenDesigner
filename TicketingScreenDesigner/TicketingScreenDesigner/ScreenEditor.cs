@@ -187,7 +187,7 @@ namespace TicketingScreenDesigner {
 
 						ListViewItem.ListViewSubItem buttonService = new() {
 							Name = ButtonsConstants.SERVICE,
-							Text = button is IssueTicketButton issueTicketButton ? issueTicketButton.Service : string.Empty
+							Text = button is IssueTicketButton issueTicketButton ? (screenController.GetService(issueTicketButton.ServiceId)?.NameEn ?? string.Empty) : string.Empty
 						};
 						row.SubItems.Add(buttonService);
 

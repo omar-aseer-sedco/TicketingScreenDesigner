@@ -28,6 +28,7 @@ namespace DataAccessLayer.Constants {
 		public const string NAME_EN = "name_en";
 		public const string NAME_AR = "name_ar";
 		public const string SERVICE = "service";
+		public const string SERVICE_ID = "service_id";
 		public const string MESSAGE_EN = "message_en";
 		public const string MESSAGE_AR = "message_ar";
 		public const int BANK_NAME_SIZE = 255;
@@ -59,6 +60,23 @@ namespace DataAccessLayer.Constants {
 			ISSUE_TICKET = 1,
 			SHOW_MESSAGE = 2,
 		}
+	}
+
+	public static class BankServicesConstants {
+		public const string TABLE_NAME = "BankServices";
+
+		public const string BANK_NAME = "bank_name";
+		public const string BANK_SERVICE_ID = "service_id";
+		public const string NAME_EN = "name_en";
+		public const string NAME_AR = "name_ar";
+		public const string ACTIVE = "active";
+		public const string MAX_DAILY_TICKETS = "max_daily_tickets";
+		public const string MIN_SERVICE_TIME = "min_service_time";
+		public const string MAX_SERVICE_TIME = "max_service_time";
+
+		public const int BANK_NAME_SIZE = 255;
+		public const int NAME_EN_SIZE = 100;
+		public const int NAME_AR_SIZE = 100;
 	}
 
 	public delegate void DatabaseNotificationDelegate(SqlNotificationInfo info);

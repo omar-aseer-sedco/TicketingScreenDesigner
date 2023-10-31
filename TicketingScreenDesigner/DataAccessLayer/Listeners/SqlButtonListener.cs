@@ -22,7 +22,7 @@ namespace DataAccessLayer.Listeners {
 
 		protected override SqlCommand CreateCommand() {
 			try {
-				CommandText = $"SELECT {ButtonsConstants.NAME_EN}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE}, {ButtonsConstants.MESSAGE_EN} FROM dbo.{ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId;";
+				CommandText = $"SELECT {ButtonsConstants.NAME_EN}, {ButtonsConstants.TYPE}, {ButtonsConstants.SERVICE_ID}, {ButtonsConstants.MESSAGE_EN} FROM dbo.{ButtonsConstants.TABLE_NAME} WHERE {ButtonsConstants.BANK_NAME} = @bankName AND {ButtonsConstants.SCREEN_ID} = @screenId;";
 
 				SqlCommand command = new SqlCommand(CommandText, connection);
 				command.Parameters.Add("@bankName", SqlDbType.VarChar, BanksConstants.BANK_NAME_SIZE).Value = bankName;

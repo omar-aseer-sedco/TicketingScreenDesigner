@@ -172,7 +172,7 @@ namespace TicketingScreenDesigner {
 				foreach (var ticketingButton in ticketingButtons) {
 					if (int.Parse(button.Name) == ticketingButton.ButtonId) {
 						if (ticketingButton is IssueTicketButton issueTicketButton) {
-							message = issueTicketButton.Service;
+							message = "Service issued";
 						}
 						else if (ticketingButton is ShowMessageButton showMessageButton) {
 							string messageEn = showMessageButton.MessageEn;

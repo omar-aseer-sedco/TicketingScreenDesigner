@@ -75,11 +75,12 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo'
 		type INT NOT NULL, 
 		name_en VARCHAR(255) NOT NULL, 
 		name_ar NVARCHAR(255) NOT NULL, 
-		service VARCHAR(255), 
+		service_id INT,
 		message_en VARCHAR(1000), 
 		message_ar NVARCHAR(1000), 
 		CONSTRAINT PK_TICKETING_BUTTONS PRIMARY KEY (bank_name, screen_id, button_id), 
-		CONSTRAINT FK_TICKETING_BUTTONS_TICKETING_SCREENS FOREIGN KEY (bank_name, screen_id) REFERENCES TicketingScreens(bank_name, screen_id) ON DELETE CASCADE ON UPDATE CASCADE
+		CONSTRAINT FK_TICKETING_BUTTONS_TICKETING_SCREENS FOREIGN KEY (bank_name, screen_id) REFERENCES TicketingScreens(bank_name, screen_id) ON DELETE CASCADE ON UPDATE CASCADE,
+		CONSTRAINT FK_TICKETING_BUTTONS_SERVICES FOREIGN KEY (bank_name, service_id) REFERENCES BankServices(bank_name, service_id) ON DELETE CASCADE ON UPDATE CASCADE
 	);
 END
 ELSE BEGIN
@@ -101,8 +102,11 @@ ELSE BEGIN
 	IF COL_LENGTH('dbo.TicketingButtons', 'name_ar') IS NULL BEGIN
 		ALTER TABLE TicketingButtons ADD name_ar NVARCHAR(255) NOT NULL;
 	END
-	IF COL_LENGTH('dbo.TicketingButtons', 'service') IS NULL BEGIN
-		ALTER TABLE TicketingButtons ADD service VARCHAR(255);
+	IF COL_LENGTH('dbo.TicketingButtons', 'service') IS NOT NULL BEGIN
+		ALTER TABLE TicketingButtons DROP COLUMN service;
+	END
+	IF COL_LENGTH('dbo.TicketingButtons', 'service_id') IS NULL BEGIN
+		ALTER TABLE TicketingButtons ADD service_id INT;
 	END
 	IF COL_LENGTH('dbo.TicketingButtons', 'message_en') IS NULL BEGIN
 		ALTER TABLE TicketingButtons ADD message_en VARCHAR(1000);
@@ -146,6 +150,9 @@ END
 IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS WHERE CONSTRAINT_NAME = 'FK_TICKETING_BUTTONS_TICKETING_SCREENS') = 0 BEGIN
 	ALTER TABLE TicketingButtons ADD CONSTRAINT FK_TICKETING_BUTTONS_TICKETING_SCREENS FOREIGN KEY (bank_name, screen_id) REFERENCES TicketingScreens(bank_name, screen_id) ON DELETE CASCADE ON UPDATE CASCADE;
 END
+IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS WHERE CONSTRAINT_NAME = 'FK_TICKETING_BUTTONS_SERVICES') = 0 BEGIN
+	ALTER TABLE TicketingButtons ADD CONSTRAINT FK_TICKETING_BUTTONS_SERVICES FOREIGN KEY (bank_name, service_id) REFERENCES BankServices(bank_name, service_id) ON DELETE CASCADE ON UPDATE CASCADE;
+END
 
 DROP PROCEDURE IF EXISTS AddButtons;
 DROP TYPE IF EXISTS add_buttons_parameter;
@@ -183,25 +190,25 @@ CREATE PROCEDURE AddButtons (@buttons add_buttons_parameter READONLY) AS BEGIN
 	DECLARE @type INT;
 	DECLARE @name_en VARCHAR(255);
 	DECLARE @name_ar NVARCHAR(255);
-	DECLARE @service VARCHAR(255);
+	DECLARE @service_id INT;
 	DECLARE @message_en VARCHAR(1000);
 	DECLARE @message_ar NVARCHAR(1000);
 
 	DECLARE parameter_cursor CURSOR FOR SELECT * FROM @buttons;
 	OPEN parameter_cursor;
 
-	FETCH NEXT FROM parameter_cursor INTO @bank_name, @screen_id, @tmp_id, @type, @name_en, @name_ar, @service, @message_en, @message_ar;
+	FETCH NEXT FROM parameter_cursor INTO @bank_name, @screen_id, @tmp_id, @type, @name_en, @name_ar, @service_id, @message_en, @message_ar;
 
 	WHILE @@FETCH_STATUS = 0 BEGIN
 		BEGIN TRY
-			INSERT INTO TicketingButtons (bank_name, screen_id, type, name_en, name_ar, service, message_en, message_ar) VALUES (@bank_name, @screen_id, @type, @name_en, @name_ar, @service, @message_en, @message_ar);
+			INSERT INTO TicketingButtons (bank_name, screen_id, type, name_en, name_ar, service_id, message_en, message_ar) VALUES (@bank_name, @screen_id, @type, @name_en, @name_ar, @service_id, @message_en, @message_ar);
 			INSERT INTO @return (bank_name, screen_id, tmp_id, success) VALUES (@bank_name, @screen_id, @tmp_id, 1);
 		END TRY
 		BEGIN CATCH
 			INSERT INTO @return (bank_name, screen_id, tmp_id, success, error_number, error_message) VALUES (@bank_name, @screen_id, @tmp_id, 0, ERROR_NUMBER(), ERROR_MESSAGE());
 		END CATCH
 
-		FETCH NEXT FROM parameter_cursor INTO @bank_name, @screen_id, @tmp_id, @type, @name_en, @name_ar, @service, @message_en, @message_ar;
+		FETCH NEXT FROM parameter_cursor INTO @bank_name, @screen_id, @tmp_id, @type, @name_en, @name_ar, @service_id, @message_en, @message_ar;
 	END
 
 	SELECT * FROM @return;
@@ -247,25 +254,25 @@ CREATE PROCEDURE UpdateButtons (@buttons update_buttons_parameter READONLY) AS B
 	DECLARE @type INT;
 	DECLARE @name_en VARCHAR(255);
 	DECLARE @name_ar NVARCHAR(255);
-	DECLARE @service VARCHAR(255);
+	DECLARE @service_id INT;
 	DECLARE @message_en VARCHAR(1000);
 	DECLARE @message_ar NVARCHAR(1000);
 
 	DECLARE parameter_cursor CURSOR FOR SELECT * FROM @buttons;
 	OPEN parameter_cursor;
 
-	FETCH NEXT FROM parameter_cursor INTO @bank_name, @screen_id, @button_id, @type, @name_en, @name_ar, @service, @message_en, @message_ar;
+	FETCH NEXT FROM parameter_cursor INTO @bank_name, @screen_id, @button_id, @type, @name_en, @name_ar, @service_id, @message_en, @message_ar;
 
 	WHILE @@FETCH_STATUS = 0 BEGIN
 		BEGIN TRY
-			UPDATE TicketingButtons SET type = @type, name_en = @name_en, name_ar = @name_ar, service = @service, message_en = @message_en, message_ar = @message_ar WHERE bank_name = @bank_name AND screen_id = @screen_id AND button_id = @button_id;
+			UPDATE TicketingButtons SET type = @type, name_en = @name_en, name_ar = @name_ar, service_id = @service_id, message_en = @message_en, message_ar = @message_ar WHERE bank_name = @bank_name AND screen_id = @screen_id AND button_id = @button_id;
 			INSERT INTO @return (bank_name, screen_id, button_id, success) VALUES (@bank_name, @screen_id, @button_id, 1);
 		END TRY
 		BEGIN CATCH
 			INSERT INTO @return (bank_name, screen_id, button_id, success, error_number, error_message) VALUES (@bank_name, @screen_id, @button_id, 0, ERROR_NUMBER(), ERROR_MESSAGE());
 		END CATCH
 
-		FETCH NEXT FROM parameter_cursor INTO @bank_name, @screen_id, @button_id, @type, @name_en, @name_ar, @service, @message_en, @message_ar;
+		FETCH NEXT FROM parameter_cursor INTO @bank_name, @screen_id, @button_id, @type, @name_en, @name_ar, @service_id, @message_en, @message_ar;
 	END
 
 	SELECT * FROM @return;

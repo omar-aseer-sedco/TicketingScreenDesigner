@@ -286,5 +286,25 @@ namespace BusinessLogicLayer.Controllers {
 			--pendingIndex;
 			return pendingIndex;
 		}
+
+		public List<BankService>? GetServices() {
+			try {
+				return BankOperations.GetServices(BankName);
+			}
+			catch (Exception ex) {
+				ExceptionHelper.HandleGeneralException(ex);
+				return default;
+			}
+		}
+
+		public BankService? GetService(int serviceId) {
+			try {
+				return BankOperations.GetService(BankName, serviceId);
+			}
+            catch (Exception ex) {
+                ExceptionHelper.HandleGeneralException(ex);
+                return default;
+            }
+        }
 	}
 }
