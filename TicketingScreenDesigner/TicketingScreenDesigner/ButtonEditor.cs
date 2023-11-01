@@ -43,7 +43,7 @@ namespace TicketingScreenDesigner {
 
                 if (services is null) {
                     LogsHelper.Log("Unable to populate services", DateTime.Now, EventSeverity.Error);
-                    MessageBox.Show("Unabel to fetch services", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Unable to fetch services.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Close();
                     return;
                 }

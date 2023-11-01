@@ -269,7 +269,7 @@ namespace DataAccessLayer.DBOperations {
 						row[ButtonsConstants.MESSAGE_AR] = null;
 					}
 					else if (button.Value is ShowMessageButton showMessageButton) {
-						row[ButtonsConstants.SERVICE_ID] = null;
+						row[ButtonsConstants.SERVICE_ID] = DBNull.Value;
 						row[ButtonsConstants.MESSAGE_EN] = showMessageButton.MessageEn;
 						row[ButtonsConstants.MESSAGE_AR] = showMessageButton.MessageAr;
 					}
